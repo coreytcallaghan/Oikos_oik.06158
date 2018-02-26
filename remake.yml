@@ -8,6 +8,7 @@ packages:
   - ggplot2
   - tidyverse
   - ape
+  - phytools
 
 targets:
   all:
@@ -17,5 +18,11 @@ targets:
   bird_tree:
     command: read_bird_tree() 
 
+  traits:
+    command: read_process_trait_data() 
+
+  oz_birds:
+    command: subset_tree(bird_tree,traits)
+
   figures/bird_plot.pdf:
-    command: plot_bird_tree(bird_tree)  
+    command: plot_bird_tree_traits(oz_birds,traits)  
