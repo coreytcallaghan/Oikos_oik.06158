@@ -31,7 +31,7 @@ plot_bird_tree_traits<-function(aus_bird_tree,traits){
   
   obj <- contMap(tree_plotting, log10(trait), fsize = c(0.6, 1), outline = FALSE)
   
-  pdf("figures/bird_plot_traits.pdf")
+  pdf("figures/bird_plot.pdf")
   plotTree.wBars(obj$tree, log10(trait), method = "plotSimmap", colors = obj$cols,
                  type = "fan", scale = 5)
   dev.off()
