@@ -1,7 +1,8 @@
 read_bird_tree<-function(){
   require(ape)
+  dir.create("Data/phylo/", showWarnings = FALSE)
   download.file("https://www.dropbox.com/s/gfackoogv6n0bv0/AllBirdsEricson1.tre?raw=1","Data/phylo/phy.tre")
-  bird_tree<-read.tree(file="Data/phylo/phy.tre")  
+  bird_tree<-read.tree(file="Data/phylo/phy.tre")[[1]]
   #drop tips to get down to Aus species here
   return(bird_tree)
 }
@@ -9,6 +10,6 @@ read_bird_tree<-function(){
 
 plot_bird_tree<-function(bird_tree){
   pdf("figures/bird_plot.pdf")
-  plot(bird_tree,type="r")
+  plot(bird_tree,type="r",show.tip.label = FALSE)
   dev.off()
 }
