@@ -1,0 +1,21 @@
+sources:
+
+  - R
+
+packages:
+  - raster
+  - maptools
+  - ggplot2
+  - tidyverse
+  - ape
+
+targets:
+  all:
+    depends:
+      - figures/bird_plot.pdf
+
+  bird_tree:
+    command: read_bird_tree() 
+
+  figures/bird_plot.pdf:
+    command: plot_bird_tree(bird_tree)  
