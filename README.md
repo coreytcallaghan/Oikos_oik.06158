@@ -12,6 +12,7 @@ To compile the paper, we use the [remake](https://github.com/richfitz/remake) pa
 
 ```r
 devtools::install_github("richfitz/remake", dependencies=TRUE)
+devtools::install_github("liamrevell/phytools", dependencies=TRUE)
 ```
 
 ### Recreating the figures and paper
