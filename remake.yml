@@ -1,5 +1,4 @@
 sources:
-
   - R
 
 packages:
@@ -14,6 +13,7 @@ targets:
   all:
     depends:
       - figures/bird_plot.pdf
+      - figures/urbanness.pdf
 
   bird_tree:
     command: read_bird_tree() 
@@ -25,4 +25,12 @@ targets:
     command: subset_tree(bird_tree,traits)
 
   figures/bird_plot.pdf:
-    command: plot_bird_tree_traits(oz_birds,traits)  
+    command: plot_bird_tree_traits(oz_birds,traits)
+    
+  urbanness_table: 
+    command: get_urbanness_table()
+
+  figures/urbanness.pdf:
+    command: urbanness_pdf(urbanness_table)
+  
+  
