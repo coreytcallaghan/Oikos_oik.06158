@@ -1,0 +1,61 @@
+---
+title: Phylogenetic adaptions to urban living in Australian birds
+author: "Corey T. Callaghan, Will Cornwell, John Wilshire, XXXX, XXXX, Richard T. Kingsford"
+date: '`r format(Sys.time(), "%d %B, %Y")`'
+output:
+  bookdown::tufte_html2:
+    number_sections: no
+    toc: no
+  bookdown::word_document2: null
+bibliography: references.bib
+fontsize: 12pt
+link-citations: no
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/global-ecology-and-biogeography.csl
+---
+
+# ABSTRACT
+
+
+https://www.youtube.com/watch?v=9Gc4QTqslN4
+
+
+
+# INTRODUCTION
+Urbanization fragments and isolates natural habitat [@marzluff2001restoration; @melles2003urban; @loram2007urban], thus globally threatening biodiversity [@mckinney2006urbanization; @mckinney2008effects]. Despite the documented loss of biodiversity directly or indirectly caused by urbanization [@mckinney1999biotic; @mckinney2006urbanization], some species have successfully adapted to, colonized and subsequently thrived in urban environments [@mckinney2002urbanization; @chace2006urban; @lowry2013behavioural; @mcdonnell2015adaptation].
+
+Within urban ecosystems there are generally urban avoiders, urban adapters, and urban exploiters [@mckinney2002urbanization; @mckinney2006urbanization; @kark2007living; @mcdonnell2015adaptation]. Urban avoiders are sensitive to urban environments [@mcdonnell2015adaptation] and tend to apportion more energy towards reproduction, relative to adapters and exploiters [@croci2008does]. Urban adapters can utilize urban environmental resources but may not reside in them [@mcdonnell2015adaptation] and are generally sedentary, social, high fecundity, with wide distribution [@kark2007living, @croci2008does]. Urban exploiters thrive in urban environments [@mcdonnell2015adaptation] and are generally more social and sedentary than adapters [@kark2007living]. Species’ traits such as social status, behavioral flexibility, migratory status, nesting, diet preferences, habitat preferences, and overall species range have all been used to predict presence in urban environments [@mcclure1989characterizes; @mills1989effects; @jokimaki1998distribution; @lim2004responses; @clergeau2006avifauna; @chace2006urban; @lowry2013behavioural]. Understanding which favored traits are associated with urban adapters and avoiders [@croci2008does] and their habitats can inform management decisions for conservation of particular species and improvements of habitats within urban environments.
+
+Rather than a specific trait that predicts a species’ ability to be an urban avoider, adapter or exploiter, it is more likely a combination of traits. For instance, urban adapters’ presence in Jerusalem was predicted by a combination of traits including diet, degree of sociality, sedentariness, and preferred nesting sites [@kark2007living]. While a regional analysis throughout France and Switzerland demonstrated urban adapters prefer forested habitats, are sedentary, omnivorous, high-nesters, and were widely distributed [@croci2008does].
+
+Despite the number of studies which have investigated the relationships between species' traits and urban adaptedness, most studies are either spatially limited, such as a single city or region [@blair1996land; @kark2007living; @croci2008does]; or temporally limited to a single breeding season [@blair1996land] or two month survey period [@kark2007living]]. Moreover, the terminology (i.e., urban adapters, avoiders, and exploiters) is used differently among studies [cf., [@kark2007living] and [@croci2008does]], potentially affecting interpretation between scientists and the public [@mcdonnell2015adaptation; @fischer2015categorizing].
+
+Fortunately, citizen science [see reviews by @devictor2010beyond; @tulloch2013realising; @bonney2014next; @kobori2016citizen] can provide broad-scale empirical datasets, allowing us to test hypotheses at spatial and temporal scales previously difficult to attain. This data provides a cost-effective method to research the relationship between species' traits and urban observations. Various projects have used citizen science data to elucidate information on abundance and distribution of birds in urban ecosystems [@mccaffrey2005using; @callaghan2017assessing], as well as functional composition of urban birds [@la2014role; @morelli2016evidence; @lepczyk2017global].
+
+Here, we use data from eBird [@sullivan2009ebird; -@sullivan2014ebird], a successful citizen science project with over 500 million observations, submitted by more than 250,000 participants [@sullivan2017using], in order to elucidate adaptations in Australian birds to urban living. We combine eBird data with multiple input rasters, that represent a continuous levels of urbanness, over the whole of Australia. This is opposed to assigning species to a priori groups (adapters, avoiders, or exploiters) and investigating differences in traits among groups [e.g., @kark2007living]. We then apply phylogenetically controlled models in order to assess species traits that predict pre-adaptation to urban living. We hypothesize that a combination of traits allows species to thrive in urban environments.
+
+
+
+
+
+
+
+
+
+
+
+# METHODS
+## Study area
+
+## Bird observation data
+We downloaded the eBird basic dataset
+
+## Assignment of landsat variables
+We used Google Earth Engine [@gorelick2017google] to assign various landsat variables to each sampling checklist.
+
+# RESULTS
+
+A total of ```nrow(all_eBird_data)``` observations were used in the analysis.
+
+# DISCUSSION
+
+# REFERENCES
