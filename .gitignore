@@ -9,8 +9,6 @@ cru3
 Data/phylo/phy.tre
 .remake
 figures/
-
-
 # Compiled source #
 ###################
 *.com
@@ -19,7 +17,6 @@ figures/
 *.exe
 *.o
 *.so
-
 # Packages #
 ############
 # it's better to unpack these files and commit the raw source
@@ -32,13 +29,11 @@ figures/
 *.rar
 *.tar
 *.zip
-
 # Logs and databases #
 ######################
 *.log
 *.sql
 *.sqlite
-
 # LaTeX #
 #########
 *.aux
@@ -53,16 +48,15 @@ figures/
 *.ttt
 *.nav
 *.snm
-
 # OS generated files #
 ######################
 .DS_Store*
 ehthumbs.db
 Icon?
 Thumbs.db
-
 # R
 .Rhistory
 .Rapp.history
 *.Rproj
 ms.html
+.httr-oauth
