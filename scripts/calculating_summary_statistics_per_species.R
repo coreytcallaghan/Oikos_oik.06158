@@ -56,7 +56,7 @@ resample_lists <- function(data, reps, variable, species) {
   
   out_df <- data.frame(mean=mean(quantile_results$value),
                        sd=sd(quantile_results$value),
-                       COMMON_NAME="Australasian Pipit")
+                       COMMON_NAME=species)
   return(out_df)
 }
 
