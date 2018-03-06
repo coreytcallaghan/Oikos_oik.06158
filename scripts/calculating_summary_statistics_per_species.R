@@ -46,7 +46,7 @@ resample_lists <- function(data, reps, variable, species) {
   resamps_df <- data.frame(matrix(unlist(list_of_resamps), nrow=n, byrow=T), stringsAsFactors=FALSE)
   
   regression <- resamps_df %>%
-    map(~residuals(lm(.~response_vector[[1]]))) %>%
+    map(~fitted.values(lm(.~response_vector[[1]]))) %>%
     as.data.frame()
   
   quantile_results <- regression %>%
@@ -54,11 +54,59 @@ resample_lists <- function(data, reps, variable, species) {
     as.data.frame() %>%
     gather()
   
-  out_df <- data.frame(mean=mean(quantile_results$value),
+  out_df <- data.frame(raw_data=quantile(response_vector[[1]], .90),
+                       mean_sampled=mean(quantile_results$value),
                        sd=sd(quantile_results$value),
                        COMMON_NAME=species)
   return(out_df)
 }
+
+AUPI_gam <- gam(avg_rad ~ s(LATITUDE, LONGITUDE), data=AUPI, family=gaussian)
+
+AUPI_gam_values <- predict(AUPI_gam)
+
+anova(AUPI_gam)
+
+## COMY
+COMY <- species_urban %>%
+  filter(COMMON_NAME == "Common Myna")
+
+quantile(COMY$avg_rad, .90)
+
+COMY_gam <- gam(avg_rad ~ s(LATITUDE, LONGITUDE), data=COMY, family=gaussian)
+
+COMY_predicted <- predict(COMY_gam)
+
+quantile(COMY_predicted, .90)
+
+
+## SOEU
+SOEU <- species_urban %>%
+  filter(COMMON_NAME == "Southern Emuwren")
+
+quantile(SOEU$avg_rad, .90)
+
+SOEU_gam <- gam(avg_rad ~ s(LATITUDE, LONGITUDE), data=SOEU, family=gaussian)
+
+SOEU_predicted <- predict(SOEU_gam)
+
+quantile(SOEU_predicted, .90)
+
+
+
+
+test_species <- c("Australasian Pipit", "Willie-wagtail", "Common Myna", "Great Egret",
+                  "White-faced Heron", "Pied Currawong", "Southern Emuwren", "Masked Woodswallow",
+                  "Painted Honeyeater", "Red Wattlebird", "Regent Honeyeater", "Southern Emuwren")
+
+
+test_data <- species_urban %>%
+  filter(COMMON_NAME %in% test_species)
+
+
+
+
+
 
 
 
