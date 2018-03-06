@@ -61,4 +61,24 @@ resample_lists <- function(data, reps, variable, species) {
 }
 
 
+species_urban %>% 
+  group_by(COMMON_NAME)  %>% 
+  summarise(obs = n()) %>% 
+  filter(obs > 1000)
+
+sp <- c("Common Myna", "Southern Emuwren", "Australian Raven",
+        "House Sparrow", "Wedge-tailed Eagle")
+  
+species_urban %>% 
+  filter(COMMON_NAME %in% sp) -> cool_birds
+  
+ggplot(cool_birds, aes(avg_rad, fill = COMMON_NAME)) +
+    geom_density(alpha = 0.4) + 
+    scale_x_log10() + theme_bw()
+  
+ggplot(cool_birds, aes(avg_rad, fill = COMMON_NAME)) +
+  geom_histogram(bins = 1000) + 
+  scale_x_log10() +
+  facet_grid(COMMON_NAME ~ .) + theme_bw()
+
 

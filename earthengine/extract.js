@@ -3,66 +3,81 @@
 // 3. Reduce Datasets
 // 4. Export Checklists with more data
 
-//var countries = ee.var
-
 // constants
-var BUFFER_SCALE = 5000
+var BUFFER = 5000
+var ERROR = 500
+var REDUCTION_SCALE = 500
+var EXPORT = true
+var SMALL = true // export a small subset of the data
 
-//////////////////////////
+/// ///////////////////////
 // 1. Import Checklists
 var checklists = ee.FeatureCollection('ft:1VHko8wiaQAmRKfqQuY_oGjaO27OAtYoRbriTVMrO')
-// for testing: 
-//checklists = checklists.limit(50)
+// for testing:
+if (!EXPORT) checklists = checklists.limit(50)
 
-var countries = ee.FeatureCollection("USDOS/LSIB/2013");
-var australia = countries.filterMetadata('iso_alpha3' , 'equals', 'AUS')
+var countries = ee.FeatureCollection('USDOS/LSIB/2013')
+var australia = countries.filterMetadata('iso_alpha3', 'equals', 'AUS')
 // remove the checklists that arent found on mainland australia
 checklists = checklists.filterBounds(australia)
 
+if (SMALL) checklists = checklists.limit(10000)
 
+// then convert the points into rough circles
 checklists = checklists.map(function (f) {
-  return f.buffer(5000, 500)
+  return f.buffer(BUFFER, ERROR)
 })
 
-//////////////////////////
+/// ///////////////////////
 // 2. Import Datasets
 var travel_time = ee.Image('Oxford/MAP/accessibility_to_cities_2015_v1_0')
-var viirs_median = ee.ImageCollection("NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG").select('avg_rad').median()
-var evi_median = ee.ImageCollection("LANDSAT/LC8_L1T_32DAY_EVI").median()
+var viirs_median = ee.ImageCollection('NOAA/VIIRS/DNB/MONTHLY_V1/VCMSLCFG').select('avg_rad').median()
+var evi_median = ee.ImageCollection('LANDSAT/LC8_L1T_32DAY_EVI').median()
 var world_pop = ee.ImageCollection('CIESIN/GPWv4/population-density').median()
 
 // crops is multinomial so it doesnt really make sense to find the sample stdDev of it
 // var crops = ee.Image('USGS/GFSAD1000_V1')
 
-// combine to one raster
+// combine to one image
+var composite = viirs_median.addBands([travel_time, evi_median, world_pop])
 
-var composite = viirs_median.addBands([travel_time, evi_median,  world_pop])
+// reduce over the entire collection
+var reducer = ee.Reducer.mean()// .combine(ee.Reducer.median(), null,true)
+  .combine(ee.Reducer.sampleStdDev(), null, true)
+  .combine(ee.Reducer.count(), null, true)
 
-var output = composite.reduceRegions({
-  collection: checklists,
-  reducer: ee.Reducer.mean().combine(ee.Reducer.percentile([0, 5, 50, 95, 100]), null,true)
-                            .combine(ee.Reducer.sampleStdDev(), null, true),
-  scale: 100,
-  tileScale: 16
-})
+// this doesnt preserve columns in the feature collection :(
+var rregion = function () {
+  return checklists.map(function (f) {
+    return f.set(composite.reduceRegion({
+      geometry: f.geometry(),
+      reducer: reducer,
+      scale: REDUCTION_SCALE
+    })).setGeometry()
+  })
+}
 
-// remove the geometry of all of the points, this reduces the output file size by an order of magnitude
-output = output.map(function (f) {
-  return f.setGeometry()
-})
+var rregions = function () {
+  return composite.reduceRegions({
+    collection: checklists,
+    reducer: reducer,
+    scale: REDUCTION_SCALE,
+    tileScale: 16
+  })
+}
 
-//var chart = ui.Chart.feature.histogram(output, 'avg_rad_mean', 15)
-//print(chart)
+var output = rregion()
 
-//print(output.first())
-//Map.addLayer(composite)
-var export_table  = function () {
-Export.table.toDrive({
-  collection: output,
-  description: 'ebird_australia_w_adhoc_urbanness_measures', 
-  folder: 'ebird',
-  fileNamePrefix: 'ebird_aus_urbanness_full'
-})}
-  
+if (!EXPORT) print(output)
 
-export_table()
+// var chart = ui.Chart.feature.histogram(output, 'avg_rad_mean', 15)
+var export_table = function () {
+  Export.table.toDrive({
+    collection: output,
+    description: 'ebird_rregion_10k',
+    folder: 'ebird',
+    fileNamePrefix: 'ebird_aus_urbanness_rregion_10k'
+  })
+}
+
+if (EXPORT) export_table()

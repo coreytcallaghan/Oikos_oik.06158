@@ -14,21 +14,28 @@ targets:
     depends:
       - figures/bird_plot.pdf
       - figures/urbanness.pdf
+      - figures/avg_rad_density.pdf
 
   bird_tree:
     command: read_bird_tree() 
 
   traits:
-    command: read_process_trait_data() 
+    command: read_process_trait_data()
+  
+  ebird_data:
+    command: load_ebird_data()
 
   oz_birds:
     command: subset_tree(bird_tree,traits)
 
-  figures/bird_plot.pdf:
-    command: plot_bird_tree_traits(oz_birds,traits)
-    
   urbanness_table: 
     command: get_urbanness_table()
+
+  figures/bird_plot.pdf:
+    command: plot_bird_tree_traits(oz_birds,traits)
+  
+  figures/avg_rad_density.pdf:
+    command: avg_rad_density_pdf(ebird_data)
 
   figures/urbanness.pdf:
     command: urbanness_pdf(urbanness_table)
