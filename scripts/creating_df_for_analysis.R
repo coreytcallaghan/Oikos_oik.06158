@@ -50,13 +50,17 @@ species_urban <- checklists %>%
   filter(EFFORT_DISTANCE_KM <= 5) %>%
   ## filter out any checklists > 500 ha in area searched
   filter(EFFORT_AREA_HA <= 500) %>%
-  dplyr::select(SAMPLING_EVENT_IDENTIFIER, EVI, accessibility, avg_rad, cf_cvg, landcover, `population-density`) %>%
+  dplyr::select(-one_of("EFFORT_DISTANCE_KM", "EFFORT_AREA_HA", "LONGITUDE", "OBSERVATION_DATE")) %>%
   inner_join(., all_eBird_data, by="SAMPLING_EVENT_IDENTIFIER") %>%
   dplyr::select(SAMPLING_EVENT_IDENTIFIER, COMMON_NAME, SCIENTIFIC_NAME, OBSERVATION_DATE, LOCALITY, LOCALITY_ID,
                 LATITUDE, LONGITUDE, EFFORT_AREA_HA, EFFORT_DISTANCE_KM, OBSERVATION_COUNT, GROUP_IDENTIFIER,
-                TAXONOMIC_ORDER, PROTOCOL_TYPE, ALL_SPECIES_REPORTED, accessibility, EVI, DURATION_MINUTES,
-                avg_rad, cf_cvg, landcover, `population-density`, CATEGORY) %>%
-  rename(population_density = `population-density`)
+                TAXONOMIC_ORDER, PROTOCOL_TYPE, ALL_SPECIES_REPORTED, accessibility_count, accessibility_mean,
+                accessibility_stdDev, avg_rad_count, avg_rad, avg_rad_stdDev, `population-density_count`,
+                `population-density_mean`, `population-density_stdDev`, EVI_count, EVI, EVI_stdDev, 
+                DURATION_MINUTES, CATEGORY) %>%
+  rename(population_density_count = `population-density_count`,
+         population_density_mean = `population-density_mean`,
+         population_density_stdDev = `population-density_stdDev`)
 
 rm(all_eBird_data)
 
@@ -77,8 +81,10 @@ species_urban <- species_urban %>%
 sampling_event_info <- species_urban %>%
   dplyr::select(SAMPLING_EVENT_IDENTIFIER, LOCALITY, LOCALITY_ID, OBSERVATION_DATE,
                 PROTOCOL_TYPE, ALL_SPECIES_REPORTED, EFFORT_DISTANCE_KM, EFFORT_AREA_HA, 
-                DURATION_MINUTES, OBSERVATION_DATE, GROUP_IDENTIFIER, EVI, accessibility, 
-                avg_rad, cf_cvg, landcover, population_density, LATITUDE, LONGITUDE) %>%
+                DURATION_MINUTES, OBSERVATION_DATE, GROUP_IDENTIFIER, LATITUDE, LONGITUDE,
+                accessibility_count, accessibility_mean, accessibility_stdDev, avg_rad_count, 
+                avg_rad, avg_rad_stdDev, population_density_count, population_density_mean, 
+                population_density_stdDev, EVI_count, EVI, EVI_stdDev) %>%
   distinct()
 
 ## want to keep the taxonomic order for each species
