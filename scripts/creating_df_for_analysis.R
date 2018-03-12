@@ -129,6 +129,16 @@ species_urban <- species_urban %>%
 species_urban <- species_urban %>%
   filter(TAXONOMIC_ORDER <= 1650 | TAXONOMIC_ORDER >= 1966)
 
+## remove any species that occure <= 100 times in the dataset
+obs <- species_urban %>% 
+  group_by(COMMON_NAME) %>% 
+  summarise(obs=n())
+
+species_urban <- species_urban %>%
+  inner_join(., obs, by="COMMON_NAME") %>%
+  filter(obs > 100) %>%
+  select(-obs)
+
 ## remove everything but the final subsetted eBird dataframe
 rm(list=setdiff(ls(), "species_urban"))
 
