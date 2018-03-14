@@ -15,7 +15,6 @@ targets:
     depends:
       - figures/bird_plot.pdf
       - figures/urbanness.pdf
-      - figures/avg_rad_density.pdf
       - figures/density_plot_per_species.pdf
       
 
@@ -36,9 +35,6 @@ targets:
 
   figures/bird_plot.pdf:
     command: plot_bird_tree_traits(oz_birds,traits)
-  
-  figures/avg_rad_density.pdf:
-    command: avg_rad_density_pdf(ebird_data)
 
   figures/urbanness.pdf:
     command: urbanness_pdf(urbanness_table)
