@@ -8,6 +8,7 @@ packages:
   - tidyverse
   - ape
   - phytools
+  - ggforce
 
 targets:
   all:
@@ -15,6 +16,8 @@ targets:
       - figures/bird_plot.pdf
       - figures/urbanness.pdf
       - figures/avg_rad_density.pdf
+      - figures/density_plot_per_species.pdf
+      
 
   bird_tree:
     command: read_bird_tree() 
@@ -39,5 +42,8 @@ targets:
 
   figures/urbanness.pdf:
     command: urbanness_pdf(urbanness_table)
+    
+  figures/density_plot_per_species.pdf:
+    command: avg_rad_density_for_each_species(ebird_data)
   
   
