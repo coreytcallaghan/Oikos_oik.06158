@@ -7,14 +7,6 @@ load_ebird_data <- function() {
 ### plot a bunch of pdfs for all species
 avg_rad_density_for_each_species <- function (species_urban) {
   
-  observations <- species_urban %>%
-    group_by(COMMON_NAME) %>%
-    summarise(N=n())
-  
-  species_urban <- species_urban %>%
-    inner_join(., observations, by="COMMON_NAME") %>%
-    arrange(desc(N))
-  
   ## find how many pages are necessary
   n_pages <- length(unique(species_urban$COMMON_NAME))/20
   
