@@ -3,7 +3,7 @@
 ## Although, will do it twice, since the newest data dump will take place March 15th
 ## The raw text file is approximately 5 gb
 
-split_ebird_data <- function () {
+split_ebird_data <- function(){
   ## packages
   library(readr)
   library(dplyr)
@@ -12,15 +12,17 @@ split_ebird_data <- function () {
   ## This makes it so it will be able to upload to github smoothly
   
   ## 1
-  data <- read_delim("ebd_AU_relNov-2017.txt", delim="\t", quote="", col_names=TRUE, trim_ws=TRUE)
+  data <- read_delim("ebd_AU_relFeb-2018.txt", delim="\t", quote="", col_names=TRUE, trim_ws=TRUE)
   
   
   ## split dataframe and keep dataframes in environment
   split <- split(data, (seq(nrow(data))-1) %/% 1500000)
   
-  list2env(setNames(split,paste0("df",1:9)),environment())
+  list2env(setNames(split,paste0("df",1:8)),environment())
   
   rm(split)
+  
+  setwd("Data/eBird data/All eBird data split/")
   
   save(df1, file=paste0("all_eBird_data1.RData"))
   save(df2, file=paste0("all_eBird_data2.RData"))
@@ -30,5 +32,5 @@ split_ebird_data <- function () {
   save(df6, file=paste0("all_eBird_data6.RData"))
   save(df7, file=paste0("all_eBird_data7.RData"))
   save(df8, file=paste0("all_eBird_data8.RData"))
-  save(df9, file=paste0("all_eBird_data9.RData"))
+
 }
