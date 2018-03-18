@@ -18,7 +18,7 @@ subset_ebird_data <- function () {
   }
   
   ### combine to one file
-  all_eBird_data <- bind_rows(df1, df2, df3, df4, df5, df6, df7, df8, df9)
+  all_eBird_data <- bind_rows(df1, df2, df3, df4, df5, df6, df7, df8)
   
   ### clean up column names
   colnames(all_eBird_data) <- gsub(" ", "_", colnames(all_eBird_data))
