@@ -32,7 +32,7 @@ for (fileName in fileNames) {
 }
 
 ### combine to one file
-all_eBird_data <- bind_rows(df1, df2, df3, df4, df5, df6, df7, df8, df9)
+all_eBird_data <- bind_rows(df1, df2, df3, df4, df5, df6, df7, df8)
 
 ### clean up column names
 colnames(all_eBird_data) <- gsub(" ", "_", colnames(all_eBird_data))
@@ -45,6 +45,8 @@ rm(list=setdiff(ls(), c("checklists", "all_eBird_data")))
 ### Merge all eBird data with response variables file
 ### subset the sampling data to what is necessary and join each species with its own urbanness value
 species_urban <- checklists %>%
+  ## truncate any negative avg_rad values to zero
+  mutate(avg_rad = ifelse(.$avg_rad < 0, 0.00001, .$avg_rad)) %>%
   replace_na(list(EFFORT_DISTANCE_KM=0, EFFORT_AREA_HA=0)) %>%
   ## filter out any checklists > 5 km in distance travelled
   filter(EFFORT_DISTANCE_KM <= 5) %>%
@@ -141,6 +143,9 @@ species_urban <- species_urban %>%
 
 ## remove everything but the final subsetted eBird dataframe
 rm(list=setdiff(ls(), "species_urban"))
+
+## set wd back
+setwd("../../../")
 
 ## save as RData file
 save.image("Data/eBird data/Final eBird data for analysis/species_urban.RData")
