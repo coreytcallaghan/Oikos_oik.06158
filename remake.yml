@@ -16,6 +16,7 @@ targets:
       - figures/bird_plot.pdf
       - figures/urbanness.pdf
       - figures/density_plot_per_species.pdf
+      - figures/distribution_response_variables.pdf
       
 
   bird_tree:
@@ -32,6 +33,9 @@ targets:
 
   urbanness_table: 
     command: get_urbanness_table()
+    
+  response_variables:
+    command: response_variables()
 
   figures/bird_plot.pdf:
     command: plot_bird_tree_traits(oz_birds,traits)
@@ -41,5 +45,8 @@ targets:
     
   figures/density_plot_per_species.pdf:
     command: avg_rad_density_for_each_species(ebird_data)
+    
+  figures/distribution_response_variables.pdf:
+    command: distribution_response_variables(response_variables)
   
   
