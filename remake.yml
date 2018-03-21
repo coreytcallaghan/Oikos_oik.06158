@@ -13,7 +13,7 @@ packages:
 targets:
   all:
     depends:
-      - figures/bird_plot.pdf
+      - figures/bird_urbanness_phylo.pdf
       - figures/urbanness.pdf
       - figures/density_plot_per_species.pdf
       - figures/distribution_response_variables.pdf
@@ -35,10 +35,10 @@ targets:
     command: get_urbanness_table()
     
   response_variables:
-    command: response_variables()
+    command: make_response_variables(ebird_data)
 
-  figures/bird_plot.pdf:
-    command: plot_bird_tree_traits(oz_birds,traits)
+  figures/bird_urbanness_phylo.pdf:
+    command: plot_bird_tree_traits(oz_birds,traits,response_variables)
 
   figures/urbanness.pdf:
     command: urbanness_pdf(urbanness_table)

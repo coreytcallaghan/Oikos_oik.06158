@@ -22,18 +22,31 @@ subset_tree<-function(trees,traits){
   }
 
 
-plot_bird_tree_traits<-function(aus_bird_tree,traits){
+plot_bird_tree_traits<-function(aus_bird_tree,traits,response_variables){
   trait<-as.array(traits$mean_body_size)
   row.names(trait)<-row.names(traits)
   trait<-subset(trait,trait!="NaN")
   trait<-subset(trait,names(trait)%in%aus_bird_tree$tip.label)
   tree_plotting<-drop.tip(aus_bird_tree,aus_bird_tree$tip.label[!aus_bird_tree$tip.label%in%row.names(trait)])
   
-  obj <- contMap(tree_plotting, log10(trait), fsize = c(0.6, 1), outline = FALSE)
+  response_variables$SCIENTIFIC_NAME<-gsub(" ","_",response_variables$SCIENTIFIC_NAME)
+  rv<-filter(response_variables,SCIENTIFIC_NAME%in%tree_plotting$tip.label)
+  exploiter<-as.array(rv$exploiter)
+  row.names(exploiter)<-rv$SCIENTIFIC_NAME
+  exploiter2<-exploiter-mean(exploiter)
   
-  pdf("figures/bird_plot.pdf")
-  plotTree.wBars(obj$tree, log10(trait), method = "plotSimmap", colors = obj$cols,
-                 type = "fan", scale = 5)
+  
+  tree_plotting_2<-drop.tip(tree_plotting,tree_plotting$tip.label[!tree_plotting$tip.label%in%row.names(exploiter2)])
+  trait<-subset(trait,names(trait)%in%tree_plotting_2$tip.label)
+  
+  obj <- contMap(tree_plotting_2, exploiter2, fsize = c(0.6, 1), outline = FALSE,plot=FALSE,type="fan")
+
+  pdf("figures/bird_urbanness_phylo.pdf")
+  plotTree.wBars(obj$tree, exploiter2, method = "plotSimmap", colors = obj$cols,
+                 type = "fan", scale = 5,tip.labels=FALSE)
   dev.off()
-}
+  pdf("figures/ref_tree.pdf")
+  plot(tree_plotting_2,type="f",cex=0.2)
+  dev.off()
+  }
 

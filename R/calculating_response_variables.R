@@ -9,13 +9,13 @@ load_ebird_data <- function() {
 }
 
 ### calculate response variable df
-response_variables <- function() {
+make_response_variables <- function(species_urban) {
   
   response_variables <- species_urban %>%
   group_by(COMMON_NAME, SCIENTIFIC_NAME) %>%
-  summarise(adapter= quantile(log(avg_rad), .90),
-            exploiter = quantile(log(avg_rad), .50),
-            avoider = quantile(log(avg_rad), .10),
+  summarise(adapter= quantile(log(avg_rad), .90,na.rm=T),
+            exploiter = quantile(log(avg_rad), .50,na.rm=T),
+            avoider = quantile(log(avg_rad), .10,na.rm=T),
             N = n(),
             unique_localities = length(unique(LOCALITY_ID)))
   
