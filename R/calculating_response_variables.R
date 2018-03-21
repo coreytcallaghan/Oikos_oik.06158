@@ -12,7 +12,7 @@ load_ebird_data <- function() {
 response_variables <- function() {
   
   response_variables <- species_urban %>%
-  group_by(COMMON_NAME) %>%
+  group_by(COMMON_NAME, SCIENTIFIC_NAME) %>%
   summarise(adapter= quantile(log(avg_rad), .90),
             exploiter = quantile(log(avg_rad), .50),
             avoider = quantile(log(avg_rad), .10),
