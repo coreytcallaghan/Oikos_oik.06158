@@ -20,6 +20,7 @@ targets:
       - figures/bird_urbanness_phylo.pdf
       - figures/urbanness.pdf
       - figures/density_plot_per_species.pdf
+      - figures/histogram_plot_per_species.pdf
       - figures/distribution_response_variables.pdf
       - reports/phylo_report.pdf
       
@@ -53,6 +54,9 @@ targets:
     
   figures/distribution_response_variables.pdf:
     command: distribution_response_variables(response_variables)
+  
+  figures/histogram_plot_per_species.pdf:
+    command: avg_rad_density_for_each_species(ebird_data)
     
   reports/phylo_report.pdf:
     command: render("reports/phylo_report.rmd")
