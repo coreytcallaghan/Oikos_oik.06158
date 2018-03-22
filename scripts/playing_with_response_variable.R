@@ -49,6 +49,8 @@ beta_fit_estimate[1,1]/beta_fit_estimate[2,1]
 ## load data
 load('Data/eBird data/Final eBird data for analysis/species_urban.RData')
 
+species_urban$avg_rad_log <- log(species_urban$avg_rad)
+
 ## Dusky Moorhen
 DUMO <- species_urban %>%
   filter(COMMON_NAME == "Dusky Moorhen") %>%
@@ -63,7 +65,7 @@ ggplot(DUMO, aes(x=avg_rad_log))+
 
 # Need to put values between 0-1
 # function for this
-range01 <- function(x){(x-min(x))/(max(x)-min(x))}
+range01 <- function(x){(x-min(species_urban$avg_rad_log))/(max(species_urban$avg_rad_log)-min(species_urban$avg_rad_log))}
 
 # transform data
 DUMO$avg_rad_log_transform <- range01(DUMO$avg_rad_log)
@@ -100,7 +102,6 @@ beta_fit <- qmedist(DUGR$avg_rad_log_transform, "beta", probs=c(1/3, 2/3))
 beta_fit_estimate <- as.data.frame(beta_fit$estimate)
 beta_fit_estimate[1,1]/beta_fit_estimate[2,1]
 
-
 ## Still not convinced. Need to test it
 
 ## write function to calculate "value" to test it a little bit
@@ -132,3 +133,64 @@ rv("Spotted Dove")
 rv("Spotted Bowerbird")
 rv("Varied Lorikeet")
 rv("Western Rosella")
+
+
+## Looks like it might work
+## Want to see about using bootstrap to 
+## account for sample size of the distibrutions it is estimating
+
+# Want to see about using bootstrap
+# need to use fitdist function instead of qmedist
+# does the same thing though, but returns different object
+beta_fit <- fitdist(DUGR$avg_rad_log_transform, "beta", method="qme", probs=c(1/3, 2/3))
+beta_fit_estimate <- as.data.frame(beta_fit$estimate)
+beta_fit_estimate[1,1]/beta_fit_estimate[2,1]
+
+# function to run bootstraps
+# can automatically parallelize it!
+boot_results <- bootdist(beta_fit, niter=1000, bootmethod="nonparam", parallel="snow", ncpus=10)
+
+boot_results_df <- boot_results[['estim']]
+
+estimate <- boot_results_df %>%
+  mutate(rv=shape1/shape2) %>%
+  summarise(mean_rv = mean(rv),
+            sd_rv = sd(rv))
+
+beta_fit_estimate[1,1]/beta_fit_estimate[2,1]
+estimate
+
+## That seems to work alright
+## Test it against Dusky Moorhen now
+# does the same thing though, but returns different object
+beta_fit <- fitdist(DUMO$avg_rad_log_transform, "beta", method="qme", probs=c(1/3, 2/3))
+beta_fit_estimate <- as.data.frame(beta_fit$estimate)
+beta_fit_estimate[1,1]/beta_fit_estimate[2,1]
+
+# function to run bootstraps
+# can automatically parallelize it!
+boot_results <- bootdist(beta_fit, niter=1000, bootmethod="nonparam", parallel="snow", ncpus=10)
+
+boot_results_df <- boot_results[['estim']]
+
+estimate <- boot_results_df %>%
+  mutate(rv=shape1/shape2) %>%
+  summarise(mean_rv = mean(rv),
+            sd_rv = sd(rv))
+
+estimate
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
