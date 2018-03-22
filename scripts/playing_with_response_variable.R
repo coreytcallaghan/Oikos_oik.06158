@@ -180,6 +180,54 @@ estimate <- boot_results_df %>%
 
 estimate
 
+# Or another way would be to use the summary and CI they provide?
+test_df <- as.data.frame(t(boot_results[["CI"]]))
+
+test_df %>%
+  mutate(rv=shape1/shape2)
+
+# that doesn't seem to work
+
+## rewrite function to calculate the bootstrapped estimates
+rv <- function(species) {
+  
+  data <- species_urban %>%
+    filter(COMMON_NAME == species) %>%
+    dplyr::select(avg_rad) %>%
+    mutate(avg_rad_log = log(avg_rad))
+  
+  # transform data
+  data$avg_rad_log_transform <- range01(data$avg_rad_log)
+  
+  # fit beta distribution
+  beta_fit <- fitdist(data$avg_rad_log_transform, "beta", method="qme", probs=c(1/3, 2/3))
+  beta_fit_estimate <- as.data.frame(beta_fit$estimate)
+  beta_fit_estimate[1,1]/beta_fit_estimate[2,1]
+  
+  boot_results <- bootdist(beta_fit, niter=1000, bootmethod="nonparam", parallel="snow", ncpus=10)
+  
+  boot_results_df <- boot_results[['estim']]
+  
+  estimate <- boot_results_df %>%
+    mutate(rv=shape1/shape2) %>%
+    summarise(mean_rv = mean(rv),
+              sd_rv = sd(rv))
+  
+  return(estimate)
+  
+}
+
+
+rv("Common Myna")
+rv("Australian Ibis")
+rv("Southern Emuwren")
+rv("Noisy Miner")
+rv("Dusky Grasswren")
+rv("Spinifex Pigeon")
+rv("Spotted Dove")
+rv("Spotted Bowerbird")
+rv("Varied Lorikeet")
+rv("Western Rosella")
 
 
 
