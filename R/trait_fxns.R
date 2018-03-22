@@ -20,8 +20,8 @@ read_process_trait_data<-function(){
     mutate(status=`49_Australian_status_July_2015_5`) %>%
     mutate(brain_size=ifelse(`113_Brain_mass_8`=="NAV", NA, as.numeric(`113_Brain_mass_8`))) %>%
     mutate(feeding_habitat_generalism=rowSums(.[115:145], na.rm=TRUE)) %>%
-    mutate(breeding_generalism=rowSums(.[146:162], na.rm=TRUE)) %>%
-    mutate(diet_generalism=rowSums(.[163:173], na.rm=TRUE))
+    mutate(breeding_habitat_generalism=rowSums(.[146:162], na.rm=TRUE)) %>%
+    mutate(diet_generalism=rowSums(.[163:173], na.rm=TRUE)) %>%
     group_by(binom) %>%
     summarise(mean_body_size=mean(body_mass,na.rm=T), 
               clutch_size=mean(clutch_size,na.rm=T),
