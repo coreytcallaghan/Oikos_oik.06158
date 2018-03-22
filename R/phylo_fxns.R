@@ -48,5 +48,8 @@ plot_bird_tree_traits<-function(aus_bird_tree,traits,response_variables){
   pdf("figures/ref_tree.pdf")
   plot(tree_plotting_2,type="f",cex=0.2)
   dev.off()
-  }
+}
+
+
+
 

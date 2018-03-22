@@ -9,6 +9,10 @@ packages:
   - ape
   - phytools
   - ggforce
+  - phylolm
+  - phylosignal
+  - phylobase
+  - rmarkdown
 
 targets:
   all:
@@ -17,6 +21,7 @@ targets:
       - figures/urbanness.pdf
       - figures/density_plot_per_species.pdf
       - figures/distribution_response_variables.pdf
+      - reports/phylo_report.pdf
       
 
   bird_tree:
@@ -28,7 +33,7 @@ targets:
   ebird_data:
     command: load_ebird_data()
 
-  oz_birds:
+  aus_bird_tree:
     command: subset_tree(bird_tree,traits)
 
   urbanness_table: 
@@ -38,7 +43,7 @@ targets:
     command: make_response_variables(ebird_data)
 
   figures/bird_urbanness_phylo.pdf:
-    command: plot_bird_tree_traits(oz_birds,traits,response_variables)
+    command: plot_bird_tree_traits(aus_bird_tree,traits,response_variables)
 
   figures/urbanness.pdf:
     command: urbanness_pdf(urbanness_table)
@@ -48,5 +53,10 @@ targets:
     
   figures/distribution_response_variables.pdf:
     command: distribution_response_variables(response_variables)
-  
-  
+    
+  reports/phylo_report.pdf:
+    command: render("reports/phylo_report.rmd")
+    depends: 
+      - traits
+      - aus_bird_tree
+      - response_variables

@@ -1,0 +1,40 @@
+---
+title: "phylo_analyses"
+author: "Everyone"
+date: "3/22/2018"
+output: pdf_document
+---
+
+```{r}
+  library(phylolm)
+
+  trait<-data.frame(mean_body_size=traits$mean_body_size,clutch_size=traits$clutch_size)
+  row.names(trait)<-row.names(traits)
+  trait<-subset(trait,trait$mean_body_size!="NaN"&trait$clutch_size!="NaN")
+  trait<-subset(trait,row.names(trait)%in%aus_bird_tree$tip.label)
+  tree_plotting<-drop.tip(aus_bird_tree,aus_bird_tree$tip.label[!aus_bird_tree$tip.label%in%row.names(trait)])
+  
+  response_variables$SCIENTIFIC_NAME<-gsub(" ","_",response_variables$SCIENTIFIC_NAME)
+  rv<-filter(response_variables,SCIENTIFIC_NAME%in%tree_plotting$tip.label)
+  exploiter<-as.array(rv$exploiter)
+  row.names(exploiter)<-rv$SCIENTIFIC_NAME
+  exploiter2<-exploiter-mean(exploiter)
+  
+  
+  tree_plotting_2<-drop.tip(tree_plotting,tree_plotting$tip.label[!tree_plotting$tip.label%in%row.names(exploiter2)])
+  trait<-subset(trait,row.names(trait)%in%tree_plotting_2$tip.label)
+  dd<-data.frame(urb=exploiter2)
+  dd$body_size<-trait$mean_body_size[match(row.names(dd),row.names(trait))]
+  dd$clutch_size<-trait$clutch_size[match(row.names(dd),row.names(trait))]
+  summary(phylolm(urb~log10(body_size)+clutch_size,data=dd,phy=tree_plotting_2))
+```
+
+
+  
+```{r}
+  library(phylosignal)
+  library(phylobase)
+  dd$body_size<-log10(dd$body_size)
+  out<-phylo4d(tree_plotting_2,tip.data=dd)
+  phyloSignal(out)
+```
