@@ -9,6 +9,7 @@ cru3
 Data/phylo/phy.tre
 .remake
 figures/
+reports/phylo_report.pdf
 # Compiled source #
 ###################
 *.com
