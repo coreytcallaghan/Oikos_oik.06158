@@ -2,6 +2,9 @@
 library(ggplot2)
 library(dplyr)
 library(fitdistrplus)
+library(tidyr)
+library(purrr)
+library(forcats)
 
 
 ## These would be the theoretical groups of birds
@@ -105,9 +108,9 @@ beta_fit_estimate[1,1]/beta_fit_estimate[2,1]
 ## Still not convinced. Need to test it
 
 ## write function to calculate "value" to test it a little bit
-rv <- function(species) {
+rv <- function(species, dataset) {
   
-  data <- species_urban %>%
+  data <- dataset %>%
     filter(COMMON_NAME == species) %>%
     dplyr::select(avg_rad) %>%
     mutate(avg_rad_log = log(avg_rad))
@@ -189,9 +192,9 @@ test_df %>%
 # that doesn't seem to work
 
 ## rewrite function to calculate the bootstrapped estimates
-rv <- function(species) {
+rv <- function(species, dataset) {
   
-  data <- species_urban %>%
+  data <- dataset %>%
     filter(COMMON_NAME == species) %>%
     dplyr::select(avg_rad) %>%
     mutate(avg_rad_log = log(avg_rad))
@@ -213,6 +216,8 @@ rv <- function(species) {
     summarise(mean_rv = mean(rv),
               sd_rv = sd(rv))
   
+  estimate$COMMON_NAME <- species
+  
   return(estimate)
   
 }
@@ -230,6 +235,85 @@ rv("Varied Lorikeet")
 rv("Western Rosella")
 
 
+
+results <- lapply(unique(species_urban$COMMON_NAME), rv, dataset = species_urban)
+
+results_df <- as.data.frame(do.call(rbind, results))
+
+results_df %>%
+  arrange(desc(mean_rv)) %>%
+  slice(1:50) %>%
+  arrange(mean_rv) %>%
+  ggplot(., aes(x=fct_inorder(COMMON_NAME), y=mean_rv))+
+  geom_point()+
+  geom_errorbar(aes(ymin=mean_rv-sd_rv, ymax=mean_rv+sd_rv))+
+  coord_flip()
+  
+### What about taking the .5 quantile of the fitted beta distribution and how does that look?!
+## histogram plot
+## Looks like it should belong to the adapter grouping
+ggplot(DUMO, aes(x=avg_rad_log))+
+  geom_histogram()
+
+
+# transform data
+DUMO$avg_rad_log_transform <- range01(DUMO$avg_rad_log)
+
+# plot histogram again
+ggplot(DUMO, aes(avg_rad_log_transform))+
+  geom_histogram()
+
+# fit beta distribution, as above
+beta_fit <- fitdist(DUMO$avg_rad_log_transform, "beta", method="qme", probs=c(1/3, 2/3))
+
+quantile(beta_fit, probs=0.5)
+
+bln <- bootdist(beta_fit, bootmethod="nonparam", niter=101)
+quantile(bln, probs = 0.5)
+
+
+## repeat for DUGR
+beta_fit <- fitdist(DUGR$avg_rad_log_transform, "beta", method="qme", probs=c(1/3, 2/3))
+
+quantile(beta_fit, probs=0.5)
+
+
+
+
+
+rv <- function(species, dataset) {
+  
+  data <- dataset %>%
+    filter(COMMON_NAME == species) %>%
+    dplyr::select(avg_rad) %>%
+    mutate(avg_rad_log = log(avg_rad))
+  
+  # transform data
+  data$avg_rad_log_transform <- range01(data$avg_rad_log)
+  
+  # fit beta distribution
+  beta_fit <- fitdist(data$avg_rad_log_transform, "beta", method="qme", probs=c(1/3, 2/3))
+  bln <- bootdist(beta_fit, bootmethod="nonparam", niter=101)
+  boot_estimate <- as.data.frame(quantile(bln, probs = 0.5)[["quantmedian"]])
+  boot_CI <- as.data.frame(quantile(bln, probs=0.5)[["quantCI"]])
+  boot_results <- bind_rows(boot_estimate, boot_CI)
+  boot_results$value <- c("median", "2.5%", "97.5%")
+  boot_results$COMMON_NAME <- species
+  
+  return(boot_results)
+  
+}
+
+test_species <- c("Common Myna", "Australian Ibis", "Southern Emuwren", "Noisy Miner", 
+                  "Dusky Grasswren", "Spinifex Pigeon", "Spotted Dove", "Spotted Bowerbird",
+                  "Varied Lorikeet", "Western Rosella")
+
+test_data <- species_urban %>%
+  filter(COMMON_NAME %in% test_species)
+
+results <- lapply(unique(test_data$COMMON_NAME), rv, dataset = test_data)
+
+results_df <- as.data.frame(do.call(rbind, results))
 
 
 
