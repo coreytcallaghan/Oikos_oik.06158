@@ -13,6 +13,7 @@ packages:
   - phylosignal
   - phylobase
   - rmarkdown
+  - stringr
 
 targets:
   all:
