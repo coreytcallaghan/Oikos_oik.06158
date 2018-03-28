@@ -13,9 +13,8 @@ make_response_variables <- function(species_urban) {
   
   response_variables <- species_urban %>%
   group_by(COMMON_NAME, SCIENTIFIC_NAME) %>%
-  summarise(adapter= quantile(log(avg_rad), .90,na.rm=T),
-            exploiter = quantile(log(avg_rad), .50,na.rm=T),
-            avoider = quantile(log(avg_rad), .10,na.rm=T),
+  summarise(urban_mean = mean(avg_rad),
+            urban_median = median(avg_rad),
             N = n(),
             unique_localities = length(unique(LOCALITY_ID)))
   
@@ -30,7 +29,7 @@ distribution_response_variables <- function(response_variables) {
   pdf("figures/distribution_response_variables.pdf")
   
   print(response_variables %>%
-    gather(key = "response_level", value = "value", adapter:avoider) %>%
+    gather(key = "response_level", value = "value", urban_mean:urban_median) %>%
     ggplot(., aes(value))+
     geom_histogram(bins = 50, 
                    col="black", 
