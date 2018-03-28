@@ -27,13 +27,16 @@ subset the tree
   tree_plotting<-drop.tip(aus_bird_tree,aus_bird_tree$tip.label[!aus_bird_tree$tip.label%in%row.names(trait)])
   response_variables$SCIENTIFIC_NAME<-gsub(" ","_",response_variables$SCIENTIFIC_NAME)
   rv<-filter(response_variables,SCIENTIFIC_NAME%in%tree_plotting$tip.label)
-  exploiter<-as.array(rv$exploiter) #the median
-  row.names(exploiter)<-rv$SCIENTIFIC_NAME
-  exploiter2<-exploiter-mean(exploiter)
+  median_rv<-as.array(rv$urban_median)
+  row.names(median_rv)<-rv$SCIENTIFIC_NAME
+  median_rv2<-median_rv-mean(median_rv)
   
-  tree_plotting_2<-drop.tip(tree_plotting,tree_plotting$tip.label[!tree_plotting$tip.label%in%row.names(exploiter2)])
+  
+  tree_plotting_2<-drop.tip(tree_plotting,tree_plotting$tip.label[!tree_plotting$tip.label%in%row.names(median_rv2)])
   trait<-subset(trait,row.names(trait)%in%tree_plotting_2$tip.label)
-  dd<-data.frame(urb=exploiter2)
+  
+  dd <- data.frame(urb=median_rv2)
+
 ```
 
 
@@ -49,7 +52,7 @@ run the model
 
 ```{r}
   mod1<-phylolm(urb~log10(body_size)+clutch_size+gregariousness,data=dd,phy=tree_plotting_2)
-summary(mod1)
+  summary(mod1)
 ```
 
 maybe we eventually want to do model selection
