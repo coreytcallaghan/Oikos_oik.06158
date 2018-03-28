@@ -17,7 +17,7 @@ plot_bird_tree<-function(aus_bird_tree){
 
 subset_tree<-function(trees,traits){
   non_aus_sp<-trees$tip.label[!trees$tip.label %in% traits$binom]
-  aus_bird_tree<-drop.tip(bird_trees,non_aus_sp)
+  aus_bird_tree<-drop.tip(trees,non_aus_sp)
   return(aus_bird_tree)
   }
 

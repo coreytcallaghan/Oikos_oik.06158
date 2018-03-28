@@ -47,6 +47,12 @@ match traits into the right dataframe
   dd$gregariousness<-trait$gregariousness[match(row.names(dd),row.names(trait))]
   
 ```
+check the corrlation of the predictors
+
+```{r}
+corrplot::corrplot(cor(dd %>% select(-gregariousness)))
+```
+
 
 run the model
 
