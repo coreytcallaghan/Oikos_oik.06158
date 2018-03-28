@@ -56,6 +56,32 @@ read_process_trait_data <- function(){
       mutate(diet_generalism = rowSums(.[2:12])) %>%
       dplyr::select(binom, diet_generalism)
     
+## Nesting generalism
+    nest_generalism <- traits %>%
+      dplyr::select(binom, 183:188) %>%
+      replace(is.na(.), 0) %>%
+      group_by(binom) %>%
+      summarise_all(sum) %>%
+      mutate(`183_Nest_location_Ground_level_12` = as.integer(as.character(gsub(2, 1, .$`183_Nest_location_Ground_level_12`)))) %>%
+      mutate(`184_Nest_location_Supported_12` = as.integer(as.character(gsub(2, 1, .$`184_Nest_location_Supported_12`)))) %>%
+      mutate(nest_generalism = rowSums(.[2:7])) %>%
+      dplyr::select(binom, nest_generalism)
+    
+## nesting categories of specific interest
+    nest_types <- traits %>%
+      dplyr::select(binom, 183, 187) %>%
+      replace(is.na(.), 0) %>%
+      group_by(binom) %>%
+      summarise_all(sum) %>%
+      rename(ground_nesting = `183_Nest_location_Ground_level_12`) %>%
+      rename(hollow_nesting = `187_Nest_location_Hollow_12`) %>%
+      mutate(ground_nesting = gsub(2, 1, .$ground_nesting)) %>%
+      mutate(ground_nesting = ifelse(ground_nesting == "1", "Yes", "No")) %>%
+      mutate(hollow_nesting = ifelse(hollow_nesting == 1, "Yes", "No"))
+    
+## join nesting
+    nesting <- inner_join(nest_types, nest_generalism, by="binom")
+    
 ## movement
     movement <- traits %>%
       dplyr::select(binom, 193:195) %>%
@@ -80,11 +106,24 @@ read_process_trait_data <- function(){
       mutate(movement_class = gsub(" and partial_migrant and ", "partial_migrant", .$movement_class)) %>%
       mutate(movement_class = gsub(" and  and ", "none", .$movement_class))
     
+## gregariousness
+    gregariousness <- traits %>%
+      dplyr::select(binom, 192) %>%
+      replace(is.na(.), 0) %>%
+      mutate_all(funs(str_replace(., "NAV", "0"))) %>%
+      rename(gregariousness = `192_Breeding_system_Cooperative_12`) %>%
+      mutate(gregariousness = as.integer(as.character(.$gregariousness))) %>%
+      group_by(binom) %>%
+      summarise_all(sum) %>%
+      mutate(gregariousness = ifelse(gregariousness==0, "No", "Yes"))
+    
     ms <- ms %>%
       inner_join(., feeding_habitat_generalism, by="binom") %>%
       inner_join(., breeding_habitat_generalism, by="binom") %>%
       inner_join(., diet_generalism, by="binom") %>%
-      inner_join(., movement, by="binom")
+      inner_join(., movement, by="binom") %>%
+      inner_join(., nesting, by="binom") %>%
+      inner_join(., gregariousness, by="binom")
     
     
     ms <- data.frame(ms)
