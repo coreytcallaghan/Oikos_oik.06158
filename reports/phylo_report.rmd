@@ -5,36 +5,68 @@ date: "3/22/2018"
 output: pdf_document
 ---
 
+
+match and subset to tree.  this is annoying because the phylo packages all use row.names and the tidyverse hates rownames.
+
+
+first create a new data.frame (not tibble) with just the traits of interest
 ```{r}
   library(phylolm)
-
-  trait<-data.frame(mean_body_size=traits$mean_body_size,clutch_size=traits$clutch_size)
+  trait<-data.frame(mean_body_size=traits$mean_body_size,clutch_size=traits$clutch_size,gregariousness=traits$gregariousness)
   row.names(trait)<-row.names(traits)
-  trait<-subset(trait,trait$mean_body_size!="NaN"&trait$clutch_size!="NaN")
+```  
+
+subset that dataframe to those names that are both in the trait data base AND the tree
+```{r}  
+  trait<-subset(trait,trait$mean_body_size!="NaN"&trait$clutch_size!="NaN"&trait$gregariousness!="NaN")
   trait<-subset(trait,row.names(trait)%in%aus_bird_tree$tip.label)
-  tree_plotting<-drop.tip(aus_bird_tree,aus_bird_tree$tip.label[!aus_bird_tree$tip.label%in%row.names(trait)])
+```  
   
+subset the tree
+```{r}
+  tree_plotting<-drop.tip(aus_bird_tree,aus_bird_tree$tip.label[!aus_bird_tree$tip.label%in%row.names(trait)])
   response_variables$SCIENTIFIC_NAME<-gsub(" ","_",response_variables$SCIENTIFIC_NAME)
   rv<-filter(response_variables,SCIENTIFIC_NAME%in%tree_plotting$tip.label)
-  exploiter<-as.array(rv$exploiter)
+  exploiter<-as.array(rv$exploiter) #the median
   row.names(exploiter)<-rv$SCIENTIFIC_NAME
   exploiter2<-exploiter-mean(exploiter)
-  
   
   tree_plotting_2<-drop.tip(tree_plotting,tree_plotting$tip.label[!tree_plotting$tip.label%in%row.names(exploiter2)])
   trait<-subset(trait,row.names(trait)%in%tree_plotting_2$tip.label)
   dd<-data.frame(urb=exploiter2)
-  dd$body_size<-trait$mean_body_size[match(row.names(dd),row.names(trait))]
-  dd$clutch_size<-trait$clutch_size[match(row.names(dd),row.names(trait))]
-  summary(phylolm(urb~log10(body_size)+clutch_size,data=dd,phy=tree_plotting_2))
 ```
 
 
+match traits into the right dataframe  
+```{r}    
+  dd$body_size<-trait$mean_body_size[match(row.names(dd),row.names(trait))]
+  dd$clutch_size<-trait$clutch_size[match(row.names(dd),row.names(trait))]
+  dd$gregariousness<-trait$gregariousness[match(row.names(dd),row.names(trait))]
+  
+```
+
+run the model
+
+```{r}
+  mod1<-phylolm(urb~log10(body_size)+clutch_size+gregariousness,data=dd,phy=tree_plotting_2)
+summary(mod1)
+```
+
+maybe we eventually want to do model selection
+
+```{r}
+library(MuMIn)
+dredge(mod1)
+```
+
+this is sort of cool.  phylogenetic signal in all the traits
   
 ```{r}
   library(phylosignal)
   library(phylobase)
   dd$body_size<-log10(dd$body_size)
-  out<-phylo4d(tree_plotting_2,tip.data=dd)
-  phyloSignal(out)
+  dd2<-subset(dd,select=-gregariousness)
+  out<-phylo4d(tree_plotting_2,tip.data=dd2)
+  ps<-phyloSignal(out)
+  knitr::kable(ps$stat)
 ```
