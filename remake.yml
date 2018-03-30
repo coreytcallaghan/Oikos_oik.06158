@@ -15,6 +15,7 @@ packages:
   - rmarkdown
   - stringr
   - corrplot
+  - lme4
 
 targets:
   all:
@@ -53,12 +54,14 @@ targets:
     
   figures/density_plot_per_species.pdf:
     command: avg_rad_density_for_each_species(ebird_data)
+    check: exists
     
   figures/distribution_response_variables.pdf:
     command: distribution_response_variables(response_variables)
   
   figures/histogram_plot_per_species.pdf:
     command: avg_rad_density_for_each_species(ebird_data)
+    check: exists
     
   reports/phylo_report.pdf:
     command: render("reports/phylo_report.rmd")
