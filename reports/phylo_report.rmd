@@ -10,19 +10,17 @@ run phylo model
 ```{r}
 
 
-mod2<-run_phylo_lm(traits,
+mod2<-run_phylo_lme4(traits,
                          response_variables,
                          aus_bird_tree)
-
-
-summary(mod2)
+broom::tidy(mod2)
 ```
-maybe we eventually want to do model selection
+
 
 ```{r}
-# library(MuMIn)
-# dredge(mod2)
+phylolm_r2(mod2)
 ```
+
 
 this is sort of cool.  phylogenetic signal in all the traits
   

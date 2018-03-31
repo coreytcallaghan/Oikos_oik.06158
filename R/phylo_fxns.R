@@ -185,20 +185,23 @@ run_phylo_lme4 <- function(traits,
   dd$gregariousness<-trait$gregariousness[match(row.names(dd),row.names(trait))]
   # run the model
   phylo<-tree_plotting_2
-  birdZ <- phylo.to.Z(tree_plotting_2)
+#  birdZ <- phylo.to.Z(tree_plotting_2)
   dd$phylo <- row.names(dd)
   dd$obs <- factor(seq(nrow(dd)))
   dd$urb_cat<-as.integer(dd$urb>0)
   dd$obs <- factor(seq(nrow(dd)))
 #  +(1|obs)
   
-  phylo_lme4_fit <- phylo_lmm(urb~log10(body_size)+(1|phylo)+(1|obs),sp=dd$phylo,
-                              data=dd,phylo=phylo,phylonm="phylo",
-                              control=lmerControl(check.nobs.vs.nlev="ignore",check.nobs.vs.nRE="ignore"),
-                              phyloZ=birdZ)
+#  phylo_lme4_fit <- phylo_lmm(urb~log10(body_size)+(1|phylo),sp=dd$phylo,
+#                              data=dd,phylo=phylo,phylonm="phylo",
+#                              control=lmerControl(check.nobs.vs.nlev="ignore",check.nobs.vs.nRE="ignore"),
+#                              phyloZ=birdZ)
   
-  
-  return(phylo_lme4_fit)
+  basic_gaus_fit <- lmer(urb~clutch_size+log10(body_size)+(1|phylo),
+                         data=dd,
+                         control=lmerControl(check.nobs.vs.nlev="ignore",check.nobs.vs.nRE="ignore"))
+
+  return(basic_gaus_fit)
 }
 
 
@@ -206,7 +209,7 @@ run_phylo_lme4 <- function(traits,
 
 phylolm_r2 <- function(phylo_lme4_fit) {
   #stuff
-  Fixed<-fixef(phylo_lme4_fit)[2]*phylo_lme4_fit@frame$`log10(body_size)`
+  Fixed<-fixef(phylo_lme4_fit)[2]*phylo_lme4_fit@frame$clutch_size+fixef(phylo_lme4_fit)[3]*phylo_lme4_fit@frame$`log10(body_size)`
     varF<-var(Fixed)
     r2<-varF/(varF + VarCorr(phylo_lme4_fit)$phylo[1]  + attr(VarCorr(phylo_lme4_fit), "sc")^2)
     return(r2)  

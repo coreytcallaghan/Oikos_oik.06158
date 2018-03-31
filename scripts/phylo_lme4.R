@@ -172,13 +172,16 @@ basic_gaus_fit <- lmer(phen~cofactor+(1|phylo),
 basic_gaus_res <- rbind(coef(summary(basic_gaus_fit))[,1:2],
                         cbind(matrix(unlist(VarCorr(basic_gaus_fit))),NA))
 
-phylo_gaus_fit <- phylo_lmm(phen~cofactor+(1|phylo)+(1|obs),sp=dat_gaus$phylo,
+phylo_gaus_fit <- phylo_lmm(phen~cofactor+(1|phylo),sp=dat_gaus$phylo,
                             data=dat_gaus,phylo=phylo,phylonm="phylo",
                             control=lmerControl(check.nobs.vs.nlev="ignore",check.nobs.vs.nRE="ignore"),
                             phyloZ=phyloZ)
 
 lme4_gaus_res <- rbind(coef(summary(phylo_gaus_fit))[,1:2],
                        cbind(matrix(unlist(VarCorr(phylo_gaus_fit))),NA))
+
+tt_lmer_nocor_gaus <- tidy(basic_gaus_fit)
+tt_lmer_cor_gaus <- tidy(phylo_gaus_fit)
 
 print(basic_gaus_res)
 print(lme4_gaus_res)
