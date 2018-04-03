@@ -17,15 +17,13 @@ read_process_trait_data <- function(){
     traits %>%
     mutate(body_mass=ifelse(`99_Body_mass_average_8`=="NAV",NA,as.numeric(`99_Body_mass_average_8`))) %>%
     mutate(clutch_size=ifelse(`178_Clutch_size_average_12`=="NAV",NA,as.numeric(`178_Clutch_size_average_12`))) %>%
-    mutate(category=`29_Population_description_4`) %>%
-    mutate(status=`49_Australian_status_July_2015_5`) %>%
+    mutate(iucn_status=`49_Australian_status_July_2015_5`) %>%
     mutate(brain_size=ifelse(`113_Brain_mass_8`=="NAV", NA, as.numeric(`113_Brain_mass_8`))) %>%
     mutate(diet_generalism=rowSums(.[163:173], na.rm=TRUE)) %>%
     group_by(binom) %>%
     summarise(mean_body_size=mean(body_mass,na.rm=T), 
               clutch_size=mean(clutch_size,na.rm=T),
-              category=Mode(category),
-              status=Mode(status),
+              iucn_status=Mode(iucn_status),
               brain_size=mean(brain_size, na.rm=T)) -> ms
               
     
@@ -55,6 +53,29 @@ read_process_trait_data <- function(){
       summarise_all(sum) %>%
       mutate(diet_generalism = rowSums(.[2:12])) %>%
       dplyr::select(binom, diet_generalism)
+
+## diet categories of specific interest
+    diet_types <- traits %>%
+      dplyr::select(binom, 165, 166, 167, 168, 170) %>%
+      replace(is.na(.), 0) %>%
+      group_by(binom) %>%
+      summarise_all(sum) %>%
+      rename(granivore = `165_Food_Seeds_10`) %>%
+      rename(insectivore = `168_Food_Terrestrial_invertebrates_10`) %>%
+      rename(plants1 = `166_Food_Foliage_or_herbs_10`) %>%
+      rename(plants2 = `167_Food_Corms_or_tubers`) %>%
+      rename(carrion_eater = `170_Food_Carrion_10`) %>%
+      mutate(plant_eater = plants1+plants2) %>%
+      select(-plants1, -plants2) %>%
+      mutate(granivore = ifelse(granivore == 1, "Yes", "no")) %>%
+      mutate(insectivore = ifelse(insectivore == 1, "Yes", "no")) %>%
+      mutate(plant_eater = ifelse(plant_eater == 2, "Yes", "no")) %>%
+      mutate(plant_eater = ifelse(plant_eater == 1, "Yes", "no")) %>%
+      mutate(carrion_eater = ifelse(carrion_eater == 1, "Yes", "no")) 
+    
+## join diet
+    diet <- inner_join(diet_types, diet_generalism, by="binom")
+
     
 ## Nesting generalism
     nest_generalism <- traits %>%
@@ -84,12 +105,14 @@ read_process_trait_data <- function(){
     
 ## movement
     movement <- traits %>%
-      dplyr::select(binom, 193:195) %>%
+      dplyr::select(binom, 193:197) %>%
       replace(is.na(.), 0) %>%
       mutate_all(funs(str_replace(., "NAV", "0"))) %>%
       mutate(`193_National_movement_local_dispersal_13` = as.integer(as.character(`193_National_movement_local_dispersal_13`))) %>%
       mutate(`194_National_movement_Partial_migrant_13` = as.integer(as.character(`194_National_movement_Partial_migrant_13`))) %>%
       mutate(`195_National_movement_Total_migrant_13` = as.integer(as.character(`195_National_movement_Total_migrant_13`))) %>%
+      mutate(`196_National_movement_Nomadic_or_opportunistic_13` = as.integer(as.character(`196_National_movement_Nomadic_or_opportunistic_13`))) %>%
+      mutate(`197_National_movement_Irruptive_13` = as.integer(as.character(`197_National_movement_Irruptive_13`))) %>%
       group_by(binom) %>%
       summarise_all(sum) %>%
       mutate(`193_National_movement_local_dispersal_13` = 
@@ -98,29 +121,64 @@ read_process_trait_data <- function(){
                ifelse(`194_National_movement_Partial_migrant_13` == 0, "", "partial_migrant")) %>%
       mutate(`195_National_movement_Total_migrant_13` = 
                ifelse(`195_National_movement_Total_migrant_13` == 0, "", "total_migrant")) %>%
-      unite("movement_class", 2:4, sep=" and ") %>%
-      mutate(movement_class = gsub("dispersal and partial_migrant and ", "dispersal and partial_migrant", .$movement_class)) %>%
-      mutate(movement_class = gsub("dispersal and  and ", "dispersal", .$movement_class)) %>%
-      mutate(movement_class = gsub(" and  and total_migrant", "total_migrant", .$movement_class)) %>%
-      mutate(movement_class = gsub(" and partial_migrant and total_migrant", "partial_migrant and total_migrant", .$movement_class)) %>%
-      mutate(movement_class = gsub(" and partial_migrant and ", "partial_migrant", .$movement_class)) %>%
-      mutate(movement_class = gsub(" and  and ", "none", .$movement_class))
-    
+      mutate(`196_National_movement_Nomadic_or_opportunistic_13` = 
+               ifelse(`196_National_movement_Nomadic_or_opportunistic_13` == 0, "", "nomadic_or_irruptive")) %>%
+      mutate(`197_National_movement_Irruptive_13` = 
+               ifelse(`197_National_movement_Irruptive_13` == 0, "", "nomadic_or_irruptive")) %>%
+      unite("movement_class", 2:6, sep=" and ") %>%
+      mutate(movement_class = gsub("dispersal and partial_migrant and  and  and nomadic_or_irruptive", "dispersal and partial_migrant and nomadic/irruptive", .$movement_class)) %>%
+      mutate(movement_class = gsub("dispersal and partial_migrant and  and  and ", "dispersal and partial_migrant", .$movement_class)) %>%
+      mutate(movement_class = gsub("dispersal and partial_migrant and  and nomadic_or_irruptive and ", "dispersal and partial_migrant and nomadic/irruptive", .$movement_class)) %>%
+      mutate(movement_class = gsub("dispersal and  and  and nomadic_or_irruptive and nomadic_or_irruptive", "dispersal and nomadic/irruptive", .$movement_class)) %>%
+      mutate(movement_class = gsub("dispersal and  and  and nomadic_or_irruptive and " , "dispersal and nomadic/irruptive", .$movement_class)) %>%
+      mutate(movement_class = gsub("dispersal and  and  and  and nomadic_or_irruptive", "dispersal and nomadic/irruptive", .$movement_class)) %>%
+      mutate(movement_class = gsub("dispersal and  and  and  and ", "dispersal", .$movement_class)) %>%
+      mutate(movement_class = gsub(" and  and total_migrant and nomadic_or_irruptive and ", "total_migrant and nomadic/irruptive", .$movement_class)) %>%
+      mutate(movement_class = gsub(" and  and total_migrant and  and ", "total_migrant", .$movement_class)) %>%
+      mutate(movement_class = gsub(" and  and  and nomadic_or_irruptive and nomadic_or_irruptive", "nomadic/irruptive", .$movement_class)) %>%
+      mutate(movement_class = gsub(" and  and  and nomadic_or_irruptive and ", "nomadic/irruptive", .$movement_class)) %>%
+      mutate(movement_class = gsub(" and partial_migrant and  and  and ", "partial_migrant", .$movement_class)) %>%
+      mutate(movement_class = gsub(" and partial_migrant and  and nomadic_or_irruptive and ", "partial_migrant and nomadic/irruptive", .$movement_class)) %>%
+      mutate(movement_class = gsub(" and partial_migrant and total_migrant and  and ", "partial_migrant and total_migrant", .$movement_class)) %>%
+      mutate(movement_class = gsub(" and  and  and  and nomadic_or_irruptive", "nomadic/irruptive", .$movement_class)) %>%
+      mutate(movement_class = gsub(" and  and  and  and ", "none", .$movement_class))
+
+
 ## gregariousness
-    gregariousness <- traits %>%
-      dplyr::select(binom, 192) %>%
+    cooperative_breeding <- traits %>%
+      dplyr::select(binom, 174:176, , 192) %>%
       replace(is.na(.), 0) %>%
       mutate_all(funs(str_replace(., "NAV", "0"))) %>%
-      rename(gregariousness = `192_Breeding_system_Cooperative_12`) %>%
-      mutate(gregariousness = as.integer(as.character(.$gregariousness))) %>%
+      rename(breeding = `192_Breeding_system_Cooperative_12`) %>%
+      mutate(breeding = as.integer(as.character(.$breeding))) %>%
       group_by(binom) %>%
       summarise_all(sum) %>%
-      mutate(gregariousness = ifelse(gregariousness==0, "No", "Yes"))
+      mutate(breeding = ifelse(gregariousness==0, "Not cooperative", "Cooperative")) %>%
+      
+    
+    
+    nest_aggregation <- traits %>%
+      dplyr::select(binom, 189:190) %>%
+      replace(is.na(.), 0) %>%
+      mutate_all(funs(str_replace(., "NAV", "0"))) %>%
+      rename(solitary_nest = `189_Nest_aggregation_Solitary_12`) %>%
+      rename(colonial_nest = `190_Nest_aggregation_Colonial_12`) %>%
+      mutate(solitary_nest = as.integer(as.character(.$solitary_nest))) %>%
+      mutate(colonial_nest = as.integer(as.character(.$colonial_nest))) %>%
+      group_by(binom) %>%
+      summarise_all(sum) %>%
+      mutate(solitary_nest = ifelse(solitary_nest == 0, "", "solitary")) %>%
+      mutate(colonial_nest = ifelse(colonial_nest == 0, "", "colonial")) %>%
+      unite("nest_aggregation", 2:3, sep=" and ") %>%
+      mutate(nest_aggregation = gsub("solitary and colonial", "both", .$nest_aggregation)) %>%
+      mutate(nest_aggregation = gsub("solitary and ", "solitary", .$nest_aggregation)) %>%
+      mutate(nest_aggregation = gsub(" and colonial", "colonial", .$nest_aggregation)) %>%
+      mutate(nest_aggregation = gsub(" and ", "none", .$nest_aggregation)) 
     
     ms <- ms %>%
       inner_join(., feeding_habitat_generalism, by="binom") %>%
       inner_join(., breeding_habitat_generalism, by="binom") %>%
-      inner_join(., diet_generalism, by="binom") %>%
+      inner_join(., diet, by="binom") %>%
       inner_join(., movement, by="binom") %>%
       inner_join(., nesting, by="binom") %>%
       inner_join(., gregariousness, by="binom")
