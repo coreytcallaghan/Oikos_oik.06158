@@ -28,7 +28,6 @@ traits_species <- traits %>%
   rename(COMMON_NAME_traits = `3_Taxon_common_name_2`) %>%
   mutate(in_traits=TRUE) %>%
   rename(SCIENTIFIC_NAME = binom) %>%
-  mutate(COMMON_NAME = COMMON_NAME_traits) %>%
   mutate(SCIENTIFIC_NAME_traits = SCIENTIFIC_NAME)
 
 
@@ -54,7 +53,7 @@ subset_tree<-function(trees,traits){
 AUS_tree <- subset_tree(trees, traits)
 
 
-AUS_tree_birds <- data.frame(SCIENTIFIC_NAME=AUS_tree$tip.label, in_tree = "TRUE", stringsAsFactors = FALSE)
+AUS_tree_birds <- data.frame(SCIENTIFIC_NAME_traits=AUS_tree$tip.label, in_tree = "TRUE", stringsAsFactors = FALSE)
 
 ## Now start merging together
 ## since the eBird data is the actual main source of data
@@ -62,15 +61,19 @@ AUS_tree_birds <- data.frame(SCIENTIFIC_NAME=AUS_tree$tip.label, in_tree = "TRUE
 
 species_joined <- eBird_species %>%
   mutate(SCIENTIFIC_NAME = gsub(" ", "_", .$SCIENTIFIC_NAME)) %>%
-  left_join(., AUS_tree_birds, by="SCIENTIFIC_NAME") %>%
+  full_join(., traits_species, by="SCIENTIFIC_NAME") %>%
+  replace_na(list(COMMON_NAME = "Not in eBird data")) %>%
+  left_join(., AUS_tree_birds, by="SCIENTIFIC_NAME_traits") %>%
   replace_na(list(in_tree="Missing")) %>%
-  left_join(., traits_species, by="SCIENTIFIC_NAME") %>%
-  left_join(., traits_species, by="COMMON_NAME")
+  rename(SCIENTIFIC_NAME_ebird = SCIENTIFIC_NAME) %>%
+  rename(COMMON_NAME_ebird = COMMON_NAME)
+
 
 
 ## list of species in eBird but not in tree
 missing_species <- species_joined %>%
-  filter(in_tree == "Missing")
+  filter(COMMON_NAME != "Not in eBird data") %>%
+  filter()
 
 
 
