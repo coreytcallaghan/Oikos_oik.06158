@@ -146,14 +146,14 @@ read_process_trait_data <- function(){
 
 ## gregariousness
     cooperative_breeding <- traits %>%
-      dplyr::select(binom, 174:176, , 192) %>%
+      dplyr::select(binom, 192) %>%
       replace(is.na(.), 0) %>%
       mutate_all(funs(str_replace(., "NAV", "0"))) %>%
       rename(breeding = `192_Breeding_system_Cooperative_12`) %>%
       mutate(breeding = as.integer(as.character(.$breeding))) %>%
       group_by(binom) %>%
       summarise_all(sum) %>%
-      mutate(breeding = ifelse(gregariousness==0, "Not cooperative", "Cooperative")) %>%
+      mutate(breeding = ifelse(breeding==0, "Not cooperative", "Cooperative"))
       
     
     
@@ -175,6 +175,36 @@ read_process_trait_data <- function(){
       mutate(nest_aggregation = gsub(" and colonial", "colonial", .$nest_aggregation)) %>%
       mutate(nest_aggregation = gsub(" and ", "none", .$nest_aggregation)) 
     
+    feeding_aggregation <- traits %>%
+      dplyr::select(binom, 174:176) %>%
+      replace(is.na(.), 0) %>%
+      mutate_all(funs(str_replace(., "NAV", "0"))) %>%
+      rename(solitary = `174_Feeding_aggregation_Solitary_11`) %>%
+      rename(pairs = `175_Feeding_aggregation_Pairs_11`) %>%
+      rename(flocks = `176_Feeding_aggregation_Flocks_11`) %>%
+      mutate(solitary = as.integer(as.character(.$solitary))) %>%
+      mutate(pairs = as.integer(as.character(.$pairs))) %>%
+      mutate(flocks = as.integer(as.character(.$flocks))) %>%
+      group_by(binom) %>%
+      summarise_all(sum) %>%
+      mutate(solitary = ifelse(solitary == 0, "", "solitary")) %>%
+      mutate(pairs = ifelse(pairs == 0, "", "pairs")) %>%
+      mutate(flocks = ifelse(flocks == 0, "", "flocks")) %>%
+      unite("feeding_aggregation", 2:4, sep=" and ") %>%
+      mutate(feeding_aggregation = gsub("solitary and pairs and flocks", "solitary_pairs_flocks", .$feeding_aggregation)) %>%
+      mutate(feeding_aggregation = gsub("solitary and  and flocks", "solitary_and_flocks", .$feeding_aggregation)) %>%
+      mutate(feeding_aggregation = gsub("solitary and  and ", "solitary", .$feeding_aggregation)) %>%
+      mutate(feeding_aggregation = gsub("solitary and pairs and ", "solitary_and_pairs", .$feeding_aggregation)) %>%
+      mutate(feeding_aggregation = gsub(" and  and flocks", "flocks", .$feeding_aggregation)) %>%
+      mutate(feeding_aggregation = gsub(" and pairs and flocks", "pairs_and_flocks", .$feeding_aggregation)) %>%
+      mutate(feeding_aggregation = gsub(" and pairs and ", "pairs", .$feeding_aggregation)) %>%
+      mutate(feeding_aggregation = gsub(" and  and ", "none", .$feeding_aggregation))
+    
+    gregariousness <- cooperative_breeding %>%
+      inner_join(., nest_aggregation, by="binom") %>%
+      inner_join(., feeding_aggregation, by="binom")
+    
+## creating final traits dataframe
     ms <- ms %>%
       inner_join(., feeding_habitat_generalism, by="binom") %>%
       inner_join(., breeding_habitat_generalism, by="binom") %>%
