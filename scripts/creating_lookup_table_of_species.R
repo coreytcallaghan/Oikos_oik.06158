@@ -264,7 +264,8 @@ rm(list=setdiff(ls(), "final_lookup"))
 
 
 
-
+## Write out lookup table
+write_csv(final_lookup, "Data/Taxonomy/taxonomy_key.csv")
 
 
 
