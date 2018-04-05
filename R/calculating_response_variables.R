@@ -8,15 +8,28 @@ load_ebird_data <- function() {
   species_urban
 }
 
+
+### read in taxonomy key
+read_lookup_table_in <- function(){
+  taxonomy_key <- read_csv("Data/Taxonomy/taxonomy_key.csv")
+  taxonomy_key
+}
+
+
 ### calculate response variable df
 make_response_variables <- function(species_urban) {
   
   response_variables <- species_urban %>%
-  group_by(COMMON_NAME, SCIENTIFIC_NAME) %>%
-  summarise(urban_mean = mean(avg_rad),
+    group_by(COMMON_NAME, SCIENTIFIC_NAME) %>%
+    summarise(urban_mean = mean(avg_rad),
             urban_median = median(avg_rad),
             N = n(),
-            unique_localities = length(unique(LOCALITY_ID)))
+            unique_localities = length(unique(LOCALITY_ID))) %>%
+    ungroup() %>%
+    rename(SCIENTIFIC_NAME_ebird = SCIENTIFIC_NAME) %>%
+    rename(COMMON_NAME_ebird = COMMON_NAME) %>%
+    inner_join(., taxonomy_key, by=c("COMMON_NAME_ebird", "SCIENTIFIC_NAME_ebird")) %>%
+    mutate(SCIENTIFIC_NAME_tree = gsub(" ", "_", .$SCIENTIFIC_NAME_tree))
   
   response_variables
   
