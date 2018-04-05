@@ -1,9 +1,29 @@
-read_trait_data_in<-function(){
-  require(readr)
-traits<-read_csv("Data/Raw trait data/Australian_Bird_Data_Version_1.csv")
-         traits$binom<- paste(traits$`4_Genus_name_2`, traits$`5_Species_name_2`,sep="_")
-         return(traits)
+read_lookup_table_in <- function(){
+  taxonomy_key <- read_csv("Data/Taxonomy/taxonomy_key.csv")
 }
+
+
+## this will read in trait data
+## cut the trait data down to all those that
+## are in eBird and then assign the "binom" to
+## the scientific names of the tree so we get the best matches
+read_trait_data_in <- function(){
+  
+  require(readr)
+  
+traits <- read_csv("Data/Raw trait data/Australian_Bird_Data_Version_1.csv")
+
+traits$SCIENTIFIC_NAME_traits <- paste(traits$`4_Genus_name_2`, traits$`5_Species_name_2`,sep="_")
+
+traits <- traits %>%
+  inner_join(., taxonomy_key, by="SCIENTIFIC_NAME_traits") %>%
+  rename(binom = SCIENTIFIC_NAME_tree) %>%
+  mutate(binom = gsub(" ", "_", .$binom))
+
+  return(traits)
+}
+
+
 
 Mode <- function(x) {
   ux <- unique(x)
@@ -11,6 +31,8 @@ Mode <- function(x) {
 }
 
 
+## This uses the trait data to collect all
+## The necessary trait characteristics
 read_process_trait_data <- function(){
   
   traits <- read_trait_data_in()
