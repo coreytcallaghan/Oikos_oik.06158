@@ -260,7 +260,7 @@ final_lookup <- bind_rows(tree_complete, df_fixing_tree)
 
 
 
-
+rm(list=setdiff(ls(), "final_lookup"))
 
 
 
