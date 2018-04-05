@@ -104,19 +104,43 @@ species_joined_2 <- eBird_species %>%
   replace_na(list(SCIENTIFIC_NAME_ebird = "Not in eBird data")) %>%
   filter(COMMON_NAME_ebird != "Not in eBird data") %>%
   replace_na(list(SCIENTIFIC_NAME_traits = "Not matched by common or scientific name")) %>%
+  replace_na(list(COMMON_NAME_traits = "Not matched by common or scientific name")) %>%
+  mutate(COMMON_NAME_traits = ifelse(.$COMMON_NAME_traits == "Not matched by common or scientific name",
+                                     .$COMMON_NAME_ebird, .$COMMON_NAME_traits)) %>%
   mutate(COMMON_NAME_traits = ifelse(.$SCIENTIFIC_NAME_traits == "Not matched by common or scientific name",
-                                     .$COMMON_NAME_traits, .$COMMON_NAME_ebird))
+                                     "Not matched by common or scientific name", .$COMMON_NAME_traits))
 
 ## Now we know which species aren't matched by sorting for not matched species
 not_matched <- species_joined_2 %>%
   filter(SCIENTIFIC_NAME_traits == "Not matched by common or scientific name")
   
               
+## Now make a new df which matches with the current missing species
+df_fixing <- data.frame(COMMON_NAME_ebird = not_matched$COMMON_NAME_ebird,
+                        SCIENTIFIC_NAME_ebird = not_matched$SCIENTIFIC_NAME_ebird,
+                        COMMON_NAME_traits = c("Grey Fantail", "Purple Swamphen", "Australian White Ibis",
+                                               "Cicadabird", "Collared Kingfisher", "not_treated_as_species", "Beach Stone-curlew",
+                                               "Grey-fronted Honeyeater", "Grey-headed Robin", "not_treated_as_species",
+                                               "not_treated_as_species", "not_trated_as_species", "not_treated_as_species",
+                                               "Red-backed Button-quail", "Major Mitchell's Cockatoo", "Frilled Monarch", 
+                                               "Yellow Wagtail", "not_treated_as_species", "new_to_australia"), 
+                        stringsAsFactors = FALSE) %>%
+  left_join(., traits_species, by="COMMON_NAME_traits") %>%
+  dplyr::select(-SCIENTIFIC_NAME, -in_traits)
 
 
 
-
-
+species_joined_final <- species_joined_2 %>%
+  dplyr::select(-in_tree, -in_traits) %>%
+  left_join(., df_fixing, by=c("COMMON_NAME_ebird", "SCIENTIFIC_NAME_ebird")) %>%
+  replace_na(list(COMMON_NAME_traits.x = "Not matched by common or scientific name")) %>%
+  mutate(COMMON_NAME_traits = ifelse(.$COMMON_NAME_traits.x == "Not matched by common or scientific name", 
+                                     .$COMMON_NAME_traits.y, .$COMMON_NAME_traits.x)) %>%
+  mutate(SCIENTIFIC_NAME_traits = ifelse(.$SCIENTIFIC_NAME_traits.x == "Not matched by common or scientific name",
+                                         .$SCIENTIFIC_NAME_traits.y, .$SCIENTIFIC_NAME_traits.x)) %>%
+  dplyr::select(COMMON_NAME_ebird, SCIENTIFIC_NAME_ebird, COMMON_NAME_traits, SCIENTIFIC_NAME_traits) %>%
+  left_join(., AUS_tree_birds, by="SCIENTIFIC_NAME_traits") %>%
+  replace_na(list(in_tree="Missing"))
 
   
   
