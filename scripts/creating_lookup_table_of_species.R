@@ -65,15 +65,63 @@ species_joined <- eBird_species %>%
   replace_na(list(COMMON_NAME = "Not in eBird data")) %>%
   left_join(., AUS_tree_birds, by="SCIENTIFIC_NAME_traits") %>%
   replace_na(list(in_tree="Missing")) %>%
+  select(-SCIENTIFIC_NAME) %>%
+  left_join(., eBird_species, by="COMMON_NAME") %>%
   rename(SCIENTIFIC_NAME_ebird = SCIENTIFIC_NAME) %>%
-  rename(COMMON_NAME_ebird = COMMON_NAME)
+  rename(COMMON_NAME_ebird = COMMON_NAME) %>%
+  replace_na(list(SCIENTIFIC_NAME_ebird = "Not in eBird data"))
 
 
 
 ## list of species in eBird but not in tree
 missing_species <- species_joined %>%
-  filter(COMMON_NAME != "Not in eBird data") %>%
-  filter()
+  filter(COMMON_NAME_ebird != "Not in eBird data") %>%
+  filter(in_tree == "Missing") %>%
+  dplyr::select(COMMON_NAME_ebird, SCIENTIFIC_NAME_ebird) %>%
+  rename(COMMON_NAME_traits = COMMON_NAME_ebird) %>%
+  left_join(., traits_species, by="COMMON_NAME_traits") %>%
+  dplyr::select(-SCIENTIFIC_NAME, -in_traits) %>%
+  rename(COMMON_NAME_ebird = COMMON_NAME_traits) 
+
+
+species_joined_2 <- eBird_species %>%
+  mutate(SCIENTIFIC_NAME = gsub(" ", "_", .$SCIENTIFIC_NAME)) %>%
+  rename(COMMON_NAME_ebird = COMMON_NAME) %>%
+  left_join(., missing_species, by="COMMON_NAME_ebird") %>%
+  dplyr::select(-SCIENTIFIC_NAME_ebird) %>%
+  full_join(., traits_species, by="SCIENTIFIC_NAME") %>%
+  replace_na(list(SCIENTIFIC_NAME_traits.y = "different_scientific_name")) %>%
+  mutate(SCIENTIFIC_NAME_traits = ifelse(.$SCIENTIFIC_NAME_traits.y == "different_scientific_name", 
+                                         .$SCIENTIFIC_NAME_traits.x, .$SCIENTIFIC_NAME_traits.y)) %>%
+  dplyr::select(-SCIENTIFIC_NAME_traits.x, -SCIENTIFIC_NAME_traits.y, -SCIENTIFIC_NAME) %>%
+  replace_na(list(COMMON_NAME = "Not in eBird data")) %>%
+  left_join(., AUS_tree_birds, by="SCIENTIFIC_NAME_traits") %>%
+  replace_na(list(in_tree="Missing")) %>%
+  rename(COMMON_NAME = COMMON_NAME_ebird) %>%
+  left_join(., eBird_species, by="COMMON_NAME") %>%
+  rename(COMMON_NAME_ebird = COMMON_NAME) %>%
+  rename(SCIENTIFIC_NAME_ebird = SCIENTIFIC_NAME) %>%
+  replace_na(list(SCIENTIFIC_NAME_ebird = "Not in eBird data")) %>%
+  filter(COMMON_NAME_ebird != "Not in eBird data") %>%
+  replace_na(list(SCIENTIFIC_NAME_traits = "Not matched by common or scientific name")) %>%
+  mutate(COMMON_NAME_traits = ifelse(.$SCIENTIFIC_NAME_traits == "Not matched by common or scientific name",
+                                     .$COMMON_NAME_traits, .$COMMON_NAME_ebird))
+              
+  
+  
+  
+  
+  full_join(., traits_species, by="SCIENTIFIC_NAME") %>%
+  replace_na(list(COMMON_NAME = "Not in eBird data")) %>%
+  left_join(., AUS_tree_birds, by="SCIENTIFIC_NAME_traits") %>%
+  replace_na(list(in_tree="Missing")) %>%
+  select(-SCIENTIFIC_NAME) %>%
+  left_join(., eBird_species, by="COMMON_NAME") %>%
+  rename(SCIENTIFIC_NAME_ebird = SCIENTIFIC_NAME) %>%
+  rename(COMMON_NAME_ebird = COMMON_NAME) %>%
+  replace_na(list(SCIENTIFIC_NAME_ebird = "Not in eBird data"))
+
+
 
 
 
