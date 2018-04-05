@@ -1,0 +1,581 @@
+COMMON_NAME_ebird,SCIENTIFIC_NAME_ebird,COMMON_NAME_traits,SCIENTIFIC_NAME_traits,SCIENTIFIC_NAME_tree,COMMON_NAME_tree
+White-plumed Honeyeater,Ptilotula penicillata,White-plumed Honeyeater,Ptilotula_penicillatus,Lichenostomus_penicillatus,White-plumed Honeyeater
+Silver Gull,Chroicocephalus novaehollandiae,Silver Gull,Chroicocephalus_novaehollandiae,Larus_novaehollandiae,Silver Gull
+Galah,Eolophus roseicapilla,Galah,Eolophus_roseicapillus,Cacatua_roseicapilla,Galah
+Yellow-faced Honeyeater,Caligavis chrysops,Yellow-faced Honeyeater,Caligavis_chrysops,Lichenostomus_chrysops,Yellow-faced Honeyeater
+Fairy Martin,Petrochelidon ariel,Fairy Martin,Petrochelidon_ariel,Hirundo_ariel,Fairy Martin
+Spotted Dove,Streptopelia chinensis,Spotted Dove,Streptopelia_chinensis,Stigmatopelia_chinensis,Spotted Dove
+Little Pied Cormorant,Microcarbo melanoleucos,Little Pied Cormorant,Microcarbo_melanoleucos,Phalacrocorax_melanoleucos,Little Pied Cormorant
+White-eared Honeyeater,Nesoptilotis leucotis,White-eared Honeyeater,Nesoptilotis_leucotis,Lichenostomus_leucotis,White-eared Honeyeater
+Intermediate Egret,Ardea intermedia,Intermediate Egret,Ardea_intermedia,Mesophoyx_intermedia,Intermediate Egret
+Tawny Grassbird,Megalurus timoriensis,Tawny Grassbird,Cincloramphus_timoriensis,Megalurus_timoriensis,Tawny Grassbird
+Black-tailed Nativehen,Tribonyx ventralis,Black-tailed Native-hen,Tribonyx_ventralis,Gallinula_ventralis,Black-tailed Native-hen
+Buff-banded Rail,Gallirallus philippensis,Buff-banded Rail,Hypotaenidia_philippensis,Gallirallus_philippensis,Buff-banded Rail
+Great Egret,Ardea alba,Great Egret,Ardea_alba,Casmerodius_albus,Great Egret
+Hooded Plover,Thinornis cucullatus,Hooded Plover,Thinornis_cucullatus,Thinornis_rubricollis,Hooded Plover
+Little Grassbird,Megalurus gramineus,Little Grassbird,Poodytes_gramineus,Megalurus_gramineus,Little Grassbird
+Spotless Crake,Zapornia tabuensis,Spotless Crake,Zapornia_tabuensis,Porzana_tabuensis,Spotless Crake
+Singing Honeyeater,Gavicalis virescens,Singing Honeyeater,Gavicalis_virescens,Lichenostomus_virescens,Singing Honeyeater
+Tree Martin,Petrochelidon nigricans,Tree Martin,Petrochelidon_nigricans,Hirundo_nigricans,Tree Martin
+Shy Heathwren,Hylacola cauta,Shy Heathwren,Calamanthus_cauta,Hylacola_cauta,Shy Heathwren
+Tasmanian Nativehen,Tribonyx mortierii,Tasmanian Native-hen,Tribonyx_mortierii,Gallinula_mortierii,Tasmanian Native-hen
+Pallid Cuckoo,Cacomantis pallidus,Pallid Cuckoo,Heteroscenes_pallidus,Cuculus_pallidus,Pallid Cuckoo
+Yellow-throated Honeyeater,Nesoptilotis flavicollis,Yellow-throated Honeyeater,Nesoptilotis_flavicollis,Lichenostomus_flavicollis,Yellow-throated Honeyeater
+Australian Shoveler,Spatula rhynchotis,Australasian Shoveler,Spatula_rhynchotis,Anas_rhynchotis,Australasian Shoveler
+Scrubtit,Acanthornis magna,Scrubtit,Acanthornis_magnus,Acanthornis_magna,Scrubtit
+Australian Swiftlet,Aerodramus terraereginae,Australian Swiftlet,Aerodramus_terraereginae,Collocalia_terraereginae,Australian Swiftlet
+Black Butcherbird,Cracticus quoyi,Black Butcherbird,Melloria_quoyi,Cracticus_quoyi,Black Butcherbird
+Large-billed Scrubwren,Sericornis magnirostra,Large-billed Scrubwren,Sericornis_magnirostris,Sericornis_magnirostra,Large-billed Scrubwren
+Spectacled Monarch,Symposiachrus trivirgatus,Spectacled Monarch,Symposiarchus_trivirgatus,Monarcha_trivirgatus,Spectacled Monarch
+Brolga,Antigone rubicunda,Brolga,Antigone_rubicunda,Grus_rubicunda,Brolga
+Speckled Warbler,Pyrrholaemus sagittatus,Speckled Warbler,Pyrrholaemus_sagittata,Chthonicola_sagittatus,Speckled Warbler
+Spotted Bowerbird,Chlamydera maculata,Spotted Bowerbird,Ptilonorhynchus_maculatus,Chlamydera_maculata,Spotted Bowerbird
+Paradise Riflebird,Ptiloris paradiseus,Paradise Riflebird,Lophorina_paradiseus,Ptiloris_paradiseus,Paradise Riflebird
+Azure Kingfisher,Ceyx azureus,Azure Kingfisher,Ceyx_azureus,Alcedo_azurea,Azure Kingfisher
+Brown Quail,Synoicus ypsilophorus,Brown Quail,Synoicus_ypsilophora,Coturnix_ypsilophora,Brown Quail
+Mangrove Honeyeater,Gavicalis fasciogularis,Mangrove Honeyeater,Gavicalis_fasciogularis,Lichenostomus_fasciogularis,Mangrove Honeyeater
+Caspian Tern,Hydroprogne caspia,Caspian Tern,Hydroprogne_caspia,Sterna_caspia,Caspian Tern
+Little Tern,Sternula albifrons,Little Tern,Sternula_albifrons,Sterna_albifrons,Little Tern
+Olive-backed Sunbird,Cinnyris jugularis,Olive-backed Sunbird,Cinnyris_jugularis,Nectarinia_jugularis,Olive-backed Sunbird
+Gray-tailed Tattler,Tringa brevipes,Grey-tailed Tattler,Tringa_brevipes,Heteroscelus_brevipes,Grey-tailed Tattler
+Broad-billed Sandpiper,Calidris falcinellus,Broad-billed Sandpiper,Calidris_falcinellus,Limicola_falcinellus,Broad-billed Sandpiper
+White-breasted Robin,Eopsaltria georgiana,White-breasted Robin,Quoyornis_georgiana,Eopsaltria_georgiana,White-breasted Robin
+Tawny-crowned Honeyeater,Gliciphila melanops,Tawny-crowned Honeyeater,Glyciphila_melanops,Phylidonyris_melanops,Tawny-crowned Honeyeater
+Mulga Parrot,Psephotus varius,Mulga Parrot,Psephotellus_varius,Psephotus_varius,Mulga Parrot
+White-fronted Honeyeater,Purnella albifrons,White-fronted Honeyeater,Purnella_albifrons,Phylidonyris_albifrons,White-fronted Honeyeater
+Yellow-plumed Honeyeater,Ptilotula ornata,Yellow-plumed Honeyeater,Ptilotula_ornatus,Lichenostomus_ornatus,Yellow-plumed Honeyeater
+Radjah Shelduck,Tadorna radjah,Radjah Shelduck,Radjah_radjah,Tadorna_radjah,Radjah Shelduck
+Fuscous Honeyeater,Ptilotula fusca,Fuscous Honeyeater,Ptilotula_fuscus,Lichenostomus_fuscus,Fuscous Honeyeater
+Little Kingfisher,Ceyx pusillus,Little Kingfisher,Ceyx_pusilla,Alcedo_pusilla,Little Kingfisher
+Yellow Honeyeater,Stomiopera flava,Yellow Honeyeater,Stomiopera_flavus,Lichenostomus_flavus,Yellow Honeyeater
+Macleay's Honeyeater,Xanthotis macleayanus,Macleay's Honeyeater,Xanthotis_macleayana,Xanthotis_macleayanus,Macleay's Honeyeater
+Victoria's Riflebird,Ptiloris victoriae,Victoria's Riflebird,Lophorina_victoriae,Ptiloris_victoriae,Victoria's Riflebird
+Bridled Honeyeater,Bolemoreus frenatus,Bridled Honeyeater,Bolemoreus_frenatus,Lichenostomus_frenatus,Bridled Honeyeater
+Gray-headed Honeyeater,Ptilotula keartlandi,Grey-headed Honeyeater,Ptilotula_keartlandi,Lichenostomus_keartlandi,Grey-headed Honeyeater
+Gray-fronted Honeyeater,Ptilotula plumula,Grey-fronted Honeyeater,Ptilotula_plumulus,Lichenostomus_plumulus,Grey-fronted Honeyeater
+Black Honeyeater,Sugomel nigrum,Black Honeyeater,Sugomel_niger,Certhionyx_niger,Black Honeyeater
+Western Bowerbird,Chlamydera guttata,Western Bowerbird,Ptilonorhynchus_guttatus,Chlamydera_guttata,Western Bowerbird
+Black-eared Cuckoo,Chrysococcyx osculans,Black-eared Cuckoo,Chalcites_osculans,Chrysococcyx_osculans,Black-eared Cuckoo
+Wandering Tattler,Tringa incana,Wandering Tattler,Tringa_incana,Heteroscelus_incanus,Wandering Tattler
+Lesser Crested Tern,Thalasseus bengalensis,Lesser Crested Tern,Thalasseus_bengalensis,Sterna_bengalensis,Lesser Crested Tern
+Great Bowerbird,Chlamydera nuchalis,Great Bowerbird,Ptilonorhynchus_nuchalis,Chlamydera_nuchalis,Great Bowerbird
+Golden Bowerbird,Amblyornis newtoniana,Golden Bowerbird,Amblyornis_newtonianus,Prionodura_newtoniana,Golden Bowerbird
+Mangrove Robin,Eopsaltria pulverulenta,Mangrove Robin,Peneothello_pulverulenta,Eopsaltria_pulverulenta,Mangrove Robin
+White-gaped Honeyeater,Stomiopera unicolor,White-gaped Honeyeater,Stomiopera_unicolor,Lichenostomus_unicolor,White-gaped Honeyeater
+Pied Heron,Egretta picata,Pied Heron,Egretta_picata,Ardea_picata,Pied Heron
+Varied Honeyeater,Gavicalis versicolor,Varied Honeyeater,Gavicalis_versicolor,Lichenostomus_versicolor,Varied Honeyeater
+Chestnut-rumped Heathwren,Hylacola pyrrhopygia,Chestnut-rumped Heathwren,Calamanthus_pyrrhopygia,Hylacola_pyrrhopygia,Chestnut-rumped Heathwren
+Australian Fairy Tern,Sternula nereis,Fairy Tern,Sternula_nereis,Sterna_nereis,Fairy Tern
+Spinifexbird,Megalurus carteri,Spinifexbird,Poodytes_carteri,Eremiornis_carteri,Spinifexbird
+White-browed Crake,Amaurornis cinerea,White-browed Crake,Amaurornis_cinerea,Porzana_cinerea,White-browed Crake
+Baillon's Crake,Zapornia pusilla,Baillon's Crake,Zapornia_pusilla,Porzana_pusilla,Baillon's Crake
+Laughing Dove,Streptopelia senegalensis,Laughing Dove,Streptopelia_senegalensis,Stigmatopelia_senegalensis,Laughing Dove
+Black-tailed Treecreeper,Climacteris melanurus,Black-tailed Treecreeper,Climacteris_melanura,Climacteris_melanurus,Black-tailed Treecreeper
+Yellow-tinted Honeyeater,Ptilotula flavescens,Yellow-tinted Honeyeater,Ptilotula_flavescens,Lichenostomus_flavescens,Yellow-tinted Honeyeater
+White-eared Monarch,Carterornis leucotis,White-eared Monarch,Carterornis_leucotis,Monarcha_leucotis,White-eared Monarch
+Banded Honeyeater,Cissomela pectoralis,Banded Honeyeater,Cissomela_pectoralis,Certhionyx_pectoralis,Banded Honeyeater
+Rufous Treecreeper,Climacteris rufus,Rufous Treecreeper,Climacteris_rufa,Climacteris_rufus,Rufous Treecreeper
+Bridled Tern,Onychoprion anaethetus,Bridled Tern,Onychoprion_anaethetus,Sterna_anaethetus,Bridled Tern
+Sarus Crane,Antigone antigone,Sarus Crane,Antigone_antigone,Grus_antigone,Sarus Crane
+Gouldian Finch,Erythrura gouldiae,Gouldian Finch,Chloebia_gouldiae,Erythrura_gouldiae,Gouldian Finch
+Chestnut Quail-thrush,Cinclosoma castanotum,Chestnut Quail-thrush,Cinclosoma_castanotus,Cinclosoma_castanotum,Chestnut Quail-thrush
+Magnificent Riflebird,Ptiloris magnificus,Magnificent Riflebird,Lophorina_magnificus,Ptiloris_magnificus,Magnificent Riflebird
+Trumpet Manucode,Phonygammus keraudrenii,Trumpet Manucode,Phonygammus_keraudrenii,Manucodia_keraudrenii,Trumpet Manucode
+Hooded Parrot,Psephotus dissimilis,Hooded Parrot,Psephotellus_dissimilis,Psephotus_dissimilis,Hooded Parrot
+Frill-necked Monarch,Arses lorealis,Frilled Monarch,Arses_telescopthalmus,Arses_telescophthalmus,Frilled Monarch
+Regent Honeyeater,Anthochaera phrygia,Regent Honeyeater,Anthochaera_phrygia,Xanthomyza_phrygia,Regent Honeyeater
+Ruff,Calidris pugnax,Ruff,Calidris_pugnax,Philomachus_pugnax,Ruff
+Sooty Tern,Onychoprion fuscatus,Sooty Tern,Onychoprion_fuscata,Sterna_fuscata,Sooty Tern
+Australasian Pipit,Anthus novaeseelandiae,Australasian Pipit,Anthus_novaeseelandiae,Anthus novaeseelandiae,Australasian Pipit
+Australian Magpie,Gymnorhina tibicen,Australian Magpie,Gymnorhina_tibicen,Gymnorhina tibicen,Australian Magpie
+Crested Pigeon,Ocyphaps lophotes,Crested Pigeon,Ocyphaps_lophotes,Ocyphaps lophotes,Crested Pigeon
+Crested Shrike-tit,Falcunculus frontatus,Crested Shrike-tit,Falcunculus_frontatus,Falcunculus frontatus,Crested Shrike-tit
+Double-barred Finch,Taeniopygia bichenovii,Double-barred Finch,Taeniopygia_bichenovii,Taeniopygia bichenovii,Double-barred Finch
+Eastern Rosella,Platycercus eximius,Eastern Rosella,Platycercus_eximius,Platycercus eximius,Eastern Rosella
+Gray Shrikethrush,Colluricincla harmonica,Grey Shrike-thrush,Colluricincla_harmonica,Colluricincla harmonica,Grey Shrike-thrush
+House Sparrow,Passer domesticus,House Sparrow,Passer_domesticus,Passer domesticus,House Sparrow
+Laughing Kookaburra,Dacelo novaeguineae,Laughing Kookaburra,Dacelo_novaeguineae,Dacelo novaeguineae,Laughing Kookaburra
+Little Lorikeet,Glossopsitta pusilla,Little Lorikeet,Glossopsitta_pusilla,Glossopsitta pusilla,Little Lorikeet
+Magpie-lark,Grallina cyanoleuca,Magpie-lark,Grallina_cyanoleuca,Grallina cyanoleuca,Magpie-lark
+Noisy Friarbird,Philemon corniculatus,Noisy Friarbird,Philemon_corniculatus,Philemon corniculatus,Noisy Friarbird
+Pacific Koel,Eudynamys orientalis,Eastern Koel,Eudynamys_orientalis,Eudynamys orientalis,Eastern Koel
+Peaceful Dove,Geopelia placida,Peaceful Dove,Geopelia_placida,Geopelia placida,Peaceful Dove
+Red-rumped Parrot,Psephotus haematonotus,Red-rumped Parrot,Psephotus_haematonotus,Psephotus haematonotus,Red-rumped Parrot
+Rufous Songlark,Megalurus mathewsi,Rufous Songlark,Cincloramphus_mathewsi,Cincloramphus mathewsi,Rufous Songlark
+Silver-eye,Zosterops lateralis,Silvereye,Zosterops_lateralis,Zosterops lateralis,Silvereye
+Sulphur-crested Cockatoo,Cacatua galerita,Sulphur-crested Cockatoo,Cacatua_galerita,Cacatua galerita,Sulphur-crested Cockatoo
+Superb Fairywren,Malurus cyaneus,Superb Fairy-wren,Malurus_cyaneus,Malurus cyaneus,Superb Fairywren
+Welcome Swallow,Hirundo neoxena,Welcome Swallow,Hirundo_neoxena,Hirundo neoxena,Welcome Swallow
+White-bellied Cuckooshrike,Coracina papuensis,White-bellied Cuckoo-shrike,Coracina_papuensis,Coracina papuensis,White-bellied Cuckooshrike
+White-naped Honeyeater,Melithreptus lunatus,White-naped Honeyeater,Melithreptus_lunatus,Melithreptus lunatus,White-naped Honeyeater
+White-winged Chough,Corcorax melanorhamphos,White-winged Chough,Corcorax_melanorhamphos,Corcorax melanorhamphos,White-winged Chough
+Willie-wagtail,Rhipidura leucophrys,Willie Wagtail,Rhipidura_leucophrys,Rhipidura leucophrys,Willie-wagtail
+Yellow-rumped Thornbill,Acanthiza chrysorrhoa,Yellow-rumped Thornbill,Acanthiza_chrysorrhoa,Acanthiza chrysorrhoa,Yellow-rumped Thornbill
+Yellow-tufted Honeyeater,Lichenostomus melanops,Yellow-tufted Honeyeater,Lichenostomus_melanops,Lichenostomus melanops,Yellow-tufted Honeyeater
+Zebra Finch,Taeniopygia guttata,Zebra Finch,Taeniopygia_guttata,Taeniopygia guttata,Zebra Finch
+Great Cormorant,Phalacrocorax carbo,Great Cormorant,Phalacrocorax_carbo,Phalacrocorax carbo,Great Cormorant
+Sooty Oystercatcher,Haematopus fuliginosus,Sooty Oystercatcher,Haematopus_fuliginosus,Haematopus fuliginosus,Sooty Oystercatcher
+Golden Whistler,Pachycephala pectoralis,Golden Whistler,Pachycephala_pectoralis,Pachycephala pectoralis,Golden Whistler
+Superb Lyrebird,Menura novaehollandiae,Superb Lyrebird,Menura_novaehollandiae,Menura novaehollandiae,Superb Lyrebird
+Fan-tailed Cuckoo,Cacomantis flabelliformis,Fan-tailed Cuckoo,Cacomantis_flabelliformis,Cacomantis flabelliformis,Fan-tailed Cuckoo
+Gray Fantail,Rhipidura albiscapa,Grey Fantail,Rhipidura_fuliginosa,Rhipidura fuliginosa,Grey Fantail
+Southern Emuwren,Stipiturus malachurus,Southern Emu-wren,Stipiturus_malachurus,Stipiturus malachurus,Southern Emuwren
+Australian King-Parrot,Alisterus scapularis,Australian King-Parrot,Alisterus_scapularis,Alisterus scapularis,Australian King-parrot
+Brown Thornbill,Acanthiza pusilla,Brown Thornbill,Acanthiza_pusilla,Acanthiza pusilla,Brown Thornbill
+Red-browed Treecreeper,Climacteris erythrops,Red-browed Treecreeper,Climacteris_erythrops,Climacteris erythrops,Red-browed Treecreeper
+Rufous Fantail,Rhipidura rufifrons,Rufous Fantail,Rhipidura_rufifrons,Rhipidura rufifrons,Rufous Fantail
+Rufous Whistler,Pachycephala rufiventris,Rufous Whistler,Pachycephala_rufiventris,Pachycephala rufiventris,Rufous Whistler
+White-browed Scrubwren,Sericornis frontalis,White-browed Scrubwren,Sericornis_frontalis,Sericornis frontalis,White-browed Scrubwren
+White-throated Treecreeper,Cormobates leucophaea,White-throated Treecreeper,Cormobates_leucophaea,Cormobates leucophaea,White-throated Treecreeper
+Australian Raven,Corvus coronoides,Australian Raven,Corvus_coronoides,Corvus coronoides,Australian Raven
+Maned Duck,Chenonetta jubata,Australian Wood Duck,Chenonetta_jubata,Chenonetta jubata,Australian Wood Duck
+Masked Lapwing,Vanellus miles,Masked Lapwing,Vanellus_miles,Vanellus miles,Masked Lapwing
+Noisy Miner,Manorina melanocephala,Noisy Miner,Manorina_melanocephala,Manorina melanocephala,Noisy Miner
+Pacific Black Duck,Anas superciliosa,Pacific Black Duck,Anas_superciliosa,Anas superciliosa,Pacific Black Duck
+Pacific Heron,Ardea pacifica,White-necked Heron,Ardea_pacifica,Ardea pacifica,White-necked Heron
+Pied Currawong,Strepera graculina,Pied Currawong,Strepera_graculina,Strepera graculina,Pied Currawong
+White-faced Heron,Egretta novaehollandiae,White-faced Heron,Egretta_novaehollandiae,Egretta novaehollandiae,White-faced Heron
+Golden-headed Cisticola,Cisticola exilis,Golden-headed Cisticola,Cisticola_exilis,Cisticola exilis,Golden-headed Cisticola
+Black-faced Cuckooshrike,Coracina novaehollandiae,Black-faced Cuckoo-shrike,Coracina_novaehollandiae,Coracina novaehollandiae,Black-faced Cuckooshrike
+Crimson Rosella,Platycercus elegans,Crimson Rosella,Platycercus_elegans,Platycercus elegans,Crimson Rosella
+Eurasian Blackbird,Turdus merula,Common Blackbird,Turdus_merula,Turdus merula,Eurasian Blackbird
+Leaden Flycatcher,Myiagra rubecula,Leaden Flycatcher,Myiagra_rubecula,Myiagra rubecula,Leaden Flycatcher
+Red-browed Firetail,Neochmia temporalis,Red-browed Finch,Neochmia_temporalis,Neochmia temporalis,Red-browed Finch
+Red Wattlebird,Anthochaera carunculata,Red Wattlebird,Anthochaera_carunculata,Anthochaera carunculata,Red Wattlebird
+Spotted Pardalote,Pardalotus punctatus,Spotted Pardalote,Pardalotus_punctatus,Pardalotus punctatus,Spotted Pardalote
+European Starling,Sturnus vulgaris,Common Starling,Sturnus_vulgaris,Sturnus vulgaris,Common Starling
+Australasian Darter,Anhinga novaehollandiae,Australasian Darter,Anhinga_novaehollandiae,Anhinga novaehollandiae,Australian Darter
+Australasian Swamphen,Porphyrio melanotus,Purple Swamphen,Porphyrio_porphyrio,Porphyrio porphyrio,Purple Swamphen
+Australian Reed Warbler,Acrocephalus australis,Australian Reed-Warbler,Acrocephalus_australis,Acrocephalus australis,Australian Reed-warbler
+Dusky Moorhen,Gallinula tenebrosa,Dusky Moorhen,Gallinula_tenebrosa,Gallinula tenebrosa,Dusky Moorhen
+European Goldfinch,Carduelis carduelis,European Goldfinch,Carduelis_carduelis,Carduelis carduelis,European Goldfinch
+Dusky Woodswallow,Artamus cyanopterus,Dusky Woodswallow,Artamus_cyanopterus,Artamus cyanopterus,Dusky Woodswallow
+Little Corella,Cacatua sanguinea,Little Corella,Cacatua_sanguinea,Cacatua sanguinea,Little Corella
+Sacred Kingfisher,Todiramphus sanctus,Sacred Kingfisher,Todiramphus_sanctus,Todiramphus sanctus,Sacred Kingfisher
+Australian Pelican,Pelecanus conspicillatus,Australian Pelican,Pelecanus_conspicillatus,Pelecanus conspicillatus,Australian Pelican
+Little Black Cormorant,Phalacrocorax sulcirostris,Little Black Cormorant,Phalacrocorax_sulcirostris,Phalacrocorax sulcirostris,Little Black Cormorant
+Pied Cormorant,Phalacrocorax varius,Pied Cormorant,Phalacrocorax_varius,Phalacrocorax varius,Large Pied Cormorant
+Black Swan,Cygnus atratus,Black Swan,Cygnus_atratus,Cygnus atratus,Black Swan
+Chestnut Teal,Anas castanea,Chestnut Teal,Anas_castanea,Anas castanea,Chestnut Teal
+Freckled Duck,Stictonetta naevosa,Freckled Duck,Stictonetta_naevosa,Stictonetta naevosa,Freckled Duck
+Gray Teal,Anas gracilis,Grey Teal,Anas_gracilis,Anas gracilis,Grey Teal
+Hoary-headed Grebe,Poliocephalus poliocephalus,Hoary-headed Grebe,Poliocephalus_poliocephalus,Poliocephalus poliocephalus,Hoary-headed Grebe
+White-eyed Duck,Aythya australis,Hardhead,Aythya_australis,Aythya australis,Hardhead
+Little Wattlebird,Anthochaera chrysoptera,Little Wattlebird,Anthochaera_chrysoptera,Anthochaera chrysoptera,Little Wattlebird
+Gang-gang Cockatoo,Callocephalon fimbriatum,Gang-gang Cockatoo,Callocephalon_fimbriatum,Callocephalon fimbriatum,Gang-gang Cockatoo
+Beautiful Firetail,Stagonopleura bella,Beautiful Firetail,Stagonopleura_bella,Stagonopleura bella,Beautiful Firetail
+Crescent Honeyeater,Phylidonyris pyrrhopterus,Crescent Honeyeater,Phylidonyris_pyrrhopterus,Phylidonyris pyrrhopterus,Crescent Honeyeater
+Little Raven,Corvus mellori,Little Raven,Corvus_mellori,Corvus mellori,Little Raven
+Eastern Yellow Robin,Eopsaltria australis,Eastern Yellow Robin,Eopsaltria_australis,Eopsaltria australis,Eastern Yellow Robin
+Australasian Gannet,Morus serrator,Australasian Gannet,Morus_serrator,Morus serrator,Australasian Gannet
+Australian Kestrel,Falco cenchroides,Nankeen Kestrel,Falco_cenchroides,Falco cenchroides,Nankeen Kestrel
+Blue-winged Parrot,Neophema chrysostoma,Blue-winged Parrot,Neophema_chrysostoma,Neophema chrysostoma,Blue-winged Parrot
+Eurasian Skylark,Alauda arvensis,Eurasian Skylark,Alauda_arvensis,Alauda arvensis,Eurasian Skylark
+New Holland Honeyeater,Phylidonyris novaehollandiae,New Holland Honeyeater,Phylidonyris_novaehollandiae,Phylidonyris novaehollandiae,New Holland Honeyeater
+Bar-shouldered Dove,Geopelia humeralis,Bar-shouldered Dove,Geopelia_humeralis,Geopelia humeralis,Bar-shouldered Dove
+Black-faced Monarch,Monarcha melanopsis,Black-faced Monarch,Monarcha_melanopsis,Monarcha melanopsis,Black-faced Monarch
+Brown Honeyeater,Lichmera indistincta,Brown Honeyeater,Lichmera_indistincta,Lichmera indistincta,Brown Honeyeater
+Dollarbird,Eurystomus orientalis,Dollarbird,Eurystomus_orientalis,Eurystomus orientalis,Asian Dollarbird
+Eastern Whipbird,Psophodes olivaceus,Eastern Whipbird,Psophodes_olivaceus,Psophodes olivaceus,Eastern Whipbird
+Little Egret,Egretta garzetta,Little Egret,Egretta_garzetta,Egretta garzetta,Little Egret
+Olive-backed Oriole,Oriolus sagittatus,Olive-backed Oriole,Oriolus_sagittatus,Oriolus sagittatus,Olive-backed Oriole
+Osprey,Pandion haliaetus,Osprey,Pandion_haliaetus,Pandion haliaetus,Osprey
+Pied Butcherbird,Cracticus nigrogularis,Pied Butcherbird,Cracticus_nigrogularis,Cracticus nigrogularis,Pied Butcherbird
+Rainbow Bee-eater,Merops ornatus,Rainbow Bee-eater,Merops_ornatus,Merops ornatus,Rainbow Bee-eater
+Rainbow Lorikeet,Trichoglossus haematodus,Coconut Lorikeet,Trichoglossus_haematodus,Trichoglossus haematodus,Rainbow Lorikeet
+Red-backed Fairywren,Malurus melanocephalus,Red-backed Fairy-wren,Malurus_melanocephalus,Malurus melanocephalus,Red-backed Fairywren
+Spangled Drongo,Dicrurus bracteatus,Spangled Drongo,Dicrurus_bracteatus,Dicrurus bracteatus,Spangled Drongo
+Striated Pardalote,Pardalotus striatus,Striated Pardalote,Pardalotus_striatus,Pardalotus striatus,Striated Pardalote
+Torresian Crow,Corvus orru,Torresian Crow,Corvus_orru,Corvus orru,Torresian Crow
+Variegated Fairywren,Malurus lamberti,Variegated Fairy-wren,Malurus_lamberti,Malurus lamberti,Variegated Fairywren
+Whistling Kite,Haliastur sphenurus,Whistling Kite,Haliastur_sphenurus,Haliastur sphenurus,Whistling Kite
+White-bellied Sea-Eagle,Haliaeetus leucogaster,White-bellied Sea-Eagle,Haliaeetus_leucogaster,Haliaeetus leucogaster,White-bellied Sea-eagle
+White-cheeked Honeyeater,Phylidonyris niger,White-cheeked Honeyeater,Phylidonyris_niger,Phylidonyris niger,White-cheeked Honeyeater
+White-throated Needletail,Hirundapus caudacutus,White-throated Needletail,Hirundapus_caudacutus,Hirundapus caudacutus,White-throated Needletail
+Australian Crake,Porzana fluminea,Australian Spotted Crake,Porzana_fluminea,Porzana fluminea,Australian Crake
+Eurasian Coot,Fulica atra,Eurasian Coot,Fulica_atra,Fulica atra,Common Coot
+Australian Shelduck,Tadorna tadornoides,Australian Shelduck,Tadorna_tadornoides,Tadorna tadornoides,Australian Shelduck
+Banded Stilt,Cladorhynchus leucocephalus,Banded Stilt,Cladorhynchus_leucocephalus,Cladorhynchus leucocephalus,Banded Stilt
+Cattle Egret,Bubulcus ibis,Cattle Egret,Bubulcus_ibis,Bubulcus ibis,Cattle Egret
+Pink-eared Duck,Malacorhynchus membranaceus,Pink-eared Duck,Malacorhynchus_membranaceus,Malacorhynchus membranaceus,Pink-eared Duck
+Red-capped Plover,Charadrius ruficapillus,Red-capped Plover,Charadrius_ruficapillus,Charadrius ruficapillus,Red-capped Plover
+Red-kneed Dotterel,Erythrogonys cinctus,Red-kneed Dotterel,Erythrogonys_cinctus,Erythrogonys cinctus,Red-kneed Dotterel
+Red-necked Stint,Calidris ruficollis,Red-necked Stint,Calidris_ruficollis,Calidris ruficollis,Red-necked Stint
+Royal Spoonbill,Platalea regia,Royal Spoonbill,Platalea_regia,Platalea regia,Royal Spoonbill
+Sharp-tailed Sandpiper,Calidris acuminata,Sharp-tailed Sandpiper,Calidris_acuminata,Calidris acuminata,Sharp-tailed Sandpiper
+Straw-necked Ibis,Threskiornis spinicollis,Straw-necked Ibis,Threskiornis_spinicollis,Threskiornis spinicollis,Straw-necked Ibis
+Swamp Harrier,Circus approximans,Swamp Harrier,Circus_approximans,Circus approximans,Swamp Harrier
+Whiskered Tern,Chlidonias hybrida,Whiskered Tern,Chlidonias_hybrida,Chlidonias hybrida,Whiskered Tern
+Brown Falcon,Falco berigora,Brown Falcon,Falco_berigora,Falco berigora,Brown Falcon
+Rufous Bristlebird,Dasyornis broadbenti,Rufous Bristlebird,Dasyornis_broadbenti,Dasyornis broadbenti,Rufous Bristlebird
+Striated Fieldwren,Calamanthus fuliginosus,Striated Fieldwren,Calamanthus_fuliginosus,Calamanthus fuliginosus,Striated Fieldwren
+Long-billed Corella,Cacatua tenuirostris,Long-billed Corella,Cacatua_tenuirostris,Cacatua tenuirostris,Long-billed Corella
+Brown Goshawk,Accipiter fasciatus,Brown Goshawk,Accipiter_fasciatus,Accipiter fasciatus,Brown Goshawk
+Little Eagle,Hieraaetus morphnoides,Little Eagle,Hieraaetus_morphnoides,Hieraaetus morphnoides,Little Eagle
+White-browed Woodswallow,Artamus superciliosus,White-browed Woodswallow,Artamus_superciliosus,Artamus superciliosus,White-browed Woodswallow
+White-fronted Chat,Epthianura albifrons,White-fronted Chat,Epthianura_albifrons,Epthianura albifrons,White-fronted Chat
+Brown-headed Honeyeater,Melithreptus brevirostris,Brown-headed Honeyeater,Melithreptus_brevirostris,Melithreptus brevirostris,Brown-headed Honeyeater
+Gray Currawong,Strepera versicolor,Grey Currawong,Strepera_versicolor,Strepera versicolor,Grey Currawong
+Brown Treecreeper,Climacteris picumnus,Brown Treecreeper,Climacteris_picumnus,Climacteris picumnus,Brown Treecreeper
+Hooded Robin,Melanodryas cucullata,Hooded Robin,Melanodryas_cucullata,Melanodryas cucullata,Hooded Robin
+Inland Thornbill,Acanthiza apicalis,Inland Thornbill,Acanthiza_apicalis,Acanthiza apicalis,Inland Thornbill
+Masked Woodswallow,Artamus personatus,Masked Woodswallow,Artamus_personatus,Artamus personatus,Masked Woodswallow
+Stubble Quail,Coturnix pectoralis,Stubble Quail,Coturnix_pectoralis,Coturnix pectoralis,Stubble Quail
+Varied Sittella,Daphoenositta chrysoptera,Varied Sittella,Daphoenositta_chrysoptera,Daphoenositta chrysoptera,Varied Sittella
+Weebill,Smicrornis brevirostris,Weebill,Smicrornis_brevirostris,Smicrornis brevirostris,Weebill
+White-browed Babbler,Pomatostomus superciliosus,White-browed Babbler,Pomatostomus_superciliosus,Pomatostomus superciliosus,White-browed Babbler
+Australasian Grebe,Tachybaptus novaehollandiae,Australasian Grebe,Tachybaptus_novaehollandiae,Tachybaptus novaehollandiae,Australasian Grebe
+Southern Scrub-Robin,Drymodes brunneopygia,Southern Scrub-robin,Drymodes_brunneopygia,Drymodes brunneopygia,Southern Scrub-robin
+Buff-rumped Thornbill,Acanthiza reguloides,Buff-rumped Thornbill,Acanthiza_reguloides,Acanthiza reguloides,Buff-rumped Thornbill
+Scarlet Robin,Petroica boodang,Scarlet Robin,Petroica_multicolor,Petroica multicolor,Scarlet Robin
+Australian Hobby,Falco longipennis,Australian Hobby,Falco_longipennis,Falco longipennis,Australian Hobby
+Musk Lorikeet,Glossopsitta concinna,Musk Lorikeet,Glossopsitta_concinna,Glossopsitta concinna,Musk Lorikeet
+Yellow-billed Spoonbill,Platalea flavipes,Yellow-billed Spoonbill,Platalea_flavipes,Platalea flavipes,Yellow-billed Spoonbill
+Common Bronzewing,Phaps chalcoptera,Common Bronzewing,Phaps_chalcoptera,Phaps chalcoptera,Common Bronzewing
+Emu,Dromaius novaehollandiae,Emu,Dromaius_novaehollandiae,Dromaius novaehollandiae,Emu
+Jacky-winter,Microeca fascinans,Jacky Winter,Microeca_fascinans,Microeca fascinans,Jacky-winter
+Red-capped Robin,Petroica goodenovii,Red-capped Robin,Petroica_goodenovii,Petroica goodenovii,Red-capped Robin
+White-winged Triller,Lalage tricolor,White-winged Triller,Lalage_tricolor,Lalage tricolor,White-winged Triller
+Yellow Thornbill,Acanthiza nana,Yellow Thornbill,Acanthiza_nana,Acanthiza nana,Yellow Thornbill
+Australian Brushturkey,Alectura lathami,Australian Brush-turkey,Alectura_lathami,Alectura lathami,Australian Brush-turkey
+Blue-faced Honeyeater,Entomyzon cyanotis,Blue-faced Honeyeater,Entomyzon_cyanotis,Entomyzon cyanotis,Blue-faced Honeyeater
+Brahminy Kite,Haliastur indus,Brahminy Kite,Haliastur_indus,Haliastur indus,Brahminy Kite
+Lewin's Honeyeater,Meliphaga lewinii,Lewin's Honeyeater,Meliphaga_lewinii,Meliphaga lewinii,Lewin's Honeyeater
+Striated Heron,Butorides striata,Striated Heron,Butorides_striata,Butorides striata,Striated Heron
+Painted Buttonquail,Turnix varius,Painted Button-quail,Turnix_varius,Turnix varius,Painted Buttonquail
+Great Crested Grebe,Podiceps cristatus,Great Crested Grebe,Podiceps_cristatus,Podiceps cristatus,Great Crested Grebe
+Australian Ringneck,Barnardius zonarius,Australian Ringneck,Barnardius_zonarius,Barnardius zonarius,Ringneck Parrot
+Gray Butcherbird,Cracticus torquatus,Grey Butcherbird,Cracticus_torquatus,Cracticus torquatus,Grey Butcherbird
+Redthroat,Pyrrholaemus brunneus,Redthroat,Pyrrholaemus_brunneus,Pyrrholaemus brunneus,Redthroat
+Southern Whiteface,Aphelocephala leucopsis,Southern Whiteface,Aphelocephala_leucopsis,Aphelocephala leucopsis,Southern Whiteface
+Splendid Fairywren,Malurus splendens,Splendid Fairy-wren,Malurus_splendens,Malurus splendens,Splendid Fairywren
+Cockatiel,Nymphicus hollandicus,Cockatiel,Nymphicus_hollandicus,Nymphicus hollandicus,Cockatiel
+Southern Boobook,Ninox novaeseelandiae,New Zealand Boobook,Ninox_novaeseelandiae,Ninox novaeseelandiae,Southern Boobook
+Cape Barren Goose,Cereopsis novaehollandiae,Cape Barren Goose,Cereopsis_novaehollandiae,Cereopsis novaehollandiae,Cape Barren Goose
+Black-headed Honeyeater,Melithreptus affinis,Black-headed Honeyeater,Melithreptus_affinis,Melithreptus affinis,Black-headed Honeyeater
+Dusky Robin,Melanodryas vittata,Dusky Robin,Melanodryas_vittata,Melanodryas vittata,Dusky Robin
+Forest Raven,Corvus tasmanicus,Forest Raven,Corvus_tasmanicus,Corvus tasmanicus,Forest Raven
+Forty-spotted Pardalote,Pardalotus quadragintus,Forty-spotted Pardalote,Pardalotus_quadragintus,Pardalotus quadragintus,Forty-spotted Pardalote
+Green Rosella,Platycercus caledonicus,Green Rosella,Platycercus_caledonicus,Platycercus caledonicus,Green Rosella
+Kelp Gull,Larus dominicanus,Kelp Gull,Larus_dominicanus,Larus dominicanus,Kelp Gull
+Yellow Wattlebird,Anthochaera paradoxa,Yellow Wattlebird,Anthochaera_paradoxa,Anthochaera paradoxa,Yellow Wattlebird
+Black Currawong,Strepera fuliginosa,Black Currawong,Strepera_fuliginosa,Strepera fuliginosa,Black Currawong
+Bassian Thrush,Zoothera lunulata,Bassian Thrush,Zoothera_lunulata,Zoothera lunulata,Bassian Thrush
+Eastern Spinebill,Acanthorhynchus tenuirostris,Eastern Spinebill,Acanthorhynchus_tenuirostris,Acanthorhynchus tenuirostris,Eastern Spinebill
+Tasmanian Scrubwren,Sericornis humilis,Tasmanian Scrubwren,Sericornis_humilis,Sericornis humilis,Tasmanian Scrubwren
+Wedge-tailed Eagle,Aquila audax,Wedge-tailed Eagle,Aquila_audax,Aquila audax,Wedge-tailed Eagle
+Pink Robin,Petroica rodinogaster,Pink Robin,Petroica_rodinogaster,Petroica rodinogaster,Pink Robin
+Strong-billed Honeyeater,Melithreptus validirostris,Strong-billed Honeyeater,Melithreptus_validirostris,Melithreptus validirostris,Strong-billed Honeyeater
+Tasmanian Thornbill,Acanthiza ewingii,Tasmanian Thornbill,Acanthiza_ewingii,Acanthiza ewingii,Tasmanian Thornbill
+Pied Oystercatcher,Haematopus longirostris,Australian Pied Oystercatcher,Haematopus_longirostris,Haematopus longirostris,Pied Oystercatcher
+Brush Bronzewing,Phaps elegans,Brush Bronzewing,Phaps_elegans,Phaps elegans,Brush Bronzewing
+Pacific Gull,Larus pacificus,Pacific Gull,Larus_pacificus,Larus pacificus,Pacific Gull
+Australasian Figbird,Sphecotheres vieilloti,Australasian Figbird,Sphecotheres_vieilloti,Sphecotheres vieilloti,Australasian Figbird
+Channel-billed Cuckoo,Scythrops novaehollandiae,Channel-billed Cuckoo,Scythrops_novaehollandiae,Scythrops novaehollandiae,Channel-billed Cuckoo
+Helmeted Friarbird,Philemon buceroides,Helmeted Friarbird,Philemon_buceroides,Philemon buceroides,Helmeted Friarbird
+Scaly-breasted Lorikeet,Trichoglossus chlorolepidotus,Scaly-breasted Lorikeet,Trichoglossus_chlorolepidotus,Trichoglossus chlorolepidotus,Scaly-breasted Lorikeet
+Torresian Imperial-Pigeon,Ducula spilorrhoa,Torresian Imperial-Pigeon,Ducula_spilorrhoa,Ducula spilorrhoa,Torresian Imperial-pigeon
+Varied Triller,Lalage leucomela,Varied Triller,Lalage_leucomela,Lalage leucomela,Varied Triller
+Common Myna,Acridotheres tristis,Common Myna,Acridotheres_tristis,Acridotheres tristis,Common Myna
+Metallic Starling,Aplonis metallica,Metallic Starling,Aplonis_metallica,Aplonis metallica,Metallic Starling
+Red-tailed Black-Cockatoo,Calyptorhynchus banksii,Red-tailed Black-Cockatoo,Calyptorhynchus_banksii,Calyptorhynchus banksii,Red-tailed Black-cockatoo
+White-breasted Woodswallow,Artamus leucorynchus,White-breasted Woodswallow,Artamus_leucorynchus,Artamus leucorynchus,White-breasted Woodswallow
+Green Oriole,Oriolus flavocinctus,Yellow Oriole,Oriolus_flavocinctus,Oriolus flavocinctus,Green Oriole
+Oriental Cuckoo,Cuculus optatus,Oriental Cuckoo,Cuculus_saturatus,Cuculus saturatus,Himalayan Cuckoo
+Wonga Pigeon,Leucosarcia melanoleuca,Wonga Pigeon,Leucosarcia_melanoleuca,Leucosarcia melanoleuca,Wonga Pigeon
+Australian Logrunner,Orthonyx temminckii,Australian Logrunner,Orthonyx_temminckii,Orthonyx temminckii,Australian Logrunner
+Australian Masked-Owl,Tyto novaehollandiae,Masked Owl,Tyto_novaehollandiae,Tyto novaehollandiae,Australian Masked-owl
+Australian Owlet-nightjar,Aegotheles cristatus,Australian Owlet-nightjar,Aegotheles_cristatus,Aegotheles cristatus,Australian Owlet-nightjar
+Brown Cuckoo-Dove,Macropygia phasianella,Brown Cuckoo-Dove,Macropygia_phasianella,Macropygia phasianella,Brown Cuckoo-Dove
+Brown Gerygone,Gerygone mouki,Brown Gerygone,Gerygone_mouki,Gerygone mouki,Brown Gerygone
+Glossy Black-Cockatoo,Calyptorhynchus lathami,Glossy Black-Cockatoo,Calyptorhynchus_lathami,Calyptorhynchus lathami,Glossy Black-cockatoo
+Gray Goshawk,Accipiter novaehollandiae,Grey Goshawk,Accipiter_novaehollandiae,Accipiter novaehollandiae,Grey Goshawk
+Green Catbird,Ailuroedus crassirostris,Green Catbird,Ailuroedus_crassirostris,Ailuroedus crassirostris,Green Catbird
+Noisy Pitta,Pitta versicolor,Noisy Pitta,Pitta_versicolor,Pitta versicolor,Noisy Pitta
+Pheasant Coucal,Centropus phasianinus,Pheasant Coucal,Centropus_phasianinus,Centropus phasianinus,Pheasant Coucal
+Rose Robin,Petroica rosea,Rose Robin,Petroica_rosea,Petroica rosea,Rose Robin
+Satin Bowerbird,Ptilonorhynchus violaceus,Satin Bowerbird,Ptilonorhynchus_violaceus,Ptilonorhynchus violaceus,Satin Bowerbird
+Tawny Frogmouth,Podargus strigoides,Tawny Frogmouth,Podargus_strigoides,Podargus strigoides,Tawny Frogmouth
+Topknot Pigeon,Lopholaimus antarcticus,Topknot Pigeon,Lopholaimus_antarcticus,Lopholaimus antarcticus,Topknot Pigeon
+White-headed Pigeon,Columba leucomela,White-headed Pigeon,Columba_leucomela,Columba leucomela,White-headed Pigeon
+Wompoo Fruit-Dove,Ptilinopus magnificus,Wompoo Fruit-Dove,Ptilinopus_magnificus,Ptilinopus magnificus,Wompoo Fruit-dove
+Yellow-throated Scrubwren,Sericornis citreogularis,Yellow-throated Scrubwren,Sericornis_citreogularis,Sericornis citreogularis,Yellow-throated Scrubwren
+Apostlebird,Struthidea cinerea,Apostlebird,Struthidea_cinerea,Struthidea cinerea,Apostlebird
+Australasian Bushlark,Mirafra javanica,Horsfield's Bushlark,Mirafra_javanica,Mirafra javanica,Australasian Lark
+Australian Bustard,Ardeotis australis,Australian Bustard,Ardeotis_australis,Ardeotis australis,Australian Bustard
+Black-faced Woodswallow,Artamus cinereus,Black-faced Woodswallow,Artamus_cinereus,Artamus cinereus,Black-faced Woodswallow
+Black-fronted Dotterel,Elseyornis melanops,Black-fronted Dotterel,Elseyornis_melanops,Elseyornis melanops,Black-fronted Dotterel
+Black Kite,Milvus migrans,Black Kite,Milvus_migrans,Milvus migrans,Black Kite
+Little Friarbird,Philemon citreogularis,Little Friarbird,Philemon_citreogularis,Philemon citreogularis,Little Friarbird
+Pale-headed Rosella,Platycercus adscitus,Pale-headed Rosella,Platycercus_adscitus,Platycercus adscitus,Pale-headed Rosella
+Red-backed Kingfisher,Todiramphus pyrrhopygius,Red-backed Kingfisher,Todiramphus_pyrrhopygius,Todiramphus pyrrhopygius,Red-backed Kingfisher
+Squatter Pigeon,Geophaps scripta,Squatter Pigeon,Geophaps_scripta,Geophaps scripta,Squatter Pigeon
+Striped Honeyeater,Plectorhyncha lanceolata,Striped Honeyeater,Plectorhyncha_lanceolata,Plectorhyncha lanceolata,Striped Honeyeater
+Yellow-throated Miner,Manorina flavigula,Yellow-throated Miner,Manorina_flavigula,Manorina flavigula,Yellow-throated Miner
+Collared Sparrowhawk,Accipiter cirrocephalus,Collared Sparrowhawk,Accipiter_cirrocephalus,Accipiter cirrocephalus,Collared Sparrowhawk
+Gray-crowned Babbler,Pomatostomus temporalis,Grey-crowned Babbler,Pomatostomus_temporalis,Pomatostomus temporalis,Grey-crowned Babbler
+Mistletoebird,Dicaeum hirundinaceum,Mistletoebird,Dicaeum_hirundinaceum,Dicaeum hirundinaceum,Mistletoebird
+Blue-winged Kookaburra,Dacelo leachii,Blue-winged Kookaburra,Dacelo_leachii,Dacelo leachii,Blue-winged Kookaburra
+Little Woodswallow,Artamus minor,Little Woodswallow,Artamus_minor,Artamus minor,Little Woodswallow
+Pictorella Munia,Heteromunia pectoralis,Pictorella Mannikin,Heteromunia_pectoralis,Heteromunia pectoralis,Pictorella Munia
+Plumed Whistling-Duck,Dendrocygna eytoni,Plumed Whistling-Duck,Dendrocygna_eytoni,Dendrocygna eytoni,Plumed Whistling-duck
+Red-winged Parrot,Aprosmictus erythropterus,Red-winged Parrot,Aprosmictus_erythropterus,Aprosmictus erythropterus,Red-winged Parrot
+White-throated Honeyeater,Melithreptus albogularis,White-throated Honeyeater,Melithreptus_albogularis,Melithreptus albogularis,White-throated Honeyeater
+Pale-yellow Robin,Tregellasia capito,Pale-yellow Robin,Tregellasia_capito,Tregellasia capito,Pale-yellow Robin
+Regent Bowerbird,Sericulus chrysocephalus,Regent Bowerbird,Sericulus_chrysocephalus,Sericulus chrysocephalus,Regent Bowerbird
+Russet-tailed Thrush,Zoothera heinei,Russet-tailed Thrush,Zoothera_heinei,Zoothera heinei,Russet-tailed Thrush
+Striated Thornbill,Acanthiza lineata,Striated Thornbill,Acanthiza_lineata,Acanthiza lineata,Striated Thornbill
+Little Shrikethrush,Colluricincla megarhyncha,Little Shrike-thrush,Colluricincla_megarhyncha,Colluricincla megarhyncha,Little Shrike-thrush
+Bell Miner,Manorina melanophrys,Bell Miner,Manorina_melanophrys,Manorina melanophrys,Bell Miner
+Forest Kingfisher,Todiramphus macleayii,Forest Kingfisher,Todiramphus_macleayii,Todiramphus macleayii,Forest Kingfisher
+Pacific Baza,Aviceda subcristata,Pacific Baza,Aviceda_subcristata,Aviceda subcristata,Pacific Baza
+Australian Kite,Elanus axillaris,Black-shouldered Kite,Elanus_axillaris,Elanus axillaris,Black-shouldered Kite
+Comb-crested Jacana,Irediparra gallinacea,Comb-crested Jacana,Irediparra_gallinacea,Irediparra gallinacea,Comb-crested Jacana
+Pied Stilt,Himantopus leucocephalus,Black-winged Stilt,Himantopus_leucocephalus,Himantopus leucocephalus,White-headed Stilt
+Scarlet Myzomela,Myzomela sanguinolenta,Scarlet Honeyeater,Myzomela_sanguinolenta,Myzomela sanguinolenta,Scarlet Myzomela
+Magpie Goose,Anseranas semipalmata,Magpie Goose,Anseranas_semipalmata,Anseranas semipalmata,Magpie Goose
+Bar-tailed Godwit,Limosa lapponica,Bar-tailed Godwit,Limosa_lapponica,Limosa lapponica,Bar-tailed Godwit
+Brown Songlark,Megalurus cruralis,Brown Songlark,Cincloramphus_cruralis,Cincloramphus cruralis,Brown Songlark
+Common Greenshank,Tringa nebularia,Common Greenshank,Tringa_nebularia,Tringa nebularia,Common Greenshank
+Curlew Sandpiper,Calidris ferruginea,Curlew Sandpiper,Calidris_ferruginea,Calidris ferruginea,Curlew Sandpiper
+Far Eastern Curlew,Numenius madagascariensis,Eastern Curlew,Numenius_madagascariensis,Numenius madagascariensis,Far Eastern Curlew
+Marsh Sandpiper,Tringa stagnatilis,Marsh Sandpiper,Tringa_stagnatilis,Tringa stagnatilis,Marsh Sandpiper
+Pacific Golden-Plover,Pluvialis fulva,Pacific Golden Plover,Pluvialis_fulva,Pluvialis fulva,Pacific Golden Plover
+Scaly-breasted Munia,Lonchura punctulata,Nutmeg Mannikin,Lonchura_punctulata,Lonchura punctulata,Scaly-breasted Munia
+Whimbrel,Numenius phaeopus,Whimbrel,Numenius_phaeopus,Numenius phaeopus,Whimbrel
+Wood Sandpiper,Tringa glareola,Wood Sandpiper,Tringa_glareola,Tringa glareola,Wood Sandpiper
+Musk Duck,Biziura lobata,Musk Duck,Biziura_lobata,Biziura lobata,Musk Duck
+Plum-headed Finch,Neochmia modesta,Plum-headed Finch,Neochmia_modesta,Neochmia modesta,Plum-headed Finch
+Red-winged Fairywren,Malurus elegans,Red-winged Fairy-wren,Malurus_elegans,Malurus elegans,Red-winged Fairywren
+Western Gerygone,Gerygone fusca,Western Gerygone,Gerygone_fusca,Gerygone fusca,Western Gerygone
+Western Spinebill,Acanthorhynchus superciliosus,Western Spinebill,Acanthorhynchus_superciliosus,Acanthorhynchus superciliosus,Western Spinebill
+Western Wattlebird,Anthochaera lunulata,Western Wattlebird,Anthochaera_lunulata,Anthochaera lunulata,Western Wattlebird
+Purple-crowned Lorikeet,Glossopsitta porphyrocephala,Purple-crowned Lorikeet,Glossopsitta_porphyrocephala,Glossopsitta porphyrocephala,Purple-crowned Lorikeet
+Peregrine Falcon,Falco peregrinus,Peregrine Falcon,Falco_peregrinus,Falco peregrinus,Peregrine Falcon
+Rufous Night-Heron,Nycticorax caledonicus,Nankeen Night-Heron,Nycticorax_caledonicus,Nycticorax caledonicus,Rufous Night-heron
+Mallard,Anas platyrhynchos,Northern Mallard,Anas_platyrhynchos,Anas platyrhynchos,Mallard
+Black-faced Cormorant,Phalacrocorax fuscescens,Black-faced Cormorant,Phalacrocorax_fuscescens,Phalacrocorax fuscescens,Black-faced Cormorant
+Black-chinned Honeyeater,Melithreptus gularis,Black-chinned Honeyeater,Melithreptus_gularis,Melithreptus gularis,Black-chinned Honeyeater
+Brush Cuckoo,Cacomantis variolosus,Brush Cuckoo,Cacomantis_variolosus,Cacomantis variolosus,Brush Cuckoo
+White-throated Gerygone,Gerygone olivacea,White-throated Gerygone,Gerygone_olivacea,Gerygone olivacea,White-throated Gerygone
+Ground Cuckooshrike,Coracina maxima,Ground Cuckoo-shrike,Coracina_maxima,Coracina maxima,Ground Cuckooshrike
+Spiny-cheeked Honeyeater,Acanthagenys rufogularis,Spiny-cheeked Honeyeater,Acanthagenys_rufogularis,Acanthagenys rufogularis,Spiny-cheeked Honeyeater
+Sooty Owl,Tyto tenebricosa,Greater Sooty Owl,Tyto_tenebricosa,Tyto tenebricosa,Sooty Owl
+White-throated Nightjar,Eurostopodus mystacalis,White-throated Nightjar,Eurostopodus_mystacalis,Eurostopodus mystacalis,White-throated Eared-nightjar
+Black-bellied Plover,Pluvialis squatarola,Grey Plover,Pluvialis_squatarola,Pluvialis squatarola,Grey Plover
+Double-banded Plover,Charadrius bicinctus,Double-banded Plover,Charadrius_bicinctus,Charadrius bicinctus,Double-banded Plover
+Great Knot,Calidris tenuirostris,Great Knot,Calidris_tenuirostris,Calidris tenuirostris,Great Knot
+Greater Sand-Plover,Charadrius leschenaultii,Greater Sand Plover,Charadrius_leschenaultii,Charadrius leschenaultii,Greater Sand Plover
+Lesser Sand-Plover,Charadrius mongolus,Lesser Sand Plover,Charadrius_mongolus,Charadrius mongolus,Lesser Sand Plover
+Red Knot,Calidris canutus,Red Knot,Calidris_canutus,Calidris canutus,Red Knot
+Cotton Pygmy-Goose,Nettapus coromandelianus,Cotton Pygmy-goose,Nettapus_coromandelianus,Nettapus coromandelianus,Cotton Pygmy-goose
+Wandering Whistling-Duck,Dendrocygna arcuata,Wandering Whistling-Duck,Dendrocygna_arcuata,Dendrocygna arcuata,Wandering Whistling-duck
+Chestnut-breasted Munia,Lonchura castaneothorax,Chestnut-breasted Mannikin,Lonchura_castaneothorax,Lonchura castaneothorax,Chestnut-breasted Munia
+Mangrove Gerygone,Gerygone levigaster,Mangrove Gerygone,Gerygone_levigaster,Gerygone levigaster,Mangrove Gerygone
+Torresian Kingfisher,Todiramphus sordidus,Collared Kingfisher,Todiramphus_chloris,Todiramphus chloris,Collared Kingfisher
+Powerful Owl,Ninox strenua,Powerful Owl,Ninox_strenua,Ninox strenua,Powerful Owl
+Red-necked Avocet,Recurvirostra novaehollandiae,Red-necked Avocet,Recurvirostra_novaehollandiae,Recurvirostra novaehollandiae,Red-necked Avocet
+Pacific Swift,Apus pacificus,Fork-tailed Swift,Apus_pacificus,Apus pacificus,Fork-tailed Swift
+Olive Whistler,Pachycephala olivacea,Olive Whistler,Pachycephala_olivacea,Pachycephala olivacea,Olive Whistler
+Dusky Myzomela,Myzomela obscura,Dusky Honeyeater,Myzomela_obscura,Myzomela obscura,Dusky Myzomela
+Rose-crowned Fruit-Dove,Ptilinopus regina,Rose-crowned Fruit-Dove,Ptilinopus_regina,Ptilinopus regina,Rose-crowned Fruit-dove
+Common Sandpiper,Actitis hypoleucos,Common Sandpiper,Actitis_hypoleucos,Actitis hypoleucos,Common Sandpiper
+Red-eared Firetail,Stagonopleura oculata,Red-eared Firetail,Stagonopleura_oculata,Stagonopleura oculata,Red-eared Firetail
+Western Rosella,Platycercus icterotis,Western Rosella,Platycercus_icterotis,Platycercus icterotis,Western Rosella
+Barn Owl,Tyto alba,Barn Owl,Tyto_alba,Tyto alba,Barn Owl
+Chestnut-crowned Babbler,Pomatostomus ruficeps,Chestnut-crowned Babbler,Pomatostomus_ruficeps,Pomatostomus ruficeps,Chestnut-crowned Babbler
+Chestnut-rumped Thornbill,Acanthiza uropygialis,Chestnut-rumped Thornbill,Acanthiza_uropygialis,Acanthiza uropygialis,Chestnut-rumped Thornbill
+Crested Bellbird,Oreoica gutturalis,Crested Bellbird,Oreoica_gutturalis,Oreoica gutturalis,Crested Bellbird
+Gilbert's Whistler,Pachycephala inornata,Gilbert's Whistler,Pachycephala_inornata,Pachycephala inornata,Gilbert's Whistler
+White-browed Treecreeper,Climacteris affinis,White-browed Treecreeper,Climacteris_affinis,Climacteris affinis,White-browed Treecreeper
+Spotted Quail-thrush,Cinclosoma punctatum,Spotted Quail-thrush,Cinclosoma_punctatum,Cinclosoma punctatum,Spotted Quail-thrush
+Barred Cuckooshrike,Coracina lineata,Barred Cuckoo-shrike,Coracina_lineata,Coracina lineata,Yellow-eyed Cuckooshrike
+Square-tailed Kite,Lophoictinia isura,Square-tailed Kite,Lophoictinia_isura,Lophoictinia isura,Square-tailed Kite
+Blue-billed Duck,Oxyura australis,Blue-billed Duck,Oxyura_australis,Oxyura australis,Blue-billed Duck
+White-winged Tern,Chlidonias leucopterus,White-winged Black Tern,Chlidonias_leucopterus,Chlidonias leucopterus,White-winged Tern
+Double-eyed Fig-Parrot,Cyclopsitta diophthalma,Double-eyed Fig-Parrot,Cyclopsitta_diophthalma,Cyclopsitta diophthalma,Double-eyed Fig-parrot
+Terek Sandpiper,Xenus cinereus,Terek Sandpiper,Xenus_cinereus,Xenus cinereus,Terek Sandpiper
+Marbled Frogmouth,Podargus ocellatus,Marbled Frogmouth,Podargus_ocellatus,Podargus ocellatus,Marbled Frogmouth
+Beach Thick-knee,Esacus magnirostris,Beach Stone-curlew,Esacus_giganteus,Esacus giganteus,Beach Thick-knee
+Black-breasted Buttonquail,Turnix melanogaster,Black-breasted Button-quail,Turnix_melanogaster,Turnix melanogaster,Black-breasted Buttonquail
+Common Tern,Sterna hirundo,Common Tern,Sterna_hirundo,Sterna hirundo,Common Tern
+Sanderling,Calidris alba,Sanderling,Calidris_alba,Calidris alba,Sanderling
+Turquoise Parrot,Neophema pulchella,Turquoise Parrot,Neophema_pulchella,Neophema pulchella,Turquoise Parrot
+Diamond Dove,Geopelia cuneata,Diamond Dove,Geopelia_cuneata,Geopelia cuneata,Diamond Dove
+Orange-footed Scrubfowl,Megapodius reinwardt,Orange-footed Scrubfowl,Megapodius_reinwardt,Megapodius reinwardt,Orange-footed Megapode
+Buff-breasted Paradise-Kingfisher,Tanysiptera sylvia,Buff-breasted Paradise-Kingfisher,Tanysiptera_sylvia,Tanysiptera sylvia,Buff-breasted Paradise-kingfisher
+Fairy Gerygone,Gerygone palpebrosa,Fairy Gerygone,Gerygone_palpebrosa,Gerygone palpebrosa,Fairy Gerygone
+Graceful Honeyeater,Meliphaga gracilis,Graceful Honeyeater,Meliphaga_gracilis,Meliphaga gracilis,Graceful Honeyeater
+Pied Monarch,Arses kaupi,Pied Monarch,Arses_kaupi,Arses kaupi,Pied Monarch
+Spotted Catbird,Ailuroedus maculosus,Spotted Catbird,Ailuroedus_melanotis,Ailuroedus melanotis,Spotted Catbird
+Superb Fruit-Dove,Ptilinopus superbus,Superb Fruit-Dove,Ptilinopus_superbus,Ptilinopus superbus,Superb Fruit-dove
+Yellow-breasted Boatbill,Machaerirhynchus flaviventer,Yellow-breasted Boatbill,Machaerirhynchus_flaviventer,Machaerirhynchus flaviventer,Yellow-breasted Boatbill
+Yellow-spotted Honeyeater,Meliphaga notata,Yellow-spotted Honeyeater,Meliphaga_notata,Meliphaga notata,Yellow-spotted Honeyeater
+Spinifex Pigeon,Geophaps plumifera,White-bellied Spinifex Pigeon,Geophaps_plumifera,Geophaps plumifera,Spinifex Pigeon
+Little Crow,Corvus bennetti,Little Crow,Corvus_bennetti,Corvus bennetti,Little Crow
+Painted Firetail,Emblema pictum,Painted Finch,Emblema_pictum,Emblema pictum,Painted Finch
+Australian Pratincole,Stiltia isabella,Australian Pratincole,Stiltia_isabella,Stiltia isabella,Australian Pratincole
+Banded Lapwing,Vanellus tricolor,Banded Lapwing,Vanellus_tricolor,Vanellus tricolor,Banded Lapwing
+Black-tailed Godwit,Limosa limosa,Black-tailed Godwit,Limosa_limosa,Limosa limosa,Black-tailed Godwit
+White-winged Fairywren,Malurus leucopterus,White-winged Fairy-wren,Malurus_leucopterus,Malurus leucopterus,White-winged Fairywren
+Ruddy Turnstone,Arenaria interpres,Ruddy Turnstone,Arenaria_interpres,Arenaria interpres,Ruddy Turnstone
+Bush Thick-knee,Burhinus grallarius,Bush Stone-curlew,Burhinus_grallarius,Burhinus grallarius,Bush Thick-knee
+Diamond Firetail,Stagonopleura guttata,Diamond Firetail,Stagonopleura_guttata,Stagonopleura guttata,Diamond Firetail
+Eastern Bristlebird,Dasyornis brachypterus,Eastern Bristlebird,Dasyornis_brachypterus,Dasyornis brachypterus,Eastern Bristlebird
+Restless Flycatcher,Myiagra inquieta,Restless Flycatcher,Myiagra_inquieta,Myiagra inquieta,Restless Flycatcher
+Western Corella,Cacatua pastinator,Western Corella,Cacatua_pastinator,Cacatua pastinator,Western Corella
+Budgerigar,Melopsittacus undulatus,Budgerigar,Melopsittacus_undulatus,Melopsittacus undulatus,Budgerigar
+Slaty-backed Thornbill,Acanthiza robustirostris,Slaty-backed Thornbill,Acanthiza_robustirostris,Acanthiza robustirostris,Slaty-backed Thornbill
+Spotted Harrier,Circus assimilis,Spotted Harrier,Circus_assimilis,Circus assimilis,Spotted Harrier
+Little Buttonquail,Turnix velox,Little Button-quail,Turnix_velox,Turnix velox,Little Buttonquail
+Pied Honeyeater,Certhionyx variegatus,Pied Honeyeater,Certhionyx_variegatus,Certhionyx variegatus,Pied Honeyeater
+Crimson Chat,Epthianura tricolor,Crimson Chat,Epthianura_tricolor,Epthianura tricolor,Crimson Chat
+Flame Robin,Petroica phoenicea,Flame Robin,Petroica_phoenicea,Petroica phoenicea,Flame Robin
+Large-billed Gerygone,Gerygone magnirostris,Large-billed Gerygone,Gerygone_magnirostris,Gerygone magnirostris,Large-billed Gerygone
+Pacific Reef-Heron,Egretta sacra,Eastern Reef Egret,Egretta_sacra,Egretta sacra,Pacific Reef-egret
+Black Falcon,Falco subniger,Black Falcon,Falco_subniger,Falco subniger,Black Falcon
+Noisy Scrub-bird,Atrichornis clamosus,Noisy Scrub-bird,Atrichornis_clamosus,Atrichornis clamosus,Noisy Scrub-bird
+Western Bristlebird,Dasyornis longirostris,Western Bristlebird,Dasyornis_longirostris,Dasyornis longirostris,Western Bristlebird
+Western Whipbird,Psophodes nigrogularis,Western Whipbird,Psophodes_nigrogularis,Psophodes nigrogularis,Western Whipbird
+Northern Fantail,Rhipidura rufiventris,Northern Fantail,Rhipidura_rufiventris,Rhipidura rufiventris,Northern Fantail
+Great-billed Heron,Ardea sumatrana,Great-billed Heron,Ardea_sumatrana,Ardea sumatrana,Great-billed Heron
+Shining Flycatcher,Myiagra alecto,Shining Flycatcher,Myiagra_alecto,Myiagra alecto,Shining Flycatcher
+Gray Whistler,Pachycephala simplex,Grey Whistler,Pachycephala_simplex,Pachycephala simplex,Grey Whistler
+Lemon-bellied Flycatcher,Microeca flavigaster,Lemon-bellied Flycatcher,Microeca_flavigaster,Microeca flavigaster,Lemon-bellied Flyrobin
+Black-throated Finch,Poephila cincta,Black-throated Finch,Poephila_cincta,Poephila cincta,Black-throated Finch
+Green Pygmy-Goose,Nettapus pulchellus,Green Pygmy-goose,Nettapus_pulchellus,Nettapus pulchellus,Green Pygmy-goose
+Glossy Ibis,Plegadis falcinellus,Glossy Ibis,Plegadis_falcinellus,Plegadis falcinellus,Glossy Ibis
+Albert's Lyrebird,Menura alberti,Albert's Lyrebird,Menura_alberti,Menura alberti,Albert's Lyrebird
+Papuan Frogmouth,Podargus papuensis,Papuan Frogmouth,Podargus_papuensis,Podargus papuensis,Papuan Frogmouth
+Chowchilla,Orthonyx spaldingii,Chowchilla,Orthonyx_spaldingii,Orthonyx spaldingii,Chowchilla
+Gray-headed Robin,Heteromyias cinereifrons,Grey-headed Robin,Heteromyias_albispecularis,Heteromyias albispecularis,Grey-headed Robin
+Australasian Bittern,Botaurus poiciloptilus,Australasian Bittern,Botaurus_poiciloptilus,Botaurus poiciloptilus,Australasian Bittern
+Lewin's Rail,Lewinia pectoralis,Lewin's Rail,Lewinia_pectoralis,Lewinia pectoralis,Lewin's Rail
+Australian Yellow White-eye,Zosterops luteus,Yellow White-eye,Zosterops_luteus,Zosterops luteus,Australian Yellow White-eye
+Green-backed Gerygone,Gerygone chloronota,Green-backed Gerygone,Gerygone_chloronota,Gerygone chloronota,Green-backed Gerygone
+Red-headed Myzomela,Myzomela erythrocephala,Red-headed Honeyeater,Myzomela_erythrocephala,Myzomela erythrocephala,Red-headed Myzomela
+Rufous-banded Honeyeater,Conopophila albogularis,Rufous-banded Honeyeater,Conopophila_albogularis,Conopophila albogularis,Rufous-banded Honeyeater
+Red-capped Parrot,Purpureicephalus spurius,Red-capped Parrot,Purpureicephalus_spurius,Purpureicephalus spurius,Red-capped Parrot
+Barking Owl,Ninox connivens,Barking Owl,Ninox_connivens,Ninox connivens,Barking Owl
+Broad-billed Flycatcher,Myiagra ruficollis,Broad-billed Flycatcher,Myiagra_ruficollis,Myiagra ruficollis,Broad-billed Flycatcher
+Crimson Finch,Neochmia phaeton,Crimson Finch,Neochmia_phaeton,Neochmia phaeton,Crimson Finch
+Bar-breasted Honeyeater,Ramsayornis fasciatus,Bar-breasted Honeyeater,Ramsayornis_fasciatus,Ramsayornis fasciatus,Bar-breasted Honeyeater
+Long-tailed Finch,Poephila acuticauda,Long-tailed Finch,Poephila_acuticauda,Poephila acuticauda,Long-tailed Finch
+Masked Finch,Poephila personata,Masked Finch,Poephila_personata,Poephila personata,Masked Finch
+Rufous-throated Honeyeater,Conopophila rufogularis,Rufous-throated Honeyeater,Conopophila_rufogularis,Conopophila rufogularis,Rufous-throated Honeyeater
+Large-tailed Nightjar,Caprimulgus macrurus,Large-tailed Nightjar,Caprimulgus_macrurus,Caprimulgus macrurus,Large-tailed Nightjar
+Silver-crowned Friarbird,Philemon argenticeps,Silver-crowned Friarbird,Philemon_argenticeps,Philemon argenticeps,Silver-crowned Friarbird
+Northern Rosella,Platycercus venustus,Northern Rosella,Platycercus_venustus,Platycercus venustus,Northern Rosella
+Purple-gaped Honeyeater,Lichenostomus cratitius,Purple-gaped Honeyeater,Lichenostomus_cratitius,Lichenostomus cratitius,Purple-gaped Honeyeater
+Varied Lorikeet,Psitteuteles versicolor,Varied Lorikeet,Psitteuteles_versicolor,Psitteuteles versicolor,Varied Lorikeet
+Red-whiskered Bulbul,Pycnonotus jocosus,Red-whiskered Bulbul,Pycnonotus_jocosus,Pycnonotus jocosus,Red-whiskered Bulbul
+Rainbow Pitta,Pitta iris,Rainbow Pitta,Pitta_iris,Pitta iris,Rainbow Pitta
+Red-browed Pardalote,Pardalotus rubricatus,Red-browed Pardalote,Pardalotus_rubricatus,Pardalotus rubricatus,Red-browed Pardalote
+Greater Bluebonnet,Northiella haematogaster,Blue Bonnet,Northiella_haematogaster,Northiella haematogaster,Blue Bonnet
+Pilotbird,Pycnoptilus floccosus,Pilotbird,Pycnoptilus_floccosus,Pycnoptilus floccosus,Pilotbird
+Ground Parrot,Pezoporus wallicus,Ground Parrot,Pezoporus_wallicus,Pezoporus wallicus,Ground Parrot
+Bower's Shrikethrush,Colluricincla boweri,Bower's Shrike-thrush,Colluricincla_boweri,Colluricincla boweri,Bower's Shrike-thrush
+Satin Flycatcher,Myiagra cyanoleuca,Satin Flycatcher,Myiagra_cyanoleuca,Myiagra cyanoleuca,Satin Flycatcher
+Latham's Snipe,Gallinago hardwickii,Latham's Snipe,Gallinago_hardwickii,Gallinago hardwickii,Latham's Snipe
+Atherton Scrubwren,Sericornis keri,Atherton Scrubwren,Sericornis_keri,Sericornis keri,Atherton Scrubwren
+Mountain Thornbill,Acanthiza katherina,Mountain Thornbill,Acanthiza_katherina,Acanthiza katherina,Mountain Thornbill
+Brown-backed Honeyeater,Ramsayornis modestus,Brown-backed Honeyeater,Ramsayornis_modestus,Ramsayornis modestus,Brown-backed Honeyeater
+Southern Cassowary,Casuarius casuarius,Southern Cassowary,Casuarius_casuarius,Casuarius casuarius,Southern Cassowary
+Regent Parrot,Polytelis anthopeplus,Regent Parrot,Polytelis_anthopeplus,Polytelis anthopeplus,Regent Parrot
+Star Finch,Neochmia ruficauda,Star Finch,Neochmia_ruficauda,Neochmia ruficauda,Star Finch
+Dusky Gerygone,Gerygone tenebrosa,Dusky Gerygone,Gerygone_tenebrosa,Gerygone tenebrosa,Dusky Gerygone
+Mangrove Fantail,Rhipidura phasiana,Mangrove Grey Fantail,Rhipidura_phasiana,Rhipidura phasiana,Mangrove Fantail
+Rufous Fieldwren,Calamanthus campestris,Rufous Fieldwren,Calamanthus_campestris,Calamanthus campestris,Rufous Fieldwren
+Black-breasted Kite,Hamirostra melanosternon,Black-breasted Buzzard,Hamirostra_melanosternon,Hamirostra melanosternon,Black-breasted Buzzard
+Black-naped Tern,Sterna sumatrana,Black-naped Tern,Sterna_sumatrana,Sterna sumatrana,Black-naped Tern
+Sandstone Shrikethrush,Colluricincla woodwardi,Sandstone Shrike-thrush,Colluricincla_woodwardi,Colluricincla woodwardi,Sandstone Shrike-thrush
+White-breasted Whistler,Pachycephala lanioides,White-breasted Whistler,Pachycephala_lanioides,Pachycephala lanioides,White-breasted Whistler
+Chiming Wedgebill,Psophodes occidentalis,Chiming Wedgebill,Psophodes_occidentalis,Psophodes occidentalis,Chiming Wedgebill
+Orange Chat,Epthianura aurifrons,Orange Chat,Epthianura_aurifrons,Epthianura aurifrons,Orange Chat
+Blue-faced Parrotfinch,Erythrura trichroa,Blue-faced Parrot-Finch,Erythrura_trichroa,Erythrura trichroa,Blue-faced Parrotfinch
+Indian Peafowl,Pavo cristatus,Indian Peafowl,Pavo_cristatus,Pavo cristatus,Indian Peafowl
+Oriental Pratincole,Glareola maldivarum,Oriental Pratincole,Glareola_maldivarum,Glareola maldivarum,Oriental Pratincole
+White-backed Swallow,Cheramoeca leucosterna,White-backed Swallow,Cheramoeca_leucosterna,Cheramoeca leucosterna,White-backed Swallow
+Fernwren,Oreoscopus gutturalis,Fernwren,Oreoscopus_gutturalis,Oreoscopus gutturalis,Fernwren
+Tooth-billed Catbird,Scenopoeetes dentirostris,Tooth-billed Bowerbird,Scenopoeetes_dentirostris,Scenopoeetes dentirostris,Tooth-billed Bowerbird
+Purple-crowned Fairywren,Malurus coronatus,Purple-crowned Fairy-wren,Malurus_coronatus,Malurus coronatus,Purple-crowned Fairywren
+Western Thornbill,Acanthiza inornata,Western Thornbill,Acanthiza_inornata,Acanthiza inornata,Western Thornbill
+Elegant Parrot,Neophema elegans,Elegant Parrot,Neophema_elegans,Neophema elegans,Elegant Parrot
+Western Yellow Robin,Eopsaltria griseogularis,Western Yellow Robin,Eopsaltria_griseogularis,Eopsaltria griseogularis,Western Yellow Robin
+Blue-breasted Fairywren,Malurus pulcherrimus,Blue-breasted Fairy-wren,Malurus_pulcherrimus,Malurus pulcherrimus,Blue-breasted Fairywren
+Cinnamon Quail-thrush,Cinclosoma cinnamomeum,Cinnamon Quail-thrush,Cinclosoma_cinnamomeum,Cinclosoma cinnamomeum,Cinnamon Quail-thrush
+Spotted Nightjar,Eurostopodus argus,Spotted Nightjar,Eurostopodus_argus,Eurostopodus argus,Spotted Eared-nightjar
+Chirruping Wedgebill,Psophodes cristatus,Chirruping Wedgebill,Psophodes_cristatus,Psophodes cristatus,Chirruping Wedgebill
+Bourke's Parrot,Neophema bourkii,Bourke's Parrot,Neopsephotus_bourkii,Neopsephotus bourkii,Bourke's Parrot
+Flock Bronzewing,Phaps histrionica,Flock Bronzewing,Phaps_histrionica,Phaps histrionica,Flock Bronzewing
+Lovely Fairywren,Malurus amabilis,Lovely Fairy-wren,Malurus_amabilis,Malurus amabilis,Lovely Fairywren
+Rockwarbler,Origma solitaria,Rockwarbler,Origma_solitaria,Origma solitaria,Rockwarbler
+Rufous-tailed Bush-hen,Amaurornis moluccana,Pale-vented Bush-hen,Amaurornis_moluccana,Amaurornis moluccana,Rufous-tailed Waterhen
+Little Curlew,Numenius minutus,Little Curlew,Numenius_minutus,Numenius minutus,Little Curlew
+White-quilled Rock-Pigeon,Petrophassa albipennis,White-quilled Rock-Pigeon,Petrophassa_albipennis,Petrophassa albipennis,White-quilled Rock-pigeon
+Buff-sided Robin,Poecilodryas cerviniventris,Buff-sided Robin,Poecilodryas_cerviniventris,Poecilodryas cerviniventris,Buff-sided Robin
+Black-tailed Whistler,Pachycephala melanura,Mangrove Golden Whistler,Pachycephala_melanura,Pachycephala melanura,Black-tailed Whistler
+Australasian Grass-Owl,Tyto longimembris,Eastern Grass Owl,Tyto_longimembris,Tyto longimembris,Eastern Grass-owl
+Australian Painted-Snipe,Rostratula australis,Australian Painted Snipe,Rostratula_australis,Rostratula australis,Australian Painted Snipe
+Pink Cockatoo,Lophochroa leadbeateri,Major Mitchell's Cockatoo,Cacatua_leadbeateri,Cacatua leadbeateri,Major Mitchell's Cockatoo
+Black-backed Butcherbird,Cracticus mentalis,Black-backed Butcherbird,Cracticus_mentalis,Cracticus mentalis,Black-backed Butcherbird
+Palm Cockatoo,Probosciger aterrimus,Palm Cockatoo,Probosciger_aterrimus,Probosciger aterrimus,Palm Cockatoo
+Tropical Scrubwren,Sericornis beccarii,Tropical Scrubwren,Sericornis_beccarii,Sericornis beccarii,Beccari's Scrubwren
+Tawny-breasted Honeyeater,Xanthotis flaviventer,Tawny-breasted Honeyeater,Xanthotis_flaviventer,Xanthotis flaviventer,Tawny-breasted Honeyeater
+Zitting Cisticola,Cisticola juncidis,Zitting Cisticola,Cisticola_juncidis,Cisticola juncidis,Zitting Cisticola
+Black Bittern,Ixobrychus flavicollis,Black Bittern,Ixobrychus_flavicollis,Ixobrychus flavicollis,Black Bittern
+Brown Noddy,Anous stolidus,Common Noddy,Anous_stolidus,Anous stolidus,Brown Noddy
+Superb Parrot,Polytelis swainsonii,Superb Parrot,Polytelis_swainsonii,Polytelis swainsonii,Superb Parrot
+Black-winged Monarch,Monarcha frater,Black-winged Monarch,Monarcha_frater,Monarcha frater,Black-winged Monarch
+White-browed Robin,Poecilodryas superciliosa,White-browed Robin,Poecilodryas_superciliosa,Poecilodryas superciliosa,White-browed Robin
+White-streaked Honeyeater,Trichodere cockerelli,White-streaked Honeyeater,Trichodere_cockerelli,Trichodere cockerelli,White-streaked Honeyeater
+Red-necked Crake,Rallina tricolor,Red-necked Crake,Rallina_tricolor,Rallina tricolor,Red-necked Crake
+Swift Parrot,Lathamus discolor,Swift Parrot,Lathamus_discolor,Lathamus discolor,Swift Parrot
+Black Noddy,Anous minutus,Black Noddy,Anous_minutus,Anous minutus,Black Noddy
+Song Thrush,Turdus philomelos,Song Thrush,Turdus_philomelos,Turdus philomelos,Song Thrush
+Pectoral Sandpiper,Calidris melanotos,Pectoral Sandpiper,Calidris_melanotos,Calidris melanotos,Pectoral Sandpiper
+Eclectus Parrot,Eclectus roratus,Eclectus Parrot,Eclectus_roratus,Eclectus roratus,Eclectus Parrot
+Red-cheeked Parrot,Geoffroyus geoffroyi,Red-cheeked Parrot,Geoffroyus_geoffroyi,Geoffroyus geoffroyi,Red-cheeked Parrot
+White-faced Robin,Tregellasia leucops,White-faced Robin,Tregellasia_leucops,Tregellasia leucops,White-faced Robin
+Yellow-billed Kingfisher,Syma torotoro,Yellow-billed Kingfisher,Syma_torotoro,Syma torotoro,Yellow-billed Kingfisher
+Eastern Yellow Wagtail,Motacilla tschutschensis,Yellow Wagtail,Motacilla_flava,Motacilla flava,Yellow Wagtail
+Barn Swallow,Hirundo rustica,Barn Swallow,Hirundo_rustica,Hirundo rustica,Barn Swallow
+Slender-billed Thornbill,Acanthiza iredalei,Slender-billed Thornbill,Acanthiza_iredalei,Acanthiza iredalei,Slender-billed Thornbill
+Dusky Grasswren,Amytornis purnelli,Dusky Grasswren,Amytornis_purnelli,Amytornis purnelli,Dusky Grasswren
+Chestnut-breasted Cuckoo,Cacomantis castaneiventris,Chestnut-breasted Cuckoo,Cacomantis_castaneiventris,Cacomantis castaneiventris,Chestnut-breasted Cuckoo
+Asian Dowitcher,Limnodromus semipalmatus,Asian Dowitcher,Limnodromus_semipalmatus,Limnodromus semipalmatus,Asian Dowitcher
+Banded Whiteface,Aphelocephala nigricincta,Banded Whiteface,Aphelocephala_nigricincta,Aphelocephala nigricincta,Banded Whiteface
+Long-toed Stint,Calidris subminuta,Long-toed Stint,Calidris_subminuta,Calidris subminuta,Long-toed Stint
+Painted Honeyeater,Grantiella picta,Painted Honeyeater,Grantiella_picta,Grantiella picta,Painted Honeyeater
+Rufous Scrub-bird,Atrichornis rufescens,Rufous Scrub-bird,Atrichornis_rufescens,Atrichornis rufescens,Rufous Scrub-bird
+Oriental Plover,Charadrius veredus,Oriental Plover,Charadrius_veredus,Charadrius veredus,Oriental Plover
+Rufous Owl,Ninox rufa,Rufous Owl,Ninox_rufa,Ninox rufa,Rufous Owl
+Eurasian Tree Sparrow,Passer montanus,Eurasian Tree Sparrow,Passer_montanus,Passer montanus,Eurasian Tree Sparrow
+Mallee Emuwren,Stipiturus mallee,Mallee Emu-wren,Stipiturus_mallee,Stipiturus mallee,Mallee Emuwren
+Yellow Chat,Epthianura crocea,Yellow Chat,Epthianura_crocea,Epthianura crocea,Yellow Chat
+White Tern,Gygis alba,White Tern,Gygis_alba,Gygis alba,Common White Tern
+Parasitic Jaeger,Stercorarius parasiticus,Arctic Jaeger,Stercorarius_parasiticus,Stercorarius parasiticus,Parasitic Jaeger
+White-fronted Tern,Sterna striata,White-fronted Tern,Sterna_striata,Sterna striata,White-fronted Tern
+Spotted Whistling-Duck,Dendrocygna guttata,Spotted Whistling-Duck,Dendrocygna_guttata,Dendrocygna guttata,Spotted Whistling-duck
+Great Crested Tern,Thalasseus bergii,Crested Tern,Thalasseus_bergii,Sterna bergii,Great Crested Tern
+Australian Ibis,Threskiornis molucca,Australian White Ibis,Threskiornis_moluccus,Threskiornis molucca,Australian Sacred Ibis
+Yellow-tailed Black-Cockatoo,Calyptorhynchus funereus,Yellow-tailed Black-Cockatoo,Zanda_funereus,Calyptorhynchus funereus,Yellow-tailed Black-cockatoo
+Horsfield's Bronze-Cuckoo,Chrysococcyx basalis,Horsfield's Bronze-Cuckoo,Chalcites_basalis,Chrysococcyx basalis,Horsfield's Bronze-cuckoo
+European Greenfinch,Chloris chloris,Common Greenfinch,Chloris_chloris,Carduelis chloris,European Greenfinch
+Common Cicadabird,Edolisoma tenuirostre,Cicadabird,Edolisoma_tenuirostris,Coracina tenuirostris,Slender-billed Cicadabird
+Gull-billed Tern,Gelochelidon nilotica,Common Gull-billed Tern,Gelochelidon_nilotica,Sterna nilotica,Gull-billed Tern
+Shining Bronze-Cuckoo,Chrysococcyx lucidus,Shining Bronze-Cuckoo,Chalcites_lucidus,Chrysococcyx lucidus,Shining Bronze-cuckoo
+Pacific Emerald Dove,Chalcophaps longirostris,Brown-capped Emerald Dove,Chalcophaps_longirostris,Chalcophaps indica,Emerald Dove
+Western Whistler,Pachycephala occidentalis,not_treated_as_species,not_treated_as_species,not_treated_as_species,not_treated_as_species
+Little Bronze-Cuckoo,Chrysococcyx minutillus,Little Bronze-Cuckoo,Chalcites_minutillus,Chrysococcyx minutillus,Little Bronze-cuckoo
+Carnaby's Black-Cockatoo,Calyptorhynchus latirostris,Carnaby's Black-Cockatoo,Zanda_latirostris,not_treated_as_species,not_treated_as_species
+Paperbark Flycatcher,Myiagra nana,not_treated_as_species,not_treated_as_species,not_treated_as_species,not_treated_as_species
+Silver-backed Butcherbird,Cracticus argenteus,not_treated_as_species,not_treated_as_species,not_treated_as_species,not_treated_as_species
+Arafura Fantail,Rhipidura dryas,not_treated_as_species,not_treated_as_species,not_treated_as_species,not_treated_as_species
+Gilbert's Honeyeater,Melithreptus chloropsis,not_treated_as_species,not_treated_as_species,not_treated_as_species,not_treated_as_species
+Baudin's Black-Cockatoo,Calyptorhynchus baudinii,Baudin's Black-Cockatoo,Zanda_baudinii,Calyptorhynchus baudinii,Baudin<U+0092>s Black-Cockatoo
+Blue-breasted Quail,Synoicus chinensis,King Quail,Synoicus_chinensis,Coturnix chinensis,Blue Quail
+Red-backed Buttonquail,Turnix maculosus,Red-backed Button-quail,Turnix_maculosa,Turnix maculosus,Red-backed Buttonquail
+Black-backed Bittern,Ixobrychus dubius,Australian Little Bittern,Ixobrychus_dubius,not_treated_as_species,not_treated_as_species
+Lord Howe White-eye,Zosterops tephropleurus,not_treated_as_species,not_treated_as_species,not_treated_as_species,not_treated_as_species
+Aleutian Tern,Onychoprion aleuticus,new_to_australia,new_to_australia,Sterna aleutica,Aleutian Tern
