@@ -16,6 +16,7 @@ packages:
   - stringr
   - corrplot
   - lme4
+  - tibble
 
 targets:
   all:
