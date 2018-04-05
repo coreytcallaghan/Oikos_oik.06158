@@ -28,32 +28,30 @@ plot_bird_tree <- function(aus_bird_tree) {
 }
 
 
-subset_tree <- function(trees, traits) {
-  non_aus_sp <- trees$tip.label[!trees$tip.label %in% traits$binom]
-  aus_bird_tree <- drop.tip(trees, non_aus_sp)
+subset_tree <- function(bird_trees, traits) {
+  non_aus_sp <- bird_trees$tip.label[!bird_trees$tip.label %in% traits$binom]
+  aus_bird_tree <- drop.tip(bird_trees, non_aus_sp)
   return(aus_bird_tree)
 }
 
 
 plot_bird_tree_traits <-
   function(aus_bird_tree,
-           traits,
+           ms,
            response_variables) {
-    trait <- as.array(traits$mean_body_size)
-    row.names(trait) <- row.names(traits)
+    trait <- as.array(ms$mean_body_size)
+    row.names(trait) <- row.names(ms)
     trait <- subset(trait, trait != "NaN")
     trait <- subset(trait, names(trait) %in% aus_bird_tree$tip.label)
     tree_plotting <-
       drop.tip(aus_bird_tree, aus_bird_tree$tip.label[!aus_bird_tree$tip.label %in%
                                                         row.names(trait)])
     
-    response_variables$SCIENTIFIC_NAME <-
-      gsub(" ", "_", response_variables$SCIENTIFIC_NAME)
     rv <-
       filter(response_variables,
-             SCIENTIFIC_NAME %in% tree_plotting$tip.label)
+             SCIENTIFIC_NAME_tree %in% tree_plotting$tip.label)
     median_rv <- as.array(rv$urban_median)
-    row.names(median_rv) <- rv$SCIENTIFIC_NAME
+    row.names(median_rv) <- rv$SCIENTIFIC_NAME_tree
     median_rv2 <- median_rv - mean(median_rv)
     
     
@@ -139,38 +137,38 @@ run_phylo_lm <- function(traits,
 }
 
 
-run_phylo_lme4 <- function(traits,
+run_phylo_lme4 <- function(ms,
                          response_variables,
                          aus_bird_tree) {
   
   #
   # match and subset to tree.
   # this is annoying because the phylo packages all use row.names and the tidyverse hates rownames.
+  ## CTC - the tibble package is helpful here with rownames to column and column to rownames within a pipe
   # first create a new data.frame (not tibble) with just the traits of interest
   #
   trait <-
     data.frame(
-      mean_body_size = traits$mean_body_size,
-      clutch_size = traits$clutch_size,
-      gregariousness = traits$gregariousness
+      mean_body_size = ms$mean_body_size,
+      clutch_size = ms$clutch_size,
+      nest_aggregation = ms$nest_aggregation
     )
-  row.names(trait) <- row.names(traits)
-  trait <-
-    subset(
-      trait,
-      trait$mean_body_size != "NaN" &
-        trait$clutch_size != "NaN" & trait$gregariousness != "NaN"
-    )
+  
+  row.names(trait) <- row.names(ms)
+  
+  trait <- trait %>%
+    rownames_to_column('names') %>%
+    filter(complete.cases(.)) %>%
+    column_to_rownames('names')
+  
   trait <- subset(trait, row.names(trait) %in% aus_bird_tree$tip.label)
-  # subset that dataframe to those names that are both in the trait data base AND the tree
-  trait<-subset(trait,trait$mean_body_size!="NaN"&trait$clutch_size!="NaN"&trait$gregariousness!="NaN")
-  trait<-subset(trait,row.names(trait)%in%aus_bird_tree$tip.label)
+
   # subset the tree
-  tree_plotting<-drop.tip(aus_bird_tree,aus_bird_tree$tip.label[!aus_bird_tree$tip.label%in%row.names(trait)])
-  response_variables$SCIENTIFIC_NAME<-gsub(" ","_",response_variables$SCIENTIFIC_NAME)
-  rv<-filter(response_variables,SCIENTIFIC_NAME%in%tree_plotting$tip.label)
+  tree_plotting <- drop.tip(aus_bird_tree,aus_bird_tree$tip.label[!aus_bird_tree$tip.label%in%row.names(trait)])
+  
+  rv <- filter(response_variables, SCIENTIFIC_NAME_tree %in% tree_plotting$tip.label)
   median_rv<-as.array(rv$urban_median)
-  row.names(median_rv)<-rv$SCIENTIFIC_NAME
+  row.names(median_rv)<-rv$SCIENTIFIC_NAME_tree
   median_rv2<-median_rv-mean(median_rv)
   
   
@@ -180,9 +178,10 @@ run_phylo_lme4 <- function(traits,
   dd <- data.frame(urb=median_rv2)
   
   #match traits into the right dataframe  
-  dd$body_size<-trait$mean_body_size[match(row.names(dd),row.names(trait))]
-  dd$clutch_size<-trait$clutch_size[match(row.names(dd),row.names(trait))]
-  dd$gregariousness<-trait$gregariousness[match(row.names(dd),row.names(trait))]
+  dd$body_size <- trait$mean_body_size[match(row.names(dd),row.names(trait))]
+  dd$clutch_size <- trait$clutch_size[match(row.names(dd),row.names(trait))]
+  dd$nest_aggregation <- trait$nest_aggregation[match(row.names(dd),row.names(trait))]
+  
   # run the model
   phylo<-tree_plotting_2
 #  birdZ <- phylo.to.Z(tree_plotting_2)
