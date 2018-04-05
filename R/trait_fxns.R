@@ -88,7 +88,7 @@ read_process_trait_data <- function(){
       rename(plants2 = `167_Food_Corms_or_tubers`) %>%
       rename(carrion_eater = `170_Food_Carrion_10`) %>%
       mutate(plant_eater = plants1+plants2) %>%
-      select(-plants1, -plants2) %>%
+      dplyr::select(-plants1, -plants2) %>%
       mutate(granivore = ifelse(granivore == 1, "Yes", "no")) %>%
       mutate(insectivore = ifelse(insectivore == 1, "Yes", "no")) %>%
       mutate(plant_eater = ifelse(plant_eater == 2, "Yes", "no")) %>%
