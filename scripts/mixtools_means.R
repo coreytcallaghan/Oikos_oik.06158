@@ -13,7 +13,8 @@ test_species <- c("Common Myna", "Australian Ibis", "Southern Emuwren", "Noisy M
 species_urban %>% group_by(COMMON_NAME) %>% 
   summarise(
     nobs = n(),
-    mean = mean(avg_rad)
+    mean = mean(avg_rad),
+    median = median(avg_rad)
   ) %>% arrange(desc(mean)) -> sp_summary
 
 sp_summary %>% 
