@@ -142,5 +142,79 @@ species_joined_final <- species_joined_2 %>%
   left_join(., AUS_tree_birds, by="SCIENTIFIC_NAME_traits") %>%
   replace_na(list(in_tree="Missing"))
 
+
+
+### Now we know all the species in the analysis (from the eBird data)
+### and the associated trait information
+### The last step is to assess which species have different names in the Jetz tree
+### which is the basis of the phylo portion of the models
+### I downloaded the Master taxonomy from Jetz's Nature paper which has the common names 
+### So we'll read that in and look for matches for the file which was calculated above
+
+## read master taxonomy in from Jetz
+tree_taxonomy <- read_csv("Data/phylo/2012-03-04206D-master_taxonomy.csv") %>%
+  dplyr::select(Scientific, TipLabel, English)
+
+## first find which species are in the Jetz tree based on
+## traits data common names but didn't match up with
+## scientific names
+tree_join_missing <- species_joined_final %>%
+  filter(in_tree == "Missing") %>%
+  rename(English = COMMON_NAME_traits) %>%
+  left_join(., tree_taxonomy, by="English") %>%
+  rename(COMMON_NAME_traits = English) %>%
+  dplyr::select(-in_tree, -Scientific) %>%
+  left_join(., tree_taxonomy, by="TipLabel") %>%
+  rename(SCIENTIFIC_NAME_tree = TipLabel) %>%
+  dplyr::select(-Scientific) %>%
+  rename(COMMON_NAME_tree = English)
+
+
+tree_join_not_missing <- species_joined_final %>%
+  filter(in_tree != "Missing") %>%
+  rename(TipLabel = SCIENTIFIC_NAME_traits) %>%
+  left_join(., tree_taxonomy, by="TipLabel") %>%
+  rename(SCIENTIFIC_NAME_traits = TipLabel) %>%
+  dplyr::select(-in_tree) %>%
+  rename(SCIENTIFIC_NAME_tree = Scientific) %>%
+  rename(COMMON_NAME_tree = English)
+
+
+## Now can join these two df
+## and see how many didn't join by either 
+## common or scientific name
+tree_join_full <- bind_rows(tree_join_missing, tree_join_not_missing) %>%
+  replace_na(list(COMMON_NAME_tree = "Missing", SCIENTIFIC_NAME_tree = "Missing"))
+
+
+## now extract the missing ones only
+missing_from_tree <- tree_join_full %>%
+  filter(COMMON_NAME_tree=="Missing")
+
+## looks like 22 species are missing from the tree
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
   
