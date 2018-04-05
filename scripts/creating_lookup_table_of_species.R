@@ -106,21 +106,12 @@ species_joined_2 <- eBird_species %>%
   replace_na(list(SCIENTIFIC_NAME_traits = "Not matched by common or scientific name")) %>%
   mutate(COMMON_NAME_traits = ifelse(.$SCIENTIFIC_NAME_traits == "Not matched by common or scientific name",
                                      .$COMMON_NAME_traits, .$COMMON_NAME_ebird))
-              
-  
-  
-  
-  
-  full_join(., traits_species, by="SCIENTIFIC_NAME") %>%
-  replace_na(list(COMMON_NAME = "Not in eBird data")) %>%
-  left_join(., AUS_tree_birds, by="SCIENTIFIC_NAME_traits") %>%
-  replace_na(list(in_tree="Missing")) %>%
-  select(-SCIENTIFIC_NAME) %>%
-  left_join(., eBird_species, by="COMMON_NAME") %>%
-  rename(SCIENTIFIC_NAME_ebird = SCIENTIFIC_NAME) %>%
-  rename(COMMON_NAME_ebird = COMMON_NAME) %>%
-  replace_na(list(SCIENTIFIC_NAME_ebird = "Not in eBird data"))
 
+## Now we know which species aren't matched by sorting for not matched species
+not_matched <- species_joined_2 %>%
+  filter(SCIENTIFIC_NAME_traits == "Not matched by common or scientific name")
+  
+              
 
 
 
