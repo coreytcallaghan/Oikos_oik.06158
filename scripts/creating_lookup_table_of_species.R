@@ -121,7 +121,7 @@ df_fixing <- data.frame(COMMON_NAME_ebird = not_matched$COMMON_NAME_ebird,
                         COMMON_NAME_traits = c("Grey Fantail", "Purple Swamphen", "Australian White Ibis",
                                                "Cicadabird", "Collared Kingfisher", "not_treated_as_species", "Beach Stone-curlew",
                                                "Grey-fronted Honeyeater", "Grey-headed Robin", "not_treated_as_species",
-                                               "not_treated_as_species", "not_trated_as_species", "not_treated_as_species",
+                                               "not_treated_as_species", "not_treated_as_species", "not_treated_as_species",
                                                "Red-backed Button-quail", "Major Mitchell's Cockatoo", "Frilled Monarch", 
                                                "Yellow Wagtail", "not_treated_as_species", "new_to_australia"), 
                         stringsAsFactors = FALSE) %>%
@@ -140,7 +140,10 @@ species_joined_final <- species_joined_2 %>%
                                          .$SCIENTIFIC_NAME_traits.y, .$SCIENTIFIC_NAME_traits.x)) %>%
   dplyr::select(COMMON_NAME_ebird, SCIENTIFIC_NAME_ebird, COMMON_NAME_traits, SCIENTIFIC_NAME_traits) %>%
   left_join(., AUS_tree_birds, by="SCIENTIFIC_NAME_traits") %>%
-  replace_na(list(in_tree="Missing"))
+  replace_na(list(in_tree="Missing")) %>%
+  replace_na(list(SCIENTIFIC_NAME_traits = "replace")) %>%
+  mutate(SCIENTIFIC_NAME_traits = ifelse(.$SCIENTIFIC_NAME_traits == "replace",
+                                         .$COMMON_NAME_traits, .$SCIENTIFIC_NAME_traits))
 
 
 
@@ -151,8 +154,13 @@ species_joined_final <- species_joined_2 %>%
 ### I downloaded the Master taxonomy from Jetz's Nature paper which has the common names 
 ### So we'll read that in and look for matches for the file which was calculated above
 
+## first clean up workspace and remove all but the currently joined version above
+rm(list=setdiff(ls(), "species_joined_final"))
+
 ## read master taxonomy in from Jetz
-tree_taxonomy <- read_csv("Data/phylo/2012-03-04206D-master_taxonomy.csv") %>%
+tree_taxonomy <- read_csv("Data/phylo/2012-03-04206D-master_taxonomy.csv")
+  
+tree_taxonomy <- tree_taxonomy %>%
   dplyr::select(Scientific, TipLabel, English)
 
 ## first find which species are in the Jetz tree based on
@@ -192,9 +200,63 @@ missing_from_tree <- tree_join_full %>%
   filter(COMMON_NAME_tree=="Missing")
 
 ## looks like 22 species are missing from the tree
+df_fixing_tree <- data.frame(COMMON_NAME_ebird=missing_from_tree$COMMON_NAME_ebird,
+                             SCIENTIFIC_NAME_ebird=missing_from_tree$SCIENTIFIC_NAME_ebird,
+                             COMMON_NAME_traits=missing_from_tree$COMMON_NAME_traits,
+                             SCIENTIFIC_NAME_traits=missing_from_tree$SCIENTIFIC_NAME_traits,
+                             COMMON_NAME_tree = c("Great Crested Tern", 
+                                                  "Australian Sacred Ibis", 
+                                                  "Yellow-tailed Black-cockatoo",
+                                                  "Horsfield's Bronze-cuckoo", 
+                                                  "European Greenfinch", 
+                                                  "Slender-billed Cicadabird",
+                                                  "Gull-billed Tern", 
+                                                  "Shining Bronze-cuckoo", 
+                                                  "Emerald Dove", 
+                                                  "not_treated_as_species",
+                                                  "Little Bronze-cuckoo", 
+                                                  "not_treated_as_species", 
+                                                  "not_treated_as_species",
+                                                  "not_treated_as_species", 
+                                                  "not_treated_as_species", 
+                                                  "not_treated_as_species",
+                                                  "Baudin<U+0092>s Black-Cockatoo", 
+                                                  "Blue Quail",  
+                                                  "Red-backed Buttonquail",
+                                                  "not_treated_as_species", 
+                                                  "not_treated_as_species",
+                                                  "Aleutian Tern"),
+                             SCIENTIFIC_NAME_tree = c("Sterna bergii", 
+                                                      "Threskiornis molucca",  
+                                                      "Calyptorhynchus funereus",
+                                                      "Chrysococcyx basalis", 
+                                                      "Carduelis chloris", 
+                                                      "Coracina tenuirostris",
+                                                      "Sterna nilotica", 
+                                                      "Chrysococcyx lucidus", 
+                                                      "Chalcophaps indica",
+                                                      "not_treated_as_species", 
+                                                      "Chrysococcyx minutillus",
+                                                      "not_treated_as_species", 
+                                                      "not_treated_as_species",
+                                                      "not_treated_as_species", 
+                                                      "not_treated_as_species", 
+                                                      "not_treated_as_species",
+                                                      "Calyptorhynchus baudinii",
+                                                      "Coturnix chinensis", 
+                                                      "Turnix maculosus",
+                                                      "not_treated_as_species", 
+                                                      "not_treated_as_species", 
+                                                      "Sterna aleutica"), stringsAsFactors = FALSE)
 
 
+### pull apart complete from joined tree file above
+### then merge this with the df fixed manually for a final lookup table
+tree_complete <- tree_join_full %>%
+  filter(COMMON_NAME_tree!="Missing")
 
+
+final_lookup <- bind_rows(tree_complete, df_fixing_tree)
 
 
 
