@@ -73,7 +73,7 @@ targets:
       - response_variables
 
   reports/non_phylo_report.pdf:
-    command: render("reports/non_phylo_report.rmd")
+    command: render("reports/non_phylo_model.rmd")
     depends: 
       - traits
       - response_variables
