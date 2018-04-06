@@ -32,10 +32,14 @@ names(df)
 df %>%
 filter_all(all_vars(!is.na(.)))->df2
 
-naive_mod<-lm(log(urban_median)~log(mean_body_size)+clutch_size+iucn_status+log(brain_size)+feeding_habitat_generalism+
+naive_mod<-lm(log(urban_median)~log(mean_body_size)+log(clutch_size)+iucn_status+log(brain_size)+feeding_habitat_generalism+
      breeding_habitat_generalism+granivore+insectivore+carrion_eater+diet_generalism+
      movement_class+ground_nesting+hollow_nesting+nest_generalism+breeding+nest_aggregation+feeding_aggregation,data=df2,na.action = "na.fail")
+summary(naive_mod)
+dim(df2)
+```
 
+```{r}
 plot(naive_mod)
 
 ```

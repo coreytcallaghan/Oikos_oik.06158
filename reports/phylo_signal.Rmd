@@ -1,0 +1,21 @@
+---
+title: "PhyloSignal"
+author: "Everyone"
+date: "4/6/2018"
+output: pdf_document
+---
+this is sort of cool.  phylogenetic signal in urbanness.
+
+
+
+  
+```{r}
+  # library(phylosignal)
+  # library(phylobase)
+  # dd$body_size<-log10(dd$body_size)
+  # dd2<-subset(dd,select=-gregariousness)
+  # out<-phylo4d(tree_plotting_2,tip.data=dd2)
+  # ps<-phyloSignal(out)
+  # knitr::kable(ps$stat)
+```
+

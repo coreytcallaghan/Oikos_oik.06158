@@ -24,11 +24,11 @@ targets:
     depends:
       - figures/bird_urbanness_phylo.pdf
       - figures/urbanness.pdf
-      - figures/density_plot_per_species.pdf
+ #     - figures/density_plot_per_species.pdf
       - figures/histogram_plot_per_species.pdf
       - figures/distribution_response_variables.pdf
       - reports/phylo_report.pdf
- #     - reports/non_phylo_report.pdf
+      - reports/non_phylo_report.pdf
       
   bird_tree:
     command: read_bird_tree() 

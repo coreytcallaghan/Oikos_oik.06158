@@ -8,28 +8,96 @@ output: pdf_document
 run phylo model
 
 ```{r}
+traits %>%
+    rownames_to_column('names') %>%
+    filter(complete.cases(.)) %>%
+    column_to_rownames('names') -> trait
 
-
-mod2<-run_phylo_lme4(traits,
-                         response_variables,
-                         aus_bird_tree)
-broom::tidy(mod2)
-```
-
-
-```{r}
-phylolm_r2(mod2)
-```
-
-
-this is sort of cool.  phylogenetic signal in all the traits
+  # subset the tree
+  matched_tree <- drop.tip(aus_bird_tree,aus_bird_tree$tip.label[!aus_bird_tree$tip.label%in%row.names(trait)])
   
+  response_variables$binom<-response_variables$SCIENTIFIC_NAME_tree
+  inner_join(response_variables,trait) %>%
+    filter(binom!="not_treated_as_species") %>%
+    data.frame(.)-> trait
+
+  
+  
+  dd<-trait
+  dd$phylo<-dd$binom
+  phylo<-matched_tree # this is hilarious: tree has to be called "phylo" for lmer to work
+```
+
+
 ```{r}
-  # library(phylosignal)
-  # library(phylobase)
-  # dd$body_size<-log10(dd$body_size)
-  # dd2<-subset(dd,select=-gregariousness)
-  # out<-phylo4d(tree_plotting_2,tip.data=dd2)
-  # ps<-phyloSignal(out)
-  # knitr::kable(ps$stat)
+
+dd$lbody<-log10(dd$mean_body_size)
+dd$lbrain<-log10(dd$brain_size)
+
+ basic_gaus_fit <- lmer(urban_median~lbody+clutch_size+iucn_status+lbrain+feeding_habitat_generalism+
+     breeding_habitat_generalism+granivore+insectivore+carrion_eater+diet_generalism+
+     movement_class+ground_nesting+hollow_nesting+nest_generalism+breeding+nest_aggregation+feeding_aggregation+(1|phylo),
+                         data=dd,
+                         control=lmerControl(check.nobs.vs.nlev="ignore",check.nobs.vs.nRE="ignore"),na.action = "na.fail")
+
+
+ AIC(basic_gaus_fit)
+```
+
+Ben Bolker hates model selection (and signficance testing) so no easy way to do it on lmer objects.  
+
+for now just test the model that the non-phylo found
+
+```{r}
+dd$urban_median_rescale<-(dd$urban_median-mean(dd$urban_median))/sd(dd$urban_median)
+dd$clutch_size_rescale<-(dd$clutch_size-mean(dd$clutch_size))/sd(dd$clutch_size)
+dd$lclutch<-log(dd$clutch_size)
+
+ basic_gaus_fit_2 <- lmer(urban_median~lclutch+lbody+
+                          (1|phylo),
+                         data=dd,
+                         control=lmerControl(check.nobs.vs.nlev="ignore",check.nobs.vs.nRE="ignore"),
+                        na.action = "na.fail")
+AIC(basic_gaus_fit_2)
+summary(basic_gaus_fit_2)
+```
+
+trying with some other software--i think lmer is bugged for phylogenies.  
+
+```{r}
+ basic_gaus_fit_phylolm <- phylolm(urban_median~lclutch+lbody,phy=phylo,
+                         data=dd)
+
+ summary(basic_gaus_fit_phylolm)
+ AIC(basic_gaus_fit_phylolm)
+```
+
+
+trying to find another factor that improves the model but it seems tough
+```{r}
+  basic_gaus_fit_phylolm <- phylolm(urban_median~lclutch+
+                                    lbody+feeding_habitat_generalism+
+                                    lbrain+insectivore+diet_generalism+
+                                    hollow_nesting,
+                                    phy=phylo,data=dd)
+
+logLik(basic_gaus_fit_phylolm)
+```
+
+lmer is totally bugged for phylo applications.  continue with phylolm next time.   
+
+```{r}
+ basic_gaus_fit_phylolm_full <- phylolm(urban_median~iucn_status+lbrain+feeding_habitat_generalism+
+     carrion_eater+lclutch+lbody+
+     movement_class+ground_nesting+nest_generalism+nest_aggregation,
+                                    phy=phylo,data=dd)
+
+
+dredge(basic_gaus_fit_phylolm_full)
+
+```
+
+```{r}
+
+visreg(basic_gaus_fit_phylolm_full)
 ```
