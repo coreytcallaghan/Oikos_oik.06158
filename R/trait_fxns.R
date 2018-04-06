@@ -10,7 +10,8 @@ read_lookup_table_in <- function(){
 read_trait_data_in <- function(){
   
   require(readr)
-  
+
+  taxonomy_key<-read_csv("Data/Taxonomy/taxonomy_key.csv")
 traits <- read_csv("Data/Raw trait data/Australian_Bird_Data_Version_1.csv")
 
 traits$SCIENTIFIC_NAME_traits <- paste(traits$`4_Genus_name_2`, traits$`5_Species_name_2`,sep="_")
