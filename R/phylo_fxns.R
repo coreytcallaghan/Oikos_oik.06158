@@ -52,7 +52,7 @@ plot_bird_tree_traits <-
              SCIENTIFIC_NAME_tree %in% tree_plotting$tip.label)
     median_rv <- as.array(rv$urban_median)
     row.names(median_rv) <- rv$SCIENTIFIC_NAME_tree
-    median_rv2 <- median_rv - mean(median_rv)
+    median_rv2 <- median_rv #- mean(median_rv)
     
     
     tree_plotting_2 <-
@@ -70,7 +70,7 @@ plot_bird_tree_traits <-
         type = "fan"
       )
     
-    pdf("figures/bird_urbanness_phylo.pdf")
+    pdf("figures/bird_urbanness_phylo.pdf",width=8.5,height=8.5)
     plotTree.wBars(
       obj$tree,
       median_rv2,
@@ -80,8 +80,9 @@ plot_bird_tree_traits <-
       scale = 5,
       tip.labels = FALSE
     )
+    add.color.bar(100, obj$cols, title = "trait value", lims = obj$lims, prompt = FALSE,x = 0.9 * par()$usr[1], y = 0.9 * par()$usr[3])
     dev.off()
-    pdf("figures/ref_tree.pdf")
+    pdf("figures/ref_tree.pdf",width=8.5,height=8.5)
     plot(tree_plotting_2, type = "f", cex = 0.2)
     dev.off()
   }
