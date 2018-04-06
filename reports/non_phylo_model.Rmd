@@ -1,0 +1,61 @@
+---
+title: "non_phylo_analyses"
+author: "Everyone"
+date: "3/22/2018"
+output: pdf_document
+---
+
+
+matching
+
+```{r}
+response_variables$binom<-response_variables$SCIENTIFIC_NAME_tree
+df<-inner_join(response_variables,traits)
+```
+
+
+look at the continuous ones
+```{r}
+library(corrplot)
+select_if(df, is.numeric) %>%
+  cor(use="pairwise.complete.obs") %>%
+  corrplot
+```
+
+
+completely naive model, plant eater taken out cause it only had one level.
+
+Logging response cause it is right-skewed and produced crazy residual plots.
+
+```{r}
+names(df)
+df %>%
+filter_all(all_vars(!is.na(.)))->df2
+
+naive_mod<-lm(log(urban_median)~log(mean_body_size)+clutch_size+iucn_status+log(brain_size)+feeding_habitat_generalism+
+     breeding_habitat_generalism+granivore+insectivore+carrion_eater+diet_generalism+
+     movement_class+ground_nesting+hollow_nesting+nest_generalism+breeding+nest_aggregation+feeding_aggregation,data=df2,na.action = "na.fail")
+
+plot(naive_mod)
+
+```
+
+
+
+looking at the model in more depth
+
+```{r}
+anova(naive_mod)
+```
+and some not-so-quick model selection.  dredge takes a little while because it considers all combinations of predictor variables.
+
+```{r}
+#library(MuMIn)
+#dredge(naive_mod,trace = TRUE)
+modselect<-step(naive_mod)
+```
+
+```{r}
+library(visreg)
+visreg(modselect)
+```

@@ -5,7 +5,7 @@ packages:
   - raster
   - maptools
   - ggplot2
-  - tidyverse
+  - dplyr
   - ape
   - phytools
   - ggforce
@@ -17,6 +17,7 @@ packages:
   - corrplot
   - lme4
   - tibble
+  - visreg
 
 targets:
   all:
@@ -27,8 +28,8 @@ targets:
       - figures/histogram_plot_per_species.pdf
       - figures/distribution_response_variables.pdf
       - reports/phylo_report.pdf
+ #     - reports/non_phylo_report.pdf
       
-
   bird_tree:
     command: read_bird_tree() 
 
@@ -63,10 +64,16 @@ targets:
   figures/histogram_plot_per_species.pdf:
     command: avg_rad_density_for_each_species(ebird_data)
     check: exists
-    
+ 
   reports/phylo_report.pdf:
     command: render("reports/phylo_report.rmd")
     depends: 
       - traits
       - aus_bird_tree
+      - response_variables
+
+  reports/non_phylo_report.pdf:
+    command: render("reports/non_phylo_report.rmd")
+    depends: 
+      - traits
       - response_variables

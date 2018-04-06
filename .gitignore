@@ -10,6 +10,7 @@ Data/phylo/phy.tre
 .remake
 figures/
 reports/phylo_report.pdf
+reports/*pdf
 R/data
 Data/data*
 Data/phylo.nex
