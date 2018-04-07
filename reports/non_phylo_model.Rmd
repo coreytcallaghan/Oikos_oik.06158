@@ -10,7 +10,8 @@ matching
 
 ```{r}
 response_variables$binom<-response_variables$SCIENTIFIC_NAME_tree
-df<-inner_join(response_variables,traits)
+df<-left_join(traits,response_variables, by="binom") %>%
+  filter(SCIENTIFIC_NAME_tree != "not_treated_as_species")
 ```
 
 
