@@ -11,7 +11,9 @@ matching
 ```{r}
 response_variables$binom<-response_variables$SCIENTIFIC_NAME_tree
 df<-left_join(traits,response_variables, by="binom") %>%
-  filter(SCIENTIFIC_NAME_tree != "not_treated_as_species")
+  filter(SCIENTIFIC_NAME_tree != "not_treated_as_species") %>%
+  # drop columns that we aren't inerested in
+  select(-brain_size)
 ```
 
 

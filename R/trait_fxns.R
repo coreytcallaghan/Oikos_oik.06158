@@ -235,9 +235,6 @@ read_process_trait_data <- function(){
     ms <- data.frame(ms)
     
     
-    ms <- ms %>%
-      filter(complete.cases(.))
-    
    row.names(ms) <- ms$binom
    
   
