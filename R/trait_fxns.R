@@ -87,9 +87,9 @@ read_process_trait_data <- function(){
       dplyr::select(-plants1, -plants2) %>%
       mutate(granivore = ifelse(granivore == 1, "Yes", "no")) %>%
       mutate(insectivore = ifelse(insectivore == 1, "Yes", "no")) %>%
-      mutate(plant_eater = ifelse(plant_eater == 2, "Yes", "no")) %>%
+      mutate(plant_eater = as.integer(as.character(gsub("2", "1", .$plant_eater)))) %>%
       mutate(plant_eater = ifelse(plant_eater == 1, "Yes", "no")) %>%
-      mutate(carrion_eater = ifelse(carrion_eater == 1, "Yes", "no")) 
+      mutate(carrion_eater = ifelse(carrion_eater == 1, "Yes", "no"))
     
 ## join diet
     diet <- inner_join(diet_types, diet_generalism, by="binom")
