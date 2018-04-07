@@ -55,7 +55,7 @@ We filtered the bird observations (sensu [@callaghan2017assessing; @la2014role])
 Seabirds (gannets, petrels, shearwaters, etc.) were omitted from the analyses as we did not expect any correlation with seabirds using urban areas under normal circumstances. Only species which included > 100 observations in the eBird database over the specified time-frame, and that met our criteria were considered for further analyses. This left us with 580 potential species from the eBird dataset which had > 100 observations on eligible checklists in the specified time frame.
 
 ## Response variable - an urbanization index
-We used VIIRS night-time lights [@elvidge2017viirs] as a proxy of a bird's association with urban habitat. The VIIRS night-time lights measures the electric lighting present on Earth's surface which is generally associated with human settlement. There are also a significant number of steps (e.g., filtering out background noise, degraded data, and other light source contamination) which are used to ensure the validity of the data and its association with human settlement [@elvidge2017viirs]. For the 637,482 checklists which met our criteria above, we used the checklists' associated spatial coordinates and Google Earth Engine [@gorelick2017google] to assign the average radiance value calculated from the VIIRS layer. For each location, the average radiance was calculated within a 5 km buffer, in order to match the spatial scale of the checklists included and to minimize any potential bias in eBird sampling protocols.
+We used VIIRS night-time lights [@elvidge2017viirs] as a proxy of a bird's association with urban habitat. The VIIRS night-time lights measures the electric lighting present on Earth's surface which is generally associated with human settlement. There are also a significant number of steps (e.g., filtering out background noise, degraded data, and other light source contamination) which are used to ensure the validity of the data and its association with human settlement [@elvidge2017viirs]. For the 637,482 checklists which met our criteria above, we used the checklists' associated spatial coordinates and Google Earth Engine [@gorelick2017google] to assign the average radiance value calculated from the VIIRS layer. For each location, the average radiance was calculated within a 5 km buffer, in order to match the spatial scale of the checklists included and to minimize any potential bias in eBird sampling protocols. Any radiance values which were negative were forced to 0.00001 (sensu CITATION!!!).
 
 Each checklist's average radiance value was then passed to every bird on that checklist, which provided every species with a distribution of average radiance values (Fig. 1). Our response variable, which served as an urbanization index, was the median for each species' given distribution of average radiance values.
 
@@ -73,7 +73,13 @@ In order to assess whether there was a phylogenetic signal of the urbanization i
 Given the diverse datasets used in this analysis, there were differing taxonomic authorities followed. The response data from eBird follows the eBird/clements checklist [http://www.birds.cornell.edu/clementschecklist/], while the biological and ecological data follows the working list of Australian birds by BirdLife Australia [http://www.birdlife.org.au/conservation/science/taxonomy], and the phylogenetic tree followed the BirdLife V3 world checklist [http://birdtree.org/taxonomy/]. There were minor differences which existed in common names, English names, and recognized species among the three datasets. A taxonomic key was made which combined the three different taxonomies (Appendix 2). Ultimately, a species' response variable, calculated from the eBird database and taxonomic source, was considered for analysis if it matched for both the trait dataset and the phylogenetic tree dataset. If it did not match both, then it was not considered for analysis (e.g., species currently only recognized by eBird/clements such as Western Whistler, Silver-backed Butcherbird, or Paperbark Flycatcher). Additionally, one species (Aleutian Tern) met the criteria for number of observations above, but was not included in the Australian trait data because it is new to Australia and thus not included in the analysis.
 
 ## Models
+Before modelling, the explanatory variables (Appendix 1) were investigated for collinearity, and brain size and body size were highly correlated. Due to the affect that collinearity can have on modelling [@cade2015model], we were inclined to drop one of the two correlated explanatory variables. Given that others using a continuous response measure of urbanization have found brain size to have no evidence of species' response to urban environments [@evans2011makes], we eliminated this trait from consideration. In so doing, it also increased the number of species to be included in our models.
 
+We had two linear modelling approaches; one with and one without phylogenetic constraints. Our urbanization index was log-transformed in order to meet model assumptions. The explanatory variables used in the models were those listed in Appendix 1, with the exception of brain size.
+
+For both approaches, we employed a model-averaging technique [@grueber2011multimodel] in which we 'dredged' all possible subsets of the model [@barton2016mumin]. The global model was weighted by a measure of error associated with the response variable. This was assessed as the proportion of the number of total observations of a species divided by the number of unique localities a species was observed from. This helps to give more weight in the model-fitting procedure to those species that had more observations in more unique locations (i.e., an assessment of reliability of the observations). The global model fit was assessed by averaging the R2 values [@nakagawa2013general; @nakagawa2017coefficient] for each model in the top-selected model-set. Additionally, we calculated the relative contribution of each explanatory variable [sensu @evans2011make] by **XXXXXXXXXXXXXXXX**. The phylogenetically constrained model was fit using the 'phylolm' function from the phylolm package [@ho2014phylolm]. In order to assess the model fit and relative effect sizes of explanatory variables in the phylogenetically constrained models we **XXXXXXXXXXXX**.
+
+All models and analyses were conducted in the R computing environment [@r2017coreteam] and relied heavily on the tidyverse environment [@wickham2017tidyverse].
 
 # RESULTS
 A total of 637,482 checklists provided a total of 5,944,819 observations of 580 different species which had > 100 observations. The least recorded species was Black-breasted Buttonquail (N=104) while the most recorded species was Australian Magpie (N=158,615). The mean +- SD number of observations for a species was 10250 +- 19269.19.
@@ -81,9 +87,12 @@ A total of 637,482 checklists provided a total of 5,944,819 observations of 580 
 We ended with 450 candidate species (Appendix 3) from the eBird dataset which matched both the trait taxonomy and the phylogenetic tree taxonomy, and also had complete trait data.
 
 ## Urbanization index
+For the 450 species included in the models the mean +- SD urbanization index was 1.00 +- 1.81, with a range from 0.00135 (Black Noddy and Black-naped Tern) to 11.851 (Powerful Owl; Fig. 2).
 
 ### Phylogenetic signal
-There was a distinct phylogenetic signal in our urbanization index measure (Fig. 2; XXXXX SIGNIFICANCE TEST).
+There was a distinct phylogenetic signal in our urbanization index measure (Fig. 3; XXXXX SIGNIFICANCE TEST).
+
+**MAYBE DO SOME MEAN index by FAMILY PRESENTATIONS HERE**.
 
 ## Model results
 ### Non phylogenetic models
@@ -100,5 +109,3 @@ There was a distinct phylogenetic signal in our urbanization index measure (Fig.
 ```{r Figure 2, echo=FALSE, fig.cap="Figure 2. A phylogenetic tree of the birds yata yata yata...."}
 knitr::include_graphics(path = "figures/bird_urbanness_phylo.pdf")
 ```
-
-
