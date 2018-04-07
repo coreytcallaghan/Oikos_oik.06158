@@ -44,7 +44,8 @@ Figure1 <- species_urban %>%
   theme_classic() +
   xlab("Average radiance") +
   ylab("Density")+
-  guides(fill=guide_legend(title="  Common Name"))
+  guides(fill=guide_legend(title="  Common Name")) +
+  theme(legend.position = c(0.2, 0.8))
 
 pdf("final figures for paper/Figure1.pdf", width=5.5, height=4.5)
 print(Figure1)
