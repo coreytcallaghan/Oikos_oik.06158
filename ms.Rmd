@@ -3,13 +3,13 @@ title: "Phylogenetic adaptions to urban living in Australian birds"
 author: Corey T. Callaghan, John Wilshire, XXXX, XXXX, Richard T. Kingsford, William K. Cornwell
 date: ""
 output:
-  html_document:
-    df_print: paged
+  bookdown::tufte_html2:
+    number_sections: no
     toc: no
   bookdown::word_document2: null
   pdf_document: null
-  bookdown::tufte_html2:
-    number_sections: no
+  html_document:
+    df_print: paged
     toc: no
 fontsize: 12pt
 link-citations: no
