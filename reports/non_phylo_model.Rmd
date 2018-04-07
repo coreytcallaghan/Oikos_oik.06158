@@ -13,7 +13,7 @@ response_variables$binom<-response_variables$SCIENTIFIC_NAME_tree
 df<-left_join(traits,response_variables, by="binom") %>%
   filter(SCIENTIFIC_NAME_tree != "not_treated_as_species") %>%
   # drop columns that we aren't inerested in
-  select(-brain_size)
+  dplyr::select(-brain_size)
 ```
 
 
@@ -35,9 +35,9 @@ names(df)
 df %>%
 filter_all(all_vars(!is.na(.)))->df2
 
-naive_mod<-lm(log(urban_median)~log(mean_body_size)+log(clutch_size)+iucn_status+log(brain_size)+feeding_habitat_generalism+
-     breeding_habitat_generalism+granivore+insectivore+carrion_eater+diet_generalism+
-     movement_class+ground_nesting+hollow_nesting+nest_generalism+breeding+nest_aggregation+feeding_aggregation,data=df2,na.action = "na.fail")
+naive_mod<-lm(log(urban_median)~log(mean_body_size)+log(clutch_size)+iucn_status+feeding_habitat_generalism+
+     breeding_habitat_generalism+granivore+insectivore+carrion_eater+diet_generalism+plant_eater+
+     movement_class+ground_nesting+hollow_nesting+nest_generalism+breeding+nest_aggregation+feeding_aggregation,data=df2,na.action = "na.fail", weights=(df2$N/df2$unique_localities))
 summary(naive_mod)
 dim(df2)
 ```
