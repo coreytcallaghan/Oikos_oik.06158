@@ -1,16 +1,20 @@
 ---
-title: Phylogenetic adaptions to urban living in Australian birds
-author: "Corey T. Callaghan, John Wilshire, XXXX, XXXX, Richard T. Kingsford, William K. Cornwell"
-date: '`r format(Sys.time(), "%d %B, %Y")`'
+title: "Phylogenetic adaptions to urban living in Australian birds"
+author: Corey T. Callaghan, John Wilshire, XXXX, XXXX, Richard T. Kingsford, William K. Cornwell
+date: ""
 output:
+  html_document:
+    df_print: paged
+    toc: no
+  bookdown::word_document2: null
+  pdf_document: null
   bookdown::tufte_html2:
     number_sections: no
     toc: no
-  bookdown::word_document2: null
-bibliography: references.bib
 fontsize: 12pt
 link-citations: no
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/global-ecology-and-biogeography.csl
+bibliography: references.bib
 ---
 
 # ABSTRACT
@@ -41,22 +45,22 @@ Here, we use data from eBird [@sullivan2009ebird; -@sullivan2014ebird], a succes
 
 # METHODS
 ## Study area
-We looked at bird observations throughout the whole of continental Australia. Bird observations from outlying islands were eliminated from potential analysis.
+We looked at bird observations throughout the whole of continental Australia. Bird observations from outlying islands were eliminated from potential analyses.
 
 ## Bird observation data
-Bird observations originated from eBird [@sullivan2009ebird; @sullivan2014ebird], a large-scale empirical dataset collected by citizen scientists. Volunteer birdwatchers submit lists of species seen or heard at a given location, over a user-determined duration and survey area [@wood2011ebird]. We downloaded the eBird basic dataset (version ebd_relFeb-2018), and used all observations between January 1, 2010 - February 28, 2018. This temporal scale was used because eBird data are richest. This time frame was also used to minimize undue leverage of mismatch between changes in the response variable measurement (see response variable below) over the given time frame.
+Bird observations originated from eBird [@sullivan2009ebird; @sullivan2014ebird], a large-scale empirical dataset collected by citizen scientists. Volunteer birdwatchers submit lists of species seen or heard at a given location, over a user-determined duration and survey area [@wood2011ebird]. We downloaded the eBird basic dataset (version ebd_relFeb-2018; available here: https://ebird.org/data/download), and used all observations between January 1, 2010 - February 28, 2018. This temporal scale was used because this is the period in which eBird data are richest and because this time period minimized undue leverage of mismatch between changes in the response variable measurement (see response variable below) over the given time frame in which bird observations were collected.
 
-We filtered the bird observations (sensu [@callaghan2017assessing; @larole2014role]) by only including observations which were on complete checklists and which followed these protocols: travelling, random, stationary, area, or BirdLife Australia protocols [@barret2003new]. Further, we filtered the checklists to those with a distance travelled of < 5 km or an area covered which was < 500 Ha. Any checklists which were shared among multiple individuals were subsampled to include only one checklist in order to avoid duplicate results.
+We filtered the bird observations (sensu [@callaghan2017assessing; @la2014role]) by only including observations which were on complete checklists and which followed these protocols: travelling, random, stationary, area, or BirdLife Australia protocols [@barrett2003new]. For further information on protocols see here: http://help.ebird.org/customer/portal/articles/1006209-understanding-observation-types]. Further, we filtered the checklists to those with a distance travelled of < 5 km or an area covered which was < 500 Ha. Any checklists which were shared among multiple individuals were subsampled to include only one checklist in order to avoid duplicate results. After this sampling, we were left with 637,482 eligible checklists throughout Australia.
 
-Seabirds (gannets, petrels, shearwaters, etc.) were omitted from the analyses as we do not expect any correlation with seabirds using urban areas under normal circumstances. Only species which included > 100 observations in the eBird database over the specified time-frame, and that met our criteria were considered for further analyses.
+Seabirds (gannets, petrels, shearwaters, etc.) were omitted from the analyses as we did not expect any correlation with seabirds using urban areas under normal circumstances. Only species which included > 100 observations in the eBird database over the specified time-frame, and that met our criteria were considered for further analyses. This left us with 580 potential species from the eBird dataset which had > 100 observations on eligible checklists in the specified time frame.
 
 ## Response variable - an urbanization index
-We used VIIRS night-time lights [@eldvidge2017viirs] as a proxy of a bird's association with urban habitat. The VIIRS night-time lights measures the electric lighting present on Earth's surface which is generally associated with human settlement. There are also a significant number of steps (e.g., filtering out background noise, degraded data, and other light source contamination) which are used to ensure the validity of the data and its association with human settlement [@eldvidge2017virrs]. For all checklists which met our criteria above (N=length(unique(urbanness$SAMPLING_EVENT_IDENTIFIER))), we used the associated spatial coordinates and Google Earth Engine [@gorelick2017google] to assign the average radiance value calculated from the VIIRS layer. For each location, we calculated the average radiance within a 5 km buffer, in order to match the spatial scale of the checklists included and to minimize any potential bias.
+We used VIIRS night-time lights [@elvidge2017viirs] as a proxy of a bird's association with urban habitat. The VIIRS night-time lights measures the electric lighting present on Earth's surface which is generally associated with human settlement. There are also a significant number of steps (e.g., filtering out background noise, degraded data, and other light source contamination) which are used to ensure the validity of the data and its association with human settlement [@elvidge2017viirs]. For the 637,482 checklists which met our criteria above, we used the checklists' associated spatial coordinates and Google Earth Engine [@gorelick2017google] to assign the average radiance value calculated from the VIIRS layer. For each location, the average radiance was calculated within a 5 km buffer, in order to match the spatial scale of the checklists included and to minimize any potential bias in eBird sampling protocols.
 
-Each checklist's average radiance value was then passed to every bird on that checklist, which provided every species with a distribution of average radiance values (Fig. 1). For all species, we then used the median of this distribution as a continuous urbanization index.
+Each checklist's average radiance value was then passed to every bird on that checklist, which provided every species with a distribution of average radiance values (Fig. 1). Our response variable, which served as an urbanization index, was the median for each species' given distribution of average radiance values.
 
 ## Explanatory variables
-Explanatory variables were calculated using a published dataset which contains the biological, ecological, and conservation information for all of Australia's birds [@garnett2015biological]. Potential traits were chosen on the basis of their existing support and hypotheses in the current literature (e.g., [@mcclure1989characterizes; @kark2007living; @evans2011makes]). Traits were parsed in different manners, and for any missing value in the dataset, we treated that as evidence against it existing (i.e., if a species had NA for a specific habitat, we assumed that the lack of evidence found by the authors indicates that the species is unlikely to be found in that habitat). Supplementary table 1 provides an overview of all candidate traits, associated references for each trait, and more detailed information on how the traits were calculated.
+Explanatory variables were calculated using a published dataset which contains the biological, ecological, and conservation information for all of Australia's birds [@garnett2015biological]. Potential traits were chosen on the basis of their existing support and hypotheses in the current literature (e.g., [@mcclure1989characterizes; @kark2007living; @evans2011makes]). Traits were parsed in different manners, and for any missing value in the dataset, we treated that as evidence against it existing (i.e., if a species had NA for a specific habitat, we assumed that the lack of evidence found by the authors indicates that the species is unlikely to be found in that habitat). Appendix 1 provides an overview of all candidate traits, some associated references for each trait, and more detailed information on how the traits were calculated.
 
 Only species which had complete data for the list of candidate traits were considered in the analyses.
 
@@ -66,14 +70,35 @@ For the phylogenetic portion of our analyses, we used the phylogenetic tree prov
 In order to assess whether there was a phylogenetic signal of the urbanization index used in our study, we used the phylosignal package [@keck2016phylosignal] in the R computing environment [@r2017coreteam].
 
 ### Taxonomic considerations
-Given the diverse datasets used in this analysis, there were differing taxonomic authorities followed. The response data from eBird follows the eBird/clements checklist [http://www.birds.cornell.edu/clementschecklist/], while the biological and ecological data follows the working list of Australian birds by BirdLife Australia [http://www.birdlife.org.au/conservation/science/taxonomy], and the phylogenetic tree followed the BirdLife V3 world checklist [http://birdtree.org/taxonomy/]. There were minor differences which existed in recognized species among the three datasets. A taxonomic key was made which combined the three different taxonomies (Supplementary Table 2). Ultimately, a species' response variable, calculated from the eBird database and taxonomic source, was considered for analysis if it matched for both the trait dataset and the phylogenetic tree dataset. If it did not match both, then it was not considered for analysis (e.g., species currently only recognized by eBird/clements such as Western Whistler, Silver-backed Butcherbird, or Paperbark Flycatcher). Additionally, one species (Aleutian Tern) met the criteria for number of observations above, but was not included in the Australian trait data because it is new to Australia.
+Given the diverse datasets used in this analysis, there were differing taxonomic authorities followed. The response data from eBird follows the eBird/clements checklist [http://www.birds.cornell.edu/clementschecklist/], while the biological and ecological data follows the working list of Australian birds by BirdLife Australia [http://www.birdlife.org.au/conservation/science/taxonomy], and the phylogenetic tree followed the BirdLife V3 world checklist [http://birdtree.org/taxonomy/]. There were minor differences which existed in common names, English names, and recognized species among the three datasets. A taxonomic key was made which combined the three different taxonomies (Appendix 2). Ultimately, a species' response variable, calculated from the eBird database and taxonomic source, was considered for analysis if it matched for both the trait dataset and the phylogenetic tree dataset. If it did not match both, then it was not considered for analysis (e.g., species currently only recognized by eBird/clements such as Western Whistler, Silver-backed Butcherbird, or Paperbark Flycatcher). Additionally, one species (Aleutian Tern) met the criteria for number of observations above, but was not included in the Australian trait data because it is new to Australia and thus not included in the analysis.
 
 ## Models
 
 
 # RESULTS
-A total of ```nrow(all_eBird_data)``` observations were used in the analysis.
+A total of 637,482 checklists provided a total of 5,944,819 observations of 580 different species which had > 100 observations. The least recorded species was Black-breasted Buttonquail (N=104) while the most recorded species was Australian Magpie (N=158,615). The mean +- SD number of observations for a species was 10250 +- 19269.19.
+
+We ended with 450 candidate species (Appendix 3) from the eBird dataset which matched both the trait taxonomy and the phylogenetic tree taxonomy, and also had complete trait data.
+
+## Urbanization index
+
+### Phylogenetic signal
+There was a distinct phylogenetic signal in our urbanization index measure (Fig. 2; XXXXX SIGNIFICANCE TEST).
+
+## Model results
+### Non phylogenetic models
+### Phylogenetically constrained models
 
 # DISCUSSION
 
 # REFERENCES
+
+
+
+# Figures
+
+```{r Figure 2, echo=FALSE, fig.cap="Figure 2. A phylogenetic tree of the birds yata yata yata...."}
+knitr::include_graphics(path = "figures/bird_urbanness_phylo.pdf")
+```
+
+
