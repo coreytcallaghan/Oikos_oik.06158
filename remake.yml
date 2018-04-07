@@ -18,6 +18,9 @@ packages:
   - lme4
   - tibble
   - visreg
+  - tidyr
+  - colorRamps
+  - MuMIn
 
 targets:
   all:
@@ -77,3 +80,5 @@ targets:
     depends: 
       - traits
       - response_variables
+      
+
