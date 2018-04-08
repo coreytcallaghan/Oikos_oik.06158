@@ -62,6 +62,45 @@ read_process_trait_data <- function(){
       summarise_all(sum) %>%
       mutate(breeding_habitat_generalism = rowSums(.[2:17])) %>%
       dplyr::select(binom, breeding_habitat_generalism)
+    
+    
+## df for specific habitat types (trees/forests and shrubs/grasslands and agricultural)
+    tree_forest <- traits %>%
+      dplyr::select(binom, 115:144, 146:161) %>%
+      replace(is.na(.), 0) %>%
+      group_by(binom) %>%
+      summarise_all(sum) %>%
+      dplyr::select(binom, 8:12, 38:42) %>%
+      mutate(tree_forest = rowSums(.[2:11])) %>%
+      dplyr::select(binom, tree_forest) %>%
+      mutate(tree_forest = ifelse(.$tree_forest > 1, 1, .$tree_forest))
+    
+    
+    grass_shrubland <- traits %>%
+      dplyr::select(binom, 115:144, 146:161) %>%
+      replace(is.na(.), 0) %>%
+      group_by(binom) %>%
+      summarise_all(sum) %>%
+      dplyr::select(binom, 1:2, 4:5, 32:33, 35:36) %>%
+      mutate(grass_shrubland = rowSums(.[2:8])) %>%
+      dplyr::select(binom, grass_shrubland) %>%
+      mutate(grass_shrubland = ifelse(.$grass_shrubland > 1, 1, .$grass_shrubland))
+    
+    
+    agricultural <- traits %>%
+      dplyr::select(binom, 115:144, 146:161) %>%
+      replace(is.na(.), 0) %>%
+      group_by(binom) %>%
+      summarise_all(sum) %>%
+      dplyr::select(binom, 31, 37) %>%
+      mutate(agricultural = rowSums(.[2:3])) %>%
+      dplyr::select(binom, agricultural) %>%
+      mutate(agricultural = ifelse(.$agricultural > 1, 1, .$agricultural))
+  
+    habitat_types <- agricultural %>%
+      inner_join(., grass_shrubland, by="binom") %>%
+      inner_join(., tree_forest, by="binom")
+      
 
 ## Diet generalism
     diet_generalism <- traits %>%
@@ -229,7 +268,8 @@ read_process_trait_data <- function(){
       inner_join(., diet, by="binom") %>%
       inner_join(., movement, by="binom") %>%
       inner_join(., nesting, by="binom") %>%
-      inner_join(., gregariousness, by="binom")
+      inner_join(., gregariousness, by="binom") %>%
+      inner_join(., habitat_types, by="binom")
     
     
     ms <- data.frame(ms)
