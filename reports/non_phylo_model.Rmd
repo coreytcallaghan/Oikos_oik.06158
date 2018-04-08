@@ -11,9 +11,7 @@ matching
 ```{r}
 response_variables$binom<-response_variables$SCIENTIFIC_NAME_tree
 df<-left_join(traits,response_variables, by="binom") %>%
-  filter(SCIENTIFIC_NAME_tree != "not_treated_as_species") %>%
-  # drop columns that we aren't inerested in
-  dplyr::select(-brain_size)
+  filter(SCIENTIFIC_NAME_tree != "not_treated_as_species")
 ```
 
 
@@ -32,10 +30,13 @@ Logging response cause it is right-skewed and produced crazy residual plots.
 
 ```{r}
 names(df)
-df %>%
-filter_all(all_vars(!is.na(.)))->df2
+df2 <- df %>%
+  # drop columns that we aren't inerested in
+  dplyr::select(-brain_size) %>%
+filter_all(all_vars(!is.na(.))) 
 
-naive_mod<-lm(log(urban_median)~log(mean_body_size)+log(clutch_size)+iucn_status+feeding_habitat_generalism+agricultural+grass_shrubland+tree_forest+breeding_habitat_generalism+granivore+insectivore+carrion_eater+diet_generalism+plant_eater+movement_class+ground_nesting+hollow_nesting+nest_generalism+breeding+nest_aggregation+feeding_aggregation,data=df2,na.action = "na.fail", weights=(df2$N/df2$unique_localities))
+
+naive_mod<-lm(log(urban_median)~log(mean_body_size)+log(clutch_size)+iucn_status+feeding_habitat_generalism+Habitat_agricultural+Habitat_grass_shrubland+Habitat_tree_forest+breeding_habitat_generalism+granivore+insectivore+carrion_eater+diet_generalism+plant_eater+movement_class+ground_nesting+hollow_nesting+nest_generalism+breeding+nest_aggregation+feeding_aggregation,data=df2,na.action = "na.fail", weights=(df2$N/df2$unique_localities))
 summary(naive_mod)
 dim(df2)
 ```

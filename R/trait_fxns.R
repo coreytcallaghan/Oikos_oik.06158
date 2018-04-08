@@ -73,7 +73,9 @@ read_process_trait_data <- function(){
       dplyr::select(binom, 8:12, 38:42) %>%
       mutate(tree_forest = rowSums(.[2:11])) %>%
       dplyr::select(binom, tree_forest) %>%
-      mutate(tree_forest = ifelse(.$tree_forest > 1, 1, .$tree_forest))
+      mutate(tree_forest = ifelse(.$tree_forest > 1, 1, .$tree_forest)) %>%
+      mutate(Habitat_tree_forest = ifelse(.$tree_forest == 1, "Yes", "no")) %>%
+      dplyr::select(-tree_forest)
     
     
     grass_shrubland <- traits %>%
@@ -84,7 +86,9 @@ read_process_trait_data <- function(){
       dplyr::select(binom, 1:2, 4:5, 32:33, 35:36) %>%
       mutate(grass_shrubland = rowSums(.[2:8])) %>%
       dplyr::select(binom, grass_shrubland) %>%
-      mutate(grass_shrubland = ifelse(.$grass_shrubland > 1, 1, .$grass_shrubland))
+      mutate(grass_shrubland = ifelse(.$grass_shrubland > 1, 1, .$grass_shrubland)) %>%
+      mutate(Habitat_grass_shrubland = ifelse(.$grass_shrubland == 1, "Yes", "no")) %>%
+      dplyr::select(-grass_shrubland)
     
     
     agricultural <- traits %>%
@@ -95,7 +99,9 @@ read_process_trait_data <- function(){
       dplyr::select(binom, 31, 37) %>%
       mutate(agricultural = rowSums(.[2:3])) %>%
       dplyr::select(binom, agricultural) %>%
-      mutate(agricultural = ifelse(.$agricultural > 1, 1, .$agricultural))
+      mutate(agricultural = ifelse(.$agricultural > 1, 1, .$agricultural)) %>%
+      mutate(Habitat_agricultural = ifelse(.$agricultural == 1, "Yes", "no")) %>%
+      dplyr::select(-agricultural)
   
     habitat_types <- agricultural %>%
       inner_join(., grass_shrubland, by="binom") %>%
