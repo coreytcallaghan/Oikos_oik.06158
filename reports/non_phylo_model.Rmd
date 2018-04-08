@@ -35,9 +35,7 @@ names(df)
 df %>%
 filter_all(all_vars(!is.na(.)))->df2
 
-naive_mod<-lm(log(urban_median)~log(mean_body_size)+log(clutch_size)+iucn_status+feeding_habitat_generalism+
-     breeding_habitat_generalism+granivore+insectivore+carrion_eater+diet_generalism+plant_eater+
-     movement_class+ground_nesting+hollow_nesting+nest_generalism+breeding+nest_aggregation+feeding_aggregation,data=df2,na.action = "na.fail", weights=(df2$N/df2$unique_localities))
+naive_mod<-lm(log(urban_median)~log(mean_body_size)+log(clutch_size)+iucn_status+feeding_habitat_generalism+agricultural+grass_shrubland+tree_forest+breeding_habitat_generalism+granivore+insectivore+carrion_eater+diet_generalism+plant_eater+movement_class+ground_nesting+hollow_nesting+nest_generalism+breeding+nest_aggregation+feeding_aggregation,data=df2,na.action = "na.fail", weights=(df2$N/df2$unique_localities))
 summary(naive_mod)
 dim(df2)
 ```
