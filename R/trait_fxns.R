@@ -37,12 +37,14 @@ read_process_trait_data <- function(){
     mutate(clutch_size=ifelse(`178_Clutch_size_average_12`=="NAV",NA,as.numeric(`178_Clutch_size_average_12`))) %>%
     mutate(iucn_status=`49_Australian_status_July_2015_5`) %>%
     mutate(brain_size=ifelse(`113_Brain_mass_8`=="NAV", NA, as.numeric(`113_Brain_mass_8`))) %>%
+    mutate(brain_residual=ifelse(`114_Brain_mass_residual_8`=="NAV", NA, as.numeric(`114_Brain_mass_residual_8`))) %>%
     mutate(diet_generalism=rowSums(.[163:173], na.rm=TRUE)) %>%
     group_by(binom) %>%
     summarise(mean_body_size=mean(body_mass,na.rm=T), 
               clutch_size=mean(clutch_size,na.rm=T),
               iucn_status=Mode(iucn_status),
-              brain_size=mean(brain_size, na.rm=T)) -> ms
+              brain_size=mean(brain_size, na.rm=T),
+              brain_residual=mean(brain_residual, na.rm=T)) -> ms
               
     
 ## calculate df for feeding habitat generalism
