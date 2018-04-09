@@ -24,7 +24,6 @@ select_if(df, is.numeric) %>%
 ```
 
 
-completely naive model, plant eater taken out cause it only had one level.
 
 Logging response cause it is right-skewed and produced crazy residual plots.
 
@@ -36,7 +35,7 @@ df2 <- df %>%
 filter_all(all_vars(!is.na(.))) 
 
 
-naive_mod<-lm(log(urban_median)~log(mean_body_size)+log(clutch_size)+iucn_status+feeding_habitat_generalism+Habitat_agricultural+Habitat_grass_shrubland+Habitat_tree_forest+breeding_habitat_generalism+granivore+insectivore+carrion_eater+diet_generalism+plant_eater+movement_class+ground_nesting+hollow_nesting+nest_generalism+breeding+nest_aggregation+feeding_aggregation,data=df2,na.action = "na.fail", weights=(df2$N/df2$unique_localities))
+naive_mod<-lm(log(urban_median)~log(mean_body_size)+log(clutch_size)+iucn_status+feeding_habitat_generalism+brain_residual+Habitat_agricultural+Habitat_grass_shrubland+Habitat_tree_forest+breeding_habitat_generalism+granivore+insectivore+carrion_eater+diet_generalism+plant_eater+movement_class+ground_nesting+hollow_nesting+nest_generalism+breeding+nest_aggregation+feeding_aggregation,data=df2,na.action = "na.fail", weights=(df2$N/df2$unique_localities))
 summary(naive_mod)
 dim(df2)
 ```
@@ -53,6 +52,14 @@ looking at the model in more depth
 ```{r}
 anova(naive_mod)
 ```
+
+checking for multicolinearity
+```{r}
+library(car)
+vif()
+```
+
+
 and some not-so-quick model selection.  dredge takes a little while because it considers all combinations of predictor variables.
 
 ```{r}
@@ -61,7 +68,44 @@ and some not-so-quick model selection.  dredge takes a little while because it c
 modselect<-step(naive_mod)
 ```
 
+
+
 ```{r}
 library(visreg)
 visreg(modselect)
 ```
+
+
+another type of potential model selection
+
+
+```{r}
+library(leaps)
+
+model_all_select <- regsubsets(log(urban_median)~log(mean_body_size)+log(clutch_size)+iucn_status+feeding_habitat_generalism+brain_residual+Habitat_agricultural+Habitat_grass_shrubland+Habitat_tree_forest+breeding_habitat_generalism+granivore+insectivore+carrion_eater+diet_generalism+plant_eater+movement_class+ground_nesting+hollow_nesting+nest_generalism+breeding+nest_aggregation+feeding_aggregation,data=df2,na.action = "na.fail", weights=(df2$N/df2$unique_localities), method = "exhaustive")
+
+results <- summary(model_all_select)
+
+which.max(results$adjr2)
+
+which.min(results$bic)
+
+which.min(results$cp)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
