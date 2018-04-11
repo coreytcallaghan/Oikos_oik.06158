@@ -5,7 +5,6 @@ date: "3/22/2018"
 output: pdf_document
 ---
 
-
 matching
 
 ```{r}
@@ -56,7 +55,7 @@ anova(naive_mod)
 checking for multicolinearity
 ```{r}
 library(car)
-vif()
+vif(naive_mod)
 ```
 
 
@@ -95,25 +94,22 @@ which.min(results$cp)
 
 ```
 
-
-
-a model averaging approach
 ```{r}
-#### Automated Approach ####
-#### Computes all possible subsets of global model
 df3 <- df2 %>%
   mutate(response = log(urban_median)) %>%
   mutate(body_size_logged = log(mean_body_size)) %>%
   mutate(clutch_size_logged = log(clutch_size))
+```
 
+a model averaging approach
+small model first
 
-glob.mod <- lm(response~body_size_logged + clutch_size_logged + feeding_habitat_generalism + brain_residual + Habitat_agricultural,
-               data=df3, na.action = "na.fail", weights=(df3$N/df3$unique_localities))
+```{r}
+glob.mod <- lm(response~body_size_logged+clutch_size_logged+feeding_habitat_generalism+brain_residual+Habitat_agricultural,data=df3,na.action="na.fail",weights=(df3$N/df3$unique_localities))
 
 library(arm)
+
 stdz.model <- standardize(glob.mod)
-
-
 model.set <- dredge(stdz.model) 
 
 model.set
@@ -137,28 +133,68 @@ confint(Averaged_models, full=TRUE)
 ```
 
 
-Now repeat on the full model (will take a while so let it run overnight)
+run a parallel version
 ```{r}
-df3 <- df2 %>%
-  mutate(response = log(urban_median)) %>%
-  mutate(body_size_logged = log(mean_body_size)) %>%
-  mutate(clutch_size_logged = log(clutch_size))
+library(snow)
+clusterType <- if(length(find.package("snow", quiet = TRUE))) "SOCK" else "PSOCK"
+clust <- try(makeCluster(getOption("cl.cores", 10), type = clusterType))
 
-glob.mod <- lm(response ~ body_size_logged + clutch_size_logged + feeding_habitat_generalism + brain_residual + Habitat_agricultural +
-                 breeding_habitat_generalism + granivore + insectivore + carrion_eater + plant_eater + diet_generalism + movement_class +
-                 groun_nesting + hollow_nesting + nest_generalism + breeding + nest_aggregation + feeding_aggregation + Habitat_grass_shrubland +
-                 Habitat_tree_forest, data=df3, na.action = "na.fail", weights=(df3$N/df3$unique_localities))
+clusterExport(clust, "df3")
+
+glob.mod <- lm(response~body_size_logged+clutch_size_logged+feeding_habitat_generalism+brain_residual+Habitat_agricultural,data=df3,na.action="na.fail",weights=(df3$N/df3$unique_localities))
 
 library(arm)
+
 stdz.model <- standardize(glob.mod)
 
-
-model.set <- dredge(stdz.model, extra="R^2") 
+model.set <- pdredge(stdz.model, cluster=clust) 
 
 model.set
 
 #### selects all models with deltaAic < 4
 top.models <- get.models(model.set, cumsum(weight) <= 0.95) 
+
+#### how many top models
+length(top.models)
+
+#### Ranks these models based on AICc
+my.models <- model.sel(top.models, rank="AICc") 
+
+#### Prints the top models (selected above)
+print.data.frame(my.models, digits=2)
+
+Averaged_models <- model.avg(top.models)
+
+summary(Averaged_models)
+confint(Averaged_models, full=TRUE)
+
+```
+
+Now repeat on the full model (will take a while so let it run overnight)
+```{r}
+library(snow)
+clusterType <- if(length(find.package("snow", quiet = TRUE))) "SOCK" else "PSOCK"
+clust <- try(makeCluster(getOption("cl.cores", 10), type = clusterType))
+
+clusterExport(clust, "df3")
+
+glob.mod <- lm(response ~ body_size_logged + clutch_size_logged + feeding_habitat_generalism + brain_residual + Habitat_agricultural +
+                 breeding_habitat_generalism + granivore + insectivore + carrion_eater + plant_eater + diet_generalism + movement_class +
+                 ground_nesting + hollow_nesting + nest_generalism + breeding + nest_aggregation + feeding_aggregation + Habitat_grass_shrubland +
+                 Habitat_tree_forest, data=df3, na.action = "na.fail", weights=(df3$N/df3$unique_localities))
+
+
+library(arm)
+
+stdz.model <- standardize(glob.mod)
+
+
+model.set <- pdredge(stdz.model, m.lim=c(0, 11), cluster=clust, extra="R^2") 
+
+model.set
+
+#### selects all models with deltaAic < 4
+top.models <- get.models(model.set, subset=delta<4) 
 
 #### how many top models
 length(top.models)
@@ -176,6 +212,7 @@ confint(Averaged_models, full=TRUE)
 
 
 ```
+
 
 
 
