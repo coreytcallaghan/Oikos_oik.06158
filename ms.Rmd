@@ -27,7 +27,7 @@ https://www.youtube.com/watch?v=9Gc4QTqslN4
 # INTRODUCTION
 Urbanization fragments and isolates natural habitat [@marzluff2001restoration; @melles2003urban; @loram2007urban], drastically altering species' composition and ecosystem functions. Thus, urbanization globally threatens biodiversity through processes such as biotic homogenization [@mckinney2006urbanization; @mckinney2008effects] and is a major threat to conservation [@czech2000economic; @dearborn2010motivations]. Despite the documented loss of biodiversity directly or indirectly caused by urbanization [@mckinney1999biotic; @mckinney2006urbanization; @devictor2007functional], some species have successfully adapted to, colonized, and subsequently thrived in urban environments [@mckinney2002urbanization; @chace2006urban; @lowry2013behavioural; @mcdonnell2015adaptation]. For instance, some species which rarely occur within urban areas can be relatively common in surrounding rural habitats [@tratalos2007bird; @evans2011makes; @gatesire2014bird].
 
-In order to best predict species' responses to future urbanization changes, it is essential to understand what biological traits are associated with urban birds [e.g., @mcclure1989characterizes; @bonier2007urban; @moller2009successful;  @mcdonnell2015adaptation]. To date, a wide array of traits have been used to predict presence of birds in urban environments. For instance, degree of sociality [@mcclure1989characterizes; @coleman1994neophobia; @jokimaki1998distribution], nesting substrate [@kark2007living; @croci2008does], diet [@beissinger1982effects; @fuller2008garden; @major2010museum; @evans2011makes], distribution size [@jokimaki2000artificial; @chace2006urban; @croci2008does], migratory status [@friesen1995effects], niche breadth [@kark2007living; @evans2011makes], and fecundity [@croci2008does; @moller2009successful; @vaugoyeau2016interspecific], among other traits (see Appendix 1), have all been hypothesized to influence a birds' presence in urban environments. Rather than a specific trait that predicts a species' ability to be found in urban environments, it is most likely a combination of traits. For instance, urban birds' presence in Jerusalem was predicted by a combination of traits including diet, degree of sociality, sedentariness, and preferred nesting sites [@kark2007living], while a regional analysis throughout France and Switzerland demonstrated that urban birds preferred forested habitats, were sedentary, omnivorous, high-nesters, and widely distributed [@croci2008does]. Notably, a wide range of results using the aforementioned traits have been reported in the literature, often contrasting one another. Indeed, brain size was found to be important by Møller and Erritzøe [-@moller2015brain] and Maklakov *et al.* [-@maklakov2011brains] but Evans *et al.* [-@evans2011makes] and Kark *et al.* [-@kark2007living] found that brain size had no effect on species' response to urbanization. Similarly, contrasting results have been reported for annual fecundity [cf., @evans2011makes with @moller2009successful & @croci2008does] and generalism or niche breadth [cf., @kark2007living with @evans2011makes].
+In order to best predict species' responses to future urbanization changes, it is essential to understand what biological traits are associated with urban birds [e.g., @mcclure1989characterizes; @bonier2007urban; @moller2009successful;  @mcdonnell2015adaptation]. To date, a wide array of traits have been used to predict presence of birds in urban environments. For instance, degree of sociality [@mcclure1989characterizes; @coleman1994neophobia; @jokimaki1998distribution], nesting substrate [@kark2007living; @croci2008does; @conole2011functional], diet [@beissinger1982effects; @fuller2008garden; @major2010museum; @evans2011makes], distribution size [@jokimaki2000artificial; @chace2006urban; @croci2008does], migratory status [@friesen1995effects], niche breadth [@clergeau2006avifauna; @kark2007living; @evans2011makes], and fecundity [@croci2008does; @moller2009successful; @vaugoyeau2016interspecific], among other traits (see Appendix 1), have all been hypothesized to influence a birds' presence in urban environments. Rather than a specific trait that predicts a species' ability to be found in urban environments, it is most likely a combination of traits. For instance, urban birds' presence in Jerusalem was predicted by a combination of traits including diet, degree of sociality, sedentariness, and preferred nesting sites [@kark2007living], while a regional analysis throughout France and Switzerland demonstrated that urban birds preferred forested habitats, were sedentary, omnivorous, high-nesters, and widely distributed [@croci2008does]. Notably, a wide range of results using the aforementioned traits have been reported in the literature, often contrasting one another. Indeed, brain size was found to be important by Mï¿½ller and Erritzï¿½e [-@moller2015brain] and Maklakov *et al.* [-@maklakov2011brains] but Evans *et al.* [-@evans2011makes] and Kark *et al.* [-@kark2007living] found that brain size had no effect on species' response to urbanization. Similarly, contrasting results have been reported for annual fecundity [cf., @evans2011makes with @moller2009successful & @croci2008does] and generalism or niche breadth [cf., @kark2007living with @evans2011makes].
 
 The majority of previous studies place species in discrete groups such as urban avoiders, adapters, or exploiters [e.g., @mckinney2002urbanization; @mckinney2006urbanization; @kark2007living; @mcdonnell2015adaptation] or even birds which do or do not occur within urban environments [e.g., @bonier2007urban; @moller2009successful]. This type of discrete response variable severely limits the generalization of these studies' results as it assumes species within a group respond to urbanization equally [@evans2011makes]. Moreover, the terminology (i.e., urban adapters, avoiders, and exploiters) is used differently among studies [cf., [@kark2007living] and [@croci2008does]], potentially affecting interpretation between scientists and the public [@mcdonnell2015adaptation; @fischer2015categorizing]. In a notable exception, [@evans2011makes] advocates for a continuous measure of urbanization in which a species' is assessed on their entire distribution in response to urban environments.
 
@@ -75,12 +75,12 @@ For both approaches, we employed a model-averaging technique [@grueber2011multim
 All models and analyses were conducted in the R computing environment [@r2017coreteam] and relied heavily on the tidyverse environment [@wickham2017tidyverse].
 
 # RESULTS
-A total of 637,482 checklists provided a total of 5,944,819 observations of 580 different species which had > 100 observations. The least recorded species was Black-breasted Buttonquail (N=104) while the most recorded species was Australian Magpie (N=158,615). The mean ± SD number of observations for a species was 10,250 ± 19,269.19.
+A total of 637,482 checklists provided a total of 5,944,819 observations of 580 different species which had > 100 observations. The least recorded species was Black-breasted Buttonquail (N=104) while the most recorded species was Australian Magpie (N=158,615). The mean ï¿½ SD number of observations for a species was 10,250 ï¿½ 19,269.19.
 
 We ended with 569 candidate species (Appendix 3) from the eBird dataset which matched both the trait taxonomy and the phylogenetic tree taxonomy, and also had complete trait data.
 
 ## Urbanization index
-For the 569 species included in the models the mean ± SD urbanization index was 1.11 ± 2.17, with a range from 0.001 (Black Noddy and Black-naped Tern) to 20.15 (Laughing Dove; Fig. 2).
+For the 569 species included in the models the mean ï¿½ SD urbanization index was 1.11 ï¿½ 2.17, with a range from 0.001 (Black Noddy and Black-naped Tern) to 20.15 (Laughing Dove; Fig. 2).
 
 ### Phylogenetic signal
 There was a distinct phylogenetic signal in our urbanization index measure (Fig. 3; XXXXX SIGNIFICANCE TEST).
@@ -113,19 +113,3 @@ knitr::include_graphics("final figures for paper/Figure2.pdf")
 ```{r Figure 3, echo=FALSE, fig.cap="A phylogenetic tree of the birds yata yata yata...."}
 knitr::include_graphics("final figures for paper/Figure3.pdf")
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
