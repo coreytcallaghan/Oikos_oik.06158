@@ -58,7 +58,7 @@ targets:
     command: matched_df(response_variables,traits)
     
   global_model:
-    command: global_model(analysis_data)
+    command: get_global_model(analysis_data)
 
   figures/bird_urbanness_phylo.pdf:
     command: plot_bird_tree_traits(aus_bird_tree,traits,response_variables)
