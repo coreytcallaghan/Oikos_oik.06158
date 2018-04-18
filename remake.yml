@@ -33,6 +33,7 @@ targets:
       - figures/corrplot_of_continuous_variables.pdf
       - tables/collinearity_investigation.pdf
       - figures/param_plot_global_model.pdf
+      - tables/Averaged_models.pdf
       #- reports/phylo_report.pdf
       #- reports/non_phylo_model.pdf
       
@@ -59,6 +60,9 @@ targets:
     
   global_model:
     command: global_model(analysis_data)
+    
+  dredged_model:
+    command: model_averaging(analysis_data, global_model)
 
   figures/bird_urbanness_phylo.pdf:
     command: plot_bird_tree_traits(aus_bird_tree,traits,response_variables)
@@ -87,6 +91,9 @@ targets:
   figures/param_plot_global_model.pdf:
     command: plot_params_globmod(global_model)
     
+  tables/Averaged_models.pdf:
+    command: model_averaging_results(dredged_model)
+
    #reports/phylo_report.pdf:
     #command: render("reports/phylo_report.rmd")
     #depends: 

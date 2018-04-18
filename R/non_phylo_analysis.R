@@ -160,6 +160,54 @@ plot_params_globmod <- function(global_model) {
 }
 
 
+## do a model averaging approach using dredging
+model_averaging <- function(analysis_data, global_model) {
+  
+  library(snow)
+  clusterType <- if(length(find.package("snow", quiet = TRUE))) "SOCK" else "PSOCK"
+  clust <- try(makeCluster(getOption("cl.cores", 10), type = clusterType))
+  
+  clusterExport(clust, "analysis_data")
+  
+  library(arm)
+  
+  stdz.model <- standardize(glob.mod)
+  
+  model.set <- pdredge(stdz.model, m.lim=c(0, 2), cluster=clust, extra="R^2") 
+  
+  return(model.set)
+  
+}
+
+
+model_averaging_results <- function(model_averaging) {
+  
+  #### selects all models with deltaAic < 4
+  top.models <- get.models(model.set, subset=delta<4) 
+  
+  #### how many top models
+  length(top.models)
+  
+  #### Ranks these models based on AICc
+  my.models <- model.sel(top.models, rank="AICc") 
+  
+  Averaged_models <- model.avg(top.models)
+  
+  summary(Averaged_models)
+  confidence_intervals <- confint(Averaged_models, full=TRUE)
+  
+  library(gridExtra)
+  
+  pdf("tables/Averaged_models.pdf")
+  grid.table(confidence_intervals)
+  dev.off()
+}
+
+
+
+
+
+
 
 
 
