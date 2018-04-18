@@ -55,7 +55,7 @@ corrplot_figure <- function(analysis_data){
 ## run one large model and standardize the model
 ## so that effect sizes are comparable
 
-global_model <- function(analysis_data) {
+get_global_model <- function(analysis_data) {
   
   glob.mod <- lm(response ~ body_size_logged + clutch_size_logged + feeding_habitat_generalism + brain_residual + 
                    Habitat_agricultural + breeding_habitat_generalism + granivore + insectivore + 
@@ -76,7 +76,7 @@ collinearity_investigation_function <- function(global_model) {
   
   library(car)
   library(gridExtra)
-  collinearity_investigation <- as.data.frame(vif(glob.mod))
+  collinearity_investigation <- as.data.frame(vif(global_model))
   
   row.names(collinearity_investigation) <- c("log(Body size)", "log(Clutch size)", "Feeding habitat generalism",
                       "Brain residual", "Habitat - agricultural", "Breeding habitat generalism",
@@ -107,7 +107,7 @@ plot_params_globmod <- function(global_model) {
   pdf("figures/param_plot_global_model.pdf", height=11, width=9)
   
   print(
-  get_model_data(glob.mod, type="std2") %>%
+  get_model_data(global_model, type="std2") %>%
     arrange(estimate) %>%
     mutate(term2 = c("log(Clutch size)",
                      "Feeding habitat generalism", 
