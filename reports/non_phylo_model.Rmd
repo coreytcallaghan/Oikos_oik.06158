@@ -202,13 +202,24 @@ length(top.models)
 #### Ranks these models based on AICc
 my.models <- model.sel(top.models, rank="AICc") 
 
- #### Prints the top models (selected above)
+#### Prints the top models (selected above)
 print.data.frame(my.models, digits=2)
 
 Averaged_models <- model.avg(top.models)
 
 summary(Averaged_models)
 confint(Averaged_models, full=TRUE)
+
+#### Re-rank the models based on BIC
+my.models_BIC <- model.sel(top.models, rank="BIC") 
+
+#### Prints the top models (selected above)
+print.data.frame(my.models_BIC, digits=2)
+
+Averaged_models_BIC <- model.avg(top.models)
+
+summary(Averaged_models_BIC)
+confint(Averaged_models_BIC, full=TRUE)
 
 
 ```

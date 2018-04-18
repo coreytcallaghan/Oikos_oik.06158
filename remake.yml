@@ -27,11 +27,14 @@ targets:
     depends:
       - figures/bird_urbanness_phylo.pdf
       - figures/urbanness.pdf
- #     - figures/density_plot_per_species.pdf
+      - figures/density_plot_per_species.pdf
       - figures/histogram_plot_per_species.pdf
       - figures/distribution_response_variables.pdf
-      - reports/phylo_report.pdf
-      - reports/non_phylo_model.pdf
+      - figures/corrplot_of_continuous_variables.pdf
+      - tables/collinearity_investigation.pdf
+      - figures/param_plot_global_model.pdf
+      #- reports/phylo_report.pdf
+      #- reports/non_phylo_model.pdf
       
   bird_tree:
     command: read_bird_tree() 
@@ -50,12 +53,22 @@ targets:
     
   response_variables:
     command: make_response_variables(ebird_data)
+  
+  analysis_data:
+    command: matched_df(response_variables,traits)
+    
+  global_model:
+    command: global_model(analysis_data)
 
   figures/bird_urbanness_phylo.pdf:
     command: plot_bird_tree_traits(aus_bird_tree,traits,response_variables)
 
   figures/urbanness.pdf:
     command: urbanness_pdf(urbanness_table)
+    
+  figures/corrplot_of_continuous_variables.pdf:
+    command: corrplot_figure(analysis_data)
+    check: exists
     
   figures/density_plot_per_species.pdf:
     command: avg_rad_density_for_each_species(ebird_data)
@@ -67,18 +80,22 @@ targets:
   figures/histogram_plot_per_species.pdf:
     command: avg_rad_density_for_each_species(ebird_data)
     check: exists
- 
-  reports/phylo_report.pdf:
-    command: render("reports/phylo_report.rmd")
-    depends: 
-      - traits
-      - aus_bird_tree
-      - response_variables
+    
+  tables/collinearity_investigation.pdf:
+    command: collinearity_investigation_function(global_model)
+    
+  figures/param_plot_global_model.pdf:
+    command: plot_params_globmod(global_model)
+    
+   #reports/phylo_report.pdf:
+    #command: render("reports/phylo_report.rmd")
+    #depends: 
+      #- traits
+      #- aus_bird_tree
+      #- response_variables
 
-  reports/non_phylo_model.pdf:
-    command: render("reports/non_phylo_model.rmd")
-    depends: 
-      - traits
-      - response_variables
-      
-
+  #reports/non_phylo_model.pdf:
+    #command: render("reports/non_phylo_model.rmd")
+    #depends: 
+     # - traits
+     # - response_variables
