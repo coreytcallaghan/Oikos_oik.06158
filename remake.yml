@@ -62,7 +62,7 @@ targets:
     command: get_global_model(analysis_data)
     
   dredged_model:
-    command: model_averaging(analysis_data, global_model)
+    command: get_dredged_model()
 
   figures/bird_urbanness_phylo.pdf:
     command: plot_bird_tree_traits(aus_bird_tree,traits,response_variables)

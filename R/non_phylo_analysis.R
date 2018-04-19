@@ -162,7 +162,7 @@ plot_params_globmod <- function(global_model) {
 ## do a model averaging approach using dredging
 get_dredged_model <- function() {
   
-  load("Data/dredged_model.rds")
+  readRDS("Data/dredged_model.rds")
   
 }
 
