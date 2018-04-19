@@ -40,8 +40,8 @@ build_dredged_model <- function() {
   model_results$variable <- row.names(model_results)
   row.names(model_results) <- NULL
   
-  save(model_results, file="Data/dredged_model_averaged_param_est.rds")
-  save(summary, file="Data/dredged_model_summary_results.rds")
+  saveRDS(model_results, file="Data/dredged_model_averaged_param_est.rds")
+  saveRDS(summary, file="Data/dredged_model_summary_results.rds")
 
 }
 
