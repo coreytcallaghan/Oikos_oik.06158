@@ -59,14 +59,10 @@ targets:
     command: matched_df(response_variables,traits)
     
   global_model:
-<<<<<<< HEAD
-    command: global_model(analysis_data)
+    command: get_global_model(analysis_data)
     
   dredged_model:
     command: model_averaging(analysis_data, global_model)
-=======
-    command: get_global_model(analysis_data)
->>>>>>> 6202afbd2fb514a2f8eb5de682e916997a77986a
 
   figures/bird_urbanness_phylo.pdf:
     command: plot_bird_tree_traits(aus_bird_tree,traits,response_variables)
