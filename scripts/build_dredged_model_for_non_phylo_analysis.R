@@ -18,8 +18,16 @@ build_dredged_model <- function() {
   
   model.set <- pdredge(global_model, m.lim=c(0, 11), cluster=clust, extra="R^2") 
   
-  saveRDS(model.set, file="Data/dredged_model.rds")
+  split <- split(model.set, (seq(nrow(model.set))-1) %/% 200000)
   
+  list2env(setNames(split,paste0("df",1:4)),environment())
+  
+  rm(split)
+  
+  saveRDS(df1, file="Data/dredged_models_1.rds")
+  saveRDS(df2, file="Data/dredged_models_2.rds")
+  saveRDS(df3, file="Data/dredged_models_3.rds")
+  saveRDS(df4, file="Data/dredged_models_4.rds")
 }
 
 build_dredged_model()
