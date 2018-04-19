@@ -194,6 +194,62 @@ model_averaging_results <- function(dredged_model) {
   summary(Averaged_models)
   confidence_intervals <- confint(Averaged_models, full=TRUE)
   
+  a <- as.data.frame(coefficients(Averaged_models, full=TRUE))
+  b <- as.data.frame(confint(Averaged_models, full=TRUE))
+  model_results <- cbind(a, b)
+  names(model_results)[1] <- "estimate"
+  names(model_results)[2] <- "lwr"
+  names(model_results)[3] <- "upr"
+  model_results$variable <- row.names(model_results)
+  row.names(model_results) <- NULL
+  
+  pdf("figures/param_plot_averaged_results.pdf")
+  print(
+  model_results %>%
+    filter(variable != "(Intercept)") %>%
+    droplevels() %>%
+    arrange(desc(estimate)) %>%
+    mutate(variable2 = c("log(Clutch size)",
+                         "Feeding habitat generalism",
+                         "Diet generalism",
+                         "Habitat - agricultural",
+                         "Breeding habitat generalism",
+                         "Feeding aggregation \n (solitary & flocks)",
+                         "log(Body size)",
+                         "Nest generalism",
+                         "Brain residual",
+                         "Ground-nesting",
+                         "Plant eater",
+                         "Hollow-nesting",
+                         "Cooperative breeding",
+                         "Feeding aggregation \n (solitary, pairs, & flocks)",
+                         "Nest aggregation \n (solitary)",
+                         "Carrion eater",
+                         "Nest aggregation \n (none)",
+                         "Nest aggregation \n (colonial)",
+                         "Habitat - tree/forest",
+                         "Feeding aggregation \n (solitary & pairs)",
+                         "Habitat - grass/shrubland",
+                         "Feeding aggregation \n (pairs)", 
+                         "Granivore", 
+                         "Feeding aggregation \n (pairs & flocks)",
+                         "Feeding aggregation \n (solitary)",
+                         "Insectivore")) %>%
+    arrange(estimate) %>%
+    mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
+    ggplot(., aes(x=fct_inorder(variable2), y=estimate, color=trend))+
+    geom_point()+
+    geom_errorbar(aes(ymin=lwr, ymax=upr, color=trend))+
+    ylab("Parameter estimates")+
+    xlab("")+
+    coord_flip()+
+    theme_classic()+
+    guides(color=FALSE)+
+    geom_hline(yintercept=0, color="black")
+  )
+
+dev.off()
+  
   library(gridExtra)
   
   pdf("tables/Averaged_models.pdf")

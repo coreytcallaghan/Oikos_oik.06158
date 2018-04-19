@@ -37,6 +37,7 @@ targets:
       #- figures/param_plot_global_model.pdf
       - tables/collinearity_investigation.pdf
       - tables/Averaged_models.pdf
+      - figures/param_plot_averaged_results.pdf
       #- reports/phylo_report.pdf
       #- reports/non_phylo_model.pdf
       
@@ -95,6 +96,9 @@ targets:
     command: plot_params_globmod(global_model)
     
   tables/Averaged_models.pdf:
+    command: model_averaging_results(dredged_model)
+    
+  figures/param_plot_averaged_results.pdf:
     command: model_averaging_results(dredged_model)
 
    #reports/phylo_report.pdf:
