@@ -107,7 +107,7 @@ plot_params_globmod <- function(global_model) {
   
   print(
   get_model_data(global_model, type="std2") %>%
-    arrange(estimate) %>%
+    arrange(desc(estimate)) %>%
     mutate(term2 = c("log(Clutch size)",
                      "Feeding habitat generalism", 
                      "Migratory type \n (partial migrant)",
@@ -143,6 +143,7 @@ plot_params_globmod <- function(global_model) {
                      "Insectivore",
                      "Feeding aggregation \n (solitary)",
                      "Migratory type \n (partial migrant & nomadic/irruptive)")) %>%
+    arrange(estimate) %>%
     mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
     ggplot(., aes(x=fct_inorder(term2), y=estimate, color=trend))+
     geom_point()+
