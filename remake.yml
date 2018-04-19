@@ -21,6 +21,7 @@ packages:
   - tidyr
   - colorRamps
   - MuMIn
+  - arm
 
 targets:
   all:
@@ -31,8 +32,8 @@ targets:
       - figures/histogram_plot_per_species.pdf
       - figures/distribution_response_variables.pdf
       - figures/corrplot_of_continuous_variables.pdf
+      #- figures/param_plot_global_model.pdf
       - tables/collinearity_investigation.pdf
-      - figures/param_plot_global_model.pdf
       - tables/Averaged_models.pdf
       #- reports/phylo_report.pdf
       #- reports/non_phylo_model.pdf
