@@ -188,30 +188,7 @@ get_dredged_model <- function() {
 
 model_averaging_results <- function(dredged_model) {
   
-  remake::dump_environment()
-  
-  #### selects all models with deltaAic < 4
-  top.models <- get.models(model.set, subset=delta<4) 
-  
-  #### how many top models
-  length(top.models)
-  
-  #### Ranks these models based on AICc
-  my.models <- model.sel(top.models, rank="AICc") 
-  
-  Averaged_models <- model.avg(top.models)
-  
-  summary(Averaged_models)
-  confidence_intervals <- confint(Averaged_models, full=TRUE)
-  
-  a <- as.data.frame(coefficients(Averaged_models, full=TRUE))
-  b <- as.data.frame(confint(Averaged_models, full=TRUE))
-  model_results <- cbind(a, b)
-  names(model_results)[1] <- "estimate"
-  names(model_results)[2] <- "lwr"
-  names(model_results)[3] <- "upr"
-  model_results$variable <- row.names(model_results)
-  row.names(model_results) <- NULL
+  model_results <- readRDS("Data/dredged_model_averaged_param_est.rds")
   
   pdf("figures/param_plot_averaged_results.pdf")
   print(
