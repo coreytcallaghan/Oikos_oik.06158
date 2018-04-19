@@ -5,99 +5,68 @@ date: "3/22/2018"
 output: pdf_document
 ---
 
-run phylo model
+non phylo model
 
 ```{r}
-traits %>%
-    rownames_to_column('names') %>%
-    filter(complete.cases(.)) %>%
-    column_to_rownames('names') -> trait
+setwd("..") #take this out later
+remake::dump_environment() #take this out later
+glob.mod <- lm(response ~ body_size_logged + clutch_size_logged + feeding_habitat_generalism + brain_residual + 
+                 Habitat_agricultural + breeding_habitat_generalism + granivore + insectivore + 
+                 carrion_eater + plant_eater + diet_generalism + movement_class +
+                 ground_nesting + hollow_nesting + nest_generalism + breeding + 
+                 nest_aggregation + feeding_aggregation + Habitat_grass_shrubland +
+                 Habitat_tree_forest, data=analysis_data, 
+               na.action = "na.fail", weights=(analysis_data$N/analysis_data$unique_localities))
 
-  # subset the tree
-  matched_tree <- drop.tip(aus_bird_tree,aus_bird_tree$tip.label[!aus_bird_tree$tip.label%in%row.names(trait)])
-  
-  response_variables$binom<-response_variables$SCIENTIFIC_NAME_tree
-  inner_join(response_variables,trait) %>%
-    filter(binom!="not_treated_as_species") %>%
-    data.frame(.)-> trait
-
-  
-  
-  dd<-trait
-  dd$phylo<-dd$binom
-  phylo<-matched_tree # this is hilarious: tree has to be called "phylo" for lmer to work
+plot(glob.mod)
 ```
 
+run phylo model, exactly the same as the non-phylo model at this point
 
 ```{r}
+non_aus_sp <- aus_bird_tree$tip.label[!aus_bird_tree$tip.label %in% analysis_data$binom]
+aus_bird_tree_ss <- drop.tip(aus_bird_tree, non_aus_sp)
 
-dd$lbody<-log10(dd$mean_body_size)
-dd$lbrain<-log10(dd$brain_size)
+row.names(analysis_data)<-analysis_data$binom
 
- basic_gaus_fit <- lmer(urban_median~lbody+clutch_size+iucn_status+lbrain+feeding_habitat_generalism+
-     breeding_habitat_generalism+granivore+insectivore+carrion_eater+diet_generalism+
-     movement_class+ground_nesting+hollow_nesting+nest_generalism+breeding+nest_aggregation+feeding_aggregation+(1|phylo),
-                         data=dd,
-                         control=lmerControl(check.nobs.vs.nlev="ignore",check.nobs.vs.nRE="ignore"),na.action = "na.fail")
+phy_mod<-phylolm(response~body_size_logged + clutch_size_logged + feeding_habitat_generalism +   
+                   brain_residual + Habitat_agricultural + breeding_habitat_generalism + 
+                   granivore + insectivore + 
+                   carrion_eater + plant_eater + diet_generalism + movement_class +
+                   ground_nesting + hollow_nesting + nest_generalism + breeding + 
+                   nest_aggregation + feeding_aggregation + Habitat_grass_shrubland +
+                   Habitat_tree_forest,data=analysis_data,phy=aus_bird_tree_ss,na.action = "na.fail", weights=(analysis_data$N/analysis_data$unique_localities))
 
-
- AIC(basic_gaus_fit)
+plot(phy_mod)
 ```
 
-Ben Bolker hates model selection (and signficance testing) so no easy way to do it on lmer objects.  
-
-for now just test the model that the non-phylo found
+looks ok from a first glance. now let's look at the model summaries.
 
 ```{r}
-dd$urban_median_rescale<-(dd$urban_median-mean(dd$urban_median))/sd(dd$urban_median)
-dd$clutch_size_rescale<-(dd$clutch_size-mean(dd$clutch_size))/sd(dd$clutch_size)
-dd$lclutch<-log(dd$clutch_size)
-
- basic_gaus_fit_2 <- lmer(urban_median~lclutch+lbody+
-                          (1|phylo),
-                         data=dd,
-                         control=lmerControl(check.nobs.vs.nlev="ignore",check.nobs.vs.nRE="ignore"),
-                        na.action = "na.fail")
-AIC(basic_gaus_fit_2)
-summary(basic_gaus_fit_2)
-```
-
-trying with some other software--i think lmer is bugged for phylogenies.  
-
-```{r}
- basic_gaus_fit_phylolm <- phylolm(urban_median~lclutch+lbody,phy=phylo,
-                         data=dd)
-
- summary(basic_gaus_fit_phylolm)
- AIC(basic_gaus_fit_phylolm)
-```
-
-
-trying to find another factor that improves the model but it seems tough
-```{r}
-  basic_gaus_fit_phylolm <- phylolm(urban_median~lclutch+
-                                    lbody+feeding_habitat_generalism+
-                                    lbrain+insectivore+diet_generalism+
-                                    hollow_nesting,
-                                    phy=phylo,data=dd)
-
-logLik(basic_gaus_fit_phylolm)
-```
-
-lmer is totally bugged for phylo applications.  continue with phylolm next time.   
-
-```{r}
- basic_gaus_fit_phylolm_full <- phylolm(urban_median~iucn_status+lbrain+feeding_habitat_generalism+
-     carrion_eater+lclutch+lbody+
-     movement_class+ground_nesting+nest_generalism+nest_aggregation,
-                                    phy=phylo,data=dd)
-
-
-dredge(basic_gaus_fit_phylolm_full)
+summary(glob.mod)
 
 ```
 
-```{r}
+and then the phylo model (this is most often called pgls in the literature)
 
-visreg(basic_gaus_fit_phylolm_full)
+```{r}
+summary(phy_mod)
 ```
+
+look a little bit more at the coefficients
+
+```{r}
+library(ggplot2)
+cc<-data.frame(phy_mod_coefs=coef(phy_mod),non_phy_mod=coef(glob.mod))
+cc$parameter<-substr(row.names(cc), start = 1, stop = 7)
+
+ggplot(cc,aes(x=non_phy_mod,y=phy_mod_coefs))+geom_point()+geom_text(aes(label=parameter),hjust=0, vjust=0)+theme_bw()+geom_abline(slope=1,intercept=0)
+
+
+```
+
+Wwith the phylogeny in the model, brain residuals association with urbanness becomes stronger.  The implication is that brain residuals varies across the phylogeny and some clades are big and some are small which means the non-phylo relationship is weak.  But **within each clade** it's the species with the large brain residuals that are doing fine in urban areas.  
+
+IDK, might be something real there????
+
+What do you think?
