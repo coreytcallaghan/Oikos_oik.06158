@@ -100,60 +100,66 @@ collinearity_investigation_function <- function(global_model) {
 ## plot parameter estimates of standardized global model
 plot_params_globmod <- function(global_model) {
   
-  library(sjPlot)
-  library(forcats)
+    library(forcats)
   
-  pdf("figures/param_plot_global_model.pdf", height=11, width=9)
-  
-  print(
-  get_model_data(global_model, type="std2") %>%
-    arrange(desc(estimate)) %>%
-    mutate(term2 = c("log(Clutch size)",
-                     "Feeding habitat generalism", 
-                     "Migratory type \n (partial migrant)",
-                     "Migratory type \n (dispersal, partial migrant, & nomadic/irruptive",
-                     "Diet generalism", 
-                     "Breeding habitat generalism", 
-                     "Migratory type \n (dispersal & nomadic/irruptive)",
-                     "Migratory type \n (total migrant)", 
-                     "Migratory type \n (none)", 
-                     "Habitat - agricultural", 
-                     "Migratory type \n (nomadic/irruptive)",
-                     "log(Body size)", 
-                     "Brain residual", 
-                     "Migratory type \n (dispersal & partial migrant)",
-                     "Nest generalism", 
-                     "Feeding aggregation \n (solitary & flocks)",
-                     "Feeding aggregation \n (solitary, pairs, & flocks)", 
-                     "Plant eater", 
-                     "Ground-nesting", 
-                     "Migratory type \n (total migrant & nomadic/irruptive)", 
-                     "Cooperative breeding",
-                     "Hollow-nesting", 
-                     "Feeding aggregation \n (solitary & pairs)", 
-                     "Nest aggregation \n (solitary)",
-                     "Habitat - tree/forest", 
-                     "Nest aggregation \n (none)", 
-                     "Nest aggregation \n (colonial)",
-                     "Feeding aggregation \n (pairs)", 
-                     "Granivore", 
-                     "Carrion eater", 
-                     "Feeding aggregation \n (pairs & flocks)", 
-                     "Habitat - grass/shrubland", 
-                     "Insectivore",
-                     "Feeding aggregation \n (solitary)",
-                     "Migratory type \n (partial migrant & nomadic/irruptive)")) %>%
-    arrange(estimate) %>%
-    mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
-    ggplot(., aes(x=fct_inorder(term2), y=estimate, color=trend))+
-    geom_point()+
-    geom_errorbar(aes(ymin=conf.low, ymax=conf.high, color=trend))+
-    ylab("Parameter estimates")+
-    xlab("")+
-    coord_flip()+
-    theme_classic()+
-    guides(color=FALSE)+
-    geom_hline(yintercept=0, color="black")
+    std.mod <- standardize(global_model) 
+    lwr <- data.frame(lwr=confint(std.mod)[,1])
+    upr <- data.frame(upr=confint(std.mod)[,2])
+    
+    pdf("figures/param_plot_global_model.pdf", height=11, width=9)
+    
+    print( 
+    tidy(std.mod) %>%
+      mutate(lwr=lwr$lwr) %>%
+      mutate(upr=upr$upr) %>%
+      filter(term != "(Intercept)") %>%
+      arrange(desc(estimate)) %>%
+      mutate(term2 = c("log(Clutch size)",
+                       "Feeding habitat generalism", 
+                       "Migratory type \n (partial migrant)",
+                       "Migratory type \n (dispersal, partial migrant, & nomadic/irruptive",
+                       "Diet generalism", 
+                       "Breeding habitat generalism", 
+                       "Migratory type \n (dispersal & nomadic/irruptive)",
+                       "Migratory type \n (total migrant)", 
+                       "Migratory type \n (none)", 
+                       "Habitat - agricultural", 
+                       "Migratory type \n (nomadic/irruptive)",
+                       "log(Body size)", 
+                       "Brain residual", 
+                       "Migratory type \n (dispersal & partial migrant)",
+                       "Nest generalism", 
+                       "Feeding aggregation \n (solitary & flocks)",
+                       "Feeding aggregation \n (solitary, pairs, & flocks)", 
+                       "Plant eater", 
+                       "Ground-nesting", 
+                       "Migratory type \n (total migrant & nomadic/irruptive)", 
+                       "Cooperative breeding",
+                       "Hollow-nesting", 
+                       "Feeding aggregation \n (solitary & pairs)", 
+                       "Nest aggregation \n (solitary)",
+                       "Habitat - tree/forest", 
+                       "Nest aggregation \n (none)", 
+                       "Nest aggregation \n (colonial)",
+                       "Feeding aggregation \n (pairs)", 
+                       "Granivore", 
+                       "Carrion eater", 
+                       "Feeding aggregation \n (pairs & flocks)", 
+                       "Habitat - grass/shrubland", 
+                       "Insectivore",
+                       "Feeding aggregation \n (solitary)",
+                       "Migratory type \n (partial migrant & nomadic/irruptive)")) %>%
+      arrange(estimate) %>%
+      mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
+      ggplot(., aes(x=fct_inorder(term2), y=estimate, color=trend))+
+      geom_point()+
+      geom_errorbar(aes(ymin=lwr, ymax=upr, color=trend))+
+      ylab("Parameter estimates")+
+      xlab("")+
+      coord_flip()+
+      theme_classic()+
+      guides(color=FALSE)+
+      geom_hline(yintercept=0, color="black")
   )
   
   dev.off()
