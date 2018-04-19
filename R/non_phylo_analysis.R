@@ -98,7 +98,6 @@ collinearity_investigation_function <- function(global_model) {
 
 
 ## plot parameter estimates of standardized global model
-
 plot_params_globmod <- function(global_model) {
   
   library(sjPlot)
@@ -161,26 +160,14 @@ plot_params_globmod <- function(global_model) {
 
 
 ## do a model averaging approach using dredging
-model_averaging <- function(analysis_data, global_model) {
+get_dredged_model <- function() {
   
-  library(snow)
-  clusterType <- if(length(find.package("snow", quiet = TRUE))) "SOCK" else "PSOCK"
-  clust <- try(makeCluster(getOption("cl.cores", 10), type = clusterType))
-  
-  clusterExport(clust, "analysis_data")
-  
-  library(arm)
-  
-  stdz.model <- standardize(glob.mod)
-  
-  model.set <- pdredge(stdz.model, m.lim=c(0, 2), cluster=clust, extra="R^2") 
-  
-  return(model.set)
+  load("Data/dredged_model.rds")
   
 }
 
 
-model_averaging_results <- function(model_averaging) {
+model_averaging_results <- function(dredged_model) {
   
   #### selects all models with deltaAic < 4
   top.models <- get.models(model.set, subset=delta<4) 
