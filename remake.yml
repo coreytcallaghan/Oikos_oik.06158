@@ -35,8 +35,8 @@ targets:
       - figures/corrplot_of_continuous_variables.pdf
       - figures/param_plot_global_model.pdf
       - tables/collinearity_investigation.pdf
-      #- tables/Averaged_models.pdf
-      #- figures/param_plot_averaged_results.pdf
+      - tables/Averaged_models.pdf
+      - figures/param_plot_averaged_results.pdf
       #- reports/phylo_report.pdf
       #- reports/non_phylo_model.pdf
       

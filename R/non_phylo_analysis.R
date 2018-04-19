@@ -101,7 +101,7 @@ collinearity_investigation_function <- function(global_model) {
 plot_params_globmod <- function(global_model) {
   
     library(forcats)
-  
+    remake::dump_environment()
     std.mod <- standardize(global_model) 
     lwr <- data.frame(lwr=confint(std.mod)[,1])
     upr <- data.frame(upr=confint(std.mod)[,2])
@@ -163,6 +163,8 @@ plot_params_globmod <- function(global_model) {
   )
   
   dev.off()
+  
+  rm(list = ls())
 }
 
 
@@ -185,6 +187,8 @@ get_dredged_model <- function() {
 
 
 model_averaging_results <- function(dredged_model) {
+  
+  remake::dump_environment()
   
   #### selects all models with deltaAic < 4
   top.models <- get.models(model.set, subset=delta<4) 
@@ -261,6 +265,8 @@ dev.off()
   pdf("tables/Averaged_models.pdf")
   grid.table(confidence_intervals)
   dev.off()
+  
+  rm(list = ls())
 }
 
 
