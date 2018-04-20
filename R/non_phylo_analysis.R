@@ -186,7 +186,7 @@ get_dredged_model <- function() {
 }
 
 
-model_averaging_results <- function(dredged_model) {
+model_averaging_results <- function() {
   
   model_results <- readRDS("Data/dredged_model_averaged_param_est.rds")
   
@@ -236,12 +236,7 @@ model_averaging_results <- function(dredged_model) {
   )
 
 dev.off()
-  
-  library(gridExtra)
-  
-  pdf("tables/Averaged_models.pdf")
-  grid.table(confidence_intervals)
-  dev.off()
+
   
   rm(list = ls())
 }
