@@ -5,6 +5,7 @@ packages:
   - raster
   - maptools
   - ggplot2
+  - readr
   - dplyr
   - ape
   - phytools
@@ -49,7 +50,7 @@ targets:
     command: load_ebird_data()
 
   aus_bird_tree:
-    command: subset_tree(bird_tree,traits)
+    command: subset_tree(bird_tree,analysis_data)
 
   urbanness_table: 
     command: get_urbanness_table()
