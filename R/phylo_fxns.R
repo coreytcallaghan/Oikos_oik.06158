@@ -1,18 +1,31 @@
 
 
 
-read_bird_tree <- function() {
+download_phylo <- function() {
   require(ape)
   if (!exists("Data/phylo/"))
     dir.create("Data/phylo/", showWarnings = FALSE)
   download.file(
-    "https://www.dropbox.com/s/gfackoogv6n0bv0/AllBirdsEricson1.tre?raw=1",
-    "Data/phylo/phy.tre"
+    "https://data.vertlife.org/birdtree/Stage2/EricsonStage2_0001_1000.zip",
+    "Data/phylo/EricsonStage2_0001_1000.zip"
   )
-  bird_trees <- ape::read.tree(file = "Data/phylo/phy.tre")[[1]]
-  #drop tips to get down to Aus species here
-  return(bird_trees)
+  
 }
+
+read_one_tree<-function(path,x=1){
+  unzip(path,overwrite=TRUE,exdir="Data/phylo/")
+  one_bird_tree <- ape::read.tree(file = "/Users/wcornwell/Documents/bird_urbanness/Data/phylo/mnt/data/projects/birdphylo/Tree_sets/Stage2_full_data/CombinedTrees/AllBirdsEricson1.tre")[[x]]
+  #drop tips to get down to Aus species here
+  return(one_bird_tree)
+}
+
+read_all_trees<-function(path){
+  unzip(path,overwrite=TRUE,exdir="Data/phylo/")
+  ape::read.tree(file = "/Users/wcornwell/Documents/bird_urbanness/Data/phylo/mnt/data/projects/birdphylo/Tree_sets/Stage2_full_data/CombinedTrees/AllBirdsEricson1.tre")
+}
+  
+  
+
 
 
 plot_bird_tree <- function(aus_bird_tree) {

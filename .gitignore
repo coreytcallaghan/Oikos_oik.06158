@@ -14,6 +14,8 @@ reports/*pdf
 R/data
 Data/data*
 Data/phylo.nex
+reports/non_phylo_model_files/
+Data/phylo/mnt/
 
 # Compiled source #
 ###################

@@ -39,10 +39,17 @@ targets:
       - tables/collinearity_investigation.pdf
       - figures/param_plot_averaged_results.pdf
       #- reports/phylo_report.pdf
-      
+  
+  Data/phylo/EricsonStage2_0001_1000.zip:
+    command: download_phylo()
+    check: exists
+    
   bird_tree:
-    command: read_bird_tree() 
-
+     command: read_one_tree("Data/phylo/EricsonStage2_0001_1000.zip")
+     
+  list_of_bird_trees:
+     command: read_all_trees("Data/phylo/EricsonStage2_0001_1000.zip")
+    
   traits:
     command: read_process_trait_data()
   
