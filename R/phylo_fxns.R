@@ -23,8 +23,8 @@ read_all_trees<-function(path){
   unzip(path,overwrite=TRUE,exdir="Data/phylo/")
   ape::read.tree(file = "/Users/wcornwell/Documents/bird_urbanness/Data/phylo/mnt/data/projects/birdphylo/Tree_sets/Stage2_full_data/CombinedTrees/AllBirdsEricson1.tre")
 }
-  
-  
+
+
 
 
 
@@ -101,10 +101,47 @@ plot_bird_tree_traits <-
   }
 
 
+
+
+
+
+run_one_phylo_model<-function(analysis_data,aus_bird_tree){
+  #non_aus_sp <- aus_bird_tree$tip.label[!aus_bird_tree$tip.label %in% analysis_data$binom]
+  #aus_bird_tree_ss <- diversitree:::drop.tip.fixed(aus_bird_tree, non_aus_sp)
+  row.names(analysis_data)<-analysis_data$binom
+  print(class(aus_bird_tree))
+  phy_mod<-phylolm(response~body_size_logged + clutch_size_logged + feeding_habitat_generalism +   
+                     brain_residual + Habitat_agricultural + breeding_habitat_generalism + 
+                     granivore + insectivore + 
+                     carrion_eater + plant_eater + diet_generalism + movement_class +
+                     ground_nesting + hollow_nesting + nest_generalism + breeding + 
+                     nest_aggregation + feeding_aggregation + Habitat_grass_shrubland +
+                     Habitat_tree_forest,data=analysis_data,phy=aus_bird_tree,
+                   na.action = "na.fail", weights=(analysis_data$N/analysis_data$unique_localities))
+  
+  return(phy_mod)
+}
+
+
+phy_v_non_phy<-function(glob.mod,phy_mod){
+  library(ggplot2)
+  cc<-data.frame(phy_mod_coefs=coef(phy_mod),non_phy_mod=coef(glob.mod))
+  cc$parameter<-substr(row.names(cc), start = 1, stop = 7)
+  
+  p <- ggplot(cc,aes(x=non_phy_mod,y=phy_mod_coefs))+geom_point()+geom_text(aes(label=parameter),hjust=0, vjust=0)+theme_bw()+geom_abline(slope=1,intercept=0)
+  pdf("figures/phy_v_non_phy.pdf")
+  print(p)
+  dev.off()
+}
+
+
+############# BELOW HERE IS OBSOLETE 
+
+
 run_phylo_lm <- function(traits,
                          response_variables,
                          aus_bird_tree) {
-
+  
   #
   # match and subset to tree.
   # this is annoying because the phylo packages all use row.names and the tidyverse hates rownames.
@@ -151,9 +188,12 @@ run_phylo_lm <- function(traits,
 }
 
 
+
+
+
 run_phylo_lme4 <- function(ms,
-                         response_variables,
-                         aus_bird_tree) {
+                           response_variables,
+                           aus_bird_tree) {
   
   #
   # match and subset to tree.
@@ -176,7 +216,7 @@ run_phylo_lme4 <- function(ms,
     column_to_rownames('names')
   
   trait <- subset(trait, row.names(trait) %in% aus_bird_tree$tip.label)
-
+  
   # subset the tree
   tree_plotting <- drop.tip(aus_bird_tree,aus_bird_tree$tip.label[!aus_bird_tree$tip.label%in%row.names(trait)])
   
@@ -198,22 +238,22 @@ run_phylo_lme4 <- function(ms,
   
   # run the model
   phylo<-tree_plotting_2
-#  birdZ <- phylo.to.Z(tree_plotting_2)
+  #  birdZ <- phylo.to.Z(tree_plotting_2)
   dd$phylo <- row.names(dd)
   dd$obs <- factor(seq(nrow(dd)))
   dd$urb_cat<-as.integer(dd$urb>0)
   dd$obs <- factor(seq(nrow(dd)))
-#  +(1|obs)
+  #  +(1|obs)
   
-#  phylo_lme4_fit <- phylo_lmm(urb~log10(body_size)+(1|phylo),sp=dd$phylo,
-#                              data=dd,phylo=phylo,phylonm="phylo",
-#                              control=lmerControl(check.nobs.vs.nlev="ignore",check.nobs.vs.nRE="ignore"),
-#                              phyloZ=birdZ)
+  #  phylo_lme4_fit <- phylo_lmm(urb~log10(body_size)+(1|phylo),sp=dd$phylo,
+  #                              data=dd,phylo=phylo,phylonm="phylo",
+  #                              control=lmerControl(check.nobs.vs.nlev="ignore",check.nobs.vs.nRE="ignore"),
+  #                              phyloZ=birdZ)
   
   basic_gaus_fit <- lmer(urb~clutch_size+log10(body_size)+(1|phylo),
                          data=dd,
                          control=lmerControl(check.nobs.vs.nlev="ignore",check.nobs.vs.nRE="ignore"))
-
+  
   return(basic_gaus_fit)
 }
 
@@ -223,7 +263,7 @@ run_phylo_lme4 <- function(ms,
 phylolm_r2 <- function(phylo_lme4_fit) {
   #stuff
   Fixed<-fixef(phylo_lme4_fit)[2]*phylo_lme4_fit@frame$clutch_size+fixef(phylo_lme4_fit)[3]*phylo_lme4_fit@frame$`log10(body_size)`
-    varF<-var(Fixed)
-    r2<-varF/(varF + VarCorr(phylo_lme4_fit)$phylo[1]  + attr(VarCorr(phylo_lme4_fit), "sc")^2)
-    return(r2)  
-  }
+  varF<-var(Fixed)
+  r2<-varF/(varF + VarCorr(phylo_lme4_fit)$phylo[1]  + attr(VarCorr(phylo_lme4_fit), "sc")^2)
+  return(r2)  
+}

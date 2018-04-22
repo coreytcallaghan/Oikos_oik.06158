@@ -38,6 +38,7 @@ targets:
       - figures/param_plot_global_model.pdf
       - tables/collinearity_investigation.pdf
       - figures/param_plot_averaged_results.pdf
+      - figures/phy_v_non_phy.pdf
       #- reports/phylo_report.pdf
   
   Data/phylo/EricsonStage2_0001_1000.zip:
@@ -71,6 +72,9 @@ targets:
   global_model:
     command: get_global_model(analysis_data)
 
+  phy_mod:
+    command: run_one_phylo_model(analysis_data,aus_bird_tree)
+
   figures/bird_urbanness_phylo.pdf:
     command: plot_bird_tree_traits(aus_bird_tree,traits,response_variables)
 
@@ -100,6 +104,10 @@ targets:
     
   figures/param_plot_averaged_results.pdf:
     command: model_averaging_results()
+
+  figures/phy_v_non_phy.pdf:
+    command: phy_v_non_phy(global_model,phy_mod)
+
 
    #reports/phylo_report.pdf:
     #command: render("reports/phylo_report.rmd")
