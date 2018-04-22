@@ -101,15 +101,31 @@ plot_bird_tree_traits <-
   }
 
 
+run_many_phylo_models<-function(analysis_data,list_bird_trees,n=1000){
+  bird_trees_ss<-list_bird_trees[1:n]
+  ss_trees<-lapply(bird_trees_ss,subset_tree,analysis_data)
+  list_o<-lapply(ss_trees,run_one_phylo_model,analysis_data=analysis_data)
+  return(list_o)
+}
+
+extract_brain<-function(mod){
+  nn<-names(mod$coefficients)
+  return(mod$coefficients[nn=="brain_residual"])
+}
+
+plot_dist_parameter<-function(list_of_models){
+  df<-data.frame(coef_brain=sapply(list_of_models,extract_brain))
+  p<-ggplot(df,aes(x=coef_brain))+geom_histogram()
+  pdf("figures/brains.pdf")
+  print(p)
+  dev.off()
+}
 
 
-
-
-run_one_phylo_model<-function(analysis_data,aus_bird_tree){
+run_one_phylo_model<-function(aus_bird_tree,analysis_data){
   #non_aus_sp <- aus_bird_tree$tip.label[!aus_bird_tree$tip.label %in% analysis_data$binom]
   #aus_bird_tree_ss <- diversitree:::drop.tip.fixed(aus_bird_tree, non_aus_sp)
   row.names(analysis_data)<-analysis_data$binom
-  print(class(aus_bird_tree))
   phy_mod<-phylolm(response~body_size_logged + clutch_size_logged + feeding_habitat_generalism +   
                      brain_residual + Habitat_agricultural + breeding_habitat_generalism + 
                      granivore + insectivore + 
@@ -132,138 +148,4 @@ phy_v_non_phy<-function(glob.mod,phy_mod){
   pdf("figures/phy_v_non_phy.pdf")
   print(p)
   dev.off()
-}
-
-
-############# BELOW HERE IS OBSOLETE 
-
-
-run_phylo_lm <- function(traits,
-                         response_variables,
-                         aus_bird_tree) {
-  
-  #
-  # match and subset to tree.
-  # this is annoying because the phylo packages all use row.names and the tidyverse hates rownames.
-  # first create a new data.frame (not tibble) with just the traits of interest
-  #
-  trait <-
-    data.frame(
-      mean_body_size = traits$mean_body_size,
-      clutch_size = traits$clutch_size,
-      gregariousness = traits$gregariousness
-    )
-  row.names(trait) <- row.names(traits)
-  trait <-
-    subset(
-      trait,
-      trait$mean_body_size != "NaN" &
-        trait$clutch_size != "NaN" & trait$gregariousness != "NaN"
-    )
-  trait <- subset(trait, row.names(trait) %in% aus_bird_tree$tip.label)
-  # subset that dataframe to those names that are both in the trait data base AND the tree
-  trait<-subset(trait,trait$mean_body_size!="NaN"&trait$clutch_size!="NaN"&trait$gregariousness!="NaN")
-  trait<-subset(trait,row.names(trait)%in%aus_bird_tree$tip.label)
-  # subset the tree
-  tree_plotting<-drop.tip(aus_bird_tree,aus_bird_tree$tip.label[!aus_bird_tree$tip.label%in%row.names(trait)])
-  response_variables$SCIENTIFIC_NAME<-gsub(" ","_",response_variables$SCIENTIFIC_NAME)
-  rv<-filter(response_variables,SCIENTIFIC_NAME%in%tree_plotting$tip.label)
-  median_rv<-as.array(rv$urban_median)
-  row.names(median_rv)<-rv$SCIENTIFIC_NAME
-  median_rv2<-median_rv-mean(median_rv)
-  
-  
-  tree_plotting_2<-drop.tip(tree_plotting,tree_plotting$tip.label[!tree_plotting$tip.label%in%row.names(median_rv2)])
-  trait<-subset(trait,row.names(trait)%in%tree_plotting_2$tip.label)
-  
-  dd <- data.frame(urb=median_rv2)
-  
-  #match traits into the right dataframe  
-  dd$body_size<-trait$mean_body_size[match(row.names(dd),row.names(trait))]
-  dd$clutch_size<-trait$clutch_size[match(row.names(dd),row.names(trait))]
-  dd$gregariousness<-trait$gregariousness[match(row.names(dd),row.names(trait))]
-  # run the model
-  mod1<-phylolm(urb~log10(body_size)+clutch_size+gregariousness,data=dd,phy=tree_plotting_2)
-  return(mod1)
-}
-
-
-
-
-
-run_phylo_lme4 <- function(ms,
-                           response_variables,
-                           aus_bird_tree) {
-  
-  #
-  # match and subset to tree.
-  # this is annoying because the phylo packages all use row.names and the tidyverse hates rownames.
-  ## CTC - the tibble package is helpful here with rownames to column and column to rownames within a pipe
-  # first create a new data.frame (not tibble) with just the traits of interest
-  #
-  trait <-
-    data.frame(
-      mean_body_size = ms$mean_body_size,
-      clutch_size = ms$clutch_size,
-      nest_aggregation = ms$nest_aggregation
-    )
-  
-  row.names(trait) <- row.names(ms)
-  
-  trait <- trait %>%
-    rownames_to_column('names') %>%
-    filter(complete.cases(.)) %>%
-    column_to_rownames('names')
-  
-  trait <- subset(trait, row.names(trait) %in% aus_bird_tree$tip.label)
-  
-  # subset the tree
-  tree_plotting <- drop.tip(aus_bird_tree,aus_bird_tree$tip.label[!aus_bird_tree$tip.label%in%row.names(trait)])
-  
-  rv <- filter(response_variables, SCIENTIFIC_NAME_tree %in% tree_plotting$tip.label)
-  median_rv<-as.array(rv$urban_median)
-  row.names(median_rv)<-rv$SCIENTIFIC_NAME_tree
-  median_rv2<-median_rv-mean(median_rv)
-  
-  
-  tree_plotting_2<-drop.tip(tree_plotting,tree_plotting$tip.label[!tree_plotting$tip.label%in%row.names(median_rv2)])
-  trait<-subset(trait,row.names(trait)%in%tree_plotting_2$tip.label)
-  
-  dd <- data.frame(urb=median_rv2)
-  
-  #match traits into the right dataframe  
-  dd$body_size <- trait$mean_body_size[match(row.names(dd),row.names(trait))]
-  dd$clutch_size <- trait$clutch_size[match(row.names(dd),row.names(trait))]
-  dd$nest_aggregation <- trait$nest_aggregation[match(row.names(dd),row.names(trait))]
-  
-  # run the model
-  phylo<-tree_plotting_2
-  #  birdZ <- phylo.to.Z(tree_plotting_2)
-  dd$phylo <- row.names(dd)
-  dd$obs <- factor(seq(nrow(dd)))
-  dd$urb_cat<-as.integer(dd$urb>0)
-  dd$obs <- factor(seq(nrow(dd)))
-  #  +(1|obs)
-  
-  #  phylo_lme4_fit <- phylo_lmm(urb~log10(body_size)+(1|phylo),sp=dd$phylo,
-  #                              data=dd,phylo=phylo,phylonm="phylo",
-  #                              control=lmerControl(check.nobs.vs.nlev="ignore",check.nobs.vs.nRE="ignore"),
-  #                              phyloZ=birdZ)
-  
-  basic_gaus_fit <- lmer(urb~clutch_size+log10(body_size)+(1|phylo),
-                         data=dd,
-                         control=lmerControl(check.nobs.vs.nlev="ignore",check.nobs.vs.nRE="ignore"))
-  
-  return(basic_gaus_fit)
-}
-
-
-
-
-phylolm_r2 <- function(phylo_lme4_fit) {
-  #stuff
-  Fixed<-fixef(phylo_lme4_fit)[2]*phylo_lme4_fit@frame$clutch_size+fixef(phylo_lme4_fit)[3]*phylo_lme4_fit@frame$`log10(body_size)`
-  varF<-var(Fixed)
-  r2<-varF/(varF + VarCorr(phylo_lme4_fit)$phylo[1]  + attr(VarCorr(phylo_lme4_fit), "sc")^2)
-  return(r2)  
 }
