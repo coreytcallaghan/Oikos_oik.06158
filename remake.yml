@@ -25,6 +25,7 @@ packages:
   - arm
   - forcats
   - broom
+  - ggrepel
 
 targets:
   all:

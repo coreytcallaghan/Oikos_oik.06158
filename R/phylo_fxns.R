@@ -236,11 +236,49 @@ plot_params_phymod <- function(phy_mod_rescaled) {
 
 phy_v_non_phy<-function(glob.mod,phy_mod){
   library(ggplot2)
-  cc<-data.frame(phy_mod_coefs=coef(phy_mod),non_phy_mod=coef(glob.mod))
-  cc$parameter<-substr(row.names(cc), start = 1, stop = 7)
+  cc <- data.frame(phy_mod_coefs=coef(phy_mod_rescaled), 
+                   non_phy_mod=coef(global_model)) %>%
+    mutate(parameter = c("Intercept",
+                         "log(Body size)",
+                         "log(Clutch size)",
+                         "Feeding habitat generalism",
+                         "Brain residual", 
+                         "Habitat - agricultural", 
+                         "Breeding habitat generalism",
+                         "Granivore", 
+                         "Insectivore", 
+                         "Carrion eater", 
+                         "Plant eater", 
+                         "Diet generalism",
+                         "Movement - migratory", 
+                         "Movement - nomadic/irruptive", 
+                         "Ground-nesting", 
+                         "Hollow-nesting", 
+                         "Nest generalism", 
+                         "Cooperative breeding", 
+                         "Nest aggregation \n (colonial)",
+                         "Nest aggregation \n (none)",
+                         "Nest aggregation  \n (solitary)",
+                         "Feeding aggregation \n (pairs)",
+                         "Feeding aggregation \n (pairs & flocks)",
+                         "Feeding aggregation \n (solitary)",
+                         "Feeding aggregation \n (solitary & flocks)",
+                         "Feeding aggregation \n (solitary & pairs)",
+                         "Feeding aggregation \n (solitary, pairs, & flocks)",
+                         "Habitat - grass/shrubland", 
+                         "Range size (1000s km2)", 
+                         "Habitat - tree/forest"))
   
-  p <- ggplot(cc,aes(x=non_phy_mod,y=phy_mod_coefs))+geom_point()+geom_text(aes(label=parameter),hjust=0, vjust=0)+theme_bw()+geom_abline(slope=1,intercept=0)
-  pdf("figures/phy_v_non_phy.pdf")
+  p <- ggplot(cc,aes(x=non_phy_mod,y=phy_mod_coefs))+
+    geom_point(color="royalblue4")+
+    theme_bw()+
+    geom_abline(slope=1,intercept=0)+
+    xlab("Non phylogenetic model")+
+    ylab("Phylogenetic model")+
+    geom_text_repel(aes(label = parameter), 
+                    box.padding = unit(0.45, "lines"))
+  
+  pdf("figures/phy_v_non_phy.pdf", height=10, width=12)
   print(p)
   dev.off()
 }
