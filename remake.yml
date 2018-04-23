@@ -38,8 +38,8 @@ targets:
       - figures/param_plot_global_model.pdf
       - tables/collinearity_investigation.pdf
       - figures/param_plot_averaged_results.pdf
-      - figures/phy_v_non_phy.pdf
-      - figures/brains.pdf
+      #- figures/phy_v_non_phy.pdf
+      #- figures/brains.pdf
       #- reports/phylo_report.pdf
   
   Data/phylo/EricsonStage2_0001_1000.zip:

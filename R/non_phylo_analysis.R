@@ -3,6 +3,8 @@
 
 
 ## create df for the model fitting
+## read in range size file here
+## subset data based on complete variables as well
 matched_df <- function(response_variables, traits){
   
   response_variables$binom <- response_variables$SCIENTIFIC_NAME_tree
@@ -10,7 +12,7 @@ matched_df <- function(response_variables, traits){
   analysis_data <- left_join(traits, response_variables, by="binom") %>%
     filter(SCIENTIFIC_NAME_tree != "not_treated_as_species")
   
-  # clean data to final dataset
+  # clean data
   analysis_data <- analysis_data %>%
     # drop any columns that we aren't interested in
     dplyr::select(-brain_size, -iucn_status) %>%
@@ -21,6 +23,14 @@ matched_df <- function(response_variables, traits){
     mutate(response = log(urban_median)) %>%
     mutate(body_size_logged = log(mean_body_size)) %>%
     mutate(clutch_size_logged = log(clutch_size))
+  
+  # filter data based on range size availability
+  range_size <- read_csv("Data/Raw trait data/temp_range_size.csv")
+  
+  # filter one more time to final dataset
+  analysis_data <- analysis_data %>%
+    inner_join(., range_size, by=c("COMMON_NAME_traits", "SCIENTIFIC_NAME_traits")) %>%
+    filter_all(all_vars(!is.na(.)))
   
   analysis_data
 }
@@ -41,6 +51,7 @@ corrplot_figure <- function(analysis_data){
     rename(`Unique localitieis observed` = unique_localities) %>%
     rename(`log(Body size)` = body_size_logged) %>%
     rename(`log(Clutch size)` = clutch_size_logged) %>%
+    rename(`Range size (1000s km2)` = range_size) %>%
     cor(use="pairwise.complete.obs")
   
   pdf("figures/corrplot_of_continuous_variables.pdf")
@@ -59,9 +70,9 @@ get_global_model <- function(analysis_data) {
   
   glob.mod <- lm(response ~ body_size_logged + clutch_size_logged + feeding_habitat_generalism + brain_residual + 
                    Habitat_agricultural + breeding_habitat_generalism + granivore + insectivore + 
-                   carrion_eater + plant_eater + diet_generalism + movement_class +
+                   carrion_eater + plant_eater + diet_generalism + migrate + nomadic_irruptive +
                    ground_nesting + hollow_nesting + nest_generalism + breeding + 
-                   nest_aggregation + feeding_aggregation + Habitat_grass_shrubland +
+                   nest_aggregation + feeding_aggregation + Habitat_grass_shrubland + range_size +
                    Habitat_tree_forest, data=analysis_data, 
                    na.action = "na.fail", weights=(analysis_data$N/analysis_data$unique_localities))
   
@@ -81,9 +92,9 @@ collinearity_investigation_function <- function(global_model) {
   row.names(collinearity_investigation) <- c("log(Body size)", "log(Clutch size)", "Feeding habitat generalism",
                       "Brain residual", "Habitat - agricultural", "Breeding habitat generalism",
                       "Granivore", "Insectivore", "Carrion eater", "Plant eater", "Diet generalism",
-                      "Migratory type", "Ground-nesting", "Hollow-nesting", "Nest generalism",
-                      "Cooperative breeding", "Nest aggregation", "Feeding aggregation",
-                      "Habitat - grass/shrubland", "Habitat - tree/forest")
+                      "Movement - migratory", "Movement - nomadic/irruptive", "Ground-nesting", "Hollow-nesting", 
+                      "Nest generalism", "Cooperative breeding", "Nest aggregation", "Feeding aggregation",
+                      "Habitat - grass/shrubland", "Range size (1000s km2)", "Habitat - tree/forest")
   
   colnames(collinearity_investigation) <- c("Generalized VIF", "Degrees of \nfreedom", "Adjusted \nGeneralized VIF")
   
@@ -114,41 +125,35 @@ plot_params_globmod <- function(global_model) {
       mutate(upr=upr$upr) %>%
       filter(term != "(Intercept)") %>%
       arrange(desc(estimate)) %>%
-      mutate(term2 = c("log(Clutch size)",
-                       "Feeding habitat generalism", 
-                       "Migratory type \n (partial migrant)",
-                       "Migratory type \n (dispersal, partial migrant, & nomadic/irruptive",
-                       "Diet generalism", 
-                       "Breeding habitat generalism", 
-                       "Migratory type \n (dispersal & nomadic/irruptive)",
-                       "Migratory type \n (total migrant)", 
-                       "Migratory type \n (none)", 
-                       "Habitat - agricultural", 
-                       "Migratory type \n (nomadic/irruptive)",
-                       "log(Body size)", 
-                       "Brain residual", 
-                       "Migratory type \n (dispersal & partial migrant)",
-                       "Nest generalism", 
+      mutate(term2 = c("Feeding habitat generalism",
+                       "Breeding habitat generalism",
+                       "log(Clutch size)",
+                       "Diet generalism",
+                       "Habitat - agricultural",
+                       "Movement - migratory",
+                       "log(Body size)",
+                       "Movement - nomadic/irruptive",
+                       "Brain residual",
                        "Feeding aggregation \n (solitary & flocks)",
-                       "Feeding aggregation \n (solitary, pairs, & flocks)", 
-                       "Plant eater", 
-                       "Ground-nesting", 
-                       "Migratory type \n (total migrant & nomadic/irruptive)", 
+                       "Ground-nesting",
+                       "Feeding aggregation \n (solitary, pairs, & flocks)",
+                       "Plant eater",
+                       "Nest generalism",
+                       "Feeding aggregation \n (solitary & pairs)",
+                       "Range size (1000s km2)",
+                       "Hollow-nesting",
                        "Cooperative breeding",
-                       "Hollow-nesting", 
-                       "Feeding aggregation \n (solitary & pairs)", 
-                       "Nest aggregation \n (solitary)",
-                       "Habitat - tree/forest", 
-                       "Nest aggregation \n (none)", 
                        "Nest aggregation \n (colonial)",
-                       "Feeding aggregation \n (pairs)", 
-                       "Granivore", 
-                       "Carrion eater", 
-                       "Feeding aggregation \n (pairs & flocks)", 
-                       "Habitat - grass/shrubland", 
+                       "Feeding aggregation \n (pairs)",
+                       "Nest aggregation \n (solitary)",
+                       "Carrion eater",
+                       "Nest aggregation \n (none)",
+                       "Feeding aggregation \n (pairs & flocks)",
+                       "Granivore",
+                       "Habitat - tree/forest",
+                       "Habitat - grass/shrubland",
                        "Insectivore",
-                       "Feeding aggregation \n (solitary)",
-                       "Migratory type \n (partial migrant & nomadic/irruptive)")) %>%
+                       "Feeding aggregation \n (solitary)")) %>%
       arrange(estimate) %>%
       mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
       ggplot(., aes(x=fct_inorder(term2), y=estimate, color=trend))+

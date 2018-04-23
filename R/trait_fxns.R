@@ -32,7 +32,8 @@ Mode <- function(x) {
 read_process_trait_data <- function(){
   
   traits <- read_trait_data_in()
-    traits %>%
+  
+  ms <- traits %>%
     mutate(body_mass=ifelse(`99_Body_mass_average_8`=="NAV",NA,as.numeric(`99_Body_mass_average_8`))) %>%
     mutate(clutch_size=ifelse(`178_Clutch_size_average_12`=="NAV",NA,as.numeric(`178_Clutch_size_average_12`))) %>%
     mutate(iucn_status=`49_Australian_status_July_2015_5`) %>%
@@ -44,7 +45,7 @@ read_process_trait_data <- function(){
               clutch_size=mean(clutch_size,na.rm=T),
               iucn_status=Mode(iucn_status),
               brain_size=mean(brain_size, na.rm=T),
-              brain_residual=mean(brain_residual, na.rm=T)) -> ms
+              brain_residual=mean(brain_residual, na.rm=T))
               
     
 ## calculate df for feeding habitat generalism
@@ -76,7 +77,7 @@ read_process_trait_data <- function(){
       mutate(tree_forest = rowSums(.[2:11])) %>%
       dplyr::select(binom, tree_forest) %>%
       mutate(tree_forest = ifelse(.$tree_forest > 1, 1, .$tree_forest)) %>%
-      mutate(Habitat_tree_forest = ifelse(.$tree_forest == 1, "Yes", "no")) %>%
+      mutate(Habitat_tree_forest = ifelse(.$tree_forest == 1, "Yes", "No")) %>%
       dplyr::select(-tree_forest)
     
     
@@ -89,7 +90,7 @@ read_process_trait_data <- function(){
       mutate(grass_shrubland = rowSums(.[2:8])) %>%
       dplyr::select(binom, grass_shrubland) %>%
       mutate(grass_shrubland = ifelse(.$grass_shrubland > 1, 1, .$grass_shrubland)) %>%
-      mutate(Habitat_grass_shrubland = ifelse(.$grass_shrubland == 1, "Yes", "no")) %>%
+      mutate(Habitat_grass_shrubland = ifelse(.$grass_shrubland == 1, "Yes", "No")) %>%
       dplyr::select(-grass_shrubland)
     
     
@@ -102,7 +103,7 @@ read_process_trait_data <- function(){
       mutate(agricultural = rowSums(.[2:3])) %>%
       dplyr::select(binom, agricultural) %>%
       mutate(agricultural = ifelse(.$agricultural > 1, 1, .$agricultural)) %>%
-      mutate(Habitat_agricultural = ifelse(.$agricultural == 1, "Yes", "no")) %>%
+      mutate(Habitat_agricultural = ifelse(.$agricultural == 1, "Yes", "No")) %>%
       dplyr::select(-agricultural)
   
     habitat_types <- agricultural %>%
@@ -132,11 +133,11 @@ read_process_trait_data <- function(){
       rename(carrion_eater = `170_Food_Carrion_10`) %>%
       mutate(plant_eater = plants1+plants2) %>%
       dplyr::select(-plants1, -plants2) %>%
-      mutate(granivore = ifelse(granivore == 1, "Yes", "no")) %>%
-      mutate(insectivore = ifelse(insectivore == 1, "Yes", "no")) %>%
+      mutate(granivore = ifelse(granivore == 1, "Yes", "No")) %>%
+      mutate(insectivore = ifelse(insectivore == 1, "Yes", "No")) %>%
       mutate(plant_eater = as.integer(as.character(gsub("2", "1", .$plant_eater)))) %>%
-      mutate(plant_eater = ifelse(plant_eater == 1, "Yes", "no")) %>%
-      mutate(carrion_eater = ifelse(carrion_eater == 1, "Yes", "no"))
+      mutate(plant_eater = ifelse(plant_eater == 1, "Yes", "No")) %>%
+      mutate(carrion_eater = ifelse(carrion_eater == 1, "Yes", "No"))
     
 ## join diet
     diet <- inner_join(diet_types, diet_generalism, by="binom")
@@ -169,44 +170,32 @@ read_process_trait_data <- function(){
     nesting <- inner_join(nest_types, nest_generalism, by="binom")
     
 ## movement
-    movement <- traits %>%
-      dplyr::select(binom, 193:197) %>%
+    migrant <- traits %>%
+      dplyr::select(binom, 194, 195) %>%
       replace(is.na(.), 0) %>%
       mutate_all(funs(str_replace(., "NAV", "0"))) %>%
-      mutate(`193_National_movement_local_dispersal_13` = as.integer(as.character(`193_National_movement_local_dispersal_13`))) %>%
       mutate(`194_National_movement_Partial_migrant_13` = as.integer(as.character(`194_National_movement_Partial_migrant_13`))) %>%
       mutate(`195_National_movement_Total_migrant_13` = as.integer(as.character(`195_National_movement_Total_migrant_13`))) %>%
+      group_by(binom) %>%
+      summarise_all(sum) %>%
+      mutate(migrate = `194_National_movement_Partial_migrant_13` + `195_National_movement_Total_migrant_13`) %>%
+      mutate(migrate=ifelse(migrate == 0, "No", "Yes")) %>%
+      dplyr::select(binom, migrate)
+    
+    opportunistic <- traits %>%
+      dplyr::select(binom, 196, 197) %>%
+      replace(is.na(.), 0) %>%
+      mutate_all(funs(str_replace(., "NAV", "0"))) %>%
       mutate(`196_National_movement_Nomadic_or_opportunistic_13` = as.integer(as.character(`196_National_movement_Nomadic_or_opportunistic_13`))) %>%
       mutate(`197_National_movement_Irruptive_13` = as.integer(as.character(`197_National_movement_Irruptive_13`))) %>%
       group_by(binom) %>%
       summarise_all(sum) %>%
-      mutate(`193_National_movement_local_dispersal_13` = 
-               ifelse(`193_National_movement_local_dispersal_13` == 0, "", "dispersal")) %>%
-      mutate(`194_National_movement_Partial_migrant_13` = 
-               ifelse(`194_National_movement_Partial_migrant_13` == 0, "", "partial_migrant")) %>%
-      mutate(`195_National_movement_Total_migrant_13` = 
-               ifelse(`195_National_movement_Total_migrant_13` == 0, "", "total_migrant")) %>%
-      mutate(`196_National_movement_Nomadic_or_opportunistic_13` = 
-               ifelse(`196_National_movement_Nomadic_or_opportunistic_13` == 0, "", "nomadic_or_irruptive")) %>%
-      mutate(`197_National_movement_Irruptive_13` = 
-               ifelse(`197_National_movement_Irruptive_13` == 0, "", "nomadic_or_irruptive")) %>%
-      unite("movement_class", 2:6, sep=" and ") %>%
-      mutate(movement_class = gsub("dispersal and partial_migrant and  and  and nomadic_or_irruptive", "dispersal and partial_migrant and nomadic/irruptive", .$movement_class)) %>%
-      mutate(movement_class = gsub("dispersal and partial_migrant and  and  and ", "dispersal and partial_migrant", .$movement_class)) %>%
-      mutate(movement_class = gsub("dispersal and partial_migrant and  and nomadic_or_irruptive and ", "dispersal and partial_migrant and nomadic/irruptive", .$movement_class)) %>%
-      mutate(movement_class = gsub("dispersal and  and  and nomadic_or_irruptive and nomadic_or_irruptive", "dispersal and nomadic/irruptive", .$movement_class)) %>%
-      mutate(movement_class = gsub("dispersal and  and  and nomadic_or_irruptive and " , "dispersal and nomadic/irruptive", .$movement_class)) %>%
-      mutate(movement_class = gsub("dispersal and  and  and  and nomadic_or_irruptive", "dispersal and nomadic/irruptive", .$movement_class)) %>%
-      mutate(movement_class = gsub("dispersal and  and  and  and ", "dispersal", .$movement_class)) %>%
-      mutate(movement_class = gsub(" and  and total_migrant and nomadic_or_irruptive and ", "total_migrant and nomadic/irruptive", .$movement_class)) %>%
-      mutate(movement_class = gsub(" and  and total_migrant and  and ", "total_migrant", .$movement_class)) %>%
-      mutate(movement_class = gsub(" and  and  and nomadic_or_irruptive and nomadic_or_irruptive", "nomadic/irruptive", .$movement_class)) %>%
-      mutate(movement_class = gsub(" and  and  and nomadic_or_irruptive and ", "nomadic/irruptive", .$movement_class)) %>%
-      mutate(movement_class = gsub(" and partial_migrant and  and  and ", "partial_migrant", .$movement_class)) %>%
-      mutate(movement_class = gsub(" and partial_migrant and  and nomadic_or_irruptive and ", "partial_migrant and nomadic/irruptive", .$movement_class)) %>%
-      mutate(movement_class = gsub(" and partial_migrant and total_migrant and  and ", "partial_migrant and total_migrant", .$movement_class)) %>%
-      mutate(movement_class = gsub(" and  and  and  and nomadic_or_irruptive", "nomadic/irruptive", .$movement_class)) %>%
-      mutate(movement_class = gsub(" and  and  and  and ", "none", .$movement_class))
+      mutate(nomadic_irruptive = `196_National_movement_Nomadic_or_opportunistic_13` + `197_National_movement_Irruptive_13`) %>%
+      mutate(nomadic_irruptive=ifelse(nomadic_irruptive == 0, "No", "Yes")) %>%
+      dplyr::select(binom, nomadic_irruptive)
+      
+    movement <- opportunistic %>%
+      inner_join(., migrant, by="binom")
 
 
 ## gregariousness
