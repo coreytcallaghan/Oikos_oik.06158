@@ -126,13 +126,12 @@ run_one_phylo_model<-function(aus_bird_tree,analysis_data){
   #non_aus_sp <- aus_bird_tree$tip.label[!aus_bird_tree$tip.label %in% analysis_data$binom]
   #aus_bird_tree_ss <- diversitree:::drop.tip.fixed(aus_bird_tree, non_aus_sp)
   row.names(analysis_data)<-analysis_data$binom
-  phy_mod<-phylolm(response~body_size_logged + clutch_size_logged + feeding_habitat_generalism +   
-                     brain_residual + Habitat_agricultural + breeding_habitat_generalism + 
-                     granivore + insectivore + 
-                     carrion_eater + plant_eater + diet_generalism + movement_class +
+  phy_mod<-phylolm(response ~ body_size_logged + clutch_size_logged + feeding_habitat_generalism + brain_residual + 
+                     Habitat_agricultural + breeding_habitat_generalism + granivore + insectivore + 
+                     carrion_eater + plant_eater + diet_generalism + migrate + nomadic_irruptive +
                      ground_nesting + hollow_nesting + nest_generalism + breeding + 
-                     nest_aggregation + feeding_aggregation + Habitat_grass_shrubland +
-                     Habitat_tree_forest,data=analysis_data,phy=aus_bird_tree,
+                     nest_aggregation + feeding_aggregation + Habitat_grass_shrubland + range_size +
+                     Habitat_tree_forest, data=analysis_data, phy=aus_bird_tree,
                    na.action = "na.fail", weights=(analysis_data$N/analysis_data$unique_localities))
   
   return(phy_mod)
