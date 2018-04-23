@@ -122,21 +122,117 @@ plot_dist_parameter<-function(list_of_models){
 }
 
 
-run_one_phylo_model<-function(aus_bird_tree,analysis_data){
+run_one_phylo_model<-function(aus_bird_tree, analysis_data){
   #non_aus_sp <- aus_bird_tree$tip.label[!aus_bird_tree$tip.label %in% analysis_data$binom]
   #aus_bird_tree_ss <- diversitree:::drop.tip.fixed(aus_bird_tree, non_aus_sp)
-  row.names(analysis_data)<-analysis_data$binom
-  phy_mod<-phylolm(response ~ body_size_logged + clutch_size_logged + feeding_habitat_generalism + brain_residual + 
+  row.names(analysis_data) <- analysis_data$binom
+  
+  phy_mod <- phylolm(response ~ body_size_logged + clutch_size_logged + feeding_habitat_generalism + brain_residual + 
                      Habitat_agricultural + breeding_habitat_generalism + granivore + insectivore + 
                      carrion_eater + plant_eater + diet_generalism + migrate + nomadic_irruptive +
                      ground_nesting + hollow_nesting + nest_generalism + breeding + 
                      nest_aggregation + feeding_aggregation + Habitat_grass_shrubland + range_size +
                      Habitat_tree_forest, data=analysis_data, phy=aus_bird_tree,
-                   na.action = "na.fail", weights=(analysis_data$N/analysis_data$unique_localities))
+                     na.action = "na.fail", weights=(analysis_data$N/analysis_data$unique_localities))
+  
+  phy_mod_rescaled <- phylolm(response ~ rescale(body_size_logged) + rescale(clutch_size_logged) + 
+                                rescale(feeding_habitat_generalism) + rescale(brain_residual) + 
+                                rescale(Habitat_agricultural) + rescale(breeding_habitat_generalism) + 
+                                rescale(granivore) + rescale(insectivore) + 
+                                rescale(carrion_eater) + rescale(plant_eater) + rescale(diet_generalism) + 
+                                rescale(migrate) + rescale(nomadic_irruptive) +
+                                rescale(ground_nesting) + rescale(hollow_nesting) + 
+                                rescale(nest_generalism) + rescale(breeding) + 
+                                nest_aggregation + feeding_aggregation + 
+                                rescale(Habitat_grass_shrubland) + rescale(range_size) +
+                                rescale(Habitat_tree_forest), data=analysis_data, phy=aus_bird_tree,
+                                na.action = "na.fail", 
+                                weights=(analysis_data$N/analysis_data$unique_localities))
   
   return(phy_mod)
 }
 
+standard_phylo_model <- function(aus_bird_tree, analysis_data) {
+  
+  phy_mod_rescaled <- phylolm(response ~ rescale(body_size_logged) + rescale(clutch_size_logged) + 
+                                rescale(feeding_habitat_generalism) + rescale(brain_residual) + 
+                                rescale(Habitat_agricultural) + rescale(breeding_habitat_generalism) + 
+                                rescale(granivore) + rescale(insectivore) + 
+                                rescale(carrion_eater) + rescale(plant_eater) + rescale(diet_generalism) + 
+                                rescale(migrate) + rescale(nomadic_irruptive) +
+                                rescale(ground_nesting) + rescale(hollow_nesting) + 
+                                rescale(nest_generalism) + rescale(breeding) + 
+                                nest_aggregation + feeding_aggregation + 
+                                rescale(Habitat_grass_shrubland) + rescale(range_size) +
+                                rescale(Habitat_tree_forest), data=analysis_data, phy=aus_bird_tree,
+                                na.action = "na.fail", 
+                                weights=(analysis_data$N/analysis_data$unique_localities))
+  
+  return(phy_mod_rescaled)
+  
+}
+
+
+plot_params_phymod <- function(phy_mod_rescaled) {
+  
+  results <- data.frame(estimate = phy_mod_rescaled$coefficients, 
+                             lwr = confint(phy_mod_rescaled)[,1],
+                             upr = confint(phy_mod_rescaled)[,2],
+                             stringsAsFactors = FALSE)
+  
+  pdf("figures/param_plot_phylo_model.pdf", height=11, width=9)
+  
+  print( 
+    results %>%
+      rownames_to_column("term") %>%
+      filter(term != "(Intercept)") %>%
+      arrange(desc(estimate)) %>%
+      mutate(term2 = c("Feeding habitat generalism",
+                       "Diet generalism",
+                       "log(Clutch size)",
+                       "Habitat - agricultural",
+                       "Brain residual",
+                       "Breeding habitat generalism",
+                       "log(Body size)",
+                       "Plant eater",
+                       "Nest generalism",
+                       "Feeding aggregation \n (solitary, pairs, & flocks)",
+                       "Movement - nomadic/irruptive",
+                       "Movement - migratory",
+                       "Feeding aggregation \n (pairs & flocks)",
+                       "Ground-nesting",
+                       "Feeding aggregation \n (solitary & pairs)",
+                       "Habitat - tree/forest",
+                       "Nest aggregation \n (solitary)",
+                       "Range size (1000s km2)",
+                       "Cooperative breeding",
+                       "Carrion eater",
+                       "Nest aggregation \n (colonial)",
+                       "Hollow-nesting",
+                       "Feeding aggregation \n (solitary & flocks)",
+                       "Granivore",
+                       "Feeding aggregation \n (solitary)",
+                       "Nest aggregation \n (none)",
+                       "Insectivore",
+                       "Habitat - grass/shrubland",
+                       "Feeding aggregation \n (pairs)")) %>%
+      arrange(estimate) %>%
+      mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
+      ggplot(., aes(x=fct_inorder(term2), y=estimate, color=trend))+
+      geom_point()+
+      geom_errorbar(aes(ymin=lwr, ymax=upr, color=trend))+
+      ylab("Parameter estimates")+
+      xlab("")+
+      coord_flip()+
+      theme_classic()+
+      guides(color=FALSE)+
+      geom_hline(yintercept=0, color="black")
+  )
+  
+  dev.off()
+  
+  rm(list = ls())
+}
 
 phy_v_non_phy<-function(glob.mod,phy_mod){
   library(ggplot2)
