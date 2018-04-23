@@ -13,14 +13,14 @@ download_phylo <- function() {
 }
 
 read_one_tree<-function(path,x=1){
-  unzip(path,overwrite=TRUE,exdir="Data/phylo/")
+  unzip(path,overwrite=TRUE,exdir="Data/phylo")
   one_bird_tree <- ape::read.tree(file = "Data/phylo/mnt/data/projects/birdphylo/Tree_sets/Stage2_full_data/CombinedTrees/AllBirdsEricson1.tre")[[x]]
   #drop tips to get down to Aus species here
   return(one_bird_tree)
 }
 
 read_all_trees<-function(path){
-  unzip(path,overwrite=TRUE,exdir="Data/phylo/")
+  unzip(path,overwrite=TRUE,exdir="Data/phylo")
   ape::read.tree(file = "Data/phylo/mnt/data/projects/birdphylo/Tree_sets/Stage2_full_data/CombinedTrees/AllBirdsEricson1.tre")
 }
 
