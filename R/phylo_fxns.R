@@ -234,7 +234,7 @@ plot_params_phymod <- function(phy_mod_rescaled) {
   rm(list = ls())
 }
 
-phy_v_non_phy<-function(glob.mod,phy_mod){
+phy_v_non_phy<-function(global_model,phy_mod_rescaled){
   library(ggplot2)
   cc <- data.frame(phy_mod_coefs=coef(phy_mod_rescaled), 
                    non_phy_mod=coef(global_model)) %>%

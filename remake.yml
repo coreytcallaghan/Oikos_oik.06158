@@ -115,7 +115,7 @@ targets:
     command: model_averaging_results()
 
   figures/phy_v_non_phy.pdf:
-    command: phy_v_non_phy(global_model,phy_mod)
+    command: phy_v_non_phy(global_model,phy_mod_rescaled)
   
   figures/brains.pdf:
     command: plot_dist_parameter(list_phy_models)
