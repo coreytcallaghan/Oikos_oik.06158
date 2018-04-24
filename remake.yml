@@ -42,7 +42,7 @@ targets:
       - figures/phy_v_non_phy.pdf
       - figures/brains.pdf
       - figures/param_plot_phylo_model.pdf
-      #- reports/phylo_report.pdf
+      - reports/phylo_report.pdf
   
   Data/phylo/EricsonStage2_0001_1000.zip:
     command: download_phylo()
@@ -123,9 +123,8 @@ targets:
   figures/param_plot_phylo_model.pdf:
     command: plot_params_phymod(phy_mod_rescaled)
 
-   #reports/phylo_report.pdf:
-    #command: render("reports/phylo_report.rmd")
-    #depends: 
-      #- traits
-      #- aus_bird_tree
-      #- response_variables
+  reports/phylo_report.pdf:
+    command: render("reports/phylo_report.rmd")
+    depends: 
+      - analysis_data
+      - aus_bird_tree

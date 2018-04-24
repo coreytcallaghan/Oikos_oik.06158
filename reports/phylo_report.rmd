@@ -1,72 +1,28 @@
 ---
-title: "phylo_analyses"
+title: "phylo_signal_analyses"
 author: "Everyone"
 date: "3/22/2018"
 output: pdf_document
 ---
 
-non phylo model
+
 
 ```{r}
-setwd("..") #take this out later
-remake::dump_environment() #take this out later
-glob.mod <- lm(response ~ body_size_logged + clutch_size_logged + feeding_habitat_generalism + brain_residual + 
-                 Habitat_agricultural + breeding_habitat_generalism + granivore + insectivore + 
-                 carrion_eater + plant_eater + diet_generalism + movement_class +
-                 ground_nesting + hollow_nesting + nest_generalism + breeding + 
-                 nest_aggregation + feeding_aggregation + Habitat_grass_shrubland +
-                 Habitat_tree_forest, data=analysis_data, 
-               na.action = "na.fail", weights=(analysis_data$N/analysis_data$unique_localities))
+require(phylosignal)
+   dplyr::select(analysis_data,body_size_logged,clutch_size_logged,response,range_size, #select appropriate rows
+          nest_generalism,diet_generalism,breeding_habitat_generalism,feeding_habitat_generalism,brain_residual) ->dd
 
-plot(glob.mod)
+row.names(dd)<-analysis_data$binom #name rows so that it matches the tree
+dd$rand<-rnorm(dim(dd)[2]) #random numbers to test package
+p4d <- phylo4d(aus_bird_tree, dd) #create phylobase object
+
+ps<-phyloSignal(p4d,reps = 9999) #run calculation, p values a bit unstable at 999 reps
 ```
-
-run phylo model, exactly the same as the non-phylo model at this point
-
+There are two output table the summary statistics and the p-value first the summary stats
 ```{r}
-non_aus_sp <- aus_bird_tree$tip.label[!aus_bird_tree$tip.label %in% analysis_data$binom]
-aus_bird_tree_ss <- drop.tip(aus_bird_tree, non_aus_sp)
-
-row.names(analysis_data)<-analysis_data$binom
-
-phy_mod<-phylolm(response~body_size_logged + clutch_size_logged + feeding_habitat_generalism +   
-                   brain_residual + Habitat_agricultural + breeding_habitat_generalism + 
-                   granivore + insectivore + 
-                   carrion_eater + plant_eater + diet_generalism + movement_class +
-                   ground_nesting + hollow_nesting + nest_generalism + breeding + 
-                   nest_aggregation + feeding_aggregation + Habitat_grass_shrubland +
-                   Habitat_tree_forest,data=analysis_data,phy=aus_bird_tree_ss,na.action = "na.fail", weights=(analysis_data$N/analysis_data$unique_localities))
-
-plot(phy_mod)
+knitr::kable(ps$stat)
 ```
-
-looks ok from a first glance. now let's look at the model summaries.
-
+and then the p-values
 ```{r}
-summary(glob.mod)
-
+knitr::kable(ps$pvalue)
 ```
-
-and then the phylo model (this is most often called pgls in the literature)
-
-```{r}
-summary(phy_mod)
-```
-
-look a little bit more at the coefficients
-
-```{r}
-library(ggplot2)
-cc<-data.frame(phy_mod_coefs=coef(phy_mod),non_phy_mod=coef(glob.mod))
-cc$parameter<-substr(row.names(cc), start = 1, stop = 7)
-
-ggplot(cc,aes(x=non_phy_mod,y=phy_mod_coefs))+geom_point()+geom_text(aes(label=parameter),hjust=0, vjust=0)+theme_bw()+geom_abline(slope=1,intercept=0)
-
-
-```
-
-Wwith the phylogeny in the model, brain residuals association with urbanness becomes stronger.  The implication is that brain residuals varies across the phylogeny and some clades are big and some are small which means the non-phylo relationship is weak.  But **within each clade** it's the species with the large brain residuals that are doing fine in urban areas.  
-
-IDK, might be something real there????
-
-What do you think?
