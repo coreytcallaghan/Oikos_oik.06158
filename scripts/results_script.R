@@ -3,29 +3,17 @@
 ## first dump the remake environment
 remake::dump_environment()
 
-## get the final dataframe which was used for analysis
-## code copies from the non_phylo_model.Rmd
-response_variables$binom <- response_variables$SCIENTIFIC_NAME_tree
-
-df <- left_join(traits,response_variables, by="binom") %>%
-  filter(SCIENTIFIC_NAME_tree != "not_treated_as_species") %>%
-  # drop columns that we aren't inerested in
-  dplyr::select(-brain_size)
-
-df2 <- df %>%
-  filter_all(all_vars(!is.na(.)))
-
 ## total number of species included in models
-length(unique(df2))
+length(unique(analysis_data))
 
 ## summary of urbanization index
-summary(df2$urban_median)
+summary(analysis_data$urban_median)
 
-sd(df2$urban_median)
+sd(analysis_data$urban_median)
 
-min(df2$urban_median)
+min(analysis_data$urban_median)
 
-max(df2$urban_median)
+max(analysis_data$urban_median)
 
 
 ## Figure 1
@@ -33,8 +21,11 @@ max(df2$urban_median)
 ## Need to load the species_urban .RData file first
 load('Data/eBird data/Final eBird data for analysis/species_urban.RData')
 
-species_to_plot <- c("Common Myna", "Scaly-breasted Lorikeet", "Welcome Swallow", 
-                     "Banded Honeyeater", "White-winged Fairywren")
+species_to_plot <- c("Dusky Moorhen",
+                     "Yellow-tailed Black-Cockatoo",
+                     "Hooded Robin",
+                     "Noisy Friarbird",
+                     "Squatter Pigeon")
 
 Figure1 <- species_urban %>%
   filter(COMMON_NAME %in% species_to_plot) %>%
@@ -42,10 +33,11 @@ Figure1 <- species_urban %>%
   geom_density(alpha = 0.7) + 
   scale_x_log10() + 
   theme_classic() +
-  xlab("Average radiance") +
+  xlab("log(Average radiance)") +
   ylab("Density")+
   guides(fill=guide_legend(title="  Common Name")) +
-  theme(legend.position = c(0.2, 0.8))
+  theme(legend.position = c(0.26, 0.8))+
+  theme(axis.text.x=element_text(hjust=0.7))
 
 pdf("final figures for paper/Figure1.pdf", width=5.5, height=4.5)
 print(Figure1)
@@ -57,21 +49,25 @@ dev.off()
 ## Use the df2 dataframe from above
 ## I want to add a line for each of the example species on the distribution
 
-species_to_plot <- c("Common Myna", "Scaly-breasted Lorikeet", "Welcome Swallow", 
-                     "Banded Honeyeater", "White-winged Fairywren")
+species_to_plot <- c("Dusky Moorhen",
+                     "Yellow-tailed Black-Cockatoo",
+                     "Hooded Robin",
+                     "Noisy Friarbird",
+                     "Squatter Pigeon")
 
-species_values <- df2 %>%
+
+species_values <- analysis_data %>%
   filter(COMMON_NAME_ebird %in% species_to_plot) %>%
   dplyr::select(COMMON_NAME_ebird, urban_median) %>%
   mutate(urban_median = log(urban_median))
 
-Figure2 <- ggplot(data=df2, aes(log(urban_median))) +
+Figure2 <- ggplot(data=analysis_data, aes(log(urban_median))) +
   geom_histogram(bins = 70, 
                  col="black", 
                  fill="green", 
                  alpha = 0.3)+
   theme_classic()+
-  xlab("Value")+
+  xlab("log(Response variable)")+
   ylab("Count")+
   geom_vline(data=species_values, aes(xintercept=urban_median), color='red', size=1.62, alpha=0.9)
 
