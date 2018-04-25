@@ -92,8 +92,207 @@ my.file.copy(from = "figures/bird_urbanness_phylo.pdf",
 
 
 
+## All parameter estimates
+## A script which plots results for each of the four 'models'
+## only three for now though
+
+## first make dfs for each separate model approach
+### Non -phylo global model
+std.mod <- standardize(global_model) 
+lwr <- data.frame(lwr=confint(std.mod)[,1])
+upr <- data.frame(upr=confint(std.mod)[,2])
+
+estimates_non_phylo <- tidy(std.mod) %>%
+  mutate(lwr=lwr$lwr) %>%
+  mutate(upr=upr$upr) %>%
+  mutate(significance = ifelse(p.value <=0.05, "Significant", "Non-significant")) %>%
+  filter(term != "(Intercept)") %>%
+  arrange(desc(estimate)) %>%
+  mutate(term2 = c("Feeding habitat generalism",
+                   "Breeding habitat generalism",
+                   "log(Clutch size)",
+                   "Diet generalism",
+                   "Habitat - agricultural",
+                   "Movement - migratory",
+                   "log(Body size)",
+                   "Movement - nomadic/irruptive",
+                   "Brain residual",
+                   "Feeding aggregation \n (solitary & flocks)",
+                   "Ground-nesting",
+                   "Feeding aggregation \n (solitary, pairs, & flocks)",
+                   "Plant eater",
+                   "Nest generalism",
+                   "Feeding aggregation \n (solitary & pairs)",
+                   "Range size (1000s km2)",
+                   "Hollow-nesting",
+                   "Cooperative breeding",
+                   "Nest aggregation \n (colonial)",
+                   "Feeding aggregation \n (pairs)",
+                   "Nest aggregation \n (solitary)",
+                   "Carrion eater",
+                   "Nest aggregation \n (none)",
+                   "Feeding aggregation \n (pairs & flocks)",
+                   "Granivore",
+                   "Habitat - tree/forest",
+                   "Habitat - grass/shrubland",
+                   "Insectivore",
+                   "Feeding aggregation \n (solitary)")) %>%
+  arrange(estimate) %>%
+  mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
+  dplyr::select(term2, estimate, lwr, upr, p.value, significance, trend) %>%
+  rename(variable=term2) %>%
+  rename(p_value=p.value) %>%
+  mutate(model = "Non-phylo global model")
+
+## Non-phylo model-averaged
+model_results <- readRDS("Data/dredged_model_averaged_param_est.rds")
+summary <- readRDS("Data/dredged_model_summary_results.rds")
+
+p_values <- data.frame(p_value=summary$coefmat.full[,5]) %>%
+  rownames_to_column("variable")
+
+estimates_non_phylo_averaged <- model_results %>%
+    inner_join(., p_values, by="variable") %>%
+    filter(variable != "(Intercept)") %>%
+    droplevels() %>%
+    arrange(desc(estimate)) %>%
+    mutate(variable2 = c("log(Clutch size)",
+                         "Habitat - agricultural",
+                         "Diet generalism",
+                         "Feeding aggregation \n (solitary & flocks)",
+                         "Breeding habitat generalism",
+                         "Feeding habitat generalism",
+                         "Movement - migratory",
+                         "Movement - nomadic/irruptive",
+                         "log(Body size)",
+                         "Ground-nesting",
+                         "Cooperative breeding",
+                         "Carrion eater",
+                         "Nest aggregation \n (colonial)",
+                         "Nest aggregation \n (solitary)",
+                         "Nest aggregation \n (none)",
+                         "Feeding aggregation \n (solitary, pairs, & flocks)",
+                         "Feeding aggregation \n (solitary & pairs)",
+                         "Feeding aggregation \n (pairs)",
+                         "Habitat - tree/forest",
+                         "Granivore", 
+                         "Feeding aggregation \n (pairs & flocks)",
+                         "Habitat - grass/shrubland",
+                         "Insectivore",
+                         "Feeding aggregation \n (solitary)")) %>%
+    arrange(estimate) %>%
+    mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
+    mutate(significance=ifelse(.$p_value <= 0.05, "Significant", "Non-significant")) %>%
+    dplyr::select(variable2, estimate, lwr, upr, p_value, significance, trend) %>%
+    rename(variable=variable2) %>%
+    mutate(model = "Non-phylo model-averaged")
+
+## Phylo model global
+results <- data.frame(estimate = phy_mod_rescaled$coefficients, 
+                      lwr = confint(phy_mod_rescaled)[,1],
+                      upr = confint(phy_mod_rescaled)[,2],
+                      p_value = summary(phy_mod_rescaled)$coefficients[,4],
+                      stringsAsFactors = FALSE)
 
 
+estimates_phylo <- results %>%
+    rownames_to_column("term") %>%
+    filter(term != "(Intercept)") %>%
+    arrange(desc(estimate)) %>%
+    mutate(term2 = c("Feeding habitat generalism",
+                     "Diet generalism",
+                     "log(Clutch size)",
+                     "Habitat - agricultural",
+                     "Brain residual",
+                     "Breeding habitat generalism",
+                     "log(Body size)",
+                     "Plant eater",
+                     "Nest generalism",
+                     "Feeding aggregation \n (solitary, pairs, & flocks)",
+                     "Movement - nomadic/irruptive",
+                     "Movement - migratory",
+                     "Feeding aggregation \n (pairs & flocks)",
+                     "Ground-nesting",
+                     "Feeding aggregation \n (solitary & pairs)",
+                     "Habitat - tree/forest",
+                     "Nest aggregation \n (solitary)",
+                     "Range size (1000s km2)",
+                     "Cooperative breeding",
+                     "Carrion eater",
+                     "Nest aggregation \n (colonial)",
+                     "Hollow-nesting",
+                     "Feeding aggregation \n (solitary & flocks)",
+                     "Granivore",
+                     "Feeding aggregation \n (solitary)",
+                     "Nest aggregation \n (none)",
+                     "Insectivore",
+                     "Habitat - grass/shrubland",
+                     "Feeding aggregation \n (pairs)")) %>%
+    arrange(estimate) %>%
+    mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
+    mutate(significance=ifelse(.$p_value <= 0.05, "Significant", "Non-significant")) %>%
+    dplyr::select(term2, estimate, lwr, upr, p_value, significance, trend) %>%
+    rename(variable=term2) %>%
+    mutate(model = "Phylo global model")
+
+## Now need to merge the dfs together
+param_estimates <- bind_rows(estimates_non_phylo, estimates_phylo, estimates_non_phylo_averaged)
+
+p <- param_estimates %>%
+  arrange(model, estimate) %>%
+  mutate(order=row_number())
+
+ggplot(p, aes(x=order, y=estimate, color=trend))+
+    geom_point(aes(shape=significance), size=3)+
+    geom_errorbar(aes(ymin=lwr, ymax=upr, color=trend))+
+    facet_wrap(~model, scales="free")+
+    scale_x_continuous(breaks=p$order, labels=p$variable, expand=c(0,0))+
+    coord_flip()+
+    xlab("Parameter estimates")+
+    ylab("")+
+    theme_bw()+
+    geom_hline(yintercept=0, color="black")+
+    theme(panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line = element_blank())+
+    guides(color=FALSE)+
+    scale_shape_manual(values=c(19, 8))+
+    guides(shape=FALSE)
+    
+ggsave(filename="C:/Users/CTC/Desktop/ex1.png", width=14, height=10, units="in", dpi=300)
+
+
+## OR, potentially this
+p2 <- param_estimates %>%
+  group_by(variable) %>%
+  summarise(mean_estimate=mean(estimate)) %>%
+  arrange(desc(mean_estimate)) %>%
+  inner_join(., param_estimates, by="variable") %>%
+  arrange(model, mean_estimate)
+
+  ggplot(p2, aes(x=fct_inorder(variable), y=estimate, group=model, color=model))+
+    geom_point(aes(shape=significance), size=3, position=position_dodge(width=0.6))+
+    scale_shape_manual(values=c(19, 8))+
+    geom_errorbar(aes(ymin=lwr, ymax=upr, color=model), position=position_dodge(width=0.6))+
+    coord_flip()+
+    xlab("Parameter estimates")+
+    ylab("")+
+    theme_bw()+
+    geom_hline(yintercept=0, color="black")+
+    theme(panel.grid.major = element_blank(), 
+          panel.grid.minor = element_blank(),
+          axis.line = element_blank())+
+    guides(shape=FALSE)+
+    geom_vline(xintercept=seq(1.5, length(unique(p2$variable))-0.5, 1), 
+               lwd=0.2, colour="gray80")+
+    theme(legend.background = element_blank(),
+          legend.box.background = element_rect(colour = "black"))+
+    theme(legend.position=c(0.14, 0.87))+
+    guides(colour = guide_legend(title="                  Model",
+                                 override.aes = list(size=2, shape=NA)))
+    
+
+ggsave(filename="C:/Users/CTC/Desktop/ex2.png", width=11, height=10, units="in", dpi=300)
 
 
 
