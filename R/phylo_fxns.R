@@ -176,9 +176,12 @@ standard_phylo_model <- function(aus_bird_tree, analysis_data) {
 plot_params_phymod <- function(phy_mod_rescaled) {
   
   results <- data.frame(estimate = phy_mod_rescaled$coefficients, 
-                             lwr = confint(phy_mod_rescaled)[,1],
-                             upr = confint(phy_mod_rescaled)[,2],
-                             stringsAsFactors = FALSE)
+                        lwr = confint(phy_mod_rescaled)[,1],
+                        upr = confint(phy_mod_rescaled)[,2],
+                        p_value = summary(phy_mod_rescaled)$coefficients[,4],
+                        stringsAsFactors = FALSE)
+  
+  summary(phy_mod_rescaled)$coefficients[,4]
   
   pdf("figures/param_plot_phylo_model.pdf", height=11, width=9)
   
@@ -218,6 +221,7 @@ plot_params_phymod <- function(phy_mod_rescaled) {
                        "Feeding aggregation \n (pairs)")) %>%
       arrange(estimate) %>%
       mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
+      mutate(significance=ifelse(.$p_value <= 0.05, "Significant", "Non-significant")) %>%
       ggplot(., aes(x=fct_inorder(term2), y=estimate, color=trend))+
       geom_point()+
       geom_errorbar(aes(ymin=lwr, ymax=upr, color=trend))+

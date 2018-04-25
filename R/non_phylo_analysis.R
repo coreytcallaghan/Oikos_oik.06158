@@ -123,6 +123,7 @@ plot_params_globmod <- function(global_model) {
     tidy(std.mod) %>%
       mutate(lwr=lwr$lwr) %>%
       mutate(upr=upr$upr) %>%
+      mutate(significance = ifelse(p.value <=0.05, "Significant", "Non-significant")) %>%
       filter(term != "(Intercept)") %>%
       arrange(desc(estimate)) %>%
       mutate(term2 = c("Feeding habitat generalism",
@@ -180,10 +181,15 @@ plot_params_globmod <- function(global_model) {
 model_averaging_results <- function() {
   
   model_results <- readRDS("Data/dredged_model_averaged_param_est.rds")
+  summary <- readRDS("Data/dredged_model_summary_results.rds")
+  
+  p_values <- data.frame(p_value=summary$coefmat.full[,5]) %>%
+    rownames_to_column("variable")
   
   pdf("figures/param_plot_averaged_results.pdf")
   print(
   model_results %>%
+    inner_join(., p_values, by="variable") %>%
     filter(variable != "(Intercept)") %>%
     droplevels() %>%
     arrange(desc(estimate)) %>%
@@ -213,6 +219,7 @@ model_averaging_results <- function() {
                          "Feeding aggregation \n (solitary)")) %>%
     arrange(estimate) %>%
     mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
+    mutate(significance=ifelse(.$p_value <= 0.05, "Significant", "Non-significant")) %>%
     ggplot(., aes(x=fct_inorder(variable2), y=estimate, color=trend))+
     geom_point()+
     geom_errorbar(aes(ymin=lwr, ymax=upr, color=trend))+
@@ -226,8 +233,6 @@ model_averaging_results <- function() {
 
 dev.off()
 
-  
-  rm(list = ls())
 }
 
 
