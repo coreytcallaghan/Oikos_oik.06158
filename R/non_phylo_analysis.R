@@ -174,23 +174,9 @@ plot_params_globmod <- function(global_model) {
 
 
 ## this pulls in the dredged model results which was
-## done out of the workflow
-## the data was chunked in order to get around github file size limits
+## done out of the workflow (currently takes about 24 hours to run)
 ## will likely have to alter this once we have a finalized
 ## set of predictor variables
-get_dredged_model <- function() {
-  
-  df1 <- readRDS("Data/dredged_models_1.rds")
-  df2 <- readRDS("Data/dredged_models_2.rds")
-  df3 <- readRDS("Data/dredged_models_3.rds")
-  df4 <- readRDS("Data/dredged_models_4.rds")
-  
-  model.set <- bind_rows(df1, df2, df3, df4)
-  
-  return(model.set)
-}
-
-
 model_averaging_results <- function() {
   
   model_results <- readRDS("Data/dredged_model_averaged_param_est.rds")
@@ -202,31 +188,29 @@ model_averaging_results <- function() {
     droplevels() %>%
     arrange(desc(estimate)) %>%
     mutate(variable2 = c("log(Clutch size)",
-                         "Feeding habitat generalism",
-                         "Diet generalism",
                          "Habitat - agricultural",
-                         "Breeding habitat generalism",
+                         "Diet generalism",
                          "Feeding aggregation \n (solitary & flocks)",
+                         "Breeding habitat generalism",
+                         "Feeding habitat generalism",
+                         "Movement - migratory",
+                         "Movement - nomadic/irruptive",
                          "log(Body size)",
-                         "Nest generalism",
-                         "Brain residual",
                          "Ground-nesting",
-                         "Plant eater",
-                         "Hollow-nesting",
                          "Cooperative breeding",
-                         "Feeding aggregation \n (solitary, pairs, & flocks)",
-                         "Nest aggregation \n (solitary)",
                          "Carrion eater",
-                         "Nest aggregation \n (none)",
                          "Nest aggregation \n (colonial)",
-                         "Habitat - tree/forest",
+                         "Nest aggregation \n (solitary)",
+                         "Nest aggregation \n (none)",
+                         "Feeding aggregation \n (solitary, pairs, & flocks)",
                          "Feeding aggregation \n (solitary & pairs)",
-                         "Habitat - grass/shrubland",
-                         "Feeding aggregation \n (pairs)", 
+                         "Feeding aggregation \n (pairs)",
+                         "Habitat - tree/forest",
                          "Granivore", 
                          "Feeding aggregation \n (pairs & flocks)",
-                         "Feeding aggregation \n (solitary)",
-                         "Insectivore")) %>%
+                         "Habitat - grass/shrubland",
+                         "Insectivore",
+                         "Feeding aggregation \n (solitary)")) %>%
     arrange(estimate) %>%
     mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
     ggplot(., aes(x=fct_inorder(variable2), y=estimate, color=trend))+
