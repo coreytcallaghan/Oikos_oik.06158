@@ -26,6 +26,7 @@ packages:
   - forcats
   - broom
   - ggrepel
+  - gridExtra
 
 targets:
   all:
@@ -40,7 +41,7 @@ targets:
       - tables/collinearity_investigation.pdf
       - figures/param_plot_averaged_results.pdf
       - figures/phy_v_non_phy.pdf
-      - figures/brains.pdf
+      - figures/accounting_for_phylo_uncertainty.pdf
       - figures/param_plot_phylo_model.pdf
       - reports/phylo_report.pdf
   
@@ -117,7 +118,7 @@ targets:
   figures/phy_v_non_phy.pdf:
     command: phy_v_non_phy(global_model,phy_mod_rescaled)
   
-  figures/brains.pdf:
+  figures/accounting_for_phylo_uncertainty.pdf:
     command: plot_dist_parameter(list_phy_models)
     
   figures/param_plot_phylo_model.pdf:
