@@ -174,23 +174,9 @@ plot_params_globmod <- function(global_model) {
 
 
 ## this pulls in the dredged model results which was
-## done out of the workflow
-## the data was chunked in order to get around github file size limits
+## done out of the workflow (currently takes about 24 hours to run)
 ## will likely have to alter this once we have a finalized
 ## set of predictor variables
-get_dredged_model <- function() {
-  
-  df1 <- readRDS("Data/dredged_models_1.rds")
-  df2 <- readRDS("Data/dredged_models_2.rds")
-  df3 <- readRDS("Data/dredged_models_3.rds")
-  df4 <- readRDS("Data/dredged_models_4.rds")
-  
-  model.set <- bind_rows(df1, df2, df3, df4)
-  
-  return(model.set)
-}
-
-
 model_averaging_results <- function() {
   
   model_results <- readRDS("Data/dredged_model_averaged_param_est.rds")
