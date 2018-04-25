@@ -185,8 +185,6 @@ plot_params_phymod <- function(phy_mod_rescaled) {
                         p_value = summary(phy_mod_rescaled)$coefficients[,4],
                         stringsAsFactors = FALSE)
   
-  summary(phy_mod_rescaled)$coefficients[,4]
-  
   pdf("figures/param_plot_phylo_model.pdf", height=11, width=9)
   
   print( 
