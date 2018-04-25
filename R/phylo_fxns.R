@@ -108,15 +108,19 @@ run_many_phylo_models<-function(analysis_data,list_bird_trees,n=1000){
   return(list_o)
 }
 
-extract_brain<-function(mod){
+extract_brain<-function(mod,term_to_extract="brain_residual"){
   nn<-names(mod$coefficients)
-  return(mod$coefficients[nn=="brain_residual"])
+  return(mod$coefficients[nn==term_to_extract])
 }
 
-plot_dist_parameter<-function(list_of_models){
-  df<-data.frame(coef_brain=sapply(list_of_models,extract_brain))
-  p<-ggplot(df,aes(x=coef_brain))+geom_histogram()
-  pdf("figures/brains.pdf")
+plot_dist_parameter<-function(list_phy_models){
+  df<-data.frame(`Feeding habitat generalism`=sapply(list_phy_models,extract_brain,term_to_extract="feeding_habitat_generalism"),
+                 `Clutch size (logged)`=sapply(list_phy_models,extract_brain,term_to_extract="clutch_size_logged"),
+                 `Diet generalism`=sapply(list_phy_models,extract_brain,term_to_extract="diet_generalism"))
+                 #`Granivore`=sapply(list_phy_models,extract_brain,term_to_extract="granivoreYes"))
+  df_long<-gather(df,key="Trait",value="Coefficient estimate")               
+  p<-ggplot(df_long,aes(x=`Coefficient estimate`,fill=Trait))+geom_density(alpha=0.5)+theme_bw()
+  pdf("figures/accounting_for_phylo_uncertainty.pdf")
   print(p)
   dev.off()
 }
