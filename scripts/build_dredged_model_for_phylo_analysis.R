@@ -39,13 +39,32 @@ rescale <- function (x, binary.inputs = "center")
 build_dredged_model <- function() {
   remake::dump_environment()
   
+  ## run phylo model once
+  ## standardized version
+  row.names(analysis_data) <- analysis_data$binom
+  
+  phy_mod_rescaled <- phylolm(response ~ rescale(body_size_logged) + rescale(clutch_size_logged) + 
+                                rescale(feeding_habitat_generalism) + rescale(brain_residual) + 
+                                rescale(Habitat_agricultural) + rescale(breeding_habitat_generalism) + 
+                                rescale(granivore) + rescale(insectivore) + 
+                                rescale(carrion_eater) + rescale(plant_eater) + rescale(diet_generalism) + 
+                                rescale(migrate) + rescale(nomadic_irruptive) +
+                                rescale(ground_nesting) + rescale(hollow_nesting) + 
+                                rescale(nest_generalism) + rescale(breeding) + 
+                                nest_aggregation + feeding_aggregation + 
+                                rescale(Habitat_grass_shrubland) + rescale(range_size) +
+                                rescale(Habitat_tree_forest), data=analysis_data, phy=aus_bird_tree,
+                                na.action = "na.fail", full.matrix=FALSE,
+                                weights=(analysis_data$N/analysis_data$unique_localities))
+  
+  
   library(snow)
   clusterType <- if(length(find.package("snow", quiet = TRUE))) "SOCK" else "PSOCK"
   clust <- try(makeCluster(getOption("cl.cores", 10), type = clusterType))
   
   clusterExport(clust, c("analysis_data", "phylolm", "rescale", "aus_bird_tree"), envir = .GlobalEnv)
   
-  model.set <- pdredge(phy_mod_rescaled, m.lim=c(0, 11), cluster=clust)
+  model.set <- pdredge(phy_mod_rescaled, m.lim=c(0, 2), cluster=clust)
   
   #### selects all models with deltaAic < 4
   top.models <- get.models(model.set, subset=delta<4) 
