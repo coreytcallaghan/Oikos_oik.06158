@@ -158,6 +158,8 @@ run_one_phylo_model<-function(aus_bird_tree, analysis_data){
 
 standard_phylo_model <- function(aus_bird_tree, analysis_data) {
   
+  row.names(analysis_data) <- analysis_data$binom
+  
   phy_mod_rescaled <- phylolm(response ~ rescale(body_size_logged) + rescale(clutch_size_logged) + 
                                 rescale(feeding_habitat_generalism) + rescale(brain_residual) + 
                                 rescale(Habitat_agricultural) + rescale(breeding_habitat_generalism) + 
