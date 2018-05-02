@@ -18,6 +18,8 @@ build_dredged_model <- function() {
   
   model.set <- pdredge(global_model, m.lim=c(0, 11), cluster=clust, extra="R^2")
   
+  saveRDS(model.set, file="Data/dredged_model_model.set.rds")
+  
   #### selects all models with deltaAic < 4
   top.models <- get.models(model.set, subset=delta<4) 
   

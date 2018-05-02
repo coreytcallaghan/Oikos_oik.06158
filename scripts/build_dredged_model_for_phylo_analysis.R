@@ -64,7 +64,9 @@ build_dredged_model <- function() {
   
   clusterExport(clust, c("analysis_data", "phylolm", "rescale", "aus_bird_tree"), envir = .GlobalEnv)
   
-  model.set <- pdredge(phy_mod_rescaled, m.lim=c(0, 2), cluster=clust)
+  model.set <- pdredge(phy_mod_rescaled, m.lim=c(0, 11), cluster=clust)
+  
+  saveRDS(model.set, file="Data/PHYLO_dredged_model_model.set.rds")
   
   #### selects all models with deltaAic < 4
   top.models <- get.models(model.set, subset=delta<4) 
