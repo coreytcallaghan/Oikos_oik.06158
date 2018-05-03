@@ -29,7 +29,7 @@ build_dredged_model <- function() {
   #### Ranks these models based on AICc
   my.models <- model.sel(top.models, rank="AICc") 
   
-  Averaged_models <- model.avg(top.models)
+  Averaged_models <- model.avg(my.models)
   
   summary <- summary(Averaged_models)
   
