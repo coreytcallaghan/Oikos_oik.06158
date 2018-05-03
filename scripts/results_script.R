@@ -4,7 +4,7 @@
 remake::dump_environment()
 
 ## total number of species included in models
-length(unique(analysis_data))
+nrow(analysis_data)
 
 ## summary of urbanization index
 summary(analysis_data$urban_median)
@@ -67,7 +67,7 @@ Figure2 <- ggplot(data=analysis_data, aes(log(urban_median))) +
                  fill="green", 
                  alpha = 0.3)+
   theme_classic()+
-  xlab("log(Response variable)")+
+  xlab("log(Urbanization index)")+
   ylab("Count")+
   geom_vline(data=species_values, aes(xintercept=urban_median), color='red', size=1.62, alpha=0.9)
 
@@ -91,10 +91,9 @@ my.file.copy(from = "figures/bird_urbanness_phylo.pdf",
 
 
 
-
+## Figure 4
 ## All parameter estimates
 ## A script which plots results for each of the four 'models'
-## only three for now though
 
 ## first make dfs for each separate model approach
 ### Non -phylo global model
@@ -282,39 +281,16 @@ estimates_phylo_averaged <- model_results %>%
 ## Now need to merge the dfs together
 param_estimates <- bind_rows(estimates_non_phylo, estimates_phylo, estimates_non_phylo_averaged, estimates_phylo_averaged)
 
+
+## Make figure which combines all model results into one
 p <- param_estimates %>%
-  arrange(model, estimate) %>%
-  mutate(order=row_number())
-
-ggplot(p, aes(x=order, y=estimate, color=trend))+
-    geom_point(aes(shape=significance), size=3)+
-    geom_errorbar(aes(ymin=lwr, ymax=upr, color=trend))+
-    facet_wrap(~model, scales="free")+
-    scale_x_continuous(breaks=p$order, labels=p$variable, expand=c(0,0))+
-    coord_flip()+
-    xlab("Parameter estimates")+
-    ylab("")+
-    theme_bw()+
-    geom_hline(yintercept=0, color="black")+
-    theme(panel.grid.major = element_blank(), 
-          panel.grid.minor = element_blank(),
-          axis.line = element_blank())+
-    guides(color=FALSE)+
-    scale_shape_manual(values=c(19, 8))+
-    guides(shape=FALSE)
-    
-ggsave(filename="C:/Users/CTC/Desktop/ex1.png", width=14, height=10, units="in", dpi=300)
-
-
-## OR, potentially this
-p2 <- param_estimates %>%
   group_by(variable) %>%
   summarise(mean_estimate=mean(estimate)) %>%
   arrange(desc(mean_estimate)) %>%
   inner_join(., param_estimates, by="variable") %>%
   arrange(model, mean_estimate)
 
-  ggplot(p2, aes(x=fct_inorder(variable), y=estimate, group=model, color=model))+
+Figure4 <- ggplot(p, aes(x=fct_inorder(variable), y=estimate, group=model, color=model))+
     geom_hline(yintercept=0, color="black")+
     geom_point(aes(shape=significance), size=3, position=position_dodge(width=0.6))+
     scale_shape_manual(values=c(19, 8))+
@@ -327,7 +303,7 @@ p2 <- param_estimates %>%
           panel.grid.minor = element_blank(),
           axis.line = element_blank())+
     guides(shape=FALSE)+
-    geom_vline(xintercept=seq(1.5, length(unique(p2$variable))-0.5, 1), 
+    geom_vline(xintercept=seq(1.5, length(unique(p$variable))-0.5, 1), 
                lwd=0.2, colour="gray80")+
     theme(legend.background = element_blank(),
           legend.box.background = element_rect(colour = "black"))+
@@ -338,8 +314,24 @@ p2 <- param_estimates %>%
     theme(axis.title.y=element_text(size=16))+
     theme(axis.text.y=element_text(size=7.5))
     
+  pdf("final figures for paper/Figure4.pdf", width=9.45, height=6.4)
+  print(Figure4)
+  dev.off()
 
-ggsave(filename="C:/Users/CTC/Desktop/ex2.png", width=24, height=16.3, units="cm", dpi=300)
+  
+  
+## Figure 5
+## Assessing differences between phylo and non-phylo global models
+my.file.copy <- function(from, to) {
+  todir <- dirname(to)
+  if (!isTRUE(file.info(todir)$isdir)) dir.create(todir, recursive=TRUE)
+  file.copy(from = from,  to = to)
+}
 
-
-
+my.file.copy(from = "figures/phy_v_non_phy.pdf",
+             to = "final figures for paper/Figure5.pdf")
+  
+  
+  
+  
+  
