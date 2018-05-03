@@ -115,11 +115,12 @@ extract_brain<-function(mod,term_to_extract="brain_residual"){
 
 plot_dist_parameter<-function(list_phy_models){
   df<-data.frame(`Feeding habitat generalism`=sapply(list_phy_models,extract_brain,term_to_extract="feeding_habitat_generalism"),
-                 `Clutch size (logged)`=sapply(list_phy_models,extract_brain,term_to_extract="clutch_size_logged"),
-                 `Diet generalism`=sapply(list_phy_models,extract_brain,term_to_extract="diet_generalism"))
+                 `log(Clutch size)`=sapply(list_phy_models,extract_brain,term_to_extract="clutch_size_logged"),
+                 `Diet generalism`=sapply(list_phy_models,extract_brain,term_to_extract="diet_generalism"),
+                 `Breeding habitat generalism`=sapply(list_phy_models,extract_brain,term_to_extract="breeding_habitat_generalism"))
                  #`Granivore`=sapply(list_phy_models,extract_brain,term_to_extract="granivoreYes"))
   df_long<-gather(df,key="Trait",value="Coefficient estimate")               
-  p<-ggplot(df_long,aes(x=`Coefficient estimate`,fill=Trait))+geom_density(alpha=0.5)+theme_bw()
+  p<-ggplot(df_long,aes(x=`Coefficient estimate`,fill=Trait))+geom_density(alpha=0.5)+theme_bw()+ylab("Density")
   pdf("figures/accounting_for_phylo_uncertainty.pdf")
   print(p)
   dev.off()
