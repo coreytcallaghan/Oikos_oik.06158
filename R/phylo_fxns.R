@@ -242,6 +242,69 @@ plot_params_phymod <- function(phy_mod_rescaled) {
   rm(list = ls())
 }
 
+## this pulls in the dredged model results which was
+## done out of the workflow (currently takes about 24 hours to run)
+## will likely have to alter this once we have a finalized
+## set of predictor variables
+phylomodel_averaging_results <- function() {
+  
+  model_results <- readRDS("Data/PHYLO_dredged_model_averaged_param_est.rds")
+  summary <- readRDS("Data/PHYLO_dredged_model_summary_results.rds")
+  
+  p_values <- data.frame(p_value=summary$coefmat.full[,4]) %>%
+    rownames_to_column("variable")
+  
+  pdf("figures/phylo_param_plot_averaged_results.pdf")
+  print(
+    model_results %>%
+      inner_join(., p_values, by="variable") %>%
+      filter(variable != "(Intercept)") %>%
+      droplevels() %>%
+      arrange(desc(estimate)) %>%
+      mutate(variable2 = c("Feeding habitat generalism",
+                           "Brain residual",
+                           "log(Body size)",
+                           "log(Clutch size)",
+                           "Breeding habitat generalism",
+                           "Nest aggregation \n (colonial)",
+                           "Diet generalism",
+                           "Plant eater",
+                           "Habitat - agricultural",
+                           "Insectivore",
+                           "Nest aggregation \n (solitary)",
+                           "Movement - migratory",
+                           "Habitat - tree/forest",
+                           "Ground-nesting",
+                           "Movement - nomadic/irruptive",
+                           "Habitat - grass/shrubland",
+                           "Hollow-nesting",
+                           "Granivore",
+                           "Nest generalism",
+                           "Cooperative breeding",
+                           "Carrion eater",
+                           "Range size (1000s km2)",
+                           "Nest aggregation \n (none)")) %>%
+      arrange(estimate) %>%
+      mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
+      mutate(significance=ifelse(.$p_value <= 0.05, "Significant", "Non-significant")) %>%
+      ggplot(., aes(x=fct_inorder(variable2), y=estimate, color=trend))+
+      geom_point()+
+      geom_errorbar(aes(ymin=lwr, ymax=upr, color=trend))+
+      ylab("Parameter estimates")+
+      xlab("")+
+      coord_flip()+
+      theme_classic()+
+      guides(color=FALSE)+
+      geom_hline(yintercept=0, color="black")
+  )
+  
+  dev.off()
+  
+}
+
+
+
+
 phy_v_non_phy<-function(global_model,phy_mod_rescaled){
   library(ggplot2)
   cc <- data.frame(phy_mod_coefs=coef(phy_mod_rescaled), 

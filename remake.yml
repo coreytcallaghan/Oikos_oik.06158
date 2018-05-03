@@ -43,6 +43,7 @@ targets:
       - figures/phy_v_non_phy.pdf
       - figures/accounting_for_phylo_uncertainty.pdf
       - figures/param_plot_phylo_model.pdf
+      - figures/phylo_param_plot_averaged_results.pdf
       - reports/phylo_report.pdf
   
   Data/phylo/EricsonStage2_0001_1000.zip:
@@ -123,6 +124,9 @@ targets:
     
   figures/param_plot_phylo_model.pdf:
     command: plot_params_phymod(phy_mod_rescaled)
+    
+  figures/phylo_param_plot_averaged_results.pdf:
+    command: phylomodel_averaging_results()
 
   reports/phylo_report.pdf:
     command: render("reports/phylo_report.rmd")
