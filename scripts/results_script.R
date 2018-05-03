@@ -235,8 +235,52 @@ estimates_phylo <- results %>%
     rename(variable=term2) %>%
     mutate(model = "Phylo global model")
 
+# Phylo model-averaged results
+model_results <- readRDS("Data/PHYLO_dredged_model_averaged_param_est.rds")
+summary <- readRDS("Data/PHYLO_dredged_model_summary_results.rds")
+
+p_values <- data.frame(p_value=summary$coefmat.full[,4]) %>%
+  rownames_to_column("variable")
+
+estimates_phylo_averaged <- model_results %>%
+    inner_join(., p_values, by="variable") %>%
+    filter(variable != "(Intercept)") %>%
+    droplevels() %>%
+    arrange(desc(estimate)) %>%
+    mutate(variable2 = c("Feeding habitat generalism",
+                         "Brain residual",
+                         "log(Body size)",
+                         "log(Clutch size)",
+                         "Breeding habitat generalism",
+                         "Nest aggregation \n (colonial)",
+                         "Diet generalism",
+                         "Plant eater",
+                         "Habitat - agricultural",
+                         "Insectivore",
+                         "Nest aggregation \n (solitary)",
+                         "Movement - migratory",
+                         "Habitat - tree/forest",
+                         "Ground-nesting",
+                         "Movement - nomadic/irruptive",
+                         "Habitat - grass/shrubland",
+                         "Hollow-nesting",
+                         "Granivore",
+                         "Nest generalism",
+                         "Cooperative breeding",
+                         "Carrion eater",
+                         "Range size (1000s km2)",
+                         "Nest aggregation \n (none)")) %>%
+    arrange(estimate) %>%
+    mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
+    mutate(significance=ifelse(.$p_value <= 0.05, "Significant", "Non-significant")) %>%
+    mutate(model = "Phylo model-averaged") %>%
+    dplyr::select(variable2, estimate, lwr, upr, p_value, significance, trend, model) %>%
+    rename(variable = variable2)
+
+
+
 ## Now need to merge the dfs together
-param_estimates <- bind_rows(estimates_non_phylo, estimates_phylo, estimates_non_phylo_averaged)
+param_estimates <- bind_rows(estimates_non_phylo, estimates_phylo, estimates_non_phylo_averaged, estimates_phylo_averaged)
 
 p <- param_estimates %>%
   arrange(model, estimate) %>%
@@ -271,14 +315,14 @@ p2 <- param_estimates %>%
   arrange(model, mean_estimate)
 
   ggplot(p2, aes(x=fct_inorder(variable), y=estimate, group=model, color=model))+
+    geom_hline(yintercept=0, color="black")+
     geom_point(aes(shape=significance), size=3, position=position_dodge(width=0.6))+
     scale_shape_manual(values=c(19, 8))+
     geom_errorbar(aes(ymin=lwr, ymax=upr, color=model), position=position_dodge(width=0.6))+
     coord_flip()+
-    xlab("Parameter estimates")+
-    ylab("")+
+    ylab("Parameter estimates")+
+    xlab("")+
     theme_bw()+
-    geom_hline(yintercept=0, color="black")+
     theme(panel.grid.major = element_blank(), 
           panel.grid.minor = element_blank(),
           axis.line = element_blank())+
@@ -287,12 +331,15 @@ p2 <- param_estimates %>%
                lwd=0.2, colour="gray80")+
     theme(legend.background = element_blank(),
           legend.box.background = element_rect(colour = "black"))+
-    theme(legend.position=c(0.14, 0.87))+
+    theme(legend.position=c(0.16, 0.88))+
     guides(colour = guide_legend(title="                  Model",
-                                 override.aes = list(size=2, shape=NA)))
+                                 override.aes = list(size=2, shape=NA)))+
+    theme(axis.text.x=element_text(size=12))+
+    theme(axis.title.y=element_text(size=16))+
+    theme(axis.text.y=element_text(size=7.5))
     
 
-ggsave(filename="C:/Users/CTC/Desktop/ex2.png", width=11, height=10, units="in", dpi=300)
+ggsave(filename="C:/Users/CTC/Desktop/ex2.png", width=24, height=16.3, units="cm", dpi=300)
 
 
 
