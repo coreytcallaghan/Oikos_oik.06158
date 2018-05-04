@@ -155,8 +155,17 @@ knitr::include_graphics("final figures for paper/Figure4.pdf")
 ```{r Figure 5, echo=FALSE, fig.cap="Proportional differences for parameter estimates from the non-phylogenetically constrained and phylogenetically constrained models."}
 knitr::include_graphics("final figures for paper/Figure5.pdf")
 ```
-
+     
 # Supplementary figures
+\newcommand{\beginsupplement}{%
+        \setcounter{table}{0}
+        \renewcommand{\thetable}{S\arabic{table}}%
+        \setcounter{figure}{0}
+        \renewcommand{\thefigure}{S\arabic{figure}}%
+     }
+     \beginsupplement
+
+
 ```{r Figure S1, echo=FALSE, fig.cap="A correlation plot for the continuous variables used in the modelling procedures."}
 knitr::include_graphics("figures/corrplot_of_continuous_variables.pdf")
 ```
@@ -164,6 +173,7 @@ knitr::include_graphics("figures/corrplot_of_continuous_variables.pdf")
 ```{r Figure S2, echo=FALSE, fig.cap="Phylogenetic uncertainty for some of the most important predictor variables included in the analysis."}
 knitr::include_graphics("figures/accounting_for_phylo_uncertainty.pdf")
 ```
+    
 
 # Supplementary tables
 ```{r Table S1, echo=FALSE, fig.cap="Variance inflation factors for the explanatory variables used in the analysis."}
