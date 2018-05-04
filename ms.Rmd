@@ -1,6 +1,10 @@
 ---
 title: "A continuous urbanization index to assess phylogenetic adaptations in urban bird living"
-author: Corey T. Callaghan, John Wilshire, XXXX, XXXX, Richard T. Kingsford, William K. Cornwell
+
+
+author: | 
+  | Corey T. Callaghan^[Corresponding author: c.callaghan@unsw.edu.au] $^1$, Richard E. Major $^1$$^,$$^2$, John H. Wilshire $^1$, John M. Martin $^1$$^,$$^3$, Richard T. Kingsford $^1$, William K. Cornwell $^1$$^,$$^4$
+  | $^1$Center for Ecosystem Science, School of Biological, Earth and Environmental Sciences, UNSW Sydney, Sydney, NSW, Australia; $^2$Australian Museum Research Institute, Sydney, NSW, Australia; $^3$Royal Botanic Gardens and Domain Trust, Sydney, NSW, Australia; $^4$Evolution and Ecology Research Centre, School of Biological, Earth and Environmental Sciences, UNSW Sydney, Sydney, NSW, Australia
 date: ""
 output:
   pdf_document: null
@@ -13,14 +17,20 @@ output:
     toc: no
 fontsize: 12pt
 link-citations: no
-csl: https://raw.githubusercontent.com/citation-style-language/styles/master/global-ecology-and-biogeography.csl
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/ecology-letters.csl
 bibliography: references.bib
+header-includes: 
+  - \usepackage{setspace}\doublespacing
+  - \usepackage{lineno}
+  - \linenumbers
 ---
+
+\newpage
 
 # ABSTRACT
 
 
-https://www.youtube.com/watch?v=9Gc4QTqslN4
+TBD
 
 
 
@@ -70,7 +80,7 @@ We employed two linear modelling approaches; one with and one without phylogenet
 We weighted the linear regression models [@solon2015weighting] using a source of error associated with our urbanization indices. This error was the  proportion of the number of total observations of a species divided by the number of unique localities a species was observed from. This gave more weight in the model-fitting procedure to those species that had more observations in more unique locations. This was done based on the assumption that those species which had the most observations would have the most reliable urbanization indices. This approach also addresses biases in sampling of eBird data in which some birds can have a high number of observations, but from known roosting sites [e.g., @callaghanavian].
 
 ### Non-phylogenetically constrained models
-Given that we hypothesized any of the potential candidate traits could significantly drive the response in our urbanization index, we first ran one global model including all 22 explanatory variables. We then used the standardize function from the arm package [@gelman2008scaling; @gelman2016arm] to standardize model estimates to represent relative effect sizes. In order to confirm our linear model results, we employed a model-averaging approach [@grueber2011multimodel] in which we 'dredged' possible subsets of the global model. This was done using the dredge function in the MuMIn package [@barton2016mumin], and we allowed a total of 11 candidate predictors to be fit at any one time in order to avoid over-fitting. This left a total of 784,626 models which were assessed, and the model-averaged parameter estimates were calculated from the top models of those with âˆ†AIC < 4. As with the global model, we present the standardized estimates which represent relative effect sizes
+Given that we hypothesized any of the potential candidate traits could significantly drive the response in our urbanization index, we first ran one global model including all 22 explanatory variables. We then used the standardize function from the arm package [@gelman2008scaling; @gelman2016arm] to standardize model estimates to represent relative effect sizes. In order to confirm our linear model results, we employed a model-averaging approach [@grueber2011multimodel] in which we 'dredged' possible subsets of the global model. This was done using the dredge function in the MuMIn package [@barton2016mumin], and we allowed a total of 11 candidate predictors to be fit at any one time in order to avoid over-fitting. This left a total of 784,626 models which were assessed, and the model-averaged parameter estimates were calculated from the top models of those with ???AIC < 4. As with the global model, we present the standardized estimates which represent relative effect sizes
 
 ### Phylogenetically constrained models
 Phylogenetic models were fit based on the same global model as above, but using the 'phylolm' function from the phylolm package [@ho2014phylolm]. Similar to above, we model-averaged the global phylogenetic model using the aforementioned methods.
@@ -84,7 +94,7 @@ A total of 637,482 checklists provided a total of 5,944,819 observations of 580 
 We ended with 477 candidate species (Appendix 4) from the eBird dataset which matched both the trait taxonomy and the phylogenetic tree taxonomy, and also had complete trait data.
 
 ## Urbanization index
-For the 477 species included in the models the mean ï¿½ SD urbanization index was 0.91 ï¿½ 1.76, with a range from 0.008 (Black-backed Butcherbird) to 11.85 (Powerful Owl; Fig. 2).
+For the 477 species included in the models the mean ± SD urbanization index was 0.91 ± 1.76, with a range from 0.008 (Black-backed Butcherbird) to 11.85 (Powerful Owl; Fig. 2).
 
 ### Phylogenetic signal
 There was a distinct phylogenetic signal in our urbanization index measure (Fig. 3; Table 1).
@@ -109,7 +119,11 @@ The phylogenetic and non-phylogenetic models largely agreed with the relative ra
 **WE ASSESSED PHYLOGENETIC UNCERTAINY AND FOUND THAT....**
 
 # DISCUSSION
+We found a significant effect of phylogenetic signal in our study, which contrasts with previous studies [@evans2011makes]. Niche breadth, as measured by generalism, was significantly associated with our urbanization index across all analyses. Conversely, granivores and insectivores were consistently selected against. Residual brain mass was significantly important within our phylogenetic models, suggesting that within a clade, it is the species with the largest residual brain mass that are most readily observed in urban areas. A similar pattern was found for body size, although not significant. Our results suggests that urbanization selects against specialist species.
 
+Generalists are ultimately better prepared to thrive, survive, and adapt within urban areas.
+
+We provide the largest study to date using a continuous urbanization metric in order to assess biological and ecological traits which predict a species' adaptability to urban environments. Understanding specific species' traits which are associated with urban birds allows us to fully understand how to best preserve and maintain avian diversity in cities. We recommend that urban areas should focus on providing habitats which allow granivores, insectivores, and others to be found more readily in cities.
 
 
 ## Acknowledgments
@@ -126,11 +140,9 @@ We thank the > 6,000 eBirders who have contributed data in Australia. We also th
 knitr::include_graphics("final figures for paper/Figure1.pdf")
 ```
 
-
 ```{r Figure 2, echo=FALSE, fig.cap="The distribution, on a log-scale, of the response variable for the 477 species included in the analysis, with five example species highlighted."}
 knitr::include_graphics("final figures for paper/Figure2.pdf")
 ```
-
 
 ```{r Figure 3, echo=FALSE, fig.cap="A phylogenetic tree of the birds with the tips colored based on the urbanization index. The urbanization index is also shown based on the size of the bar associated with a species."}
 knitr::include_graphics("final figures for paper/Figure3.pdf")
