@@ -89,7 +89,7 @@ Phylogenetic models were fit based on the same global model as above, but using 
 Given the diverse datasets used in this analysis, there were differing taxonomic authorities followed. The response data from eBird follows the eBird/clements checklist [http://www.birds.cornell.edu/clementschecklist/], while the biological and ecological data follows the working list of Australian birds by BirdLife Australia [http://www.birdlife.org.au/conservation/science/taxonomy], and the phylogenetic tree followed the BirdLife V3 world checklist [http://birdtree.org/taxonomy/]. There were minor differences which existed in common names, scientific names, and recognized species among the three datasets. A taxonomic key was made which combined the three different taxonomies (Appendix 2). Ultimately, a species' response variable, calculated from the eBird database and taxonomic source, was considered for analysis if it matched for both the trait dataset and the phylogenetic tree dataset. If it did not match both, then it was not considered for analysis (e.g., species currently only recognized by eBird/clements such as Western Whistler, Silver-backed Butcherbird, or Paperbark Flycatcher). Additionally, one species (Aleutian Tern) met the criteria for number of observations above, but was not included in the Australian trait data because it is new to Australia and thus not included in the analysis.
 
 # RESULTS
-A total of 637,482 checklists provided a total of 5,944,819 observations of 580 different species which had > 100 observations. The least recorded species was Black-breasted Buttonquail (N=104) while the most recorded species was Australian Magpie (N=158,615). The mean ï¿½ SD number of observations for a species was 10,250 ï¿½ 19,269.19. Density plots of all 580 species' distributions of average radiance values are presented in Appendix 3.
+A total of 637,482 checklists provided a total of 5,944,819 observations of 580 different species which had > 100 observations. The least recorded species was Black-breasted Buttonquail (N=104) while the most recorded species was Australian Magpie (N=158,615). The mean ± SD number of observations for a species was 10,250 ± 19,269.19. Density plots of all 580 species' distributions of average radiance values are presented in Appendix 3.
 
 We ended with 477 candidate species (Appendix 4) from the eBird dataset which matched both the trait taxonomy and the phylogenetic tree taxonomy, and also had complete trait data.
 
@@ -137,25 +137,54 @@ We thank the > 6,000 eBirders who have contributed data in Australia. We also th
 # Figures
 
 ```{r Figure 1, echo=FALSE, fig.cap="An example of five different species' average radiance values."}
-knitr::include_graphics("final figures for paper/Figure1.pdf")
+knitr::include_graphics("final figures & tables for ms/Figure1.pdf")
 ```
 
 ```{r Figure 2, echo=FALSE, fig.cap="The distribution, on a log-scale, of the response variable for the 477 species included in the analysis, with five example species highlighted."}
-knitr::include_graphics("final figures for paper/Figure2.pdf")
+knitr::include_graphics("final figures & tables for ms/Figure2.pdf")
 ```
 
 ```{r Figure 3, echo=FALSE, fig.cap="A phylogenetic tree of the birds with the tips colored based on the urbanization index. The urbanization index is also shown based on the size of the bar associated with a species."}
-knitr::include_graphics("final figures for paper/Figure3.pdf")
+knitr::include_graphics("final figures & tables for ms/Figure3.pdf")
 ```
 
 ```{r Figure 4, echo=FALSE, fig.cap="Parameter estimates for each of the four modelling approaches employed in the analysis. A star represents a significant effect. Note that the model-averaged results do not contain every possible predictor variable in the case that a given predictor variable was not included in the top model set."}
-knitr::include_graphics("final figures for paper/Figure4.pdf")
+knitr::include_graphics("final figures & tables for ms/Figure4.pdf")
 ```
 
 ```{r Figure 5, echo=FALSE, fig.cap="Proportional differences for parameter estimates from the non-phylogenetically constrained and phylogenetically constrained models."}
-knitr::include_graphics("final figures for paper/Figure5.pdf")
+knitr::include_graphics("final figures & tables for ms/Figure5.pdf")
 ```
-     
+
+# Tables
+```{r Table 1, echo=FALSE, warning=FALSE, message=FALSE}
+remake::dump_environment()
+
+library(phylosignal)
+   dplyr::select(analysis_data,body_size_logged,clutch_size_logged,response,range_size, #select appropriate rows
+          nest_generalism,diet_generalism,breeding_habitat_generalism,feeding_habitat_generalism,brain_residual) ->dd
+
+row.names(dd) <- analysis_data$binom #name rows so that it matches the tree
+dd$rand <- rnorm(dim(dd)[2]) #random numbers to test package
+p4d <- phylo4d(aus_bird_tree, dd) #create phylobase object
+
+ps <- phyloSignal(p4d,reps = 9999)
+
+Table1 <- ps$pvalue
+
+row.names(Table1) <- c("log(Body size)", "log(Clutch size)", "Urbanization index", "Range size (1000s km2)",
+                       "Nest generalism", "Diet generalism", "Breeding habitat generalism",
+                       "Feeding habitat generalism", "Brain residual", "Rand")
+
+library(kableExtra)
+
+kable(Table1, format = "latex", caption = "Results showing the significance of the phylogenetic signal analyses.", booktabs = T) %>%
+kable_styling(latex_options = c("striped", "hold_position"))
+
+```
+
+
+  
 # Supplementary figures
 \newcommand{\beginsupplement}{%
         \setcounter{table}{0}
@@ -167,15 +196,49 @@ knitr::include_graphics("final figures for paper/Figure5.pdf")
 
 
 ```{r Figure S1, echo=FALSE, fig.cap="A correlation plot for the continuous variables used in the modelling procedures."}
-knitr::include_graphics("figures/corrplot_of_continuous_variables.pdf")
+knitr::include_graphics("final figures & tables for ms/FigureS1.pdf")
 ```
 
 ```{r Figure S2, echo=FALSE, fig.cap="Phylogenetic uncertainty for some of the most important predictor variables included in the analysis."}
-knitr::include_graphics("figures/accounting_for_phylo_uncertainty.pdf")
+knitr::include_graphics("final figures & tables for ms/FigureS2.pdf")
 ```
     
 
 # Supplementary tables
-```{r Table S1, echo=FALSE, fig.cap="Variance inflation factors for the explanatory variables used in the analysis."}
-knitr::include_graphics("tables/collinearity_investigation.pdf")
+```{r Table S1, echo=FALSE, warning=FALSE, message=FALSE}
+library(kableExtra)
+
+read_csv("Data/TableS1.csv")
+
+kable(collinearity_investigation, format = "latex", caption = "Variance inflation factors for the explanatory variables used in the analysis.", booktabs = T) %>%
+kable_styling(latex_options = c("striped", "hold_position"))
+
 ```
+
+
+```{r Table S2, echo=FALSE, warning=FALSE, message=FALSE}
+remake::dump_environment()
+
+library(phylosignal)
+   dplyr::select(analysis_data,body_size_logged,clutch_size_logged,response,range_size, #select appropriate rows
+          nest_generalism,diet_generalism,breeding_habitat_generalism,feeding_habitat_generalism,brain_residual) ->dd
+
+row.names(dd) <- analysis_data$binom #name rows so that it matches the tree
+dd$rand <- rnorm(dim(dd)[2]) #random numbers to test package
+p4d <- phylo4d(aus_bird_tree, dd) #create phylobase object
+
+ps <- phyloSignal(p4d,reps = 9999)
+
+TableS2 <- ps$stat
+
+row.names(TableS2) <- c("log(Body size)", "log(Clutch size)", "Urbanization index", "Range size (1000s km2)",
+                       "Nest generalism", "Diet generalism", "Breeding habitat generalism",
+                       "Feeding habitat generalism", "Brain residual", "Rand")
+
+kable(TableS2, format = "latex", caption = "Summary statistics of the phylogenetic signal analysis.", booktabs = T) %>%
+kable_styling(latex_options = c("striped", "hold_position"))
+
+```
+
+
+

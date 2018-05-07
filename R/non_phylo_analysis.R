@@ -101,6 +101,8 @@ collinearity_investigation_function <- function(global_model) {
   is.num <- sapply(collinearity_investigation, is.numeric)
   collinearity_investigation[is.num] <- lapply(collinearity_investigation[is.num], round, 2)
   
+  write_csv(collinearity_investigation, "Data/TableS1.csv")
+  
   pdf("tables/collinearity_investigation.pdf")
   grid.table(collinearity_investigation)
   dev.off()

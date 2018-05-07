@@ -1,4 +1,4 @@
-### A script for summary of the results and to create final figures using the final set of species
+### A script for summary of the results and to create final figures/tables using the final set of species
 
 ## first dump the remake environment
 remake::dump_environment()
@@ -39,7 +39,7 @@ Figure1 <- species_urban %>%
   theme(legend.position = c(0.26, 0.8))+
   theme(axis.text.x=element_text(hjust=0.7))
 
-pdf("final figures for paper/Figure1.pdf", width=5.5, height=4.5)
+pdf("final figures & tables for ms/Figure1.pdf", width=5.5, height=4.5)
 print(Figure1)
 dev.off()
 
@@ -71,7 +71,7 @@ Figure2 <- ggplot(data=analysis_data, aes(log(urban_median))) +
   ylab("Count")+
   geom_vline(data=species_values, aes(xintercept=urban_median), color='red', size=1.62, alpha=0.9)
 
-pdf("final figures for paper/Figure2.pdf", width=5.5, height=4.5)
+pdf("final figures & tables for ms/Figure2.pdf", width=5.5, height=4.5)
 print(Figure2)
 dev.off()
 
@@ -87,7 +87,7 @@ my.file.copy <- function(from, to) {
 }
 
 my.file.copy(from = "figures/bird_urbanness_phylo.pdf",
-               to = "final figures for paper/Figure3.pdf")
+               to = "final figures & tables for ms/Figure3.pdf")
 
 
 
@@ -314,7 +314,7 @@ Figure4 <- ggplot(p, aes(x=fct_inorder(variable), y=estimate, group=model, color
     theme(axis.title.y=element_text(size=16))+
     theme(axis.text.y=element_text(size=7.5))
     
-  pdf("final figures for paper/Figure4.pdf", width=9.45, height=6.4)
+  pdf("final figures & tables for ms/Figure4.pdf", width=9.45, height=6.4)
   print(Figure4)
   dev.off()
 
@@ -329,9 +329,30 @@ my.file.copy <- function(from, to) {
 }
 
 my.file.copy(from = "figures/phy_v_non_phy.pdf",
-             to = "final figures for paper/Figure5.pdf")
+             to = "final figures & tables for ms/Figure5.pdf")
   
   
-  
+##########################################
+###### Supplementary Figures #############
+##########################################
+
+## Figure S1
+my.file.copy(from = "figures/corrplot_of_continuous_variables.pdf",
+             to = "final figures & tables for ms/FigureS1.pdf")
+
+
+## Figure S2
+my.file.copy(from = "figures/accounting_for_phylo_uncertainty.pdf",
+             to = "final figures & tables for ms/FigureS2.pdf")
+
+
+
+##########################################
+###### Supplementary Tables ##############
+##########################################
+
+## Table S1
+my.file.copy(from = "tables/collinearity_investigation.pdf",
+             to = "final figures & tables for ms/TableS1.pdf")
   
   

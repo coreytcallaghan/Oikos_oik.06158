@@ -45,6 +45,8 @@ targets:
       - figures/param_plot_phylo_model.pdf
       - figures/phylo_param_plot_averaged_results.pdf
       - reports/phylo_report.pdf
+      - tables/phylosignal_pvalues.pdf
+      - tables/phylosignal_summary_stats.pdf
   
   Data/phylo/EricsonStage2_0001_1000.zip:
     command: download_phylo()
@@ -133,3 +135,9 @@ targets:
     depends: 
       - analysis_data
       - aus_bird_tree
+      
+  tables/phylosignal_pvalues.pdf:
+    command: phylosignal_analysis(analysis_data, aus_bird_tree)
+    
+  tables/phylosignal_summary_stats.pdf:
+    command: phylosignal_analysis(analysis_data, aus_bird_tree)

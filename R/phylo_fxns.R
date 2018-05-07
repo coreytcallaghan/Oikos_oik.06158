@@ -354,3 +354,52 @@ phy_v_non_phy<-function(global_model,phy_mod_rescaled){
   print(p)
   dev.off()
 }
+
+
+
+## phylosignal analysis
+phylosignal_analysis <- function(analysis_data, aus_bird_tree){
+  
+  require(phylosignal)
+  dplyr::select(analysis_data,body_size_logged,clutch_size_logged,response,range_size, #select appropriate rows
+                nest_generalism,diet_generalism,breeding_habitat_generalism,feeding_habitat_generalism,brain_residual) ->dd
+  
+  row.names(dd)<-analysis_data$binom #name rows so that it matches the tree
+  dd$rand<-rnorm(dim(dd)[2]) #random numbers to test package
+  p4d <- phylo4d(aus_bird_tree, dd) #create phylobase object
+  
+  ps<-phyloSignal(p4d,reps = 9999) #run calculation, p values a bit unstable at 999 reps
+  
+  
+  Table1 <- ps$pvalue
+  
+  row.names(Table1) <- c("log(Body size)", "log(Clutch size)", "Urbanization index", "Range size (1000s km2)",
+                         "Nest generalism", "Diet generalism", "Breeding habitat generalism",
+                         "Feeding habitat generalism", "Brain residual", "Rand")
+  
+  
+  TableS2 <- ps$stat
+  
+  row.names(TableS2) <- c("log(Body size)", "log(Clutch size)", "Urbanization index", "Range size (1000s km2)",
+                          "Nest generalism", "Diet generalism", "Breeding habitat generalism",
+                          "Feeding habitat generalism", "Brain residual", "Rand")
+  
+  write_csv(Table1, "Data/Table1.csv")
+  write_csv(TableS2, "Data/TableS2.csv")
+  
+  is.num <- sapply(Table1, is.numeric)
+  Table1[is.num] <- lapply(Table1[is.num], round, 2)
+  pdf("tables/phylosignal_pvalues.pdf")
+  grid.table(Table1)
+  dev.off()
+  
+  is.num <- sapply(TableS2, is.numeric)
+  TableS2[is.num] <- lapply(TableS2[is.num], round, 2)
+  pdf("tables/phylosignal_summary_stats.pdf")
+  grid.table(TableS2)
+  dev.off()
+  
+}
+
+
+
