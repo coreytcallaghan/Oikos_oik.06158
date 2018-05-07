@@ -174,8 +174,8 @@ tgrp <- xtabs(cbind(Cmean, I, K, K.star, Lambda) ~ Value+Variable, grouped)
 table <- ftable(aperm(tgrp, c(3, 1, 2)), row.vars=c("Variable", "Value"))
 
 library(kableExtra)
-
-kable(table, format = "latex", caption = "Results showing the significance of the phylogenetic signal analyses.")
+library(pander)
+pander(table, caption = "Results showing the significance of the phylogenetic signal analyses.")
 
 ```
 
