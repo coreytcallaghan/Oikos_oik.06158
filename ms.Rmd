@@ -156,15 +156,26 @@ knitr::include_graphics("finalFigs/Figure5.pdf")
 
 # Tables
 
-
 ```{r Table 1, echo=FALSE, warning=FALSE, message=FALSE}
 library(readr)
-Table1 <- read_csv("Data/Table1.csv")
+Table1a <- read_csv("Data/Table1.csv")
+colnames(Table1a) <- gsub("X1", "Variable", colnames(Table1a))
+is.num <- sapply(Table1a, is.numeric)
+Table1a[is.num] <- lapply(Table1a[is.num], round, 3)
+
+Table1b <- read_csv("Data/TableS2.csv")
+colnames(Table1b) <- gsub("X1", "Variable", colnames(Table1b))
+is.num <- sapply(Table1b, is.numeric)
+Table1b[is.num] <- lapply(Table1b[is.num], round, 3)
+
+grouped <- rbind(cbind(Value="Statistic", Table1a), cbind(Value="p-values", Table1b))
+tgrp <- xtabs(cbind(Cmean, I, K, K.star, Lambda) ~ Value+Variable, grouped)
+
+table <- ftable(aperm(tgrp, c(3, 1, 2)), row.vars=c("Variable", "Value"))
 
 library(kableExtra)
 
-kable(Table1, format = "latex", caption = "Results showing the significance of the phylogenetic signal analyses.", booktabs = T) %>%
-kable_styling(latex_options = c("hold_position"))
+kable(table, format = "latex", caption = "Results showing the significance of the phylogenetic signal analyses.")
 
 ```
 
@@ -200,16 +211,6 @@ collinearity_investigation <- collinearity_investigation[-1,]
 kable(collinearity_investigation, format = "latex", caption = "Variance inflation factors for the explanatory variables used in the analysis.", booktabs = T) %>%
 kable_styling(latex_options = c("hold_position"))
 
-```
-
-
-```{r Table S2, echo=FALSE, warning=FALSE, message=FALSE}
-library(kableExtra)
-
-TableS2 <- read_csv("Data/TableS2.csv")
-
-kable(TableS2, format = "latex", caption = "Summary statistics of the phylogenetic signal analysis.", booktabs = T) %>%
-kable_styling(latex_options = c("hold_position"))
 ```
 
 
