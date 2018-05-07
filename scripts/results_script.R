@@ -354,14 +354,5 @@ my.file.copy(from = "figures/corrplot_of_continuous_variables.pdf",
 my.file.copy(from = "figures/accounting_for_phylo_uncertainty.pdf",
              to = "finalFigs/FigureS2.pdf")
 
-
-
-##########################################
-###### Supplementary Tables ##############
-##########################################
-
-## Table S1
-my.file.copy(from = "tables/collinearity_investigation.pdf",
-             to = "finalFigs/TableS1.pdf")
   
   
