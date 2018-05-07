@@ -44,9 +44,14 @@ targets:
       - figures/accounting_for_phylo_uncertainty.pdf
       - figures/param_plot_phylo_model.pdf
       - figures/phylo_param_plot_averaged_results.pdf
+<<<<<<< HEAD
       - reports/phylo_report.pdf
       - tables/phylosignal_pvalues.pdf
       - tables/phylosignal_summary_stats.pdf
+=======
+      #- reports/phylo_report.pdf
+      - ms.pdf
+>>>>>>> a07b79ee30f1e1deda4f6ad6a7efda4f3ee91f08
   
   Data/phylo/EricsonStage2_0001_1000.zip:
     command: download_phylo()
@@ -130,8 +135,8 @@ targets:
   figures/phylo_param_plot_averaged_results.pdf:
     command: phylomodel_averaging_results()
 
-  reports/phylo_report.pdf:
-    command: render("reports/phylo_report.rmd")
+  ms.pdf:
+    command: render("ms.rmd")
     depends: 
       - analysis_data
       - aus_bird_tree
