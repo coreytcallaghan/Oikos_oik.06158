@@ -7,22 +7,15 @@ author: |
   | $^1$Center for Ecosystem Science, School of Biological, Earth and Environmental Sciences, UNSW Sydney, Sydney, NSW, Australia; $^2$Australian Museum Research Institute, Sydney, NSW, Australia; $^3$Royal Botanic Gardens and Domain Trust, Sydney, NSW, Australia; $^4$Evolution and Ecology Research Centre, School of Biological, Earth and Environmental Sciences, UNSW Sydney, Sydney, NSW, Australia
 date: ""
 output:
-  pdf_document: null
-  bookdown::word_document2: null
-  bookdown::tufte_html2:
-    number_sections: no
-    toc: no
-  html_document:
-    df_print: paged
-    toc: no
+  rmarkdown::pdf_document:
+    fig_caption: yes    
+    includes:  
+      in_header: preamble-latex.tex
 fontsize: 12pt
 link-citations: no
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/ecology-letters.csl
 bibliography: references.bib
-header-includes: 
-  - \usepackage{setspace}\doublespacing
-  - \usepackage{lineno}
-  - \linenumbers
+  
 ---
 
 \newpage
@@ -135,6 +128,8 @@ We thank the > 6,000 eBirders who have contributed data in Australia. We also th
 
 <div id="refs"></div>
 
+\newpage
+
 # Figures
 
 ```{r Figure 1, echo=FALSE, fig.cap="An example of five different species' average radiance values."}
@@ -157,7 +152,11 @@ knitr::include_graphics("finalFigs/Figure4.pdf")
 knitr::include_graphics("finalFigs/Figure5.pdf")
 ```
 
+\newpage
+
 # Tables
+
+
 ```{r Table 1, echo=FALSE, warning=FALSE, message=FALSE}
 library(readr)
 Table1 <- read_csv("Data/Table1.csv")
@@ -165,11 +164,11 @@ Table1 <- read_csv("Data/Table1.csv")
 library(kableExtra)
 
 kable(Table1, format = "latex", caption = "Results showing the significance of the phylogenetic signal analyses.", booktabs = T) %>%
-kable_styling(latex_options = c("striped", "hold_position"))
+kable_styling(latex_options = c("hold_position"))
 
 ```
 
-
+\newpage
   
 # Supplementary figures
 \newcommand{\beginsupplement}{%
@@ -188,7 +187,8 @@ knitr::include_graphics("finalFigs/FigureS1.pdf")
 ```{r Figure S2, echo=FALSE, fig.cap="Phylogenetic uncertainty for some of the most important predictor variables included in the analysis."}
 knitr::include_graphics("finalFigs/FigureS2.pdf")
 ```
-    
+
+\newpage    
 
 # Supplementary tables
 ```{r Table S1, echo=FALSE, warning=FALSE, message=FALSE}
@@ -198,7 +198,7 @@ collinearity_investigation <- read_csv("Data/TableS1.csv")
 collinearity_investigation <- collinearity_investigation[-1,]
 
 kable(collinearity_investigation, format = "latex", caption = "Variance inflation factors for the explanatory variables used in the analysis.", booktabs = T) %>%
-kable_styling(latex_options = c("striped", "hold_position"))
+kable_styling(latex_options = c("hold_position"))
 
 ```
 
@@ -209,7 +209,7 @@ library(kableExtra)
 TableS2 <- read_csv("Data/TableS2.csv")
 
 kable(TableS2, format = "latex", caption = "Summary statistics of the phylogenetic signal analysis.", booktabs = T) %>%
-kable_styling(latex_options = c("striped", "hold_position"))
+kable_styling(latex_options = c("hold_position"))
 ```
 
 
