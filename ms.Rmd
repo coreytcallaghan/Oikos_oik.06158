@@ -2,7 +2,7 @@
 title: "A continuous urbanization index to assess phylogenetic adaptations in urban bird living"
 
 
-author: | 
+author: |
   | Corey T. Callaghan^[Corresponding author: c.callaghan@unsw.edu.au] $^1$, Richard E. Major $^1$$^,$$^2$, John H. Wilshire $^1$, John M. Martin $^1$$^,$$^3$, Richard T. Kingsford $^1$, William K. Cornwell $^1$$^,$$^4$
   | $^1$Center for Ecosystem Science, School of Biological, Earth and Environmental Sciences, UNSW Sydney, Sydney, NSW, Australia; $^2$Australian Museum Research Institute, Sydney, NSW, Australia; $^3$Royal Botanic Gardens and Domain Trust, Sydney, NSW, Australia; $^4$Evolution and Ecology Research Centre, School of Biological, Earth and Environmental Sciences, UNSW Sydney, Sydney, NSW, Australia
 date: ""
@@ -15,7 +15,7 @@ fontsize: 12pt
 link-citations: no
 csl: https://raw.githubusercontent.com/citation-style-language/styles/master/ecology-letters.csl
 bibliography: references.bib
-  
+
 ---
 
 \newpage
@@ -36,7 +36,7 @@ The majority of previous studies place species in discrete groups such as urban 
 
 Despite the number of studies which have investigated the relationships between species' traits and urban adaptedness, most studies are either spatially limited, such as a single city or region [@blair1996land; @kark2007living; @croci2008does]; or temporally limited to a single breeding season [@blair1996land] or even two month survey period [@kark2007living]]. Fortunately, citizen science [see reviews by @devictor2010beyond; @tulloch2013realising; @bonney2014next; @kobori2016citizen] can provide broad-scale empirical datasets, allowing us to test hypotheses at spatial and temporal scales previously difficult to attain. This data provides a cost-effective method to research the relationship between species' traits and urban observations. Indeed, various projects have used citizen science data to elucidate information on abundance and distribution of birds in urban ecosystems [@mccaffrey2005using; @callaghan2017assessing], as well as functional composition of urban birds [@la2014role; @morelli2016evidence; @lepczyk2017global]. However, we are unaware of any projects which use citizen science observations to assess species' traits in relation to urban environments over a large spatial and temporal scale.
 
-Here, we improve upon current methods of assessing biological traits which predicts urbanization in birds by using a series of publicly available datasets available for Australian birds. Importantly, we developed and used a continuous urbanization index as a response variable in the analyses. We had two objectives. Our first objective was to investigate whether there was a phylogenetic signal in our urbanization index, as previous studies have found a lack of phylogenetic signal in urbanization [@evans2011makes]. Second, we developed models which were and were not phylogenetically constrained to assess species' traits that predict pre-adaptation to urban living, using continuous and categorical explanatory variables. These results are especially critical in the future action plans of Australia's birds [@garnett2011action], given Australia is currently undergoing a period of rapid urban growth.
+Here, we improve upon current methods of assessing biological traits which predicts urbanization in birds by using a series of publicly available datasets available for Australian birds. Importantly, we developed and used a continuous urbanization index as a response variable in the analyses. We had two objectives. Our first objective was to investigate whether there was a phylogenetic signal in our urbanization index, as previous studies have found a lack of phylogenetic signal in urbanization [@evans2011makes]. Second, we developed models which were and were not phylogenetically constrained to assess species' traits that predict pre-adaptation to urban living, using continuous and categorical predictor variables. These results are especially critical in the future action plans of Australia's birds [@garnett2011action], given Australia is currently undergoing a period of rapid urban growth.
 
 
 # METHODS
@@ -56,24 +56,24 @@ We used VIIRS night-time lights [@elvidge2017viirs] as a proxy of a bird's assoc
 Each checklist's average radiance value was then passed to every bird on that checklist, which provided every species with a distribution of average radiance values (Fig. 1). The median for each species' given distribution of average radiance values served as our response variable in our analyses.
 
 ## Biological traits
-Explanatory variables were calculated using a published dataset which contains the biological, ecological, and conservation information for all of Australia's birds [@garnett2015biological]. Potential traits (Appendix 1a) were chosen on the basis of their existing support and hypotheses in the current literature (e.g., [@mcclure1989characterizes; @kark2007living; @evans2011makes]). Traits were parsed in different manners (Appendix 1b), and for any missing value in the dataset, we treated that as evidence against it existing (i.e., if a species had NA for a specific habitat, we assumed that the lack of evidence found by the authors indicates that the species is unlikely to be found in that habitat). Appendix 1 provides an overview of all candidate traits, some associated references for each trait, and more detailed information on how the traits were calculated. Preliminary analyses including IUCN status (exotic/native) showed that exotic birds were strongly associated with urbanization, but given the preferential selection by acclimatization societies for introduction of species with proven synanthropy [@blackburn2009avian], exotic species were omitted from the final analysis to avoid bias. Therefore, we excluded IUCN status as a trait given that the majority of our candidate species were of Least Concern.
+Predictor variables were calculated using a published dataset which contains the biological, ecological, and conservation information for all of Australia's birds [@garnett2015biological]. Potential traits (Appendix 1a) were chosen on the basis of their existing support and hypotheses in the current literature (e.g., [@mcclure1989characterizes; @kark2007living; @evans2011makes]). Traits were parsed in different manners (Appendix 1b), and for any missing value in the dataset, we treated that as evidence against it existing (i.e., if a species had NA for a specific habitat, we assumed that the lack of evidence found by the authors indicates that the species is unlikely to be found in that habitat). Appendix 1 provides an overview of all candidate traits, some associated references for each trait, and more detailed information on how the traits were calculated. Preliminary analyses including IUCN status (exotic/native) showed that exotic birds were strongly associated with urbanization, but given the preferential selection by acclimatization societies for introduction of species with proven synanthropy [@blackburn2009avian], exotic species were omitted from the final analysis to avoid bias. Therefore, we excluded IUCN status as a trait given that the majority of our candidate species were of Least Concern.
 
 Only species which had complete data for the list of candidate traits were considered in the analyses, and we thereby ended with 477 species which met this criteria.
 
 ## Phylogenetic analysis
-For the phylogenetic portion of our analyses, we used the phylogenetic tree provided by Jetz et al. [@jetz2012global]. This phylogeny represents the first completely mapped phylogeny of 9,993 birds [@jetz2012global]. In order to assess whether there was a phylogenetic signal of the urbanization index used in our study, we used the phylosignal package [@keck2016phylosignal] in the R computing environment [@r2017coreteam]. This was also conducted for each of the continuous response variables in order to assess the relative contribution of phylogeny on the explanatory variables.
+For the phylogenetic portion of our analyses, we used the phylogenetic tree provided by Jetz et al. [@jetz2012global]. This phylogeny represents the first completely mapped phylogeny of 9,993 birds [@jetz2012global]. In order to assess whether there was a phylogenetic signal [@revell2008phylogenetic, @munkemuller2012measure] of the urbanization index and the continuous predictor variables used in our study, we used the phylosignal package [@keck2016phylosignal] in the R computing environment [@r2017coreteam]. This was also conducted for each of the continuous response variables in order to assess the relative contribution of phylogeny on the predictor variables.
 
 ## Statistical analyses
-All models and analyses were conducted in the R computing environment [@r2017coreteam] and relied heavily on the tidyverse workflow [@wickham2017tidyverse].
+All models and analyses were conducted in R [@r2017coreteam] and relied heavily on the tidyverse workflow [@wickham2017tidyverse].
 
-Before modelling, the explanatory variables were investigated for multi-collinearity. We used the corrplot package [@corrplot2017] to show correlation among continuous variables (Supplementary Figure 1), and used generalized variance inflation factors [@fox1992generalized], from the car package [@fox2011companion], which accounts for the degrees of freedom for a particular term to show minimal correlation amongst each other (Supplementary Table 1).
+Before modelling, the predictor variables were investigated for multi-collinearity. We used the corrplot package [@corrplot2017] to show correlation among continuous variables (Supplementary Figure 1), and used generalized variance inflation factors [@fox1992generalized], from the car package [@fox2011companion], which accounts for the degrees of freedom for a particular term to show minimal correlation amongst each other (Supplementary Table 1).
 
-We employed two linear modelling approaches; one with and one without phylogenetic constraints. Our urbanization index was log-transformed in order to meet model assumptions. The explanatory variables used in the models were those listed in Appendix 1, with the exception of IUCN status.
+We employed two linear modelling approaches; one with and one without phylogenetic constraints. Our urbanization index was log-transformed in order to meet model assumptions. The predictor variables used in the models were those listed in Appendix 1, with the exception of IUCN status.
 
 We weighted the linear regression models [@solon2015weighting] using a source of error associated with our urbanization indices. This error was the  proportion of the number of total observations of a species divided by the number of unique localities a species was observed from. This gave more weight in the model-fitting procedure to those species that had more observations in more unique locations. This was done based on the assumption that those species which had the most observations would have the most reliable urbanization indices. This approach also addresses biases in sampling of eBird data in which some birds can have a high number of observations, but from known roosting sites [e.g., @callaghanavian].
 
 ### Non-phylogenetically constrained models
-Given that we hypothesized any of the potential candidate traits could significantly drive the response in our urbanization index, we first ran one global model including all 22 explanatory variables. We then used the standardize function from the arm package [@gelman2008scaling; @gelman2016arm] to standardize model estimates to represent relative effect sizes. In order to confirm our linear model results, we employed a model-averaging approach [@grueber2011multimodel] in which we 'dredged' possible subsets of the global model. This was done using the dredge function in the MuMIn package [@barton2016mumin], and we allowed a total of 11 candidate predictors to be fit at any one time in order to avoid over-fitting. This left a total of 784,626 models which were assessed, and the model-averaged parameter estimates were calculated from the top models of those with ???AIC < 4. As with the global model, we present the standardized estimates which represent relative effect sizes
+Given that we hypothesized any of the potential candidate traits could significantly drive the response in our urbanization index, we first ran one global model including all 22 predictor variables. We then used the standardize function from the arm package [@gelman2008scaling; @gelman2016arm] to standardize model estimates to represent relative effect sizes. In order to confirm our linear model results, we employed a model-averaging approach [@grueber2011multimodel] in which we 'dredged' possible subsets of the global model. This was done using the dredge function in the MuMIn package [@barton2016mumin], and we allowed a total of 11 candidate predictors to be fit at any one time in order to avoid over-fitting. This left a total of 784,626 models which were assessed, and the model-averaged parameter estimates were calculated from the top models of those with ???AIC < 4. As with the global model, we present the standardized estimates which represent relative effect sizes
 
 ### Phylogenetically constrained models
 Phylogenetic models were fit based on the same global model as above, but using the 'phylolm' function from the phylolm package [@ho2014phylolm]. Similar to above, we model-averaged the global phylogenetic model using the aforementioned methods.
@@ -84,8 +84,7 @@ Given the diverse datasets used in this analysis, there were differing taxonomic
 # RESULTS
 A total of 637,482 checklists provided a total of 5,944,819 observations of 580 different species which had > 100 observations. The least often recorded species was Black-breasted Buttonquail (N=104) while the most recorded species was Australian Magpie (N=158,615). The mean number of observations for a species was 10,250. Density plots of all 580 species' distributions of average radiance values are presented in Appendix 3.
 
-
-We ended with 477 candidate species (Appendix 4) from the eBird dataset which matched both the trait taxonomy and the phylogenetic tree taxonomy, and also had complete trait data.
+We ended with 477 candidate species from the eBird dataset which matched both the trait taxonomy and the phylogenetic tree taxonomy, and also had complete trait data (Appendix 4).
 
 ## Urbanization index
 For the 477 species included in the models the mean ? SD urbanization index was 0.91 ? 1.76, with a range from 0.008 (Black-backed Butcherbird) to 11.85 (Powerful Owl; Fig. 2).
@@ -97,14 +96,14 @@ There was a distinct phylogenetic signal in our urbanization index measure (Fig.
 
 ## Model results
 ### Non phylogenetic models
-The most important predictors of urbanization in the non-phylogenetic global model (Fig. 4) were feeding habitat generalism (p < 0.001), breeding habitat generalism (p < 0.001), clutch size (p < 0.001), and diet generalism (p < 0.001). Urban birds were also positively significantly associated with agricultural habitats (p < 0.001) and migratory status (p < 0.001). Urban birds were significantly negatively associated with solitary nesting (p < 0.001), feeding in pairs and flocks (p < 0.001), being granivorous (p < 0.001), using forested habitats (p < 0.001), using grassland/shrubland habitats (p < 0.001), being insectivorous (p < 0.001), and feeding solitary (p < 0.001).
+The most important predictors of urbanization in the non-phylogenetic global model (Fig. 4) were feeding habitat generalism (t = 3.40, p = 0.001), breeding habitat generalism (t = 3.27, p = 0.001), clutch size (t = 4.52, p < 0.001), and diet generalism (t = 2.74, p = 0.006). Urban birds were also positively significantly associated with agricultural habitats (t = 2.88, p = 0.004) and migratory status (t = 2.15, p = 0.032). Urban birds were significantly negatively associated with solitary nesting (t = -2.06, p = 0.040), feeding in pairs and flocks (t = -2.24, p =0.025), being granivorous (t = -3.40, p = 0.001), using forested habitats (t = -2.94, p = 0.003), using grassland/shrubland habitats (t = -4.26, p < 0.001), being insectivorous (t = -3.96, p < 0.001), and feeding solitary (t = -2.90, p = 0.004).
 
-When this global model was dredged and model-averaged, patterns remained similar (Fig. 4). Clutch size (p < 0.001), diet generalism (p < 0.001), breeding habitat generalism (p < 0.001), and feeding habitat generalism (p < 0.001) all remained significant predictors. Additionally, agricultural birds were significantly associated with urbanization (p < 0.001). Urban birds remained significantly negatively associated with solitary nesting (p < 0.001), feeding in pairs and flocks (p < 0.001), being granivorous (p < 0.001), using forested habitats (p < 0.001), using grassland/shrubland habitats (p < 0.001), being insectivorous (p < 0.001), and feeding solitary (p < 0.001).
+When this global model was dredged and model-averaged, patterns remained similar (Fig. 4). Clutch size (z = 4.83, p < 0.001), diet generalism (z = 3.84, p < 0.001), breeding habitat generalism (z = 3.09, p = 0.002), and feeding habitat generalism (z = 3.27, p = 0.001) all remained significant predictors. Additionally, agricultural birds were significantly associated with urbanization (z = 3.40, p = 0.001). Urban birds remained significantly negatively associated with feeding solitary (z = 3.39, p = 0.001), being insectivorous (z = 5.42, p < 0.001), using grassland/shrubland habitats (z = 4.05, p < 0.001), feeding in pairs and flocks (z = 3.16, p = 0.002), being granivorous (z = 3.91, p < 0.001), and using forested habitats (z = 3.30, p = 0.001).
 
 ### Phylogenetically constrained models
-The most significant predictors of urbanization in the phylogenetically controlled global model (Fig. 4) were feeding habitat generalism (p < 0.001), diet generalism (p < 0.001), clutch size (p < 0.001), brain residual size (p < 0.001), and breeding habitat generalism (p < 0.001). Granivores (p < 0.001), birds without any known nest aggregation (p < 0.001), insectivores (p < 0.001) and birds who are associated with grassland/shrubland habitat (p < 0.001) were significantly negatively associated with the urbanization index.
+The most significant predictors of urbanization in the phylogenetically controlled global model (Fig. 4) were brain residual size (t = 3.58, p < 0.001), feeding habitat generalism ( t = 4.63, p < 0.001), clutch size (t = 3.04, p = 0.002), diet generalism (t = 2.07, p = 0.039), and breeding habitat generalism (t = 2.80, p = 0.005). Nest generlaism (t = -2.06, p = 0.040), range size, (t = -4.38, p < 0.001), cooperative breeding species (t = -3.25, p = 0.001) and species without any known nest aggregation (t = -3.28, p = 0.001) were significantly negatively associated with the urbanization index.
 
-When the phylogenetic global model was model-averaged, the patterns were similar (Fig. 4). Feeding habitat generalism (p < 0.001), brain residual size (p < 0.001), clutch size (p < 0.001), and breeding habitat generalism (p < 0.001) remained significant predictors of urbanization index. Further, cooperative breeders (p < 0.001), range size (p < 0.001), and species which nest aggregation was unknown (p < 0.001) remained significantly negative predictors.
+When the phylogenetic global model was model-averaged, the patterns were similar (Fig. 4). Feeding habitat generalism (z = 7.54, p < 0.001), clutch size (z = 7.31, p < 0.001), body size (z = 3.93, p < 0.001), and brain residual size (z = 2.10, p = 0.036), were significant predictors of urbanization index. Further, species which were cooperative breeders (z = 2.53, p - 0.011), used grassland/shrubland habitats (z = 7.64, p < 0.001), and no known nest aggregation pattern (z = 4.20, p < 0.001) were significantly negatively associated with urbanization.
 
 ### Differences in non-phylogenetic model and phylogenetic model
 The phylogenetic and non-phylogenetic models largely agreed with the relative rank of standardized predictor estimates, and the significance of individual predictors (Fig. 4). However, brain residual size was not significant in either of the non-phylogenetic models, but was significantly associated with urbanization in our phylogenetic models (Fig. 5). Further, diet generalism, feeding habitat generalism, and breeding habitat generalism were relatively more important (larger parameter estimates) in the phylogenetic model compared with the non-phylogenetic model (Fig. 5). Lastly, although not significant, body size was minimally important for the non-phylogenetic model, but substantially more important for the phylogenetically controlled model (Fig. 4 & Fig. 5).
@@ -180,7 +179,7 @@ pander(table, caption = "Results showing the significance of the phylogenetic si
 ```
 
 \newpage
-  
+
 # Supplementary figures
 \newcommand{\beginsupplement}{%
         \setcounter{table}{0}
@@ -208,10 +207,7 @@ library(kableExtra)
 collinearity_investigation <- read_csv("Data/TableS1.csv")
 collinearity_investigation <- collinearity_investigation[-1,]
 
-kable(collinearity_investigation, format = "latex", caption = "Variance inflation factors for the explanatory variables used in the analysis.", booktabs = T) %>%
+kable(collinearity_investigation, format = "latex", caption = "Variance inflation factors for the predictor variables used in the analysis.", booktabs = T) %>%
 kable_styling(latex_options = c("hold_position"))
 
 ```
-
-
-
