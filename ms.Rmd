@@ -141,25 +141,6 @@ We thank the > 6,000 eBirders who have contributed data in Australia. We also th
 # Figures
 
 ```{r Figure 1, echo=FALSE, fig.cap="An example of five different species' average radiance values."}
-<<<<<<< HEAD
-knitr::include_graphics("final figures & tables for ms/Figure1.pdf")
-```
-
-```{r Figure 2, echo=FALSE, fig.cap="The distribution, on a log-scale, of the response variable for the 477 species included in the analysis, with five example species highlighted."}
-knitr::include_graphics("final figures & tables for ms/Figure2.pdf")
-```
-
-```{r Figure 3, echo=FALSE, fig.cap="A phylogenetic tree of the birds with the tips colored based on the urbanization index. The urbanization index is also shown based on the size of the bar associated with a species."}
-knitr::include_graphics("final figures & tables for ms/Figure3.pdf")
-```
-
-```{r Figure 4, echo=FALSE, fig.cap="Parameter estimates for each of the four modelling approaches employed in the analysis. A star represents a significant effect. Note that the model-averaged results do not contain every possible predictor variable in the case that a given predictor variable was not included in the top model set."}
-knitr::include_graphics("final figures & tables for ms/Figure4.pdf")
-```
-
-```{r Figure 5, echo=FALSE, fig.cap="Proportional differences for parameter estimates from the non-phylogenetically constrained and phylogenetically constrained models."}
-knitr::include_graphics("final figures & tables for ms/Figure5.pdf")
-=======
 knitr::include_graphics("finalFigs/Figure1.pdf")
 ```
 
@@ -177,28 +158,12 @@ knitr::include_graphics("finalFigs/Figure4.pdf")
 
 ```{r Figure 5, echo=FALSE, fig.cap="Proportional differences for parameter estimates from the non-phylogenetically constrained and phylogenetically constrained models."}
 knitr::include_graphics("finalFigs/Figure5.pdf")
->>>>>>> a07b79ee30f1e1deda4f6ad6a7efda4f3ee91f08
 ```
 
 # Tables
 ```{r Table 1, echo=FALSE, warning=FALSE, message=FALSE}
-remake::dump_environment()
-
-library(phylosignal)
-   dplyr::select(analysis_data,body_size_logged,clutch_size_logged,response,range_size, #select appropriate rows
-          nest_generalism,diet_generalism,breeding_habitat_generalism,feeding_habitat_generalism,brain_residual) ->dd
-
-row.names(dd) <- analysis_data$binom #name rows so that it matches the tree
-dd$rand <- rnorm(dim(dd)[2]) #random numbers to test package
-p4d <- phylo4d(aus_bird_tree, dd) #create phylobase object
-
-ps <- phyloSignal(p4d,reps = 9999)
-
-Table1 <- ps$pvalue
-
-row.names(Table1) <- c("log(Body size)", "log(Clutch size)", "Urbanization index", "Range size (1000s km2)",
-                       "Nest generalism", "Diet generalism", "Breeding habitat generalism",
-                       "Feeding habitat generalism", "Brain residual", "Rand")
+library(readr)
+Table1 <- read_csv("Data/Table1.csv")
 
 library(kableExtra)
 
@@ -220,11 +185,11 @@ kable_styling(latex_options = c("striped", "hold_position"))
 
 
 ```{r Figure S1, echo=FALSE, fig.cap="A correlation plot for the continuous variables used in the modelling procedures."}
-knitr::include_graphics("final figures & tables for ms/FigureS1.pdf")
+knitr::include_graphics("finalFigs/FigureS1.pdf")
 ```
 
 ```{r Figure S2, echo=FALSE, fig.cap="Phylogenetic uncertainty for some of the most important predictor variables included in the analysis."}
-knitr::include_graphics("final figures & tables for ms/FigureS2.pdf")
+knitr::include_graphics("finalFigs/FigureS2.pdf")
 ```
     
 
@@ -232,7 +197,7 @@ knitr::include_graphics("final figures & tables for ms/FigureS2.pdf")
 ```{r Table S1, echo=FALSE, warning=FALSE, message=FALSE}
 library(kableExtra)
 
-read_csv("Data/TableS1.csv")
+collinearity_investigation <- read_csv("Data/TableS1.csv")
 
 kable(collinearity_investigation, format = "latex", caption = "Variance inflation factors for the explanatory variables used in the analysis.", booktabs = T) %>%
 kable_styling(latex_options = c("striped", "hold_position"))
@@ -241,27 +206,12 @@ kable_styling(latex_options = c("striped", "hold_position"))
 
 
 ```{r Table S2, echo=FALSE, warning=FALSE, message=FALSE}
-remake::dump_environment()
+library(kableExtra)
 
-library(phylosignal)
-   dplyr::select(analysis_data,body_size_logged,clutch_size_logged,response,range_size, #select appropriate rows
-          nest_generalism,diet_generalism,breeding_habitat_generalism,feeding_habitat_generalism,brain_residual) ->dd
-
-row.names(dd) <- analysis_data$binom #name rows so that it matches the tree
-dd$rand <- rnorm(dim(dd)[2]) #random numbers to test package
-p4d <- phylo4d(aus_bird_tree, dd) #create phylobase object
-
-ps <- phyloSignal(p4d,reps = 9999)
-
-TableS2 <- ps$stat
-
-row.names(TableS2) <- c("log(Body size)", "log(Clutch size)", "Urbanization index", "Range size (1000s km2)",
-                       "Nest generalism", "Diet generalism", "Breeding habitat generalism",
-                       "Feeding habitat generalism", "Brain residual", "Rand")
+TableS2 <- read_csv("Data/TableS2.csv")
 
 kable(TableS2, format = "latex", caption = "Summary statistics of the phylogenetic signal analysis.", booktabs = T) %>%
 kable_styling(latex_options = c("striped", "hold_position"))
-
 ```
 
 
