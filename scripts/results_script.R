@@ -39,7 +39,7 @@ Figure1 <- species_urban %>%
   theme(legend.position = c(0.26, 0.8))+
   theme(axis.text.x=element_text(hjust=0.7))
 
-pdf("final figures & tables for ms/Figure1.pdf", width=5.5, height=4.5)
+pdf("finalFigs/Figure1.pdf", width=5.5, height=4.5)
 print(Figure1)
 dev.off()
 
@@ -71,7 +71,7 @@ Figure2 <- ggplot(data=analysis_data, aes(log(urban_median))) +
   ylab("Count")+
   geom_vline(data=species_values, aes(xintercept=urban_median), color='red', size=1.62, alpha=0.9)
 
-pdf("final figures & tables for ms/Figure2.pdf", width=5.5, height=4.5)
+pdf("finalFigs/Figure2.pdf", width=5.5, height=4.5)
 print(Figure2)
 dev.off()
 
@@ -87,7 +87,7 @@ my.file.copy <- function(from, to) {
 }
 
 my.file.copy(from = "figures/bird_urbanness_phylo.pdf",
-               to = "final figures & tables for ms/Figure3.pdf")
+               to = "finalFigs/Figure3.pdf")
 
 
 
@@ -138,7 +138,7 @@ estimates_non_phylo <- tidy(std.mod) %>%
                    "Feeding aggregation \n (solitary)")) %>%
   arrange(estimate) %>%
   mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
-  dplyr::select(term2, estimate, lwr, upr, p.value, significance, trend) %>%
+  dplyr::select(term2, estimate, lwr, upr, statistic, p.value, significance, trend) %>%
   rename(variable=term2) %>%
   rename(p_value=p.value) %>%
   mutate(model = "Non-phylo global model")
@@ -150,8 +150,12 @@ summary <- readRDS("Data/dredged_model_summary_results.rds")
 p_values <- data.frame(p_value=summary$coefmat.full[,5]) %>%
   rownames_to_column("variable")
 
+statistic <- data.frame(statistic=summary$coefmat.full[,4]) %>%
+  rownames_to_column("variable")
+
 estimates_non_phylo_averaged <- model_results %>%
     inner_join(., p_values, by="variable") %>%
+    inner_join(., statistic, by="variable") %>%
     filter(variable != "(Intercept)") %>%
     droplevels() %>%
     arrange(desc(estimate)) %>%
@@ -182,7 +186,7 @@ estimates_non_phylo_averaged <- model_results %>%
     arrange(estimate) %>%
     mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
     mutate(significance=ifelse(.$p_value <= 0.05, "Significant", "Non-significant")) %>%
-    dplyr::select(variable2, estimate, lwr, upr, p_value, significance, trend) %>%
+    dplyr::select(variable2, estimate, lwr, upr, statistic, p_value, significance, trend) %>%
     rename(variable=variable2) %>%
     mutate(model = "Non-phylo model-averaged")
 
@@ -191,6 +195,7 @@ results <- data.frame(estimate = phy_mod_rescaled$coefficients,
                       lwr = confint(phy_mod_rescaled)[,1],
                       upr = confint(phy_mod_rescaled)[,2],
                       p_value = summary(phy_mod_rescaled)$coefficients[,4],
+                      statistic = summary(phy_mod_rescaled)$coefficients[,3],
                       stringsAsFactors = FALSE)
 
 
@@ -198,39 +203,39 @@ estimates_phylo <- results %>%
     rownames_to_column("term") %>%
     filter(term != "(Intercept)") %>%
     arrange(desc(estimate)) %>%
-    mutate(term2 = c("Feeding habitat generalism",
-                     "Diet generalism",
+    mutate(term2 = c("Brain residual",
+                     "Feeding habitat generalism",
                      "log(Clutch size)",
-                     "Habitat - agricultural",
-                     "Brain residual",
-                     "Breeding habitat generalism",
                      "log(Body size)",
-                     "Plant eater",
-                     "Nest generalism",
+                     "Diet generalism",
+                     "Breeding habitat generalism",
                      "Feeding aggregation \n (solitary, pairs, & flocks)",
-                     "Movement - nomadic/irruptive",
-                     "Movement - migratory",
-                     "Feeding aggregation \n (pairs & flocks)",
-                     "Ground-nesting",
                      "Feeding aggregation \n (solitary & pairs)",
+                     "Ground-nesting",
+                     "Nest aggregation \n (colonial)",
+                     "Plant eater",
                      "Habitat - tree/forest",
+                     "Habitat - agricultural",
+                     "Movement - migratory",
+                     "Movement - nomadic/irruptive",
                      "Nest aggregation \n (solitary)",
+                     "Insectivore",
+                     "Feeding aggregation \n (solitary)",
+                     "Feeding aggregation \n (pairs & flocks)",
+                     "Habitat - grass/shrubland",
+                     "Feeding aggregation \n (solitary & flocks)",
+                     "Feeding aggregation \n (pairs)",
+                     "Hollow-nesting",
+                     "Nest generalism",
+                     "Granivore",
                      "Range size (1000s km2)",
                      "Cooperative breeding",
-                     "Carrion eater",
-                     "Nest aggregation \n (colonial)",
-                     "Hollow-nesting",
-                     "Feeding aggregation \n (solitary & flocks)",
-                     "Granivore",
-                     "Feeding aggregation \n (solitary)",
                      "Nest aggregation \n (none)",
-                     "Insectivore",
-                     "Habitat - grass/shrubland",
-                     "Feeding aggregation \n (pairs)")) %>%
+                     "Carrion eater")) %>%
     arrange(estimate) %>%
     mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
     mutate(significance=ifelse(.$p_value <= 0.05, "Significant", "Non-significant")) %>%
-    dplyr::select(term2, estimate, lwr, upr, p_value, significance, trend) %>%
+    dplyr::select(term2, estimate, lwr, upr, statistic, p_value, significance, trend) %>%
     rename(variable=term2) %>%
     mutate(model = "Phylo global model")
 
@@ -241,39 +246,43 @@ summary <- readRDS("Data/PHYLO_dredged_model_summary_results.rds")
 p_values <- data.frame(p_value=summary$coefmat.full[,4]) %>%
   rownames_to_column("variable")
 
+statistic <- data.frame(statistic=summary$coefmat.full[,3]) %>%
+  rownames_to_column("variable")
+
 estimates_phylo_averaged <- model_results %>%
     inner_join(., p_values, by="variable") %>%
+    inner_join(., statistic, by="variable") %>%
     filter(variable != "(Intercept)") %>%
     droplevels() %>%
     arrange(desc(estimate)) %>%
     mutate(variable2 = c("Feeding habitat generalism",
-                         "Brain residual",
-                         "log(Body size)",
                          "log(Clutch size)",
+                         "log(Body size)",
+                         "Brain residual",
+                         "Nest generalism",
                          "Breeding habitat generalism",
-                         "Nest aggregation \n (colonial)",
+                         "Carrion eater",
                          "Diet generalism",
-                         "Plant eater",
-                         "Habitat - agricultural",
-                         "Insectivore",
-                         "Nest aggregation \n (solitary)",
                          "Movement - migratory",
+                         "Habitat - agricultural",
+                         "Plant eater",
                          "Habitat - tree/forest",
-                         "Ground-nesting",
                          "Movement - nomadic/irruptive",
-                         "Habitat - grass/shrubland",
+                         "Ground-nesting",
+                         "Insectivore",
                          "Hollow-nesting",
                          "Granivore",
-                         "Nest generalism",
-                         "Cooperative breeding",
-                         "Carrion eater",
                          "Range size (1000s km2)",
+                         "Nest aggregation \n (solitary)",
+                         "Nest aggregation \n (colonial)",
+                         "Cooperative breeding",
+                         "Habitat - grass/shrubland",
                          "Nest aggregation \n (none)")) %>%
     arrange(estimate) %>%
     mutate(trend=ifelse(.$estimate >0, "positive", "negative")) %>%
     mutate(significance=ifelse(.$p_value <= 0.05, "Significant", "Non-significant")) %>%
     mutate(model = "Phylo model-averaged") %>%
-    dplyr::select(variable2, estimate, lwr, upr, p_value, significance, trend, model) %>%
+    dplyr::select(variable2, estimate, lwr, upr, statistic, p_value, significance, trend, model) %>%
     rename(variable = variable2)
 
 
@@ -314,7 +323,7 @@ Figure4 <- ggplot(p, aes(x=fct_inorder(variable), y=estimate, group=model, color
     theme(axis.title.y=element_text(size=16))+
     theme(axis.text.y=element_text(size=7.5))
     
-  pdf("final figures & tables for ms/Figure4.pdf", width=9.45, height=6.4)
+  pdf("finalFigs/Figure4.pdf", width=9.45, height=6.4)
   print(Figure4)
   dev.off()
 
@@ -329,7 +338,7 @@ my.file.copy <- function(from, to) {
 }
 
 my.file.copy(from = "figures/phy_v_non_phy.pdf",
-             to = "final figures & tables for ms/Figure5.pdf")
+             to = "finalFigs/Figure5.pdf")
   
   
 ##########################################
@@ -338,12 +347,12 @@ my.file.copy(from = "figures/phy_v_non_phy.pdf",
 
 ## Figure S1
 my.file.copy(from = "figures/corrplot_of_continuous_variables.pdf",
-             to = "final figures & tables for ms/FigureS1.pdf")
+             to = "finalFigs/FigureS1.pdf")
 
 
 ## Figure S2
 my.file.copy(from = "figures/accounting_for_phylo_uncertainty.pdf",
-             to = "final figures & tables for ms/FigureS2.pdf")
+             to = "finalFigs/FigureS2.pdf")
 
 
 
@@ -353,6 +362,6 @@ my.file.copy(from = "figures/accounting_for_phylo_uncertainty.pdf",
 
 ## Table S1
 my.file.copy(from = "tables/collinearity_investigation.pdf",
-             to = "final figures & tables for ms/TableS1.pdf")
+             to = "finalFigs/TableS1.pdf")
   
   
