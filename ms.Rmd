@@ -89,11 +89,8 @@ Phylogenetic models were fit based on the same global model as above, but using 
 Given the diverse datasets used in this analysis, there were differing taxonomic authorities followed. The response data from eBird follows the eBird/clements checklist [http://www.birds.cornell.edu/clementschecklist/], while the biological and ecological data follows the working list of Australian birds by BirdLife Australia [http://www.birdlife.org.au/conservation/science/taxonomy], and the phylogenetic tree followed the BirdLife V3 world checklist [http://birdtree.org/taxonomy/]. There were minor differences which existed in common names, scientific names, and recognized species among the three datasets. A taxonomic key was made which combined the three different taxonomies (Appendix 2). Ultimately, a species' response variable, calculated from the eBird database and taxonomic source, was considered for analysis if it matched for both the trait dataset and the phylogenetic tree dataset. If it did not match both, then it was not considered for analysis (e.g., species currently only recognized by eBird/clements such as Western Whistler, Silver-backed Butcherbird, or Paperbark Flycatcher). Additionally, one species (Aleutian Tern) met the criteria for number of observations above, but was not included in the Australian trait data because it is new to Australia and thus not included in the analysis.
 
 # RESULTS
-<<<<<<< HEAD
-A total of 637,482 checklists provided a total of 5,944,819 observations of 580 different species which had > 100 observations. The least recorded species was Black-breasted Buttonquail (N=104) while the most recorded species was Australian Magpie (N=158,615). The mean ± SD number of observations for a species was 10,250 ± 19,269.19. Density plots of all 580 species' distributions of average radiance values are presented in Appendix 3.
-=======
 A total of 637,482 checklists provided a total of 5,944,819 observations of 580 different species which had > 100 observations. The least often recorded species was Black-breasted Buttonquail (N=104) while the most recorded species was Australian Magpie (N=158,615). The mean number of observations for a species was 10,250. Density plots of all 580 species' distributions of average radiance values are presented in Appendix 3.
->>>>>>> a07b79ee30f1e1deda4f6ad6a7efda4f3ee91f08
+
 
 We ended with 477 candidate species (Appendix 4) from the eBird dataset which matched both the trait taxonomy and the phylogenetic tree taxonomy, and also had complete trait data.
 
@@ -198,6 +195,7 @@ knitr::include_graphics("finalFigs/FigureS2.pdf")
 library(kableExtra)
 
 collinearity_investigation <- read_csv("Data/TableS1.csv")
+collinearity_investigation <- collinearity_investigation[-1,]
 
 kable(collinearity_investigation, format = "latex", caption = "Variance inflation factors for the explanatory variables used in the analysis.", booktabs = T) %>%
 kable_styling(latex_options = c("striped", "hold_position"))
