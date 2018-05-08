@@ -285,11 +285,11 @@ estimates_phylo_averaged <- model_results %>%
     dplyr::select(variable2, estimate, lwr, upr, statistic, p_value, significance, trend, model) %>%
     rename(variable = variable2)
 
-
-
 ## Now need to merge the dfs together
 param_estimates <- bind_rows(estimates_non_phylo, estimates_phylo, estimates_non_phylo_averaged, estimates_phylo_averaged)
 
+## write model results for an appendix
+write_csv(param_estimates, "H:/Dissertation/Dissertation Chapters/Data Chapters/Adaptations to urban living in birds/Appendices/Appendix 5/Appendix5.csv")
 
 ## Make figure which combines all model results into one
 p <- param_estimates %>%
