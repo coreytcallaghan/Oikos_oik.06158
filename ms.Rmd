@@ -154,7 +154,7 @@ knitr::include_graphics("finalFigs/Figure5.pdf")
 \newpage
 
 # Tables
-
+\small
 ```{r Table 1, echo=FALSE, warning=FALSE, message=FALSE}
 library(readr)
 Table1a <- read_csv("Data/Table1.csv")
@@ -174,7 +174,7 @@ table <- ftable(aperm(tgrp, c(3, 1, 2)), row.vars=c("Variable", "Value"))
 
 library(kableExtra)
 library(pander)
-pander(table, caption = "Results showing the significance of the phylogenetic signal analyses.")
+pander(table, caption = "Results showing the significance of the phylogenetic signal analyses.", split.table=Inf)
 
 ```
 
