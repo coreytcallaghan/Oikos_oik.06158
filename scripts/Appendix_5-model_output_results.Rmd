@@ -1,0 +1,48 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+setwd("H:/Dissertation/Dissertation Chapters/Data Chapters/Adaptations to urban living in birds/bird_urbanness")
+remake::dump_environment()
+```
+
+## Model: Non-phylogenetically controlled global model results
+
+```{r Non-phylogenetically controlled global model results, echo=FALSE, message=FALSE}
+setwd("H:/Dissertation/Dissertation Chapters/Data Chapters/Adaptations to urban living in birds/bird_urbanness")
+remake::dump_environment()
+summary(global_model)
+```
+
+## Model: Non-phylogenetically controlled model-averaged results
+
+```{r Non-phylogenetically controlled model-averaged results, echo=FALSE, message=FALSE}
+setwd("H:/Dissertation/Dissertation Chapters/Data Chapters/Adaptations to urban living in birds/bird_urbanness")
+remake::dump_environment()
+summary <- readRDS("Data/dredged_model_summary_results.rds")
+summary(summary)
+```
+
+## Model: Phylogenetically controlled global model results
+
+```{r Phylogenetically controlled global model results, echo=FALSE, message=FALSE}
+setwd("H:/Dissertation/Dissertation Chapters/Data Chapters/Adaptations to urban living in birds/bird_urbanness")
+remake::dump_environment()
+summary(phy_mod_rescaled)
+```
+
+## Model: Phylogenetically controlled model-averaged results
+
+```{r Phylogenetically controlled model-averaged results, echo=FALSE, message=FALSE}
+setwd("H:/Dissertation/Dissertation Chapters/Data Chapters/Adaptations to urban living in birds/bird_urbanness")
+remake::dump_environment()
+summary2 <- readRDS("Data/PHYLO_dredged_model_summary_results.rds")
+summary(summary2)
+```
+
+
