@@ -2,6 +2,8 @@
 output:
   pdf_document: default
   html_document: default
+classoption: landscape
+geometry: margin=2cm
 ---
 
 
@@ -10,38 +12,46 @@ knitr::opts_chunk$set(echo = TRUE)
 setwd("H:/Dissertation/Dissertation Chapters/Data Chapters/Adaptations to urban living in birds/bird_urbanness")
 remake::dump_environment()
 ```
+\newpage
 
 ## Model: Non-phylogenetically controlled global model results
-
+\footnotesize
 ```{r Non-phylogenetically controlled global model results, echo=FALSE, message=FALSE}
 setwd("H:/Dissertation/Dissertation Chapters/Data Chapters/Adaptations to urban living in birds/bird_urbanness")
 remake::dump_environment()
+options(digits=4)
 summary(global_model)
 ```
+\newpage
 
 ## Model: Non-phylogenetically controlled model-averaged results
-
+\footnotesize
 ```{r Non-phylogenetically controlled model-averaged results, echo=FALSE, message=FALSE}
 setwd("H:/Dissertation/Dissertation Chapters/Data Chapters/Adaptations to urban living in birds/bird_urbanness")
 remake::dump_environment()
 summary <- readRDS("Data/dredged_model_summary_results.rds")
+options(digits=4)
 summary(summary)
 ```
+\newpage
 
 ## Model: Phylogenetically controlled global model results
-
+\footnotesize
 ```{r Phylogenetically controlled global model results, echo=FALSE, message=FALSE}
 setwd("H:/Dissertation/Dissertation Chapters/Data Chapters/Adaptations to urban living in birds/bird_urbanness")
 remake::dump_environment()
+options(digits=4)
 summary(phy_mod_rescaled)
 ```
+\newpage
 
 ## Model: Phylogenetically controlled model-averaged results
-
+\footnotesize
 ```{r Phylogenetically controlled model-averaged results, echo=FALSE, message=FALSE}
 setwd("H:/Dissertation/Dissertation Chapters/Data Chapters/Adaptations to urban living in birds/bird_urbanness")
 remake::dump_environment()
 summary2 <- readRDS("Data/PHYLO_dredged_model_summary_results.rds")
+options(digits=4)
 summary(summary2)
 ```
 
