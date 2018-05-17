@@ -86,7 +86,7 @@ Figure2 <- ggplot(data=analysis_data, aes(urban_median)) +
                  alpha = 0.3)+
   scale_x_continuous(trans='log10', breaks=c(0.005, 0.1, 1.0, 12.0), labels=c("0.005", "0.1", "1.0", "12.0"))+
   theme_classic()+
-  xlab("log(Urbanization index)")+
+  xlab("Urbanization index")+
   ylab("Count")+
   geom_segment(aes(x=0.025, xend=0.025, y=23, yend=16), color='firebrick4', size=1.2, arrow=arrow(length=unit(0.5, "cm")))+
   geom_segment(aes(x=0.034, xend=0.034, y=25, yend=18), color='firebrick4', size=1.2, arrow=arrow(length=unit(0.5, "cm")))+
