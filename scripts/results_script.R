@@ -15,6 +15,24 @@ min(analysis_data$urban_median)
 
 max(analysis_data$urban_median)
 
+## get total number of checklists and observations used for the analysis, based on the 477 species only
+## need to subset the eBird data to only those species in the analysis data
+
+## get list of species
+species <- analysis_data %>%
+  dplyr::select(COMMON_NAME_ebird) %>%
+  rename(COMMON_NAME = COMMON_NAME_ebird) %>%
+  .$COMMON_NAME
+
+## subset eBird data based on this list
+eBird_final_data <- ebird_data %>%
+  filter(COMMON_NAME %in% species)
+
+## number of checklists
+length(unique(eBird_final_data$SAMPLING_EVENT_IDENTIFIER))
+
+## number of observations
+nrow(eBird_final_data)
 
 ## Figure 1
 ## A figure showing the distribution of 5 different species included in the analysis
@@ -26,18 +44,18 @@ species_to_plot <- c("Dusky Moorhen",
                      "Hooded Robin",
                      "Noisy Friarbird",
                      "Squatter Pigeon")
-
+library(scales)
 Figure1 <- species_urban %>%
   filter(COMMON_NAME %in% species_to_plot) %>%
   ggplot(., aes(avg_rad, fill=COMMON_NAME)) +
   geom_density(alpha = 0.7) + 
-  scale_x_log10() + 
+  scale_x_continuous(trans='log10', breaks=c(0.0001, 0.0100, 1.0000, 100.0000), labels=c("0.0001", "0.01", "1.0", "100.0"))+ 
   theme_classic() +
-  xlab("log(Average radiance)") +
+  xlab(bquote('Average radiance ('* 'nW' ~cm^-2~sr^-1*')'))+
   ylab("Density")+
   guides(fill=guide_legend(title="  Common Name")) +
   theme(legend.position = c(0.26, 0.8))+
-  theme(axis.text.x=element_text(hjust=0.7))
+  theme(axis.text.x=element_text(hjust=0.6))
 
 pdf("finalFigs/Figure1.pdf", width=5.5, height=4.5)
 print(Figure1)
@@ -58,18 +76,23 @@ species_to_plot <- c("Dusky Moorhen",
 
 species_values <- analysis_data %>%
   filter(COMMON_NAME_ebird %in% species_to_plot) %>%
-  dplyr::select(COMMON_NAME_ebird, urban_median) %>%
-  mutate(urban_median = log(urban_median))
+  dplyr::select(COMMON_NAME_ebird, urban_median)
 
-Figure2 <- ggplot(data=analysis_data, aes(log(urban_median))) +
+# I manually add arrows here using the species_values df above
+Figure2 <- ggplot(data=analysis_data, aes(urban_median)) +
   geom_histogram(bins = 70, 
                  col="black", 
                  fill="green", 
                  alpha = 0.3)+
+  scale_x_continuous(trans='log10', breaks=c(0.005, 0.1, 1.0, 12.0), labels=c("0.005", "0.1", "1.0", "12.0"))+
   theme_classic()+
   xlab("log(Urbanization index)")+
   ylab("Count")+
-  geom_vline(data=species_values, aes(xintercept=urban_median), color='red', size=1.62, alpha=0.9)
+  geom_segment(aes(x=0.025, xend=0.025, y=23, yend=16), color='firebrick4', size=1.2, arrow=arrow(length=unit(0.5, "cm")))+
+  geom_segment(aes(x=0.034, xend=0.034, y=25, yend=18), color='firebrick4', size=1.2, arrow=arrow(length=unit(0.5, "cm")))+
+  geom_segment(aes(x=0.27505, xend=0.27507, y=24, yend=17), color='firebrick4', size=1.2, arrow=arrow(length=unit(0.5, "cm")))+
+  geom_segment(aes(x=0.68820, xend=0.68820, y=19, yend=12), color='firebrick4', size=1.2, arrow=arrow(length=unit(0.5, "cm")))+
+  geom_segment(aes(x=10, xend=10, y=11, yend=4), color='firebrick4', size=1.2, arrow=arrow(length=unit(0.5, "cm")))
 
 pdf("finalFigs/Figure2.pdf", width=5.5, height=4.5)
 print(Figure2)
@@ -314,8 +337,7 @@ Figure4 <- ggplot(p, aes(x=fct_inorder(variable), y=estimate, group=model, color
     guides(shape=FALSE)+
     geom_vline(xintercept=seq(1.5, length(unique(p$variable))-0.5, 1), 
                lwd=0.2, colour="gray80")+
-    theme(legend.background = element_blank(),
-          legend.box.background = element_rect(colour = "black"))+
+    theme(legend.background = element_rect(fill="white", color="black"))+
     theme(legend.position=c(0.16, 0.88))+
     guides(colour = guide_legend(title="                  Model",
                                  override.aes = list(size=2, shape=NA)))+
@@ -323,7 +345,7 @@ Figure4 <- ggplot(p, aes(x=fct_inorder(variable), y=estimate, group=model, color
     theme(axis.title.y=element_text(size=16))+
     theme(axis.text.y=element_text(size=7.5))
     
-  pdf("finalFigs/Figure4.pdf", width=9.45, height=6.4)
+  pdf("finalFigs/Figure4.pdf", width=9.45, height=10)
   print(Figure4)
   dev.off()
 
@@ -351,8 +373,49 @@ my.file.copy(from = "figures/corrplot_of_continuous_variables.pdf",
 
 
 ## Figure S2
-my.file.copy(from = "figures/accounting_for_phylo_uncertainty.pdf",
+my.file.copy(from = "figures/ref_tree.pdf",
              to = "finalFigs/FigureS2.pdf")
 
+
+## Figure S3
+my.file.copy(from = "figures/accounting_for_phylo_uncertainty.pdf",
+             to = "finalFigs/FigureS3.pdf")
+
+
+
+#######################################
+######## Appendices ###################
+#######################################
+
+## want to remake appendix 3 so it only 
+## includes the 477 species and not the 580 species
+### plot a bunch of pdfs for all species
+library(ggforce)
+
+  ## find how many pages are necessary
+  n_pages <- length(unique(eBird_final_data$COMMON_NAME))/15
   
+  pdf("H:/Dissertation/Dissertation Chapters/Data Chapters/Adaptations to urban living in birds/Appendices/Appendix 3/Appendix 3.pdf")
+  
+  for (i in 1:n_pages) {
+    
+    print(ggplot(eBird_final_data, aes(avg_rad)) +
+            geom_density(alpha = 0.4, fill="blue") + 
+            scale_x_continuous(trans='log10', breaks=c(0.0001, 0.0100, 1.0000, 100.0000), labels=c("0.0001", "0.01", "1.0", "100.0")) + 
+            theme_classic() +
+            xlab(bquote('Average radiance ('* 'nW' ~cm^-2~sr^-1*')'))+
+            ylab("Density") +
+            theme(axis.text.x=element_text(hjust=0.8)) +
+            facet_wrap_paginate(~COMMON_NAME, ncol = 3, nrow = 5, scales="free_y", page = i))
+    
+  }
+  
+  dev.off()
+  
+
+
+
+
+
+
   
