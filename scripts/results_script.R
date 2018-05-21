@@ -368,18 +368,21 @@ my.file.copy(from = "figures/phy_v_non_phy.pdf",
 ##########################################
 
 ## Figure S1
-my.file.copy(from = "figures/corrplot_of_continuous_variables.pdf",
-             to = "finalFigs/FigureS1.pdf")
-
+## made using google earth engine, outside of R
 
 ## Figure S2
-my.file.copy(from = "figures/ref_tree.pdf",
+my.file.copy(from = "figures/corrplot_of_continuous_variables.pdf",
              to = "finalFigs/FigureS2.pdf")
 
 
 ## Figure S3
-my.file.copy(from = "figures/accounting_for_phylo_uncertainty.pdf",
+my.file.copy(from = "figures/ref_tree.pdf",
              to = "finalFigs/FigureS3.pdf")
+
+
+## Figure S4
+my.file.copy(from = "figures/accounting_for_phylo_uncertainty.pdf",
+             to = "finalFigs/FigureS4.pdf")
 
 
 
