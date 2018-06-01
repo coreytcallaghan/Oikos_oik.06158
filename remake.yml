@@ -27,6 +27,9 @@ packages:
   - broom
   - ggrepel
   - gridExtra
+  - car
+  - pander
+  - kableExtra
 
 targets:
   all:
