@@ -167,7 +167,7 @@ table <- ftable(aperm(tgrp, c(3, 1, 2)), row.vars=c("Variable", "Value"))
 
 library(kableExtra)
 library(pander)
-pander(table, caption = "Results showing the significance of the phylogenetic signal analyses, for a suite of indices.", split.table=Inf)
+pander(table, caption = "Results showing the  phylogenetic signal for both predictor and response traits.  Because there are a number of indices in the literature, with specific strengths and weaknesses, we present here all available indices (Keck et al. 2016).", split.table=Inf)
 
 ```
 

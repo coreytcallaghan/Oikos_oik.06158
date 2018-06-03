@@ -365,7 +365,7 @@ phylosignal_analysis <- function(analysis_data, aus_bird_tree){
                 nest_generalism,diet_generalism,breeding_habitat_generalism,feeding_habitat_generalism,brain_residual) ->dd
   
   row.names(dd)<-analysis_data$binom #name rows so that it matches the tree
-  dd$rand<-rnorm(dim(dd)[2]) #random numbers to test package
+  #dd$rand<-rnorm(dim(dd)[2]) #random numbers to test package
   p4d <- phylo4d(aus_bird_tree, dd) #create phylobase object
   
   ps <- phyloSignal(p4d,reps = 9999) #run calculation, p values a bit unstable at 999 reps
@@ -375,14 +375,14 @@ phylosignal_analysis <- function(analysis_data, aus_bird_tree){
   
   row.names(Table1) <- c("log(Body size)", "log(Clutch size)", "Urbanization index", "Range size (1000s km2)",
                          "Nest generalism", "Diet generalism", "Breeding habitat generalism",
-                         "Feeding habitat generalism", "Brain residual", "Rand")
+                         "Feeding habitat generalism", "Brain residual")
   
   
   TableS2 <- ps$pvalue
   
   row.names(TableS2) <- c("log(Body size)", "log(Clutch size)", "Urbanization index", "Range size (1000s km2)",
                           "Nest generalism", "Diet generalism", "Breeding habitat generalism",
-                          "Feeding habitat generalism", "Brain residual", "Rand")
+                          "Feeding habitat generalism", "Brain residual")
   
   write.csv(Table1, "Data/Table1.csv")
   write.csv(TableS2, "Data/TableS2.csv")
