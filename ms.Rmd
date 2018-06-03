@@ -194,7 +194,7 @@ knitr::include_graphics("finalFigs/FigureS2.pdf")
 knitr::include_graphics("finalFigs/FigureS3.pdf")
 ```
 
-```{r Figure S4, echo=FALSE, fig.cap="An assessment of phylogenetic uncertainty for some of the most important predictor variables included in the analysis."}
+```{r Figure S4, echo=FALSE, fig.cap="To account for one aspect of phylogenetic uncertainty, we fits the same phylolm model to 1000 of the family of trees presented by Jetz et al. (2012).  The density plots are the estimated parameters for most important variables across models fit to the collection trees from Jetz et al. (2012)"}
 knitr::include_graphics("finalFigs/FigureS4.pdf")
 ```
 
