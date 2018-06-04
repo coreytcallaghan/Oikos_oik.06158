@@ -20,7 +20,7 @@ bibliography: references.bib
 \newpage
 
 # ABSTRACT
-Understanding the suite of ecological and life history traits which influence a species' tolerance to urbanization is critical to understand which species are most likely to persist in our increasingly urbanizing world. Previous work investigating these relationships has found a wide array of contrasting patterns for a given trait's association with urbanization. In a continental-scale analysis, incorporating 477 species and > 5,000,000 bird observations, we provide a novel and scalable methodology which assesses the ecological and life history traits which most influence a species' adaptability to persist in urban environments. We elucidate generalized, phylogenetically controlled, patterns: bird species which are specialists, with high clutch size, and large residual brain size are among the most urban-tolerant bird species. Conversely, specialized feeding strategies (i.e., insectivores and granivores) are negatively associated with urbanization. Our results suggest that the enhancement and persistence of avian biodiversity in urban environments relies on maintaining and developing a suite of habitats to serve a range of life history strategies.
+Understanding the suite of ecological and life history traits which influence a species' tolerance to urbanization is critical to understand which species are most likely to persist in our increasingly urbanizing world. Previous work investigating these relationships has found a wide array of contrasting patterns for a given trait's association with urbanization. In a continental-scale analysis, incorporating 477 species and > 5,000,000 bird observations, we provide a novel and scalable methodology which assesses the ecological and life history traits which most influence a species' adaptability to persist in urban environments. We elucidate generalized, phylogenetically controlled, patterns: bird species which are generalists, with high clutch size, and large residual brain size are among the most urban-tolerant bird species. Conversely, specialized feeding strategies (i.e., insectivores and granivores) are negatively associated with urbanization. Our results suggest that the enhancement and persistence of avian biodiversity in urban environments relies on maintaining and developing a suite of habitats to serve a range of life history strategies.
 
 *keywords*: birds; brain size; generalists; specialists; life history traits; ecological traits; urbanization index
 
@@ -124,7 +124,7 @@ knitr::include_graphics("finalFigs/Figure1.pdf")
 ```
 
 
-```{r Figure 2, echo=FALSE, fig.cap="The distribution, on a logarithmic scale, of the urbanization index for the 477 species included in the analysis, with five example species highlighted. The urbanization index was taken as the median of the distribution for a species' average radiance values, as demonstrated in Figure 1."}
+```{r Figure 2, echo=FALSE, fig.cap="The distribution, on a logarithmic scale, of the urbanization index for the 477 species included in the analysis, with five example species highlighted. The urbanization index was taken as the median of the distribution for a species' average radiance values, as demonstrated in Figure 1. Figure S1 shows randomly chosen indices for a given point."}
 knitr::include_graphics("finalFigs/Figure2.pdf")
 ```
 
@@ -182,7 +182,7 @@ pander(table, caption = "Results showing the  phylogenetic signal for both predi
      }
      \beginsupplement
 
-```{r Figure S1, echo=FALSE, fig.cap="The VIIRS nightime-lights shown for Australia, Brisbane (top right), Melbourne (bottom left), and Sydney (bottom right). Values are measured as average radiance, shown in red. For each checklist in our analysis, the average radiance was calculated within a 5 km buffer, in order to match the spatial scale of the checklists included, and this led to the distributions shown in Figure 1."}
+```{r Figure S1, echo=FALSE, fig.cap="The VIIRS nightime-lights shown for Australia, Brisbane (top right), Melbourne (bottom left), and Sydney (bottom right). Values are measured as average radiance, shown in red. For each checklist in our analysis, the average radiance was calculated within a 5 km buffer, in order to match the spatial scale of the checklists included, and this led to the distributions shown in Figure 1. We show random points and their average associated average radiance values calculated as the mean within a 5 km buffer of that point."}
 knitr::include_graphics("finalFigs/FigureS1.pdf")
 ```
 
@@ -194,7 +194,7 @@ knitr::include_graphics("finalFigs/FigureS2.pdf")
 knitr::include_graphics("finalFigs/FigureS3.pdf")
 ```
 
-```{r Figure S4, echo=FALSE, fig.cap="To account for one aspect of phylogenetic uncertainty, we fits the same phylolm model to 1000 of the family of trees presented by Jetz et al. (2012).  The density plots are the estimated parameters for most important variables across models fit to the collection trees from Jetz et al. (2012)"}
+```{r Figure S4, echo=FALSE, fig.cap="To account for one aspect of phylogenetic uncertainty, we fit the same phylolm model to 1000 of the family of trees presented by Jetz et al. (2012). The density plots are the estimated parameters for most important variables across models fit to the collection trees from Jetz et al. (2012)."}
 knitr::include_graphics("finalFigs/FigureS4.pdf")
 ```
 
