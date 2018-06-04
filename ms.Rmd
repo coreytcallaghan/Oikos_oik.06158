@@ -1,5 +1,5 @@
 ---
-title: "A continental-scale analysis finds generalists, with large clutch size and residual brain mass, are the most urban-tolerant of birds"
+title: "Generalists are the most urban-tolerant of birds: a phylogenetically controlled analysis of ecological and life-history traits using a novel continuous urbanization index"
 
 
 author: |
