@@ -1,11 +1,10 @@
 "","Cmean","I","K","K.star","Lambda"
 "log(Body size)",1e-04,1e-04,1e-04,1e-04,1e-04
 "log(Clutch size)",1e-04,1e-04,1e-04,1e-04,1e-04
-"Urbanization index",1e-04,1e-04,0.056,0.0392,1e-04
-"Range size (1000s km2)",1e-04,0.0032,0.8068,0.8088,1e-04
-"Nest generalism",1e-04,0.0025,0.0251,0.0153,1e-04
-"Diet generalism",1e-04,3e-04,1e-04,1e-04,1e-04
-"Breeding habitat generalism",2e-04,0.0059,0.072,0.0866,1e-04
-"Feeding habitat generalism",1e-04,7e-04,0.0016,0.0023,1e-04
+"Urbanization index",1e-04,1e-04,0.0594,0.0427,1e-04
+"Range size (1000s km2)",1e-04,0.0028,0.804,0.8117,1e-04
+"Nest generalism",1e-04,0.0029,0.0251,0.0144,1e-04
+"Diet generalism",1e-04,2e-04,1e-04,1e-04,1e-04
+"Breeding habitat generalism",1e-04,0.0072,0.0674,0.0822,1e-04
+"Feeding habitat generalism",1e-04,7e-04,0.002,8e-04,1e-04
 "Brain residual",1e-04,1e-04,1e-04,1e-04,1e-04
-"Rand",0.8134,0.7541,0.292,0.2936,1
