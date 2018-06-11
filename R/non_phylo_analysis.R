@@ -48,7 +48,7 @@ corrplot_figure <- function(analysis_data){
     rename(`Diet generalism` = diet_generalism) %>%
     rename(`Nest generalism` = nest_generalism) %>%
     rename(`Number of records` = N) %>%
-    rename(`Unique localitieis observed` = unique_localities) %>%
+    rename(`Unique localities observed` = unique_localities) %>%
     rename(`log(Body size)` = body_size_logged) %>%
     rename(`log(Clutch size)` = clutch_size_logged) %>%
     rename(`Range size (1000s km2)` = range_size) %>%
