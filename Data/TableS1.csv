@@ -1,25 +1,25 @@
-Generalized VIF,"Degrees of 
+"","Generalized VIF","Degrees of 
 freedom","Adjusted 
 Generalized VIF"
-2.65,1,1.63
-1.82,1,1.35
-3.22,1,1.79
-1.92,1,1.39
-1.81,1,1.34
-3.23,1,1.8
-1.71,1,1.31
-2.54,1,1.59
-1.57,1,1.25
-1.62,1,1.27
-2.46,1,1.57
-1.37,1,1.17
-1.67,1,1.29
-2.37,1,1.54
-1.87,1,1.37
-1.73,1,1.31
-1.34,1,1.16
-1.92,3,1.11
-3.9,6,1.12
-1.86,1,1.36
-2.08,1,1.44
-2.06,1,1.43
+"log(Body size)",2.65,1,1.63
+"log(Clutch size)",1.82,1,1.35
+"Feeding habitat generalism",3.22,1,1.79
+"Brain residual",1.92,1,1.39
+"Habitat - agricultural",1.81,1,1.34
+"Breeding habitat generalism",3.23,1,1.8
+"Granivore",1.71,1,1.31
+"Insectivore",2.54,1,1.59
+"Carrion eater",1.57,1,1.25
+"Plant eater",1.62,1,1.27
+"Diet generalism",2.46,1,1.57
+"Movement - migratory",1.37,1,1.17
+"Movement - nomadic/irruptive",1.67,1,1.29
+"Ground-nesting",2.37,1,1.54
+"Hollow-nesting",1.87,1,1.37
+"Nest generalism",1.73,1,1.31
+"Cooperative breeding",1.34,1,1.16
+"Nest aggregation",1.92,3,1.11
+"Feeding aggregation",3.9,6,1.12
+"Habitat - grass/shrubland",1.86,1,1.36
+"Range size (1000s km2)",2.08,1,1.44
+"Habitat - tree/forest",2.06,1,1.43
