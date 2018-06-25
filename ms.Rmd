@@ -1,5 +1,5 @@
 ---
-title: "Generalists are the most urban-tolerant of birds: a phylogenetically controlled analysis of ecological and life-history traits using a novel continuous urbanization index"
+title: "Generalists are the most urban-tolerant of birds: an analysis of ecological and life history traits using a novel continuous urbanization index"
 
 
 author: |
@@ -13,7 +13,7 @@ output:
       in_header: preamble-latex.tex
 fontsize: 12pt
 link-citations: no
-csl: https://raw.githubusercontent.com/citation-style-language/styles/master/ecology-letters.csl
+csl: https://raw.githubusercontent.com/citation-style-language/styles/master/proceedings-of-the-royal-society-b.csl
 bibliography: references.bib
 ---
 
@@ -21,6 +21,8 @@ bibliography: references.bib
 
 # ABSTRACT
 Identifying which ecological and life history traits influence a species' tolerance to urbanization is critical to understanding the trajectory of biodiversity in an increasingly urbanizing world. There is evidence for a wide array of contrasting patterns for single trait associations with urbanization. In a continental-scale analysis, incorporating 477 species and > 5,000,000 bird observations, we developed a novel and scalable methodology that evaluated the ecological and life history traits which most influence a species' adaptability to persist in urban environments. We identified generalized, phylogenetically controlled patterns: bird species which are generalists (i.e., large niche breadth), with high clutch size, and large residual brain size are among the most urban-tolerant bird species. Conversely, specialized feeding strategies (i.e., insectivores and granivores) were negatively associated with urbanization. Enhancement and persistence of avian biodiversity in urban environments probably relies on protecting, maintaining, and restoring diverse habitats serving a range of life history strategies.
+
+*Keywords*: eBird, citizen science, phylogenetics, life history traits, avian, brain size
 
 \newpage
 # INTRODUCTION
@@ -32,20 +34,20 @@ Most analyses assign species to discrete a priori groups such as urban avoiders,
 
 Most studies are either spatially limited, such as a single city or region [@blair1996land; @kark2007living; @croci2008does] or temporally limited to a single breeding season [@blair1996land] or even two-month survey period [@kark2007living]. Broad-scale empirical data allow hypotheses to be tested at large spatiotemporal scales. Citizen science can provide such data [see reviews by @devictor2010beyond; @tulloch2013realising; @bonney2014next; @kobori2016citizen], and can be used to describe patterns of abundance, distribution, and functional composition of birds in urban ecosystems [@mccaffrey2005using; @la2014role; @morelli2016evidence; @lepczyk2017global @callaghan2017assessing].
 
-We aimed to determine what suite of life history traits predicted avian tolerance to urbanization at a continental scale. We predicted that different traits would positively and negatively associate with urbanization. For generality, our analyses had to (1) be comprehensive in faunal coverage, (2) account for phylogenetic constraints, (3) include a broad-range of traits, and (4) employ a continuous measure of urbanization. We integrated a series of large datasets to establish a novel continuous urbanization index to test associations with ecological and life history traits influencing species' responses to urbanization. We first investigated whether our urbanization index was statistically independent in relation to phylogeny (i.e., phylogenetic signal - Revell et al. 2008; Evans et al. 2011), given our comprehensive sample size. We then developed models, including and excluding phylogenetic constraints, to test for associations between our urbanization index and a suite of continuous and categorical predictor variables representing species' traits.
+We aimed to determine what suite of life history traits predicted avian tolerance to urbanization at a continental scale. We predicted that different traits would positively and negatively associate with urbanization. For generality, our analyses had to (1) be comprehensive in faunal coverage, (2) account for phylogenetic constraints, (3) include a broad-range of traits, and (4) employ a continuous measure of urbanization. We integrated a series of large datasets to establish a novel continuous urbanization index to test associations with ecological and life history traits influencing species' responses to urbanization. We first investigated whether our urbanization index was statistically independent in relation to phylogeny (i.e., phylogenetic signal - [@revell2008phylogenetic; @evans2011makes]), given our comprehensive sample size. We then developed models, including and excluding phylogenetic effects, to test for associations between our urbanization index and a suite of continuous and categorical predictor variables representing species' traits.
 
 
 # METHODS
 ## Bird observation data
 We collated bird observations throughout mainland Australia from eBird [@sullivan2009ebird; @sullivan2014ebird], a large-scale empirical dataset contributed by citizen scientists. Volunteer birdwatchers submit lists of species seen or heard at a given location, over a user-determined duration and survey area [@wood2011ebird], often comparable to trained observers [@callaghan2015efficacy]. We downloaded the eBird basic dataset (version ebd_relFeb-2018; available here: https://ebird.org/data/download), and used all observations between January 1, 2010 - February 28, 2018. This corresponded to the richest period of eBird data, minimizing undue leverage of mismatch between changes in response variables over which bird observations were collected.
 
-We filtered bird observations [@callaghan2017assessing; @la2014role], only including observations on complete checklists and which were either travelling, random, stationary, area, or followed BirdLife Australia protocols [@barrett2003new] (see here: http://help.ebird.org/customer/portal/articles/1006209-understanding-observation-types). We then filtered the checklists to those which travelled < 5 km or covered < 500 Ha, to ensure the highest quality data were used. Any checklists shared among multiple observers were subsampled, including only one checklist to avoid duplication. This provided 637,482 eligible checklists throughout Australia. Seabirds (e.g., gannets, petrels, shearwaters) were omitted from analyses as we did not expect any correlation with seabirds using urban areas. Further, only species with > 100 observations were analyzed. In total, 580 species, most (~80%) of Australia's bird species were candidates for analyses. We used differing taxonomic authorities (see Appendix 2).
+We filtered bird observations [@callaghan2017assessing; @la2014role], only including observations on complete checklists and which were either travelling, random, stationary, area, or followed BirdLife Australia protocols [@barrett2003new] (see here: http://help.ebird.org/customer/portal/articles/1006209-understanding-observation-types). We then filtered the checklists to those which travelled < 5 km or covered < 500 Ha, to ensure the highest quality data were used. Any checklists shared among multiple observers were subsampled, including only one checklist to avoid duplication. This provided 637,482 eligible checklists throughout Australia. Seabirds (e.g., gannets, petrels, shearwaters) were omitted from analyses as we did not expect any correlation with seabirds using urban areas. Further, only species with > 100 observations were analyzed. In total 580 species, most (~80%) of Australia's bird species, were candidates for analyses. We used differing taxonomic authorities (see Appendix 2).
 
 ## Urbanization index
 We used VIIRS night-time lights [@elvidge2017viirs] as a continuous measure for urban habitat, measuring the electric lighting associated with human settlement (Fig. S1). This has filtered out background noise (e.g., fires, degraded data, and other light source contamination) to ensure validity of the data and its association with human settlement [@elvidge2017viirs]. For our checklists and their associated species, we used the spatial coordinates and Google Earth Engine [@gorelick2017google], to assign the average radiance value, calculated from the VIIRS layer. For each checklist, the average radiance was calculated within a 5 km buffer, to match the spatial scale of the checklists included and to minimize any potential bias in eBird sampling protocols. Any negative radiance values were forced to 0.00001 [*sensu* @ou2015evaluation]. Every bird species subsequently had a distribution of average radiance values (Fig. 1), with the median of each species' distribution becoming the response variable. There was no definitive range for this index, dependent on a species' distribution of observations.
 
 ## Ecological and life history traits
-Ecological and life history traits were chosen on the basis of existing support (e.g., McClure 1989; Kark *et al.* 2007; Evans *et al.* 2011; Table 1; Appendix 1). These included a wide array of potential traits for all of Australia's birds [@garnett2015biological]. A total of 22 traits were included in analyses: clutch size, body size, brain residual, nest generalism, feeding habitat generalism, breeding habitat generalism, diet generalism, habitat association with agricultural landscapes, habitat association with treed/forested habitats, habitat association with grass/shrubland habitats, whether a species nests in hollows, whether a species nests on the ground, whether a species eats plants, whether a species is a granivore, whether a species is an insectivore, whether a species eats carrion, whether a species is nomadic/irruptive, whether a species is migratory, the range size of a species, nesting aggregation of a species, feeding aggregation of a species, and whether a species is a cooperative breeder (Table 1; Appendix 1a). For any missing trait in the dataset [@garnett2015biological] for a species, we assumed it did not exist. For example, if a species had no data for a specific habitat, it was deemed not to occur in that habitat. Our preliminary analyses, which included IUCN status, showed that exotic birds strongly associated with urbanization; these were omitted from the final analyses to avoid bias, given the preferential selection by acclimatization societies for their proven synanthropy [@blackburn2009avian]. We also excluded IUCN status because most (96%) of our candidate species were of Least Concern. In total, 477 species had complete data for all candidate traits and were included in analyses.
+Ecological and life history traits were chosen on the basis of existing support [e.g., @mcclure1989characterizes; @kark2007living; @evans2011makes] (Table 1; Appendix 1), including a wide array of potential traits for all of Australia's birds [@garnett2015biological]. A total of 22 traits, grouped into 7 categories, were included (Table 1): life history traits (n=3), measures of niche breadth (n=4), specific habitat preferences (n=3), specific nesting preferences (n=2), specific diet preferences (n=4), movement and range size (n=3), and degree of sociality (n=3). For any missing trait in the dataset [@garnett2015biological] for a species, we assumed it did not exist. For example, if a species had no data for a specific habitat, it was deemed not to occur in that habitat. Our preliminary analyses, which included IUCN status, showed that exotic birds strongly associated with urbanization; these were omitted from the final analyses to avoid bias, given the preferential selection by acclimatization societies for their proven synanthropy [@blackburn2009avian]. We also excluded IUCN status because most (96%) of our candidate species were of Least Concern. In total, 477 species had complete data for all candidate traits and were included in analyses.
 
 ## Statistical analyses
 Before modelling of predictor variables (Table 1), we investigated multi-collinearity among continuous variables (Fig. S2), using the corrplot package [@corrplot2017]. We used generalized variance inflation factors [@fox1992generalized], from the car package [@fox2011companion], which accounts for the degrees of freedom for a particular term to show minimal correlation among each other; all traits < 2 suggested negligible correlation (Supplementary Table 1). We used two independent linear modelling approaches: one without and one with phylogenetic effects. Phylogenetic effects are defined as the tendency of closely related organisms to have similar life history components due to their shared evolutionary history [@derrickson1988taxon; @mckitrick1993phylogenetic]. Both approaches were used because of shortcomings [@cadotte2017phylogenies] and importance [@losos2008phylogenetic; @graham2018phylogenetic] of incorporating evolutionary distinctness in ecological research.
@@ -73,7 +75,7 @@ With model-averaging, patterns remained similar (Fig. 4; Appendix 5). However, t
 
 ## Phylogenetic analyses
 ### Phylogenetic signal
-There was a distinct relationship between the phylogenetic signal and our urbanization index (Fig. 3; Fig. S3; Table 2), significantly different from random for 4 out of 5 indices (Cmean, I, K.star, and Lambda). For example, the urbanization index was disproportionately important with respect to the phylogenetic tree (Fig. 3), evidenced by the highest urbanization indices clustered throughout the waterbird clade. Further, within a specific clade, there were some species which substantially higher urbanization indices (e.g., *Manorina melanocephala*, Noisy Miner, cf. honeyeaters). We generally found weaker signals for behavioral, compared with morphological traits. For behavioural traits, the estimates of phylogenetic signal were weaker than Brownian motion, but usually significant (Table 2). Additionally, there was a strong phylogenetic signal for body size and brain residual size (Table 2).
+There was a distinct relationship between the phylogenetic signal and our urbanization index (Fig. 3; Fig. S3; Table 2), significantly different from random for 4 out of 5 indices (Cmean, I, K.star, and Lambda). For example, the urbanization index was disproportionately important with respect to the phylogenetic tree (Fig. 3), evidenced by the highest urbanization indices clustered throughout the waterbird clade. Further, within a specific clade, there were some species with substantially higher urbanization indices (e.g., *Manorina melanocephala*, Noisy Miner, cf. honeyeaters). We generally found weaker signals for behavioral, compared with morphological traits. For behavioural traits, the estimates of phylogenetic signal were weaker than Brownian motion, but usually significant (Table 2). Additionally, there was a strong phylogenetic signal for body size and brain residual size (Table 2).
 
 ### Phylogenetically controlled models
 Brain residual size (1.25) had the largest standardized parameter estimate for the phylogenetically controlled global model (Fig. 4; Appendix 5), followed by feeding habitat generalism (1.18), clutch size (0.91), and body size (0.82).The most significantly positive traits associated with urbanization were brain residual size (t = 3.58, p < 0.001), feeding habitat generalism (t = 4.63, p < 0.001), clutch size (t = 3.04, p = 0.002), diet generalism (t = 2.07, p = 0.039), and breeding habitat generalism (t = 2.80, p = 0.005). Conversely, nest generalism (t = -2.06, p = 0.040), range size, (t = -4.38, p < 0.001), cooperative breeding (t = -3.25, p = 0.001), and species without any known nest aggregation (t = -3.28, p = 0.001) were significantly negatively associated with urbanization.
@@ -98,8 +100,26 @@ Understanding which traits promote urban-tolerance or intolerance can inform act
 In conclusion, our novel continuous urbanization index showed relationships between ecological and life history traits with avian tolerance to urban environments. Improving understanding of the temporal nature of these relationships will be important, but we highlight the importance of considering these questions using a continuous measure of urbanization [@evans2011makes] as well as using a phylogenetically informed approach. It is the generalist species [@shochat2006patterns], with high clutch sizes and large residual brain sizes, which are best prepared to forage and survive in the ecologically novel aspects of urban environments.
 
 
-## Acknowledgments
+# Data, code and materials
+This work relied heavily on open-source, fully accessible datasets.
+The necessary portions of those datasets, along with code to reproduce the analyses are available at
+this github repository (https://github.com/cornwell-lab-unsw/bird_urbanness), and will be
+permanently archived upon acceptance of the manuscript. The supporting data has been included in the article's supplementary material (Appendix 4).
+
+# Competing interests
+We have no competing interests.
+
+# Author's Contributions
+CTC, WKC, and JHW conceived and designed the methodology of the
+study. CTC, WKC performed the statistical analyses. JMM, REM, and RTK contributed in drafting
+the manuscript. All authors provided editorial advice, approved the final version of the manuscript,
+and agree to be accountable for all aspects of the work.
+
+# Acknowledgments
 We thank the > 6,000 eBirders who have contributed data in Australia. We also thank the dedicated eBird team at the Cornell Lab of Ornithology and the global network of reviewers. Thanks to Stephen Garnett and Glenn Ehmke for providing us with extent of occurrence estimates for each of the species in our analysis. Thanks to Corrine Edwards for providing the illustrations used in Fig. 3.
+
+# Funding
+The authors declare no sources of funding specific to this work.
 
 \newpage
 # REFERENCES
@@ -141,24 +161,37 @@ knitr::include_graphics("finalFigs/Figure5.pdf")
 \small
 ```{r Table 2, echo=FALSE, warning=FALSE, message=FALSE}
 library(readr)
+library(dplyr)
 Table1a <- read_csv("Data/Table1.csv")
 colnames(Table1a) <- gsub("X1", "Variable", colnames(Table1a))
 is.num <- sapply(Table1a, is.numeric)
 Table1a[is.num] <- lapply(Table1a[is.num], round, 3)
+Table1a <- Table1a %>%
+  rename(`Abouheif's Cmean` = Cmean) %>%
+  rename(`Moran's I` = I) %>%
+  rename(`Blomberg's K` = K) %>%
+  rename(`K*` = K.star) %>%
+  rename(`Pagel's Lambda` = Lambda)
 
 Table1b <- read_csv("Data/TableS2.csv")
 colnames(Table1b) <- gsub("X1", "Variable", colnames(Table1b))
 is.num <- sapply(Table1b, is.numeric)
 Table1b[is.num] <- lapply(Table1b[is.num], round, 3)
+Table1b <- Table1b %>%
+  rename(`Abouheif's Cmean` = Cmean) %>%
+  rename(`Moran's I` = I) %>%
+  rename(`Blomberg's K` = K) %>%
+  rename(`K*` = K.star) %>%
+  rename(`Pagel's Lambda` = Lambda)
 
 grouped <- rbind(cbind(Value="Statistic", Table1a), cbind(Value="p-values", Table1b))
-tgrp <- xtabs(cbind(Cmean, I, K, K.star, Lambda) ~ Value+Variable, grouped)
+tgrp <- xtabs(cbind(`Abouheif's Cmean`, `Moran's I`, `Blomberg's K`, `K*`, `Pagel's Lambda`) ~ Value+Variable, grouped)
 
 table <- ftable(aperm(tgrp, c(3, 1, 2)), row.vars=c("Variable", "Value"))
 
 library(kableExtra)
 library(pander)
-pander(table, caption = "Summary of results showing an assessment of a phylogenetic signal for our response variable (urbanization index) and the continuous predictor traits. We show all available indices (Blomberg's K and K*, Abouheif's Cmean, Moran's I, and Pagel's Lambda; Keck et al. 2016), each of which represents the statistical nonindependence of a trait's value due to its phylogenetic relatedness (Revell et al. 2008).", split.table=Inf)
+pander(table, caption = "Summary of results showing an assessment of a phylogenetic signal for our response variable (urbanization index) and the continuous predictor traits. We show all available indices (Keck et al. 2016), each of which represents the statistical nonindependence of a trait's value due to its phylogenetic relatedness (Revell et al. 2008).", split.table=Inf)
 
 ```
 
@@ -200,6 +233,7 @@ collinearity_investigation <- read_csv("Data/TableS1.csv")
 collinearity_investigation <- collinearity_investigation[-1,]
 collinearity_investigation <- collinearity_investigation %>%
   rename(Trait = X1)
+collinearity_investigation <- collinearity_investigation[c(2, 1, 4, 16, 3, 6, 11, 5, 22, 20, 15, 14, 10, 7, 8, 9, 13, 12, 21, 18, 19, 17), ]
 
 kable(collinearity_investigation, format = "latex", caption = "Variance inflation factors for the predictor traits used in the analysis.", booktabs = T) %>%
 kable_styling(latex_options = c("hold_position"))
