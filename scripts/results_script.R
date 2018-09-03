@@ -371,18 +371,31 @@ my.file.copy(from = "figures/phy_v_non_phy.pdf",
 ## made using google earth engine, outside of R
 
 ## Figure S2
-my.file.copy(from = "figures/corrplot_of_continuous_variables.pdf",
-             to = "finalFigs/FigureS2.pdf")
+FigureS2 <- ggplot(urbanness_table, aes(x=avg_rad, y=`population-density_mean`))+
+  geom_point()+
+  geom_smooth(method="lm")+
+  theme_classic()+
+  xlab(bquote('Average radiance ('* 'nW' ~cm^-2~sr^-1*')'))+
+  ylab("Human population density")
 
+
+pdf("finalFigs/FigureS2.pdf", width=5.5, height=4.5)
+print(FigureS2)
+dev.off()
 
 ## Figure S3
-my.file.copy(from = "figures/ref_tree.pdf",
+my.file.copy(from = "figures/corrplot_of_continuous_variables.pdf",
              to = "finalFigs/FigureS3.pdf")
 
 
 ## Figure S4
-my.file.copy(from = "figures/accounting_for_phylo_uncertainty.pdf",
+my.file.copy(from = "figures/ref_tree.pdf",
              to = "finalFigs/FigureS4.pdf")
+
+
+## Figure S5
+my.file.copy(from = "figures/accounting_for_phylo_uncertainty.pdf",
+             to = "finalFigs/FigureS5.pdf")
 
 
 
