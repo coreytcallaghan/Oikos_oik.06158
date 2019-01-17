@@ -1,7 +1,7 @@
 Traits that affect urbanness in birds
 ================
 
-This repository contains code needed to reproduce the analysis for the article: Callaghan et al. 2019
+This repository contains code needed to reproduce the analysis for the article: Callaghan et al. 2019: https://onlinelibrary.wiley.com/doi/abs/10.1111/oik.06158
 
 Instructions
 ------------
